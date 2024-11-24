@@ -51,5 +51,6 @@
         "temp/": true,
         "Temp/": true
     },
-    "dotnet.defaultSolution": "hackathon-game.sln"
+    "dotnet.defaultSolution": "hackathon-game.sln",
+    "editor.formatOnSave": true
 }
