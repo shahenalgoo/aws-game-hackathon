@@ -6,6 +6,8 @@ public class LevelBuilder : MonoBehaviour
     [SerializeField]
     private GameObject[] levelObjects;
 
+    private float yAdjustTarget = 0.35f;
+
     private int[,] instructions;
     // Start is called before the first frame update
     void Start()
@@ -34,10 +36,21 @@ public class LevelBuilder : MonoBehaviour
             {
                 int objectId = instructions[i, j];
                 if (objectId == 0) continue;
-                Vector3 pos = new Vector3(objectId, 0, 0);
-                GameObject prefab = Resources.Load<GameObject>("Prefabs/" + objectId);
-                Instantiate(prefab, new Vector3(j, 0, i), Quaternion.identity);
+                Vector3 pos = new Vector3(i, 0, j);
+
+                GameObject obj = Instantiate(levelObjects[objectId], pos, Quaternion.identity);
+
+                // If a target or bonus teleporter
+                if (objectId == 2 || objectId == 7 || objectId == 8)
+                {
+                    // Add a floor underneath
+                    Instantiate(levelObjects[1], pos, Quaternion.Euler(0, 90, 0));
+
+                    // Adjust y of obj
+                    obj.transform.position += new Vector3(0, yAdjustTarget, 0);
+                }
             }
         }
+
     }
 }
