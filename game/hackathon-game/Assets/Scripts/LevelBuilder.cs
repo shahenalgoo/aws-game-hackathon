@@ -8,7 +8,7 @@ public class LevelBuilder : MonoBehaviour
     [SerializeField]
     private GameObject[] levelObjects;
 
-    private float yAdjustTarget = 0.35f;
+    private float yAdjustTarget = 1f;
 
     private int[,] instructions;
 
@@ -33,14 +33,17 @@ public class LevelBuilder : MonoBehaviour
 
     void BuildLevel()
     {
+        GridResolver resolver = new GridResolver(instructions);
+        int[,] fixedInstructions = resolver.FixIsolatedRegions(4, 0);
+
         // create 2d array for loop
-        for (int i = 0; i < instructions.GetLength(0); i++)
+        for (int i = 0; i < fixedInstructions.GetLength(0); i++)
         {
-            for (int j = 0; j < instructions.GetLength(1); j++)
+            for (int j = 0; j < fixedInstructions.GetLength(1); j++)
             {
-                int objectId = instructions[i, j];
+                int objectId = fixedInstructions[i, j];
                 if (objectId == 0) continue;
-                Vector3 pos = new Vector3(i * tileSize, 0, j * tileSize);
+                Vector3 pos = new Vector3(i * tileSize, -5f, j * tileSize);
 
                 GameObject obj = Instantiate(levelObjects[objectId], pos, Quaternion.identity);
 
@@ -48,13 +51,12 @@ public class LevelBuilder : MonoBehaviour
                 if (objectId == 2 || objectId == 7 || objectId == 8)
                 {
                     // Add a floor underneath
-                    Instantiate(levelObjects[1], pos, Quaternion.Euler(0, 90, 0));
+                    GameObject floor = Instantiate(levelObjects[1], pos, Quaternion.identity);
 
                     // Adjust y of obj
-                    obj.transform.position += new Vector3(0, yAdjustTarget, 0);
+                    obj.transform.position = new Vector3(pos.x, yAdjustTarget, pos.z);
                 }
             }
         }
-
     }
 }
