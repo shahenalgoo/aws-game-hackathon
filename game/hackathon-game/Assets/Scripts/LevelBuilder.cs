@@ -2,6 +2,8 @@ using UnityEngine;
 
 public class LevelBuilder : MonoBehaviour
 {
+    [SerializeField]
+    private int tileSize = 2;
 
     [SerializeField]
     private GameObject[] levelObjects;
@@ -9,6 +11,8 @@ public class LevelBuilder : MonoBehaviour
     private float yAdjustTarget = 0.35f;
 
     private int[,] instructions;
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -36,7 +40,7 @@ public class LevelBuilder : MonoBehaviour
             {
                 int objectId = instructions[i, j];
                 if (objectId == 0) continue;
-                Vector3 pos = new Vector3(i, 0, j);
+                Vector3 pos = new Vector3(i * tileSize, 0, j * tileSize);
 
                 GameObject obj = Instantiate(levelObjects[objectId], pos, Quaternion.identity);
 
