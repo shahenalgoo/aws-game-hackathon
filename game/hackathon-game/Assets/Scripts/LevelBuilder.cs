@@ -51,7 +51,7 @@ public class LevelBuilder : MonoBehaviour
                     if (HasNonZeroNeighbor(i, j))
                     {
                         Vector3 wallPos = new Vector3(i * tileSize, 0, j * tileSize);
-                        Instantiate(levelObjects[objectId], wallPos, Quaternion.identity);
+                        CreateObject(levelObjects[objectId], wallPos, Quaternion.identity);
                     }
                     continue;
                 }
@@ -59,13 +59,14 @@ public class LevelBuilder : MonoBehaviour
 
                 Vector3 pos = new Vector3(i * tileSize, yAdjustObject, j * tileSize);
 
-                GameObject obj = Instantiate(levelObjects[objectId], pos, Quaternion.identity);
+                GameObject obj = CreateObject(levelObjects[objectId], pos, Quaternion.identity);
 
                 // If a target or bonus teleporter
                 if (objectId == 2 || objectId == 7 || objectId == 8)
                 {
                     // Add a floor underneath
-                    Instantiate(levelObjects[1], pos, Quaternion.identity);
+                    CreateObject(levelObjects[1], pos, Quaternion.identity);
+
 
                     // Adjust y of obj
                     obj.transform.position = new Vector3(pos.x, yAdjustTarget, pos.z);
@@ -122,8 +123,18 @@ public class LevelBuilder : MonoBehaviour
         }
 
 
-        if (extremeRowWallPos != Vector3.zero) Instantiate(levelObjects[0], extremeRowWallPos, Quaternion.identity);
-        if (extremeColWallPos != Vector3.zero) Instantiate(levelObjects[0], extremeColWallPos, Quaternion.identity);
+        if (extremeRowWallPos != Vector3.zero) CreateObject(levelObjects[0], extremeRowWallPos, Quaternion.identity);
+        if (extremeColWallPos != Vector3.zero) CreateObject(levelObjects[0], extremeColWallPos, Quaternion.identity);
+    }
+
+    private GameObject CreateObject(GameObject prefab, Vector3 position, Quaternion rotation)
+    {
+        GameObject obj = Instantiate(prefab, position, rotation);
+
+        // Set parent to this object
+        obj.transform.parent = transform;
+
+        return obj;
     }
 
 }

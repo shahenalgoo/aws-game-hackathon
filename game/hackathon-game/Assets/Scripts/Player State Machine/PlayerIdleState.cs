@@ -19,7 +19,14 @@ public class PlayerIdleState : PlayerBaseState
         //should follow cursor if fight mode
         Ctx.AimGun?.Invoke();
 
+        // Apply Gravity
+        if (!Ctx.CharController.isGrounded)
+        {
+            Ctx.CharController.Move(Physics.gravity * Time.deltaTime);
+        }
+
         CheckSwitchStates();
+
     }
 
     public override void CheckSwitchStates()

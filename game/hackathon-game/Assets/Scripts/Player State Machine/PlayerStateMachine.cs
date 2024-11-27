@@ -31,8 +31,9 @@ public class PlayerStateMachine : MonoBehaviour
     [SerializeField] private float _dashDistance;
     [SerializeField] private float _dashSpeed;
     [SerializeField] private float _dashTime;
-    [SerializeField] private float _dashCooldown;
     [SerializeField] private bool _canDash = true;
+    [SerializeField] private float _dashCooldown;
+    [SerializeField] private float _dashCooldownCounter;
     public bool IsDashing { get { return _isDashing; } set { _isDashing = value; } }
     public float DashDistance { get { return _dashDistance; } }
     public float DashSpeed { get { return _dashSpeed; } }
@@ -144,7 +145,11 @@ public class PlayerStateMachine : MonoBehaviour
     /* GET INPUT FOR DASH */
     public void GetDashInput(InputAction.CallbackContext ctx)
     {
-        if (ctx.performed && !_isDashing) _currentState.SwitchState(_states.Dash());
+        if (ctx.performed && !_isDashing && _canDash)
+        {
+            _canDash = false;
+            _currentState.SwitchState(_states.Dash());
+        }
     }
 
 
@@ -186,6 +191,7 @@ public class PlayerStateMachine : MonoBehaviour
     {
         _currentState.UpdateStates();
         FightModeCountdown();
+        CooldownDash();
     }
 
     public void LookAtAim()
@@ -206,6 +212,20 @@ public class PlayerStateMachine : MonoBehaviour
                 Quaternion rotationR = Quaternion.LookRotation(_rightStickInput.ToIso(), Vector3.up);
                 _playerModel.rotation = Quaternion.RotateTowards(_playerModel.rotation, rotationR, 2 * _turnSpeed * _turnSpeedMagnitude * Time.deltaTime);
             }
+        }
+    }
+
+    public void CooldownDash()
+    {
+        if (_isDashing) return;
+        if (_canDash) return;
+
+        _dashCooldownCounter += Time.deltaTime;
+
+        if (_dashCooldownCounter >= _dashCooldown)
+        {
+            _canDash = true;
+            _dashCooldownCounter = 0;
         }
     }
 
