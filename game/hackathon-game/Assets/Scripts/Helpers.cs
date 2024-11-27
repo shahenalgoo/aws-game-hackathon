@@ -23,4 +23,28 @@ public static class Helpers
 
     }
 
+    public static bool HasNonZeroNeighbor(int[,] grid, int row, int col)
+    {
+        int rows = grid.GetLength(0);
+        int cols = grid.GetLength(1);
+
+        // Check up
+        if (row > 0 && grid[row - 1, col] != 0)
+            return true;
+
+        // Check down
+        if (row < rows - 1 && grid[row + 1, col] != 0)
+            return true;
+
+        // Check left
+        if (col > 0 && grid[row, col - 1] != 0)
+            return true;
+
+        // Check right
+        if (col < cols - 1 && grid[row, col + 1] != 0)
+            return true;
+
+        return false;
+    }
+
 }
