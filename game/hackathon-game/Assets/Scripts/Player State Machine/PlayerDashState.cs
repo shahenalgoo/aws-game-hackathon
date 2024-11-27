@@ -147,7 +147,7 @@ public class PlayerDashState : PlayerBaseState
 
     public override void CollisionEventHandler(ControllerColliderHit hit)
     {
-        if (hit.gameObject.layer == LayerMask.NameToLayer("Obstacles"))
+        if (hit.gameObject.layer == LayerMask.NameToLayer("Obstacles") || hit.gameObject.layer == LayerMask.NameToLayer("InvisibleWall"))
         {
             Ctx.IsDashing = false;
             CheckSwitchStates();

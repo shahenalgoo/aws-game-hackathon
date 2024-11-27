@@ -31,10 +31,14 @@ public class PlayerStateMachine : MonoBehaviour
     [SerializeField] private float _dashDistance;
     [SerializeField] private float _dashSpeed;
     [SerializeField] private float _dashTime;
+    [SerializeField] private float _dashCooldown;
+    [SerializeField] private bool _canDash = true;
     public bool IsDashing { get { return _isDashing; } set { _isDashing = value; } }
     public float DashDistance { get { return _dashDistance; } }
     public float DashSpeed { get { return _dashSpeed; } }
     public float DashTime { get { return _dashTime; } }
+    public float DashCooldown { get { return _dashCooldown; } }
+    public bool CanDash { get { return _canDash; } }
 
 
     [Header("Fight Mode variables")]
