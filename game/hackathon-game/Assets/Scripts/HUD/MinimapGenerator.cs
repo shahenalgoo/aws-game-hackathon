@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEngine.UI;
 
 
-[RequireComponent(typeof(AspectRatioFitter))]
+// [RequireComponent(typeof(AspectRatioFitter))]
 public class MinimapGenerator : MonoBehaviour
 {
     [SerializeField] private RawImage minimapImage;
@@ -14,12 +14,16 @@ public class MinimapGenerator : MonoBehaviour
 
     public void Start()
     {
-        var aspectFitter = minimapImage.gameObject.GetComponent<AspectRatioFitter>();
-        if (aspectFitter == null)
-            aspectFitter = minimapImage.gameObject.AddComponent<AspectRatioFitter>();
+        // Add this at the start of your existing Start method
+        minimapImage.material = new Material(Shader.Find("UI/Default"));
+        minimapImage.color = Color.white; // Ensure full opacity on the RawImage itself
 
-        aspectFitter.aspectMode = AspectRatioFitter.AspectMode.FitInParent;
-        aspectFitter.aspectRatio = 1f;
+        // var aspectFitter = minimapImage.gameObject.GetComponent<AspectRatioFitter>();
+        // if (aspectFitter == null)
+        //     aspectFitter = minimapImage.gameObject.AddComponent<AspectRatioFitter>();
+
+        // aspectFitter.aspectMode = AspectRatioFitter.AspectMode.FitInParent;
+        // aspectFitter.aspectRatio = 1f;
 
         grid = new int[,] {
             { 0, 0, 0, 2, 4, 1, 0, 0, 0, 6, 2, 0, 0, 0, 1, 5, 1, 0, 2, 7 },
@@ -47,12 +51,13 @@ public class MinimapGenerator : MonoBehaviour
         int offsetX = (textureSize - width) / 2;
         int offsetY = (textureSize - height) / 2;
 
-        // First fill everything with white (background)
+        // First fill everything with transparent (background)
+        Color transparentColor = new Color(0, 0, 0, 0); // Full transparency
         for (int y = 0; y < textureSize; y++)
         {
             for (int x = 0; x < textureSize; x++)
             {
-                minimapTexture.SetPixel(x, y, Color.white);
+                minimapTexture.SetPixel(x, y, transparentColor);
             }
         }
 
@@ -70,18 +75,41 @@ public class MinimapGenerator : MonoBehaviour
                         Color.black
                     );
                 }
+                else
+                {
+                    minimapTexture.SetPixel(
+                        x + offsetX,
+                        height - 1 - y,  // Flip Y coordinates to match Unity's coordinate system
+                        Color.white
+                    );
+                }
             }
         }
 
         minimapTexture.Apply();
 
-        // Assign the texture to the UI RawImage
+        // Assign the texture to the UI RawImage and set its size and position
         if (minimapImage != null)
         {
             minimapImage.texture = minimapTexture;
-            minimapImage.GetComponent<RectTransform>().sizeDelta = new Vector2(100, 100);
-            var aspectFitter = minimapImage.gameObject.GetComponent<AspectRatioFitter>();
-            aspectFitter.aspectRatio = 1f;
+
+            // Make the minimap smaller (adjust these values as needed)
+            RectTransform rectTransform = minimapImage.GetComponent<RectTransform>();
+            // rectTransform.sizeDelta = new Vector2(200, 200); // Smaller size, adjust as needed
+
+            // // Position in top-right corner (adjust these values as needed)
+            // rectTransform.anchorMin = new Vector2(1, 1); // Top right anchor
+            // rectTransform.anchorMax = new Vector2(1, 1);
+            // rectTransform.pivot = new Vector2(1, 1); // Pivot at top right
+            // rectTransform.anchoredPosition = new Vector2(-20, -20); // Offset from corner
+
+            rectTransform.sizeDelta = new Vector2(200, 200);
+
+            // Position in bottom-left corner
+            rectTransform.anchorMin = new Vector2(0, 0); // Changed to bottom-left
+            rectTransform.anchorMax = new Vector2(0, 0); // Changed to bottom-left
+            rectTransform.pivot = new Vector2(0, 0);     // Changed to bottom-left
+            rectTransform.anchoredPosition = new Vector2(20, 20); // Positive offset to move away from corner
         }
     }
 
