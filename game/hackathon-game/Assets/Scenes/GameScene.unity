@@ -953,7 +953,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   laserLength: 50
-  laserColor: {r: 1, g: 0, b: 0, a: 1}
+  laserWidth: 0.03
+  laserColor: {r: 1, g: 0.33333334, b: 0, a: 1}
 --- !u!1001 &5005141027864569
 PrefabInstance:
   m_ObjectHideFlags: 0
