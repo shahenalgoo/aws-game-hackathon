@@ -6,13 +6,13 @@ public class CircularMinimapV2 : MonoBehaviour
     [SerializeField] private Transform player;
     [SerializeField] private Color backgroundColor;
     [SerializeField] private Color pathColor;
-    [SerializeField] private Vector2Int gridSize = new Vector2Int(20, 9); // Your grid dimensions
+    [SerializeField] private Vector2Int gridSize = new Vector2Int(9, 20); // Your grid dimensions
 
     // Add these new serialized fields for configuration
-    [SerializeField] private float cellSizeX = 7f;
-    [SerializeField] private float cellSizeY = 7f;
     [SerializeField] private int startingGridX = 4;
     [SerializeField] private int viewRange = 4;
+    private float cellSizeX;
+    private float cellSizeY;
     private Texture2D minimapTexture;
     private int textureSize = 256;
     private int[,] gridData;
@@ -22,9 +22,21 @@ public class CircularMinimapV2 : MonoBehaviour
 
     void Start()
     {
+
+    }
+
+    public void Init(int[,] gridInstructions, float cellDimension)
+    {
         InitializeMinimapUI();
         CreateCircularMask();
-        InitializeGridData();
+
+        // Initialize your grid data here
+        gridData = new int[gridSize.x, gridSize.y];
+        // Populate gridData with your values
+        gridData = gridInstructions;
+
+        cellSizeX = cellSizeY = cellDimension;
+
 
         // Calculate cell size based on your world space
         cellSize = new Vector2(
@@ -54,24 +66,6 @@ public class CircularMinimapV2 : MonoBehaviour
         // Rotate the RawImage 45 degrees clockwise
         rectTransform.localRotation = Quaternion.Euler(0, 0, -45);
 
-    }
-
-    private void InitializeGridData()
-    {
-        // Initialize your grid data here
-        gridData = new int[gridSize.x, gridSize.y];
-        // Populate gridData with your values
-        gridData = new int[,] {
-            { 0, 0, 0, 2, 4, 1, 0, 0, 0, 6, 2, 0, 0, 0, 1, 5, 1, 0, 2, 7 },
-            { 0, 1, 0, 1, 0, 2, 3, 1, 0, 3, 0, 0, 2, 1, 2, 0, 1, 2, 1, 0 },
-            { 0, 2, 0, 0, 0, 0, 0, 1, 4, 1, 0, 0, 1, 0, 0, 0, 0, 5, 0, 0 },
-            { 0, 1, 4, 2, 1, 0, 0, 0, 0, 2, 4, 1, 5, 0, 1, 3, 1, 2, 6, 0 },
-            { 1, 2, 0, 0, 5, 1, 3, 6, 0, 0, 0, 0, 1, 4, 2, 0, 0, 0, 2, 1 },
-            { 0, 0, 0, 0, 0, 0, 1, 5, 1, 5, 1, 0, 0, 0, 1, 3, 1, 0, 0, 0 },
-            { 0, 1, 4, 2, 0, 0, 0, 0, 2, 0, 1, 3, 1, 0, 0, 0, 2, 1, 0, 8 },
-            { 0, 0, 0, 3, 1, 2, 1, 0, 4, 0, 0, 0, 2, 4, 1, 0, 0, 5, 1, 1 },
-            { 0, 0, 0, 1, 0, 0, 2, 5, 6, 3, 2, 0, 0, 0, 2, 1, 0, 0, 2, 0 },
-        };
     }
 
     void CreateCircularMask()

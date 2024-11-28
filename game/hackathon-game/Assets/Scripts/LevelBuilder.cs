@@ -2,21 +2,19 @@ using UnityEngine;
 
 public class LevelBuilder : MonoBehaviour
 {
-    [SerializeField]
-    private int tileSize = 2;
+    [SerializeField] private int tileSize;
 
-    [SerializeField]
-    private GameObject[] levelObjects;
+    [SerializeField] private GameObject[] levelObjects;
 
     private float yAdjustObject = -5f;
     private float yAdjustTarget = 1f;
-
-
     private int[,] grid;
+
+    public CircularMinimapV2 minimap;
 
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         grid = new int[,] {
             { 0, 0, 0, 2, 4, 1, 0, 0, 0, 6, 2, 0, 0, 0, 1, 5, 1, 0, 2, 7 },
@@ -37,6 +35,10 @@ public class LevelBuilder : MonoBehaviour
     {
         GridResolver resolver = new GridResolver(grid);
         grid = resolver.FixIsolatedRegions(4, 0);
+
+        // Initialize minimap
+        minimap.Init(grid, tileSize);
+
 
         // create 2d array for loop
         for (int i = 0; i < grid.GetLength(0); i++)
