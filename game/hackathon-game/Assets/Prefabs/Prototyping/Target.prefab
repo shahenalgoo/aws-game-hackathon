@@ -148,4 +148,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b559103daa005435aa6cb3f5522e3d59, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 100
+  _maxHealth: 100
+  _currentHealth: 0
+  healthBarPrefab: {fileID: 4246624257137828755, guid: fdb2145bbcd774fa29c12c723601f96f,
+    type: 3}
+  healthBarOffset: {x: 0, y: 2, z: 0}
