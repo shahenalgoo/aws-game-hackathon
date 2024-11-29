@@ -22,7 +22,7 @@ public class PlayerDashState : PlayerBaseState
         _isDashOver = false;
 
         // Determine valid destination
-        CalculatePossibleStopPoint();
+        // CalculatePossibleStopPoint();
 
         // Turn body in direction of motion if running during fight mode
         if (Ctx.IsFightMode && Ctx.IsRunning) Ctx.transform.LookAt(Ctx.MoveDirection);

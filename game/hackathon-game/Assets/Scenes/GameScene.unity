@@ -360,7 +360,7 @@ GameObject:
   - component: {fileID: 203750202}
   - component: {fileID: 203750205}
   m_Layer: 0
-  m_Name: MinimapGenerator
+  m_Name: Minimap
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -677,6 +677,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a9d8b1d9c79264e28baf62dc3c9594a8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _targetLoot: {fileID: 1892878532141364688, guid: d78794dad934544eb928e588dc5e1a88,
+    type: 3}
+  _lootCollected: 0
 --- !u!1 &1451792806
 GameObject:
   m_ObjectHideFlags: 0
@@ -810,6 +813,11 @@ PrefabInstance:
     - target: {fileID: 3928576000499327119, guid: ed6351fa37ed1a54bac66c908dc976f8,
         type: 3}
       propertyPath: m_Name
+      value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 3928576000499327119, guid: ed6351fa37ed1a54bac66c908dc976f8,
+        type: 3}
+      propertyPath: m_TagString
       value: Player
       objectReference: {fileID: 0}
     - target: {fileID: 4269175703655125022, guid: ed6351fa37ed1a54bac66c908dc976f8,
@@ -1699,12 +1707,12 @@ PrefabInstance:
 SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
-  - {fileID: 203750202}
   - {fileID: 410087041}
   - {fileID: 832575519}
   - {fileID: 4817982330810883922}
-  - {fileID: 1397485082}
+  - {fileID: 203750202}
   - {fileID: 125806741}
+  - {fileID: 1397485082}
   - {fileID: 1596745087}
   - {fileID: 1778806167}
   - {fileID: 158363675}

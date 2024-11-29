@@ -6,7 +6,6 @@ public class CircularMinimap : MonoBehaviour
     [SerializeField] private RawImage minimapImage;
     [SerializeField] private Transform player; // Reference to player transform
     [SerializeField] private float radius = 50f; // Detection radius around player
-    [SerializeField] private float minimapSize = 150f; // Size of the minimap in UI
     // [SerializeField] private float borderThickness = 5f;
 
     [SerializeField] private Color backgroundColor;
