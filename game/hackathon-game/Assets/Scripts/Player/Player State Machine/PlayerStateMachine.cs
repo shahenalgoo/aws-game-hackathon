@@ -157,7 +157,10 @@ public class PlayerStateMachine : MonoBehaviour
     /* GET INPUT FOR RELOAD */
     public void GetReloadInput(InputAction.CallbackContext ctx)
     {
-        if (ctx.performed && !_reloadAttempt && Gun.CanReload()) _reloadAttempt = true;
+        if (ctx.performed && !_reloadAttempt && Gun.CanReload())
+        {
+            _reloadAttempt = true;
+        }
     }
 
 

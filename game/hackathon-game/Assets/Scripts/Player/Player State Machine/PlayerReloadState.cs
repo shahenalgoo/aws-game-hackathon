@@ -23,6 +23,9 @@ public class PlayerReloadState : PlayerBaseState
             // Reward with ammo
             Ctx.Gun.ReloadMag();
 
+            // Check fight mode
+            Ctx.CheckFightMode(false);
+
             // exit state
             ExitState();
         }
