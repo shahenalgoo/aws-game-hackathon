@@ -34,7 +34,7 @@ public class GunManager : MonoBehaviour
         _player = GetComponentInParent<PlayerStateMachine>();
         _player.Gun = this;
 
-        _currentAmmo = _magSize;
+        ReloadMag();
     }
 
     private void LateUpdate()
@@ -87,12 +87,21 @@ public class GunManager : MonoBehaviour
         // allow next shot at fire rate
         Invoke("AllowNextShot", _fireRate);
 
+        // Update ui
+        HUDManager._ammoUpdater(_currentAmmo);
+
         if (_fireStyle == FireType.Single) _player.IsShooting = false;
     }
 
     public void AllowNextShot() => _canShoot = true;
     public bool CanReload() => _currentAmmo != _magSize;
-    public void ReloadMag() => _currentAmmo = _magSize;
+    public void ReloadMag()
+    {
+        _currentAmmo = _magSize;
+
+        // Update ui
+        HUDManager._ammoUpdater(_currentAmmo);
+    }
     public void InterruptMuzzleFlash() => _muzzleFlash.Clear();
 
     public GameObject GetPooledBullets()

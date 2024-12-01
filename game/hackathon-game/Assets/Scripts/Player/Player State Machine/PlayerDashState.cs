@@ -141,6 +141,7 @@ public class PlayerDashState : PlayerBaseState
         {
             SetSubState(Factory.Reload());
             CurrentSubState.ExitState();
+            ReloadBar._cancelReloadSlider?.Invoke();
             CurrentSubState = null;
         }
     }

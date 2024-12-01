@@ -160,7 +160,7 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
-  m_PresetInfoIsWorld: 0
+  m_PresetInfoIsWorld: 1
 --- !u!114 &1727429532823082123
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -193,6 +193,7 @@ MonoBehaviour:
   slider: {fileID: 740759263475084918}
   canvas: {fileID: 6261571830097821267}
   lerpSpeed: 10
+  hideDelay: 5
 --- !u!1 &5216002992347715655
 GameObject:
   m_ObjectHideFlags: 0
@@ -301,8 +302,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.25}
   m_AnchorMax: {x: 1, y: 0.75}
-  m_AnchoredPosition: {x: -5, y: 0}
-  m_SizeDelta: {x: -20, y: 0}
+  m_AnchoredPosition: {x: 1.5999985, y: 0}
+  m_SizeDelta: {x: -6.8, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &8289746159575224016
 GameObject:

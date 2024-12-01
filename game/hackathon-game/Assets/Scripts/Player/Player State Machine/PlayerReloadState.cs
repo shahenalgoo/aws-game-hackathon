@@ -14,6 +14,9 @@ public class PlayerReloadState : PlayerBaseState
         Ctx.LeftHand.weight = 0;
 
         Ctx.IsShootingAllowed = false;
+
+        // Activate reload bar
+        ReloadBar._activateReloadSlider?.Invoke();
     }
 
     public override void UpdateState()

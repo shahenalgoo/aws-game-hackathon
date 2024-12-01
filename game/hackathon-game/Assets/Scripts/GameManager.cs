@@ -10,6 +10,9 @@ public class GameManager : MonoBehaviour
     [SerializeField] private int _lootCollected;
     public int LootCollected { get { return _lootCollected; } }
 
+    [SerializeField] private float _gameTimer;
+    public float GameTimer { get { return _gameTimer; } }
+
     private void Awake()
     {
         SingletonCheck();
@@ -28,16 +31,25 @@ public class GameManager : MonoBehaviour
         Instance = this;
     }
 
+    void Update()
+    {
+        TimeCounter();
+    }
+
 
     public void IncrementLoot()
     {
         _lootCollected++;
-        HUDManager.lootUpdater?.Invoke(_lootCollected);
+        HUDManager._lootUpdater?.Invoke(_lootCollected);
     }
 
     public void RestartScene()
     {
         SceneManager.LoadScene(0);
 
+    }
+    public void TimeCounter()
+    {
+        _gameTimer += Time.deltaTime;
     }
 }
