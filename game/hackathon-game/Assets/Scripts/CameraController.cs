@@ -13,6 +13,9 @@ public class CameraController : MonoBehaviour
     }
     void Update()
     {
+        if (player == null) return;
+
+
         if (stateMachine.IsRunning)
         {
             Vector3 followTransform = player.transform.position;

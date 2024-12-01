@@ -1,6 +1,13 @@
 using UnityEngine;
 
-public class BulletManager : MonoBehaviour
+public enum Shooter
+{
+    Player = 0,
+    Target = 1
+
+}
+
+public class BulletController : MonoBehaviour
 {
     [SerializeField] private float _flySpeed;
     [SerializeField] private float _lifeTime;
@@ -10,12 +17,21 @@ public class BulletManager : MonoBehaviour
     [SerializeField] private bool _canFly;
     [SerializeField] private TrailRenderer _trail;
 
+    private Shooter _whoShot;
+
+
     private void OnEnable()
     {
         Invoke("DisableBullet", _lifeTime);
         _canFly = true;
         _currentDamage = _damage;
     }
+
+    public void SetShooter(Shooter who)
+    {
+        _whoShot = who;
+    }
+
 
     void Update()
     {
@@ -38,13 +54,23 @@ public class BulletManager : MonoBehaviour
     // Or add this function for physics-based collision
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.CompareTag("Target"))
+        if (_whoShot == Shooter.Player && other.gameObject.CompareTag("Target"))
         {
             int damageRoundUp = Mathf.CeilToInt(_currentDamage);
-            other.gameObject.GetComponent<TargetController>().TakeDamage(damageRoundUp);
+            other.gameObject.GetComponent<TargetHealth>().TakeDamage(damageRoundUp);
+            CancelInvoke("DisableBullet");
+            DisableBullet();
         }
 
-        CancelInvoke("DisableBullet");
-        DisableBullet();
+        if (_whoShot == Shooter.Target && other.gameObject.CompareTag("Player"))
+        {
+            int damageRoundUp = Mathf.CeilToInt(_currentDamage);
+            other.gameObject.GetComponent<PlayerHealth>().TakeDamage(damageRoundUp);
+            CancelInvoke("DisableBullet");
+            DisableBullet();
+        }
+
+
+
     }
 }

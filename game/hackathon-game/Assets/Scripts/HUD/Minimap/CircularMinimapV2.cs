@@ -91,6 +91,8 @@ public class CircularMinimapV2 : MonoBehaviour
 
     void Update()
     {
+        if (player == null) return;
+
         // Update minimap only when player moves to another grid
         Vector2Int currentPlayerGridPos = WorldToGridPosition(player.position);
         if (prevPlayerGridPos != currentPlayerGridPos)

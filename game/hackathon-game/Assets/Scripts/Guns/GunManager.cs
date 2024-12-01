@@ -66,6 +66,7 @@ public class GunManager : MonoBehaviour
         if (bullet == null)
         {
             bullet = Instantiate(_bulletPrefab, _firePoint.transform.position, bulletDirection);
+            bullet.GetComponent<BulletController>().SetShooter(Shooter.Player);
             pooledBullets.Add(bullet);
         }
         else

@@ -2,55 +2,60 @@ using UnityEngine;
 
 public class TargetController : MonoBehaviour
 {
+    [SerializeField] private float _delayOnStart = 2f;
 
-    [SerializeField] private int _maxHealth = 100;
-    [SerializeField] private int _currentHealth;
+    [SerializeField] private float _detectionRadius = 10f;
+    [SerializeField] private float _fireRate = 5f; // Seconds between shots
+    private Transform _player;
+    private float _nextFireTime;
+    private bool _playerInRange;
 
-    private HealthBar healthBar;
-
-    // Reference to the health bar prefab
-    [SerializeField] private GameObject healthBarPrefab;
-    // Offset for health bar position
-    [SerializeField] private Vector3 healthBarOffset = new Vector3(0, 2f, 0);
-
-    public void Start()
+    void Start()
     {
-        _currentHealth = _maxHealth;
-
-        // Spawn the health bar
-        CreateHealthBar();
+        Invoke("FindPlayer", _delayOnStart);
     }
 
-    private void CreateHealthBar()
+    void FindPlayer()
     {
-        // Instantiate the health bar prefab as a child of this object
-        GameObject healthBarObject = Instantiate(healthBarPrefab, transform.position + healthBarOffset, Quaternion.identity, transform);
+        _player = GameObject.FindGameObjectWithTag("Player").transform;
 
-        // Get the HealthBar component
-        healthBar = healthBarObject.GetComponent<HealthBar>();
-
-        // Set the initial max health
-        healthBar.SetMaxHealth(_maxHealth);
     }
-    public void TakeDamage(int amount)
+
+    // Update is called once per frame
+    void Update()
     {
 
-        _currentHealth -= amount;
+        if (_player == null) return;
 
-        // Update the health bar
-        healthBar.UpdateHealthBar(_currentHealth);
+        CheckPlayerDistance();
 
-        if (_currentHealth <= 0)
+        if (_playerInRange && Time.time >= _nextFireTime)
         {
-            Die();
+            // Calculate direction from target to player
+            Vector3 playerPos = new Vector3(_player.transform.position.x, transform.position.y, _player.transform.position.z);
+            Vector3 direction = (playerPos - transform.position).normalized;
+
+            // Convert the direction into a rotation
+            Quaternion bulletRotation = Quaternion.LookRotation(direction);
+
+            // Vector3 direction = (player.position - firePoint.position).normalized;
+            Vector3 spawnPos = new Vector3(transform.position.x, _player.transform.position.y, transform.position.z);
+            TargetBulletManager.Instance.SpawnBullet(transform.position, bulletRotation);
+            _nextFireTime = Time.time + _fireRate;
         }
     }
 
-    private void Die()
+    void CheckPlayerDistance()
     {
-        Destroy(gameObject);
+        float distanceToPlayer = Vector3.Distance(transform.position, _player.position);
+        _playerInRange = distanceToPlayer <= _detectionRadius;
+    }
 
-        // Spawn loot
-        Instantiate(GameManager.Instance.TargetLoot, transform.position, Quaternion.identity);
+
+    // Optional: Visualize the detection radius in the editorß
+    void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(transform.position, _detectionRadius);
     }
 }
