@@ -8,6 +8,7 @@ public class PlayerIdleState : PlayerBaseState
         InitializeSubState();
     }
 
+
     public override void EnterState()
     {
         Ctx.IsRunning = false;
@@ -39,6 +40,11 @@ public class PlayerIdleState : PlayerBaseState
         {
             SetSubState(Factory.Reload());
             CurrentSubState.EnterState();
+        }
+
+        if (Ctx.IsStunned)
+        {
+            SwitchState(Factory.Stunned());
         }
     }
 

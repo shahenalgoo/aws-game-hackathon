@@ -31,16 +31,17 @@ public class PlayerHealth : MonoBehaviour
 
     public void TakeDamage(int amount)
     {
-
         // _currentHealth -= amount;
 
         // Update the health bar
         HUDManager._targetHealthUpdater?.Invoke(_currentHealth);
 
         // Trigger damage effect
-        // StartCoroutine(FlashRed());
-        StartCoroutine(FlashRedSmooth());
+        StartCoroutine(FlashRed());
 
+        // Play hurt animation
+        PlayerStateMachine psm = GetComponent<PlayerStateMachine>();
+        if (!psm.IsStunned) psm.IsStunned = true;
 
         if (_currentHealth <= 0)
         {
@@ -49,20 +50,6 @@ public class PlayerHealth : MonoBehaviour
     }
 
     private IEnumerator FlashRed()
-    {
-        if (vignette != null)
-        {
-            // Set vignette intensity for damage effect
-            vignette.intensity.Override(0.5f);
-
-            yield return new WaitForSeconds(flashDuration);
-
-            // Reset vignette intensity
-            vignette.intensity.Override(0f);
-        }
-    }
-
-    private IEnumerator FlashRedSmooth()
     {
         if (vignette == null) yield break;
 

@@ -8,10 +8,16 @@ public class PlayerRunState : PlayerBaseState
         InitializeSubState();
     }
 
+
+
     public override void EnterState()
     {
         Ctx.IsRunning = true;
         Ctx.CharacterAnimator.SetBool("isRunning", true);
+
+
+
+
     }
 
     public override void UpdateState()
@@ -68,6 +74,11 @@ public class PlayerRunState : PlayerBaseState
         {
             SetSubState(Factory.Reload());
             CurrentSubState.EnterState();
+        }
+
+        if (Ctx.IsStunned)
+        {
+            SwitchState(Factory.Stunned());
         }
     }
 

@@ -25,4 +25,9 @@ public class PlayerStateFactory
     {
         return new PlayerReloadState(_context, this);
     }
+
+    public PlayerBaseState Stunned()
+    {
+        return new PlayerStunnedState(_context, this);
+    }
 }

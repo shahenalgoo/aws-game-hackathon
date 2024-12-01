@@ -2,7 +2,6 @@ using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Animations.Rigging;
-using UnityEngine.Assertions.Must;
 public class PlayerStateMachine : MonoBehaviour
 {
     [Header("User Input variables")]
@@ -40,7 +39,7 @@ public class PlayerStateMachine : MonoBehaviour
     public float DashSpeed { get { return _dashSpeed; } }
     public float DashTime { get { return _dashTime; } }
     public float DashCooldown { get { return _dashCooldown; } }
-    public bool CanDash { get { return _canDash; } }
+    public bool CanDash { get { return _canDash; } set { _canDash = value; } }
 
 
     [Header("Fight Mode variables")]
@@ -72,6 +71,10 @@ public class PlayerStateMachine : MonoBehaviour
     public bool IsReloading { get { return _isReloading; } set { _isReloading = value; } }
     public bool ReloadAttempt { get { return _reloadAttempt; } set { _reloadAttempt = value; } }
 
+    [Header("Stunned Variables")]
+    [SerializeField] private bool _isStunned = false;
+    public bool IsStunned { get { return _isStunned; } set { _isStunned = value; } }
+
 
     [Header("Animation Rigging variables")]
     [SerializeField] private Rig _rig;
@@ -91,7 +94,7 @@ public class PlayerStateMachine : MonoBehaviour
 
     [Header("State Variables")]
     PlayerBaseState _currentState;
-    PlayerStateFactory _states;
+    public PlayerStateFactory _states;
     public PlayerBaseState CurrentState { get { return _currentState; } set { _currentState = value; } }
 
 
@@ -112,6 +115,8 @@ public class PlayerStateMachine : MonoBehaviour
 
         // Animation rigging
         ToggleRigAndWeapon(false);
+
+        // Get Stun clip length
     }
 
 
@@ -157,7 +162,7 @@ public class PlayerStateMachine : MonoBehaviour
     /* GET INPUT FOR RELOAD */
     public void GetReloadInput(InputAction.CallbackContext ctx)
     {
-        if (ctx.performed && !_reloadAttempt && Gun.CanReload())
+        if (ctx.performed && !_reloadAttempt && Gun.CanReload() && !_isStunned)
         {
             _reloadAttempt = true;
         }

@@ -16,7 +16,7 @@ public class ReloadBar : MonoBehaviour
 
     public void Start()
     {
-        _reloadSlider = GetComponent<Slider>();
+        _reloadSlider = GetComponentInChildren<Slider>();
 
         _activateReloadSlider += StartReload;
         _cancelReloadSlider += DeactivateReload;

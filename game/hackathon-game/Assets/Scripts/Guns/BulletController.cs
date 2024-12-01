@@ -66,6 +66,7 @@ public class BulletController : MonoBehaviour
         {
             int damageRoundUp = Mathf.CeilToInt(_currentDamage);
             other.gameObject.GetComponent<PlayerHealth>().TakeDamage(damageRoundUp);
+
             CancelInvoke("DisableBullet");
             DisableBullet();
         }
