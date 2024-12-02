@@ -17,6 +17,9 @@ public class PlayerIdleState : PlayerBaseState
 
     public override void UpdateState()
     {
+        // Track move direction in case of dash
+        // Ctx.TrackMovement();
+
         //should follow cursor if fight mode
         Ctx.AimGun?.Invoke();
 

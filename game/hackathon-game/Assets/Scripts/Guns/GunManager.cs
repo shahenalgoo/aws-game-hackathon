@@ -39,7 +39,7 @@ public class GunManager : MonoBehaviour
 
     private void LateUpdate()
     {
-        if (_player.IsShooting && _player.IsShootingAllowed) ShootGun();
+        if (_player.IsShooting && _player.IsShootingAllowed && !_player.IsReloading) ShootGun();
     }
 
     public void ShootGun()

@@ -74,6 +74,8 @@ public class PlayerStateMachine : MonoBehaviour
     [Header("Stunned Variables")]
     [SerializeField] private bool _isStunned = false;
     public bool IsStunned { get { return _isStunned; } set { _isStunned = value; } }
+    private Vector3 _knockbackVelocity;
+    public float _knockbackRecoverySpeed = 5f;
 
 
     [Header("Animation Rigging variables")]
@@ -144,6 +146,12 @@ public class PlayerStateMachine : MonoBehaviour
         Vector2 stickValue = ctx.ReadValue<Vector2>();
         _rightStickInput = new Vector3(stickValue.x, 0, stickValue.y);
 
+        if (!_isShooting)
+        {
+            ActivateFightMode();
+            CheckFightMode(false);
+        }
+
         if (_currentInputDevice != InputDevice.Controller) _currentInputDevice = InputDevice.Controller;
     }
 
@@ -166,6 +174,15 @@ public class PlayerStateMachine : MonoBehaviour
         {
             _reloadAttempt = true;
         }
+    }
+
+    /* GET INPUT FOR AIMING ONLY */
+    public void GetAimingInput(InputAction.CallbackContext ctx)
+    {
+        if (_isShooting) return;
+
+        ActivateFightMode();
+        CheckFightMode(false);
     }
 
 
@@ -198,9 +215,19 @@ public class PlayerStateMachine : MonoBehaviour
 
     public void Update()
     {
+        TrackMovement();
         _currentState.UpdateStates();
         FightModeCountdown();
         CooldownDash();
+
+        // If any
+        PerformKnockback();
+    }
+
+    public void TrackMovement()
+    {
+        // Track move direction in case of dash
+        _moveDirection = transform.position + (_movementInput.ToIso() * 10);
     }
 
     public void LookAtAim()
@@ -294,6 +321,21 @@ public class PlayerStateMachine : MonoBehaviour
 
     public void AllowShootDelayed() => Invoke("AllowShoot", 0.1f);
     public void AllowShoot() => _isShootingAllowed = true;
+
+    public void ApplyKnockback(Vector3 force)
+    {
+        _knockbackVelocity = force;
+    }
+
+    public void PerformKnockback()
+    {
+        // Apply knockback
+        if (_knockbackVelocity.magnitude > 0.2f)
+        {
+            _characterController.Move(_knockbackVelocity * Time.deltaTime);
+            _knockbackVelocity = Vector3.Lerp(_knockbackVelocity, Vector3.zero, _knockbackRecoverySpeed * Time.deltaTime);
+        }
+    }
 
     // Feed collision info to current state
     private void OnControllerColliderHit(ControllerColliderHit hit) => _currentState.CollisionHandler?.Invoke(hit);

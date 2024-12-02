@@ -24,8 +24,8 @@ public class PlayerDashState : PlayerBaseState
         // Determine valid destination
         // CalculatePossibleStopPoint();
 
-        // Turn body in direction of motion if running during fight mode
-        if (Ctx.IsFightMode && Ctx.IsRunning) Ctx.transform.LookAt(Ctx.MoveDirection);
+        // Turn body in direction of motion 
+        Ctx.transform.LookAt(Ctx.MoveDirection);
 
         // Start animation
         Ctx.CharacterAnimator.Play("Dash");
@@ -148,7 +148,7 @@ public class PlayerDashState : PlayerBaseState
 
     public override void CollisionEventHandler(ControllerColliderHit hit)
     {
-        if (hit.gameObject.layer == LayerMask.NameToLayer("Obstacles") || hit.gameObject.layer == LayerMask.NameToLayer("InvisibleWall"))
+        if (hit.gameObject.layer == LayerMask.NameToLayer("InvisibleWall"))
         {
             Ctx.IsDashing = false;
             CheckSwitchStates();

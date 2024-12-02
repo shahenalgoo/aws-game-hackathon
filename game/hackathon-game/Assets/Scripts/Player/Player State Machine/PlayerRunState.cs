@@ -18,8 +18,8 @@ public class PlayerRunState : PlayerBaseState
 
     public override void UpdateState()
     {
-        // Track move direction
-        Ctx.MoveDirection = Ctx.transform.position + (Ctx.MovementInput.ToIso() * 10);
+        // // Track move direction
+        // Ctx.TrackMovement();
 
         // Apply motion
         Vector3 moveVelocity = Ctx.MovementInput.normalized * Ctx.MoveSpeed;

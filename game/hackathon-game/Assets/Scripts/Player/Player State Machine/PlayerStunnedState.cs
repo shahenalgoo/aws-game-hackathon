@@ -11,7 +11,7 @@ public class PlayerStunnedState : PlayerBaseState
     }
 
     private bool isOver = false;
-    private float _stunTime = 0.5f;
+    private float _stunTime = 0.4f;
 
     private float _counter;
 
@@ -34,6 +34,8 @@ public class PlayerStunnedState : PlayerBaseState
     }
     public override void UpdateState()
     {
+        // Track move direction in case of dash
+        // Ctx.TrackMovement();
 
         _counter += Time.deltaTime;
 
