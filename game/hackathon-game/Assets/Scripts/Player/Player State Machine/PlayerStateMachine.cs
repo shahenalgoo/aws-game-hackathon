@@ -40,6 +40,8 @@ public class PlayerStateMachine : MonoBehaviour
     public float DashTime { get { return _dashTime; } }
     public float DashCooldown { get { return _dashCooldown; } }
     public bool CanDash { get { return _canDash; } set { _canDash = value; } }
+    [SerializeField] public TrailRenderer[] _dashTrails;
+
 
 
     [Header("Fight Mode variables")]

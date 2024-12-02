@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Rendering;
 using UnityEngine.Rendering.Universal; // For URP
@@ -13,6 +14,13 @@ public class PlayerHealth : MonoBehaviour
     [SerializeField] private float flashDuration = 0.2f;
     private Vignette vignette;
 
+
+    [SerializeField] private float explosionForce = 300f;
+    [SerializeField] private float explosionRadius = 5f;
+    [SerializeField] private int numberOfPieces = 10;
+
+    private MeshFilter meshFilter;
+    private List<GameObject> pieces = new List<GameObject>();
     public void Start()
     {
         _currentHealth = _maxHealth;
@@ -27,11 +35,13 @@ public class PlayerHealth : MonoBehaviour
             vignette.intensity.Override(0f);
             vignette.color.Override(Color.red);
         }
+
+        meshFilter = GetComponent<MeshFilter>();
     }
 
     public void TakeDamage(int amount)
     {
-        // _currentHealth -= amount;
+        _currentHealth -= amount;
 
         // Update the health bar
         HUDManager._targetHealthUpdater?.Invoke(_currentHealth);
@@ -82,14 +92,56 @@ public class PlayerHealth : MonoBehaviour
         vignette.intensity.Override(0f);
     }
 
+
     private void Die()
     {
+        // Store original mesh data
+        Mesh originalMesh = meshFilter.mesh;
+        Vector3[] vertices = originalMesh.vertices;
+        int[] triangles = originalMesh.triangles;
+        Vector2[] uvs = originalMesh.uv;
+
+        // Create chunks
+        for (int i = 0; i < numberOfPieces; i++)
+        {
+            GameObject piece = new GameObject("Piece_" + i);
+            piece.transform.position = transform.position;
+            piece.transform.rotation = transform.rotation;
+
+            // Add mesh components
+            MeshFilter pieceFilter = piece.AddComponent<MeshFilter>();
+            MeshRenderer pieceRenderer = piece.AddComponent<MeshRenderer>();
+            MeshCollider pieceCollider = piece.AddComponent<MeshCollider>();
+            Rigidbody pieceRigidbody = piece.AddComponent<Rigidbody>();
+
+            // Copy material
+            pieceRenderer.material = GetComponent<MeshRenderer>().material;
+
+            // Create submesh
+            // This is a simplified version - you'd want more sophisticated mesh splitting
+            Mesh pieceMesh = new Mesh();
+            // ... mesh splitting logic here
+
+            pieceFilter.mesh = pieceMesh;
+            pieceCollider.convex = true;
+
+            // Add explosion force
+            Vector3 randomDir = Random.insideUnitSphere;
+            pieceRigidbody.AddExplosionForce(explosionForce, transform.position, explosionRadius);
+            pieceRigidbody.AddTorque(randomDir * explosionForce);
+
+            pieces.Add(piece);
+        }
+
+        // Hide original robot
+        gameObject.SetActive(false);
 
         // Die visuals & audio feedback
 
         // Remove this later
-        Destroy(gameObject);
+        // Destroy(gameObject);
 
         // Death screen
+
     }
 }

@@ -13,7 +13,6 @@ public class PlayerDashState : PlayerBaseState
 
     int layerMask = 1 << 6;
     private Vector3 _startingPoint;
-
     public override void EnterState()
     {
 
@@ -42,6 +41,17 @@ public class PlayerDashState : PlayerBaseState
 
         _startingPoint = Ctx.transform.position;
 
+        // Setup trail
+        ToggleTrails(true);
+
+    }
+
+    public void ToggleTrails(bool value)
+    {
+        for (int i = 0; i < Ctx._dashTrails.Length; i++)
+        {
+            Ctx._dashTrails[i].emitting = value;
+        }
     }
 
     public void CalculatePossibleStopPoint()
@@ -126,7 +136,8 @@ public class PlayerDashState : PlayerBaseState
         // Reactivate Character Controller
         if (!Ctx.CharController.enabled) Ctx.CharController.enabled = true;
 
-
+        // Disable trail
+        ToggleTrails(false);
     }
 
     public override void CheckSwitchStates()
