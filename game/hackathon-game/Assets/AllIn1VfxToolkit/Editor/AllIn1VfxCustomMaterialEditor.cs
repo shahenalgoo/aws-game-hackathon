@@ -1,8 +1,9 @@
 ﻿#if UNITY_EDITOR
-using UnityEngine;
+using System.Linq;
+using AllIn1VfxToolkit;
 using UnityEditor;
 using UnityEditor.SceneManagement;
-using System.Linq;
+using UnityEngine;
 using UnityEngine.Experimental.Rendering;
 using UnityEngine.Rendering;
 
@@ -89,7 +90,9 @@ public class AllIn1VfxCustomMaterialEditor : ShaderGUI
             DrawLine(Color.grey, 1, 3);
             DrawProperty(9);
             DrawLine(Color.grey, 1, 3);
-            Fog("Use Unity Fog", "FOG_ON");
+            OneLineKeywordToggle("Use Unity Fog", "FOG_ON");
+            DrawLine(Color.grey, 1, 3);
+            OneLineKeywordToggle("Use Custom Time", "TIMEISCUSTOM_ON");
             DrawLine(Color.grey, 1, 3);
             EditorGUIUtility.labelWidth = 140;
             materialEditor.EnableInstancingField();
@@ -438,7 +441,7 @@ public class AllIn1VfxCustomMaterialEditor : ShaderGUI
         if(tempValue != colorM.floatValue && !Application.isPlaying) SaveAndSetCustomConfig();
     }
 
-    private void Fog(string inspector, string keyword)
+    private void OneLineKeywordToggle(string inspector, string keyword)
     {
         bool toggle = oldKeyWords.Contains(keyword);
         bool ini = toggle;
@@ -478,11 +481,11 @@ public class AllIn1VfxCustomMaterialEditor : ShaderGUI
                         targetMat.DisableKeyword("SHAPE3_ON");
                         targetMat.DisableKeyword("SHAPE2SCREENUV_ON");
                         targetMat.DisableKeyword("SHAPE3SCREENUV_ON");
-                        SetShaderBasedOnEffectsAndPipeline();
+                        AllIn1VfxWindow.SetShaderBasedOnEffectsAndPipeline(targetMat);
                     }
                     else if(shapeNumber == 3)
                     {
-                        SetShaderBasedOnEffectsAndPipeline();
+                        AllIn1VfxWindow.SetShaderBasedOnEffectsAndPipeline(targetMat);
                         targetMat.DisableKeyword("SHAPE3SCREENUV_ON");
                     }
                 }
@@ -593,19 +596,19 @@ public class AllIn1VfxCustomMaterialEditor : ShaderGUI
         else targetMat.DisableKeyword("SHAPE" + shapeToNumber + "CONTRAST_ON");
         if(oldKeyWords.Contains("SHAPE" + shapeFromNumber + "DISTORT_ON")) targetMat.EnableKeyword("SHAPE" + shapeToNumber + "DISTORT_ON");
         else targetMat.DisableKeyword("SHAPE" + shapeToNumber + "DISTORT_ON");
-        
+
         if(oldKeyWords.Contains("SHAPE" + shapeFromNumber + "ROTATE_ON")) targetMat.EnableKeyword("SHAPE" + shapeToNumber + "ROTATE_ON");
         else targetMat.DisableKeyword("SHAPE" + shapeToNumber + "ROTATE_ON");
         int rotationOffsetToIndex = 150 + ((shapeToNumber - 1) * 2); //150 is the first rotation property
         int rotationOffsetFromIndex = 150 + ((shapeFromNumber - 1) * 2);
         CopyShapeProperty(rotationOffsetToIndex, rotationOffsetFromIndex);
         CopyShapeProperty(rotationOffsetToIndex + 1, rotationOffsetFromIndex + 1); //Copy rotation speed
-        
+
         if(oldKeyWords.Contains("SHAPE" + shapeFromNumber + "SHAPECOLOR_ON")) targetMat.EnableKeyword("SHAPE" + shapeToNumber + "SHAPECOLOR_ON");
         else targetMat.DisableKeyword("SHAPE" + shapeToNumber + "SHAPECOLOR_ON");
         if(oldKeyWords.Contains("SHAPE" + shapeFromNumber + "SCREENUV_ON")) targetMat.EnableKeyword("SHAPE" + shapeToNumber + "SCREENUV_ON");
         else targetMat.DisableKeyword("SHAPE" + shapeToNumber + "SCREENUV_ON");
-        SetShaderBasedOnEffectsAndPipeline();
+        AllIn1VfxWindow.SetShaderBasedOnEffectsAndPipeline(targetMat);
     }
 
     private void CopyShapeProperty(int propertyTo, int propertyFrom)
@@ -660,7 +663,7 @@ public class AllIn1VfxCustomMaterialEditor : ShaderGUI
             }
             else targetMat.DisableKeyword(keyword);
 
-            SetShaderBasedOnEffectsAndPipeline();
+            AllIn1VfxWindow.SetShaderBasedOnEffectsAndPipeline(targetMat);
             Save();
         }
 
@@ -1007,7 +1010,7 @@ public class AllIn1VfxCustomMaterialEditor : ShaderGUI
             if(toggle) targetMat.EnableKeyword(keyword);
             else targetMat.DisableKeyword(keyword);
 
-            SetShaderBasedOnEffectsAndPipeline();
+            AllIn1VfxWindow.SetShaderBasedOnEffectsAndPipeline(targetMat);
             if(!setCustomConfigAfter) Save();
             else SaveAndSetCustomConfig();
         }
@@ -1031,58 +1034,11 @@ public class AllIn1VfxCustomMaterialEditor : ShaderGUI
                 if(extraKeywordToDisable != null) targetMat.DisableKeyword(extraKeywordToDisable);
             }
 
-            SetShaderBasedOnEffectsAndPipeline();
+            AllIn1VfxWindow.SetShaderBasedOnEffectsAndPipeline(targetMat);
             Save();
         }
 
         return toggle;
-    }
-
-    private void SetShaderBasedOnEffectsAndPipeline()
-    {
-        oldKeyWords = targetMat.shaderKeywords;
-        string targetShader = "AllIn1Vfx";
-
-        string pipeline = "Built-In";
-        RenderPipelineAsset renderPipelineAsset = GraphicsSettings.renderPipelineAsset;
-        if(renderPipelineAsset != null)
-        {
-            switch(renderPipelineAsset.GetType().Name)
-            {
-                case"UniversalRenderPipelineAsset":
-                    pipeline = "URP";
-                    break;
-                case"HDRenderPipelineAsset":
-                    pipeline = "HDRP";
-                    break;
-            }
-        }
-
-        if(pipeline.Equals("Built-In"))
-        {
-            if(oldKeyWords.Contains("SCREENDISTORTION_ON")) targetShader = "AllIn1VfxGrabPass";
-            else if(oldKeyWords.Contains("FOG_ON") || oldKeyWords.Contains("SHAPE1SCREENUV_ON") || oldKeyWords.Contains("SHAPE2SCREENUV_ON") ||
-                    oldKeyWords.Contains("SHAPE3SCREENUV_ON") || oldKeyWords.Contains("SOFTPART_ON") || oldKeyWords.Contains("DEPTHGLOW_ON")) targetShader = "AllIn1VfxBuiltIn";
-        }
-        else if(pipeline.Equals("URP"))
-        {
-            targetShader = "AllIn1VfxURP";
-        }
-        else if(pipeline.Equals("HDRP"))
-        {
-            targetShader = "AllIn1VfxHDRP";
-        }
-
-        if(!targetMat.shader.name.Equals(targetShader))
-        {
-            int renderingQueue = targetMat.renderQueue;
-            targetMat.shader = Resources.Load(targetShader, typeof(Shader)) as Shader;
-            targetMat.renderQueue = renderingQueue;
-            EditorUtility.SetDirty(targetMat);
-        }
-        
-        AssetDatabase.SaveAssets();
-        AssetDatabase.Refresh();
     }
 
     private bool SpecialCaseEffectHeaderToggle(string inspector, string keyword, bool toggle)
@@ -1181,7 +1137,7 @@ public class AllIn1VfxCustomMaterialEditor : ShaderGUI
     {
         Rect r = EditorGUILayout.GetControlRect(GUILayout.Height(padding + thickness));
         r.height = thickness;
-        r.y += (padding / 2);
+        r.y += (padding / 2f);
         r.x -= 2;
         r.width += 6;
         EditorGUI.DrawRect(r, color);
