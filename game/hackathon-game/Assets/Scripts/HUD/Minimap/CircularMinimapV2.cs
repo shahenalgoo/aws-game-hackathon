@@ -3,6 +3,7 @@ using UnityEngine.UI;
 public class CircularMinimapV2 : MonoBehaviour
 {
     [SerializeField] private RawImage minimapImage;
+    [SerializeField] private float mapSize = 216f;
     [SerializeField] private Transform player;
     [SerializeField] private Color backgroundColor;
     [SerializeField] private Color pathColor;
@@ -56,8 +57,7 @@ public class CircularMinimapV2 : MonoBehaviour
         minimapImage.color = Color.white;
 
         RectTransform rectTransform = minimapImage.GetComponent<RectTransform>();
-        float size = Screen.height * 0.2f;
-        rectTransform.sizeDelta = new Vector2(size, size);
+        rectTransform.sizeDelta = new Vector2(mapSize, mapSize);
         rectTransform.anchorMin = new Vector2(0, 0);
         rectTransform.anchorMax = new Vector2(0, 0);
         rectTransform.pivot = new Vector2(0, 0);
