@@ -32,6 +32,13 @@ public class PlayerIdleState : PlayerBaseState
 
     public override void CheckSwitchStates()
     {
+        // Check stunned state
+        if (Ctx.IsStunned)
+        {
+            SwitchState(Factory.Stunned());
+        }
+
+
         //if movement input is not 0, we have to switch to run
         if (Ctx.MovementInput != Vector3.zero) SwitchState(Factory.Run());
 
@@ -42,10 +49,6 @@ public class PlayerIdleState : PlayerBaseState
             CurrentSubState.EnterState();
         }
 
-        if (Ctx.IsStunned)
-        {
-            SwitchState(Factory.Stunned());
-        }
     }
 
     public override void ExitState() { }

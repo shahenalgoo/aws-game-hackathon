@@ -2,7 +2,6 @@ using UnityEngine;
 using System;
 using UnityEngine.UI;
 using System.Linq;
-using UnityEditor.Animations;
 
 public class ReloadBar : MonoBehaviour
 {
@@ -26,13 +25,12 @@ public class ReloadBar : MonoBehaviour
 
         // Get animation length from animator
         Animator animator = GetComponentInParent<Animator>();
-        AnimatorController animController = animator.runtimeAnimatorController as AnimatorController;
+        RuntimeAnimatorController animController = animator.runtimeAnimatorController as RuntimeAnimatorController;
         AnimationClip clip = animController.animationClips.First(x => x.name == "Reload");
         _reloadTime = clip.length;
 
         // Deactive initially
         _reloadSlider.gameObject.SetActive(false);
-
     }
 
     public void StartReload()

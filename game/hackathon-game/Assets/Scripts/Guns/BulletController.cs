@@ -62,7 +62,7 @@ public class BulletController : MonoBehaviour
             DisableBullet();
         }
 
-        if (_whoShot == Shooter.Target && other.gameObject.CompareTag("Player"))
+        if (_whoShot == Shooter.Target && other.gameObject.CompareTag("Player") && !other.gameObject.GetComponent<PlayerStateMachine>().IsDashing)
         {
             int damageRoundUp = Mathf.CeilToInt(_currentDamage);
             other.gameObject.GetComponent<PlayerHealth>().TakeDamage(damageRoundUp);

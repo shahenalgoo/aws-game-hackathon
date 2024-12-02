@@ -14,10 +14,6 @@ public class PlayerRunState : PlayerBaseState
     {
         Ctx.IsRunning = true;
         Ctx.CharacterAnimator.SetBool("isRunning", true);
-
-
-
-
     }
 
     public override void UpdateState()
@@ -66,6 +62,12 @@ public class PlayerRunState : PlayerBaseState
 
     public override void CheckSwitchStates()
     {
+        // Check stunned state
+        if (Ctx.IsStunned)
+        {
+            SwitchState(Factory.Stunned());
+        }
+
         //if movement input is 0, we have to switch to idle
         if (Ctx.MovementInput == Vector3.zero) SwitchState(Factory.Idle());
 
@@ -76,10 +78,6 @@ public class PlayerRunState : PlayerBaseState
             CurrentSubState.EnterState();
         }
 
-        if (Ctx.IsStunned)
-        {
-            SwitchState(Factory.Stunned());
-        }
     }
 
     public override void InitializeSubState()
