@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Rendering;
 using UnityEngine.Rendering.Universal; // For URP
@@ -14,13 +13,7 @@ public class PlayerHealth : MonoBehaviour
     [SerializeField] private float flashDuration = 0.2f;
     private Vignette vignette;
 
-
-    [SerializeField] private float explosionForce = 300f;
-    [SerializeField] private float explosionRadius = 5f;
-    [SerializeField] private int numberOfPieces = 10;
-
-    private MeshFilter meshFilter;
-    private List<GameObject> pieces = new List<GameObject>();
+    private PlayerFracture fracture;
     public void Start()
     {
         _currentHealth = _maxHealth;
@@ -35,8 +28,6 @@ public class PlayerHealth : MonoBehaviour
             vignette.intensity.Override(0f);
             vignette.color.Override(Color.red);
         }
-
-        meshFilter = GetComponent<MeshFilter>();
     }
 
     public void TakeDamage(int amount)
@@ -95,51 +86,24 @@ public class PlayerHealth : MonoBehaviour
 
     private void Die()
     {
-        // Store original mesh data
-        Mesh originalMesh = meshFilter.mesh;
-        Vector3[] vertices = originalMesh.vertices;
-        int[] triangles = originalMesh.triangles;
-        Vector2[] uvs = originalMesh.uv;
+        fracture = GetComponent<PlayerFracture>();
 
-        // Create chunks
-        for (int i = 0; i < numberOfPieces; i++)
-        {
-            GameObject piece = new GameObject("Piece_" + i);
-            piece.transform.position = transform.position;
-            piece.transform.rotation = transform.rotation;
+        // Disable any animations or other components first
+        GetComponent<Animator>().enabled = false;
 
-            // Add mesh components
-            MeshFilter pieceFilter = piece.AddComponent<MeshFilter>();
-            MeshRenderer pieceRenderer = piece.AddComponent<MeshRenderer>();
-            MeshCollider pieceCollider = piece.AddComponent<MeshCollider>();
-            Rigidbody pieceRigidbody = piece.AddComponent<Rigidbody>();
+        GetComponent<CharacterController>().enabled = false;
 
-            // Copy material
-            pieceRenderer.material = GetComponent<MeshRenderer>().material;
+        GetComponent<PlayerStateMachine>().enabled = false;
 
-            // Create submesh
-            // This is a simplified version - you'd want more sophisticated mesh splitting
-            Mesh pieceMesh = new Mesh();
-            // ... mesh splitting logic here
+        GetComponentInChildren<GunManager>().gameObject.SetActive(false);
 
-            pieceFilter.mesh = pieceMesh;
-            pieceCollider.convex = true;
-
-            // Add explosion force
-            Vector3 randomDir = Random.insideUnitSphere;
-            pieceRigidbody.AddExplosionForce(explosionForce, transform.position, explosionRadius);
-            pieceRigidbody.AddTorque(randomDir * explosionForce);
-
-            pieces.Add(piece);
-        }
+        // Shatter Effect
+        fracture.Shatter();
 
         // Hide original robot
-        gameObject.SetActive(false);
+        // gameObject.SetActive(false);
 
         // Die visuals & audio feedback
-
-        // Remove this later
-        // Destroy(gameObject);
 
         // Death screen
 

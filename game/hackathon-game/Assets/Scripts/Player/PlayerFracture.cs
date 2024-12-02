@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections.Generic;
+using System.Collections;
 
 public class PlayerFracture : MonoBehaviour
 {
@@ -11,8 +12,18 @@ public class PlayerFracture : MonoBehaviour
 
     [Header("Piece Settings")]
     [SerializeField] private float pieceMass = 1f;
-    [SerializeField] private float pieceLifetime = 3f;
     [SerializeField] private Material pieceMaterial;
+
+    [Header("Trail Settings")]
+    [SerializeField] private Material trailMaterial;
+    [SerializeField] private float trailTime = 0.5f;
+    [SerializeField] private float startWidth = 0.1f;
+    [SerializeField] private float endWidth = 0.0f;
+    [SerializeField] private Gradient trailColor;
+
+    [Header("Fade Settings")]
+    [SerializeField] private float fadeDelay = 3f;
+    [SerializeField] private float fadeDuration = 3f;
 
     [Header("Effects")]
     [SerializeField] private GameObject explosionEffectPrefab;
@@ -126,7 +137,12 @@ public class PlayerFracture : MonoBehaviour
     {
         foreach (VoronoiPoint point in points)
         {
-            if (point.Vertices.Count == 0) continue;
+            // Skip if not enough vertices
+            if (point.Vertices.Count < 4) continue;
+
+            // Check for unique vertices
+            HashSet<Vector3> uniqueVertices = new HashSet<Vector3>(point.Vertices);
+            if (uniqueVertices.Count < 4) continue;
 
             GameObject piece = new GameObject("Piece");
             piece.transform.position = skinnedMeshRenderer.transform.position;
@@ -135,8 +151,11 @@ public class PlayerFracture : MonoBehaviour
             // Add components
             MeshFilter meshFilter = piece.AddComponent<MeshFilter>();
             MeshRenderer meshRenderer = piece.AddComponent<MeshRenderer>();
-            MeshCollider meshCollider = piece.AddComponent<MeshCollider>();
             Rigidbody rb = piece.AddComponent<Rigidbody>();
+
+            // Set layer collision ignoring
+            piece.layer = LayerMask.NameToLayer("Default"); // Or whatever layer you want the pieces to be on
+            Physics.IgnoreLayerCollision(piece.layer, LayerMask.NameToLayer("InvisibleWall"), true);
 
             // Create mesh
             Mesh mesh = new Mesh();
@@ -148,9 +167,15 @@ public class PlayerFracture : MonoBehaviour
 
             // Setup components
             meshFilter.mesh = mesh;
-            meshRenderer.material = pieceMaterial;
-            meshCollider.sharedMesh = mesh;
-            meshCollider.convex = true;
+            Material instanceMaterial = new Material(pieceMaterial);
+            SetupTransparentMaterial(instanceMaterial);
+            meshRenderer.material = instanceMaterial;
+
+            // Add collision with fallback options
+            AddCollisionToPiece(piece, mesh);
+
+            // Add trail renderer
+            AddTrailRenderer(piece);
 
             // Setup rigidbody
             rb.mass = pieceMass;
@@ -159,10 +184,227 @@ public class PlayerFracture : MonoBehaviour
 
             pieces.Add(piece);
 
-            // Destroy piece after lifetime
-            Destroy(piece, pieceLifetime);
+            // Start fade out coroutine
+            StartCoroutine(FadeOutPiece(piece));
         }
     }
+
+    private void AddCollisionToPiece(GameObject piece, Mesh originalMesh)
+    {
+        // Just use a sphere collider for maximum simplicity
+        SphereCollider sphereCollider = piece.AddComponent<SphereCollider>();
+        sphereCollider.radius = originalMesh.bounds.extents.magnitude * 0.5f;
+
+        // Optional: Slightly randomize the radius for variety
+        sphereCollider.radius *= Random.Range(0.8f, 1.2f);
+        //     try
+        //     {
+        //         // First try: Simple convex mesh collider
+        //         MeshCollider meshCollider = piece.AddComponent<MeshCollider>();
+        //         meshCollider.convex = true;
+        //         meshCollider.sharedMesh = originalMesh;
+
+        //         // If the mesh is too complex (over 256 triangles), create a simplified collision mesh
+        //         if (originalMesh.triangles.Length > 256 * 3)
+        //         {
+        //             Mesh simplifiedMesh = SimplifyMesh(originalMesh);
+        //             meshCollider.sharedMesh = simplifiedMesh;
+        //         }
+        //     }
+        //     catch
+        //     {
+        //         try
+        //         {
+        //             // Second try: Create a very simple convex hull
+        //             Mesh simplestMesh = CreateSimpleConvexHull(originalMesh);
+        //             MeshCollider meshCollider = piece.GetComponent<MeshCollider>();
+        //             if (meshCollider != null)
+        //             {
+        //                 meshCollider.sharedMesh = simplestMesh;
+        //             }
+        //             else
+        //             {
+        //                 meshCollider = piece.AddComponent<MeshCollider>();
+        //                 meshCollider.convex = true;
+        //                 meshCollider.sharedMesh = simplestMesh;
+        //             }
+        //         }
+        //         catch
+        //         {
+        //             // Final fallback: Use primitive collider
+        //             if (piece.GetComponent<MeshCollider>() != null)
+        //                 Destroy(piece.GetComponent<MeshCollider>());
+
+        //             BoxCollider boxCollider = piece.AddComponent<BoxCollider>();
+        //             boxCollider.size = originalMesh.bounds.size;
+        //             boxCollider.center = originalMesh.bounds.center;
+        //         }
+        //     }
+        // }
+
+        // private Mesh SimplifyMesh(Mesh originalMesh)
+        // {
+        //     // Create a simplified mesh with fewer vertices
+        //     Vector3[] vertices = originalMesh.vertices;
+        //     int[] triangles = originalMesh.triangles;
+
+        //     // Skip vertices to reduce complexity (example: take every nth vertex)
+        //     List<Vector3> simplifiedVerts = new List<Vector3>();
+        //     List<int> simplifiedTris = new List<int>();
+
+        //     // Take every 3rd triangle (reducing mesh complexity by ~66%)
+        //     for (int i = 0; i < triangles.Length; i += 9)
+        //     {
+        //         if (i + 8 < triangles.Length)
+        //         {
+        //             for (int j = 0; j < 3; j++)
+        //             {
+        //                 simplifiedVerts.Add(vertices[triangles[i + j]]);
+        //                 simplifiedTris.Add(simplifiedVerts.Count - 1);
+        //             }
+        //         }
+        //     }
+
+        //     Mesh simplifiedMesh = new Mesh();
+        //     simplifiedMesh.vertices = simplifiedVerts.ToArray();
+        //     simplifiedMesh.triangles = simplifiedTris.ToArray();
+        //     simplifiedMesh.RecalculateNormals();
+        //     simplifiedMesh.RecalculateBounds();
+
+        //     return simplifiedMesh;
+    }
+
+    private Mesh CreateSimpleConvexHull(Mesh originalMesh)
+    {
+        // Create a very simple convex hull using the bounds vertices
+        Vector3[] vertices = originalMesh.vertices;
+
+        // Get the extreme points
+        Vector3 min = vertices[0];
+        Vector3 max = vertices[0];
+
+        foreach (Vector3 vertex in vertices)
+        {
+            min = Vector3.Min(min, vertex);
+            max = Vector3.Max(max, vertex);
+        }
+
+        // Create 8 vertices for a box-like hull
+        Vector3[] hullVertices = new Vector3[]
+        {
+        new Vector3(min.x, min.y, min.z),
+        new Vector3(max.x, min.y, min.z),
+        new Vector3(min.x, max.y, min.z),
+        new Vector3(max.x, max.y, min.z),
+        new Vector3(min.x, min.y, max.z),
+        new Vector3(max.x, min.y, max.z),
+        new Vector3(min.x, max.y, max.z),
+        new Vector3(max.x, max.y, max.z)
+        };
+
+        // Create triangles for the hull (simple box topology)
+        int[] hullTriangles = new int[]
+        {
+        0, 2, 1, 1, 2, 3, // front
+        4, 5, 6, 5, 7, 6, // back
+        0, 1, 4, 1, 5, 4, // bottom
+        2, 6, 3, 3, 6, 7, // top
+        0, 4, 2, 2, 4, 6, // left
+        1, 3, 5, 3, 7, 5  // right
+        };
+
+        Mesh hullMesh = new Mesh();
+        hullMesh.vertices = hullVertices;
+        hullMesh.triangles = hullTriangles;
+        hullMesh.RecalculateNormals();
+        hullMesh.RecalculateBounds();
+
+        return hullMesh;
+    }
+
+    private void AddTrailRenderer(GameObject piece)
+    {
+        TrailRenderer trail = piece.AddComponent<TrailRenderer>();
+
+        // Basic trail settings
+        trail.time = trailTime;
+        trail.startWidth = startWidth;
+        trail.endWidth = endWidth;
+        trail.material = trailMaterial;
+
+        // Set trail color gradient
+        if (trailColor.colorKeys.Length == 0)
+        {
+            // Default gradient if none is set
+            trailColor = new Gradient();
+            GradientColorKey[] colorKeys = new GradientColorKey[2];
+            colorKeys[0] = new GradientColorKey(Color.white, 0f);
+            colorKeys[1] = new GradientColorKey(Color.white, 1f);
+
+            GradientAlphaKey[] alphaKeys = new GradientAlphaKey[2];
+            alphaKeys[0] = new GradientAlphaKey(1f, 0f);
+            alphaKeys[1] = new GradientAlphaKey(0f, 1f);
+
+            trailColor.SetKeys(colorKeys, alphaKeys);
+        }
+        trail.colorGradient = trailColor;
+
+        // Additional trail settings
+        trail.generateLightingData = true;
+        trail.shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.Off;
+        trail.receiveShadows = false;
+        trail.autodestruct = false;
+    }
+
+    private IEnumerator FadeOutPiece(GameObject piece)
+    {
+        // Wait for fade delay
+        yield return new WaitForSeconds(fadeDelay);
+
+        MeshRenderer renderer = piece.GetComponent<MeshRenderer>();
+        TrailRenderer trail = piece.GetComponent<TrailRenderer>();
+        Material material = renderer.material;
+        Color startColor = material.color;
+        float elapsedTime = 0f;
+
+        // Gradually fade out
+        while (elapsedTime < fadeDuration)
+        {
+            elapsedTime += Time.deltaTime;
+            float normalizedTime = elapsedTime / fadeDuration;
+
+            // Fade material
+            Color newColor = new Color(
+                startColor.r,
+                startColor.g,
+                startColor.b,
+                Mathf.Lerp(startColor.a, 0f, normalizedTime)
+            );
+            material.color = newColor;
+
+            // Fade trail if it exists
+            if (trail != null)
+            {
+                trail.startWidth = Mathf.Lerp(startWidth, 0f, normalizedTime);
+                trail.endWidth = Mathf.Lerp(endWidth, 0f, normalizedTime);
+            }
+
+            yield return null;
+        }
+
+        // Destroy the piece after fading
+        Destroy(piece);
+    }
+
+    // Make sure your material supports transparency
+    private void SetupTransparentMaterial(Material material)
+    {
+        material.SetFloat("_Surface", 1f); // 0 = opaque, 1 = transparent
+        material.SetFloat("_Blend", 0f);   // 0 = alpha, 1 = premultiply
+        material.renderQueue = 3000;        // Transparent queue
+        material.SetShaderPassEnabled("ShadowCaster", false);
+    }
+
 
     private void PlayBreakEffects()
     {
