@@ -56,7 +56,7 @@ public class GunManager : MonoBehaviour
         _canShoot = false;
 
         //generating random spread
-        UnityEngine.Random.InitState(System.DateTime.Now.Millisecond);
+        UnityEngine.Random.InitState(DateTime.Now.Millisecond);
         float spread = UnityEngine.Random.Range(-_spreadAmount, _spreadAmount);
         Quaternion bulletDirection = transform.root.transform.rotation * Quaternion.Euler(0, spread, 0);
 
@@ -89,7 +89,7 @@ public class GunManager : MonoBehaviour
         Invoke("AllowNextShot", _fireRate);
 
         // Update ui
-        HUDManager._ammoUpdater(_currentAmmo);
+        HUDManager._ammoUpdater?.Invoke(_currentAmmo);
 
         if (_fireStyle == FireType.Single) _player.IsShooting = false;
     }
@@ -101,7 +101,7 @@ public class GunManager : MonoBehaviour
         _currentAmmo = _magSize;
 
         // Update ui
-        HUDManager._ammoUpdater(_currentAmmo);
+        HUDManager._ammoUpdater?.Invoke(_currentAmmo);
     }
     public void InterruptMuzzleFlash() => _muzzleFlash.Clear();
 

@@ -244,6 +244,17 @@
                 },
                 {
                     "name": "",
+                    "id": "567d3896-231e-408e-b6b7-f10b79a3e9d1",
+                    "path": "<Mouse>/middleButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Reload",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "fc64df06-52da-469f-a32f-05bc8fb579f0",
                     "path": "<Gamepad>/buttonWest",
                     "interactions": "",

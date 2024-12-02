@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -16,6 +17,14 @@ public class GameManager : MonoBehaviour
     private void Awake()
     {
         SingletonCheck();
+        InitializeGameState();
+    }
+
+    private void InitializeGameState()
+    {
+        _lootCollected = 0;
+        _gameTimer = 0;
+        HUDManager._lootUpdater?.Invoke(_lootCollected);
     }
 
     void SingletonCheck()
@@ -46,8 +55,8 @@ public class GameManager : MonoBehaviour
     public void RestartScene()
     {
         SceneManager.LoadScene(0);
-
     }
+
     public void TimeCounter()
     {
         _gameTimer += Time.deltaTime;

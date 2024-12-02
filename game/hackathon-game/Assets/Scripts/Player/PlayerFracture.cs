@@ -32,6 +32,11 @@ public class PlayerFracture : MonoBehaviour
     private SkinnedMeshRenderer skinnedMeshRenderer;
     private List<GameObject> pieces = new List<GameObject>();
 
+    // Store the original layer collision state
+    private bool originalCollisionState;
+    private int piecesLayer;
+    private int invisibleWallLayer;
+
     private void Awake()
     {
         skinnedMeshRenderer = GetComponentInChildren<SkinnedMeshRenderer>();
@@ -39,6 +44,19 @@ public class PlayerFracture : MonoBehaviour
         // If no material assigned, use the original object's material
         if (pieceMaterial == null)
             pieceMaterial = skinnedMeshRenderer.material;
+
+        // Store the layers we'll be working with
+        piecesLayer = LayerMask.NameToLayer("Default"); // Or whatever layer your pieces use
+        invisibleWallLayer = LayerMask.NameToLayer("InvisibleWall");
+
+        // Store the original collision state between these layers
+        originalCollisionState = Physics.GetIgnoreLayerCollision(piecesLayer, invisibleWallLayer);
+    }
+
+    private void OnDestroy()
+    {
+        // Restore the original collision state between layers
+        Physics.IgnoreLayerCollision(piecesLayer, invisibleWallLayer, originalCollisionState);
     }
 
     public void Shatter()
@@ -153,9 +171,9 @@ public class PlayerFracture : MonoBehaviour
             MeshRenderer meshRenderer = piece.AddComponent<MeshRenderer>();
             Rigidbody rb = piece.AddComponent<Rigidbody>();
 
-            // Set layer collision ignoring
-            piece.layer = LayerMask.NameToLayer("Default"); // Or whatever layer you want the pieces to be on
-            Physics.IgnoreLayerCollision(piece.layer, LayerMask.NameToLayer("InvisibleWall"), true);
+            // Set layer and ignore collisions
+            piece.layer = piecesLayer;
+            Physics.IgnoreLayerCollision(piecesLayer, invisibleWallLayer, true);
 
             // Create mesh
             Mesh mesh = new Mesh();
@@ -197,129 +215,6 @@ public class PlayerFracture : MonoBehaviour
 
         // Optional: Slightly randomize the radius for variety
         sphereCollider.radius *= Random.Range(0.8f, 1.2f);
-        //     try
-        //     {
-        //         // First try: Simple convex mesh collider
-        //         MeshCollider meshCollider = piece.AddComponent<MeshCollider>();
-        //         meshCollider.convex = true;
-        //         meshCollider.sharedMesh = originalMesh;
-
-        //         // If the mesh is too complex (over 256 triangles), create a simplified collision mesh
-        //         if (originalMesh.triangles.Length > 256 * 3)
-        //         {
-        //             Mesh simplifiedMesh = SimplifyMesh(originalMesh);
-        //             meshCollider.sharedMesh = simplifiedMesh;
-        //         }
-        //     }
-        //     catch
-        //     {
-        //         try
-        //         {
-        //             // Second try: Create a very simple convex hull
-        //             Mesh simplestMesh = CreateSimpleConvexHull(originalMesh);
-        //             MeshCollider meshCollider = piece.GetComponent<MeshCollider>();
-        //             if (meshCollider != null)
-        //             {
-        //                 meshCollider.sharedMesh = simplestMesh;
-        //             }
-        //             else
-        //             {
-        //                 meshCollider = piece.AddComponent<MeshCollider>();
-        //                 meshCollider.convex = true;
-        //                 meshCollider.sharedMesh = simplestMesh;
-        //             }
-        //         }
-        //         catch
-        //         {
-        //             // Final fallback: Use primitive collider
-        //             if (piece.GetComponent<MeshCollider>() != null)
-        //                 Destroy(piece.GetComponent<MeshCollider>());
-
-        //             BoxCollider boxCollider = piece.AddComponent<BoxCollider>();
-        //             boxCollider.size = originalMesh.bounds.size;
-        //             boxCollider.center = originalMesh.bounds.center;
-        //         }
-        //     }
-        // }
-
-        // private Mesh SimplifyMesh(Mesh originalMesh)
-        // {
-        //     // Create a simplified mesh with fewer vertices
-        //     Vector3[] vertices = originalMesh.vertices;
-        //     int[] triangles = originalMesh.triangles;
-
-        //     // Skip vertices to reduce complexity (example: take every nth vertex)
-        //     List<Vector3> simplifiedVerts = new List<Vector3>();
-        //     List<int> simplifiedTris = new List<int>();
-
-        //     // Take every 3rd triangle (reducing mesh complexity by ~66%)
-        //     for (int i = 0; i < triangles.Length; i += 9)
-        //     {
-        //         if (i + 8 < triangles.Length)
-        //         {
-        //             for (int j = 0; j < 3; j++)
-        //             {
-        //                 simplifiedVerts.Add(vertices[triangles[i + j]]);
-        //                 simplifiedTris.Add(simplifiedVerts.Count - 1);
-        //             }
-        //         }
-        //     }
-
-        //     Mesh simplifiedMesh = new Mesh();
-        //     simplifiedMesh.vertices = simplifiedVerts.ToArray();
-        //     simplifiedMesh.triangles = simplifiedTris.ToArray();
-        //     simplifiedMesh.RecalculateNormals();
-        //     simplifiedMesh.RecalculateBounds();
-
-        //     return simplifiedMesh;
-    }
-
-    private Mesh CreateSimpleConvexHull(Mesh originalMesh)
-    {
-        // Create a very simple convex hull using the bounds vertices
-        Vector3[] vertices = originalMesh.vertices;
-
-        // Get the extreme points
-        Vector3 min = vertices[0];
-        Vector3 max = vertices[0];
-
-        foreach (Vector3 vertex in vertices)
-        {
-            min = Vector3.Min(min, vertex);
-            max = Vector3.Max(max, vertex);
-        }
-
-        // Create 8 vertices for a box-like hull
-        Vector3[] hullVertices = new Vector3[]
-        {
-        new Vector3(min.x, min.y, min.z),
-        new Vector3(max.x, min.y, min.z),
-        new Vector3(min.x, max.y, min.z),
-        new Vector3(max.x, max.y, min.z),
-        new Vector3(min.x, min.y, max.z),
-        new Vector3(max.x, min.y, max.z),
-        new Vector3(min.x, max.y, max.z),
-        new Vector3(max.x, max.y, max.z)
-        };
-
-        // Create triangles for the hull (simple box topology)
-        int[] hullTriangles = new int[]
-        {
-        0, 2, 1, 1, 2, 3, // front
-        4, 5, 6, 5, 7, 6, // back
-        0, 1, 4, 1, 5, 4, // bottom
-        2, 6, 3, 3, 6, 7, // top
-        0, 4, 2, 2, 4, 6, // left
-        1, 3, 5, 3, 7, 5  // right
-        };
-
-        Mesh hullMesh = new Mesh();
-        hullMesh.vertices = hullVertices;
-        hullMesh.triangles = hullTriangles;
-        hullMesh.RecalculateNormals();
-        hullMesh.RecalculateBounds();
-
-        return hullMesh;
     }
 
     private void AddTrailRenderer(GameObject piece)

@@ -98,4 +98,13 @@ public class HUDManager : MonoBehaviour
         _targetHealth = maxHealth;
     }
 
+    private void OnDestroy()
+    {
+        // IMPORTANT: Unsubscribe from static events
+        _lootUpdater -= UpdateLootText;
+        _ammoUpdater -= UpdateAmmoText;
+        _targetHealthUpdater -= SetTargetHealth;
+        _maxHealthUpdater -= SetMaxHealthBar;
+    }
+
 }

@@ -72,4 +72,10 @@ public class ReloadBar : MonoBehaviour
     {
         transform.rotation = _initialRotation;
     }
+    private void OnDestroy()
+    {
+        // IMPORTANT: Unsubscribe from static events
+        _activateReloadSlider -= StartReload;
+        _cancelReloadSlider -= DeactivateReload;
+    }
 }
