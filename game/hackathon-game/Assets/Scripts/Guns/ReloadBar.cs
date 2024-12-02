@@ -13,6 +13,10 @@ public class ReloadBar : MonoBehaviour
     public static Action _activateReloadSlider;
     public static Action _cancelReloadSlider;
 
+    private GameObject _player;
+    private CanvasGroup _canvasGroup;
+    private float alphaOn = 0.8f;
+
     public void Start()
     {
         _reloadSlider = GetComponentInChildren<Slider>();
@@ -24,27 +28,29 @@ public class ReloadBar : MonoBehaviour
         _initialRotation = transform.rotation;
 
         // Get animation length from animator
-        Animator animator = GetComponentInParent<Animator>();
-        RuntimeAnimatorController animController = animator.runtimeAnimatorController as RuntimeAnimatorController;
+        _player = GameObject.FindGameObjectWithTag("Player");
+        Animator animator = _player.GetComponentInParent<Animator>();
+        RuntimeAnimatorController animController = animator.runtimeAnimatorController;
         AnimationClip clip = animController.animationClips.First(x => x.name == "Reload");
         _reloadTime = clip.length;
 
         // Deactive initially
-        _reloadSlider.gameObject.SetActive(false);
+        _canvasGroup = GetComponent<CanvasGroup>();
+        _canvasGroup.alpha = 0;
     }
 
     public void StartReload()
     {
         _currentReloadTime = 0f;
         _isReloading = true;
-        _reloadSlider.gameObject.SetActive(true);
+        _canvasGroup.alpha = alphaOn;
         _reloadSlider.value = 0f;
     }
 
     public void DeactivateReload()
     {
+        _canvasGroup.alpha = 0;
         _isReloading = false;
-        _reloadSlider.gameObject.SetActive(false);
 
     }
 
@@ -62,13 +68,8 @@ public class ReloadBar : MonoBehaviour
         }
     }
 
-    // Alternative approach using LateUpdate if Update isn't smooth enough
     void LateUpdate()
     {
-        if (_isReloading)
-        {
-            // This ensures the rotation reset happens after all other updates
-            transform.rotation = _initialRotation;
-        }
+        transform.rotation = _initialRotation;
     }
 }

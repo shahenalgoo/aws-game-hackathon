@@ -85,7 +85,6 @@ GameObject:
   m_Component:
   - component: {fileID: 900468488180749991}
   - component: {fileID: 7323698466573877431}
-  - component: {fileID: 1325371876960108854}
   m_Layer: 5
   m_Name: reloadBar
   m_TagString: Untagged
@@ -101,7 +100,7 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1542550766506131961}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: -217}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -111,7 +110,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 192.13}
+  m_AnchoredPosition: {x: -0, y: 197}
   m_SizeDelta: {x: 160, y: 20}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &7323698466573877431
@@ -165,19 +164,6 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
---- !u!114 &1325371876960108854
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1542550766506131961}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b55db91cfe00142f68f3fab13daa8c9f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _reloadSlider: {fileID: 7323698466573877431}
 --- !u!1 &1599673993215271259
 GameObject:
   m_ObjectHideFlags: 0
@@ -190,6 +176,8 @@ GameObject:
   - component: {fileID: 3012384617359414146}
   - component: {fileID: 3077252397405565991}
   - component: {fileID: 512219479507522693}
+  - component: {fileID: 2608576155106941915}
+  - component: {fileID: 9059848194399787327}
   m_Layer: 5
   m_Name: ReloadBarCanvas
   m_TagString: Untagged
@@ -280,6 +268,30 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!114 &2608576155106941915
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1599673993215271259}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b55db91cfe00142f68f3fab13daa8c9f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!225 &9059848194399787327
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1599673993215271259}
+  m_Enabled: 1
+  m_Alpha: 0.8
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &4445272923750632068
 GameObject:
   m_ObjectHideFlags: 0

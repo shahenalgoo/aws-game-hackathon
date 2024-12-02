@@ -328,6 +328,7 @@ MonoBehaviour:
   _isReloading: 0
   _reloadAttempt: 0
   _isStunned: 0
+  _knockbackRecoverySpeed: 5
   _rig: {fileID: 4934840142527468320}
   _weapon: {fileID: 877339874980085658}
   _leftHand: {fileID: 2461162001000420237}
@@ -487,6 +488,22 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: 13310613-515f-4fc2-b1e0-22852c1df765
     m_ActionName: PlayerControls/Restart[/Keyboard/backslash]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 4269175703655125022}
+        m_TargetAssemblyTypeName: PlayerStateMachine, Assembly-CSharp
+        m_MethodName: GetAimingInput
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 1b4c3949-8bef-4a16-a019-0fd440660591
+    m_ActionName: PlayerControls/AimRightClick[/Mouse/rightButton]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: PlayerControls
@@ -2164,6 +2181,11 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 3012384617359414146, guid: f8ecb0bb037144428b5baecf7f4c67bd,
+        type: 3}
+      propertyPath: m_SortingOrder
+      value: 999
+      objectReference: {fileID: 0}
     - target: {fileID: 5557576774869220122, guid: f8ecb0bb037144428b5baecf7f4c67bd,
         type: 3}
       propertyPath: m_Pivot.x
@@ -2278,6 +2300,10 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 263982460834065643}
+    - targetCorrespondingSourceObject: {fileID: 1599673993215271259, guid: f8ecb0bb037144428b5baecf7f4c67bd,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2376258017413140895}
   m_SourcePrefab: {fileID: 100100000, guid: f8ecb0bb037144428b5baecf7f4c67bd, type: 3}
 --- !u!224 &2380378651208901221 stripped
 RectTransform:
@@ -2303,3 +2329,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b55db91cfe00142f68f3fab13daa8c9f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!225 &2376258017413140895
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8798793840924719140}
+  m_Enabled: 1
+  m_Alpha: 0.63
+  m_Interactable: 0
+  m_BlocksRaycasts: 0
+  m_IgnoreParentGroups: 0
