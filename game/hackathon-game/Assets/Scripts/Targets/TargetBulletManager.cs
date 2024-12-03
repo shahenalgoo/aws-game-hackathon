@@ -22,12 +22,7 @@ public class TargetBulletManager : ObjectPooler
         bullet.obj.transform.position = spawnPoint;
         bullet.obj.transform.rotation = direction;
 
-        if (bullet.isNewlyCreated)
-        {
-            bullet.obj.GetComponent<BulletController>().SetShooter(Shooter.Target);
-
-        }
-        else
+        if (!bullet.isNewlyCreated)
         {
             bullet.obj.SetActive(true);
         }

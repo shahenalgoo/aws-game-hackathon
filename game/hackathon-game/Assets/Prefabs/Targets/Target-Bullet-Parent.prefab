@@ -9,8 +9,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1595836512531620774}
-  - component: {fileID: 3145554390460526808}
   - component: {fileID: 1069561645235727251}
+  - component: {fileID: -7309033994531192090}
   m_Layer: 0
   m_Name: Target-Bullet-Parent
   m_TagString: Untagged
@@ -34,28 +34,6 @@ Transform:
   - {fileID: 864895218021265493}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &3145554390460526808
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8539527772419689907}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2dc84f2612418dc438a470e6d9efc800, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _flySpeed: 15
-  _lifeTime: 2
-  _damage: 30
-  _damageFalloffRate: 30
-  _currentDamage: 0
-  _canFly: 1
-  _trail: {fileID: 196883545036911829}
-  _knockbackForce: 5
-  _impact: {fileID: 0}
-  _bulletPrefab: {fileID: 3833643471077583058}
 --- !u!65 &1069561645235727251
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -77,6 +55,26 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.20422621, y: 0.10733028, z: 0.4023508}
   m_Center: {x: -0.0046236753, y: 0.024292588, z: 0.19908409}
+--- !u!114 &-7309033994531192090
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8539527772419689907}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5782299bebec84ef79857ab3dfcd5f23, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _flySpeed: 15
+  _lifeTime: 2
+  _damage: 30
+  _damageFalloffRate: 30
+  _currentDamage: 0
+  _canFly: 1
+  _trail: {fileID: 196883545036911829}
+  _knockbackForce: 5
 --- !u!1001 &7421791384796523498
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -170,12 +168,6 @@ TrailRenderer:
 --- !u!4 &864895218021265493 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7710099268766178239, guid: c01a5c8aa29d8d14c88452067eb580bb,
-    type: 3}
-  m_PrefabInstance: {fileID: 7421791384796523498}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &3833643471077583058 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6038387695507129144, guid: c01a5c8aa29d8d14c88452067eb580bb,
     type: 3}
   m_PrefabInstance: {fileID: 7421791384796523498}
   m_PrefabAsset: {fileID: 0}
