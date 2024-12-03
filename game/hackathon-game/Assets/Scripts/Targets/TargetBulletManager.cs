@@ -4,6 +4,8 @@ using UnityEngine;
 public class TargetBulletManager : ObjectPooler
 {
     public static Action<Vector3, Quaternion> _bulletSpawner;
+    [SerializeField] private GameObject _muzzleFlash;
+
 
     public void OnEnable()
     {
@@ -21,6 +23,9 @@ public class TargetBulletManager : ObjectPooler
 
         bullet.obj.transform.position = spawnPoint;
         bullet.obj.transform.rotation = direction;
+
+        if (_muzzleFlash != null) Instantiate(_muzzleFlash, spawnPoint, direction);
+
 
         if (!bullet.isNewlyCreated)
         {

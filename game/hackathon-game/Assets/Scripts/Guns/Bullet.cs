@@ -21,7 +21,7 @@ public class Bullet : MonoBehaviour
     // private Shooter _whoShot;
 
 
-    private void OnEnable()
+    public void OnEnable()
     {
         Invoke("DisableBullet", _lifeTime);
         _canFly = true;
@@ -48,7 +48,7 @@ public class Bullet : MonoBehaviour
     public void DisableBullet()
     {
         _canFly = false;
-        _trail.Clear();
+        if (_trail != null) _trail.Clear();
 
         gameObject.SetActive(false);
     }

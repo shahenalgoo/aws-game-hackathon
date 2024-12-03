@@ -4,11 +4,17 @@ public class TargetBulletController : Bullet
 {
     [SerializeField] private float _knockbackForce = 10f;
 
+    [SerializeField] private GameObject _impact;
+
     // Or add this function for physics-based collision
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.CompareTag("Player") && !other.gameObject.GetComponent<PlayerStateMachine>().IsDashing)
         {
+            Vector3 collisionPoint = other.ClosestPoint(transform.position);
+
+            Instantiate(_impact, collisionPoint, Quaternion.identity);
+
             int damageRoundUp = Mathf.CeilToInt(_currentDamage);
             other.gameObject.GetComponent<PlayerHealth>().TakeDamage(damageRoundUp);
 

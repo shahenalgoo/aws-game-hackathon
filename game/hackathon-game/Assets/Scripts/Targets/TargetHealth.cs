@@ -23,7 +23,7 @@ public class TargetHealth : MonoBehaviour
     private void CreateHealthBar()
     {
         // Instantiate the health bar prefab as a child of this object
-        GameObject healthBarObject = Instantiate(healthBarPrefab, transform.position + healthBarOffset, Quaternion.identity, transform);
+        GameObject healthBarObject = Instantiate(healthBarPrefab, transform.position + healthBarOffset, Quaternion.Euler(0,-45,0), transform);
 
         // Get the HealthBar component
         healthBar = healthBarObject.GetComponent<HealthBar>();

@@ -6,6 +6,7 @@ public class HealthBar : MonoBehaviour
     [SerializeField] private Slider slider;
     [SerializeField] private Canvas canvas;
     private Camera mainCamera;
+    private Quaternion _initialRotation; // Store the initial rotation
 
     // Lerp settings
     private float targetHealth;
@@ -19,6 +20,9 @@ public class HealthBar : MonoBehaviour
 
     private void Start()
     {
+        // Store the initial rotation we want to maintain
+        _initialRotation = transform.rotation;
+
         mainCamera = Camera.main;
 
         // Ensure the canvas is set to world space
@@ -28,7 +32,7 @@ public class HealthBar : MonoBehaviour
         canvas.transform.localScale = new Vector3(0.01f, 0.01f, 0.01f);
 
         // Set fixed rotation of -45 degrees on Y axis
-        canvas.transform.rotation = Quaternion.Euler(0, -45, 0);
+        // canvas.transform.rotation = Quaternion.Euler(0, -45, 0);
 
         // Hide health bar initially
         canvas.enabled = false;
@@ -55,6 +59,11 @@ public class HealthBar : MonoBehaviour
         {
             HideHealthBar();
         }
+    }
+
+    void LateUpdate()
+    {
+        transform.rotation = _initialRotation;
     }
 
     public void UpdateHealthBar(float currentHealth)
