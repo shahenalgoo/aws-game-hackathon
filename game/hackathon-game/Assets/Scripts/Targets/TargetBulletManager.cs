@@ -1,68 +1,35 @@
-using System.Collections;
-using System.Collections.Generic;
+using System;
 using UnityEngine;
 
-public class TargetBulletManager : MonoBehaviour
+public class TargetBulletManager : ObjectPooler
 {
-    public static TargetBulletManager Instance { get; private set; }
+    public static Action<Vector3, Quaternion> _bulletSpawner;
 
-    private List<GameObject> pooledBullets = new List<GameObject>();
-    public GameObject _targetBulletPrefab;
-
-    private void Awake()
+    public void OnEnable()
     {
-        SingletonCheck();
+        _bulletSpawner += SpawnBullet;
     }
 
-    void SingletonCheck()
+    public void OnDisable()
     {
-        // If there is an instance, and it's not this one, delete this one
-        if (Instance != null && Instance != this)
-        {
-            Destroy(gameObject);
-            return;
-        }
+        _bulletSpawner -= SpawnBullet;
 
-        // Set the instance
-        Instance = this;
     }
     public void SpawnBullet(Vector3 spawnPoint, Quaternion direction)
     {
-        // spawn bullet
-        GameObject bullet = GetPooledBullets();
+        PooledObjType bullet = GetObject();
 
-        if (bullet == null)
+        bullet.obj.transform.position = spawnPoint;
+        bullet.obj.transform.rotation = direction;
+
+        if (bullet.isNewlyCreated)
         {
-            bullet = Instantiate(_targetBulletPrefab, spawnPoint, direction);
-            bullet.GetComponent<BulletController>().SetShooter(Shooter.Target);
-            pooledBullets.Add(bullet);
+            bullet.obj.GetComponent<BulletController>().SetShooter(Shooter.Target);
+
         }
         else
         {
-            bullet.transform.position = spawnPoint;
-            bullet.transform.rotation = direction;
-            bullet.SetActive(true);
+            bullet.obj.SetActive(true);
         }
-    }
-    public GameObject GetPooledBullets()
-    {
-        for (int i = 0; i < pooledBullets.Count; i++)
-        {
-            if (!pooledBullets[i].activeInHierarchy)
-            {
-                return pooledBullets[i];
-            }
-        }
-        return null;
-    }
-
-    public void ClearPooledBullets()
-    {
-        //destroy pooled bullets
-        for (int i = 0; i < pooledBullets.Count; i++)
-        {
-            Destroy(pooledBullets[i].gameObject);
-        }
-        pooledBullets.Clear();
     }
 }

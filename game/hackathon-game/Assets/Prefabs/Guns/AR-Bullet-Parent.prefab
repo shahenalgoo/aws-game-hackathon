@@ -53,6 +53,7 @@ MonoBehaviour:
   _currentDamage: 0
   _canFly: 1
   _trail: {fileID: 196883545036911829}
+  _knockbackForce: 10
 --- !u!65 &1069561645235727251
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -83,6 +84,11 @@ PrefabInstance:
     m_TransformParent: {fileID: 1595836512531620774}
     m_Modifications:
     - target: {fileID: 2046527002536690945, guid: c01a5c8aa29d8d14c88452067eb580bb,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6038387695507129144, guid: c01a5c8aa29d8d14c88452067eb580bb,
         type: 3}
       propertyPath: m_IsActive
       value: 1

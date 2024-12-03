@@ -54,6 +54,8 @@ MonoBehaviour:
   _canFly: 1
   _trail: {fileID: 196883545036911829}
   _knockbackForce: 5
+  _impact: {fileID: 0}
+  _bulletPrefab: {fileID: 3833643471077583058}
 --- !u!65 &1069561645235727251
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -168,6 +170,12 @@ TrailRenderer:
 --- !u!4 &864895218021265493 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7710099268766178239, guid: c01a5c8aa29d8d14c88452067eb580bb,
+    type: 3}
+  m_PrefabInstance: {fileID: 7421791384796523498}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &3833643471077583058 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6038387695507129144, guid: c01a5c8aa29d8d14c88452067eb580bb,
     type: 3}
   m_PrefabInstance: {fileID: 7421791384796523498}
   m_PrefabAsset: {fileID: 0}

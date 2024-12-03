@@ -40,7 +40,7 @@ public class TargetController : MonoBehaviour
 
             // Vector3 direction = (player.position - firePoint.position).normalized;
             Vector3 spawnPos = new Vector3(transform.position.x, _player.transform.position.y, transform.position.z);
-            TargetBulletManager.Instance.SpawnBullet(transform.position, bulletRotation);
+            TargetBulletManager._bulletSpawner?.Invoke(transform.position, bulletRotation);
             _nextFireTime = Time.time + _fireRate;
         }
     }

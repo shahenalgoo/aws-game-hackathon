@@ -18,7 +18,6 @@ public class BulletController : MonoBehaviour
     [SerializeField] private TrailRenderer _trail;
     [SerializeField] private float _knockbackForce = 10f;
 
-
     private Shooter _whoShot;
 
 
@@ -50,6 +49,7 @@ public class BulletController : MonoBehaviour
     {
         _canFly = false;
         _trail.Clear();
+
         gameObject.SetActive(false);
     }
 
@@ -58,9 +58,13 @@ public class BulletController : MonoBehaviour
     {
         if (_whoShot == Shooter.Player && other.gameObject.CompareTag("Target"))
         {
+            CancelInvoke("DisableBullet");
+
+            BulletImpactManager._impactSpawner?.Invoke(transform.position, Quaternion.identity);
+
             int damageRoundUp = Mathf.CeilToInt(_currentDamage);
             other.gameObject.GetComponent<TargetHealth>().TakeDamage(damageRoundUp);
-            CancelInvoke("DisableBullet");
+
             DisableBullet();
         }
 
