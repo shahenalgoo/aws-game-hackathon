@@ -76,11 +76,11 @@ public class PlayerFracture : MonoBehaviour
         // Assign vertices to nearest Voronoi point
         AssignVerticesToPoints(voronoiPoints, vertices, triangles, uvs);
 
-        // Create pieces
-        CreatePieces(voronoiPoints);
-
         // Play effects
         PlayBreakEffects();
+
+        // Create pieces
+        CreatePieces(voronoiPoints);
 
         // Hide original object
         skinnedMeshRenderer.enabled = false;
@@ -251,6 +251,7 @@ public class PlayerFracture : MonoBehaviour
         trail.autodestruct = false;
     }
 
+
     private IEnumerator FadeOutPiece(GameObject piece)
     {
         // Wait for fade delay
@@ -331,3 +332,5 @@ public class VoronoiPoint
         UVs = new List<Vector2>();
     }
 }
+
+
