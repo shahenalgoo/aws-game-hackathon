@@ -41,7 +41,9 @@ public class PlayerStateMachine : MonoBehaviour
     public float DashCooldown { get { return _dashCooldown; } }
     public bool CanDash { get { return _canDash; } set { _canDash = value; } }
     [SerializeField] public TrailRenderer[] _dashTrails;
-
+    [SerializeField] public Vector3[] _dashTrailsInitialPos;
+    [SerializeField] public ParticleSystem _dashLightning;
+    [SerializeField] public ParticleSystem _dashLightningOnHit;
 
 
     [Header("Fight Mode variables")]
@@ -120,7 +122,11 @@ public class PlayerStateMachine : MonoBehaviour
         // Animation rigging
         ToggleRigAndWeapon(false);
 
-        // Get Stun clip length
+        // Record dash trail positions
+        for (int i = 0; i < _dashTrails.Length; i++)
+        {
+            _dashTrailsInitialPos[i] = _dashTrails[i].transform.localPosition;
+        }
     }
 
 

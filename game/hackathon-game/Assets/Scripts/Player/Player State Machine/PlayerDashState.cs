@@ -13,6 +13,13 @@ public class PlayerDashState : PlayerBaseState
 
     int layerMask = 1 << 6;
     private Vector3 _startingPoint;
+
+    private float _stationaryDashDuration = 0.25f; // Adjust this value as needed
+    private bool _stationaryDashTimeElapsed = false;
+    private float _stationaryDashTimer = 0f;
+
+    private bool _hitInvisibleWall = false;
+    public float _normalDashTime;
     public override void EnterState()
     {
 
@@ -44,6 +51,9 @@ public class PlayerDashState : PlayerBaseState
         // Setup trail
         ToggleTrails(true);
 
+        // Toggle lightning
+        Ctx._dashLightning.Play();
+
     }
 
     public void ToggleTrails(bool value)
@@ -51,6 +61,14 @@ public class PlayerDashState : PlayerBaseState
         for (int i = 0; i < Ctx._dashTrails.Length; i++)
         {
             Ctx._dashTrails[i].emitting = value;
+        }
+    }
+    private void StartStationaryDashTimer()
+    {
+        _stationaryDashTimer += Time.deltaTime;
+        if (_stationaryDashTimer >= _stationaryDashDuration)
+        {
+            _stationaryDashTimeElapsed = true;
         }
     }
 
@@ -96,10 +114,19 @@ public class PlayerDashState : PlayerBaseState
 
     public override void UpdateState()
     {
-
-        if (Vector3.Distance(_startingPoint, Ctx.transform.position) <= _dashDistance)
+        if (_hitInvisibleWall)
         {
-            // Apply forward motion
+
+            // Stay in place but continue the dash animation/effects
+            if (!_isDashOver)
+            {
+                // You might want to add a timer here to control how long the stationary dash lasts
+                StartStationaryDashTimer();
+            }
+        }
+        else if (Vector3.Distance(_startingPoint, Ctx.transform.position) <= _dashDistance)
+        {
+            // Normal dash movement
             _dash = Ctx.transform.forward * Ctx.DashSpeed * Time.deltaTime;
 
             if (Ctx.CharController.enabled)
@@ -108,13 +135,14 @@ public class PlayerDashState : PlayerBaseState
             }
             else
             {
-                // we still need to move the player even if the character controller is disabled
                 Ctx.transform.position += _dash;
             }
 
-
+            _normalDashTime += Time.deltaTime;
         }
-        else if (!_isDashOver)
+
+        if (!_isDashOver && ((_hitInvisibleWall && _stationaryDashTimeElapsed) ||
+            (!_hitInvisibleWall && Vector3.Distance(_startingPoint, Ctx.transform.position) > _dashDistance)))
         {
             Ctx.IsDashing = false;
             CheckSwitchStates();
@@ -136,8 +164,21 @@ public class PlayerDashState : PlayerBaseState
         // Reactivate Character Controller
         if (!Ctx.CharController.enabled) Ctx.CharController.enabled = true;
 
-        // Disable trail
+
         ToggleTrails(false);
+
+        // Reset trail positions and colors
+        if (_hitInvisibleWall)
+        {
+            // reset trail pos
+            for (int i = 0; i < Ctx._dashTrails.Length; i++)
+            {
+                Ctx._dashTrails[i].transform.localPosition = Ctx._dashTrailsInitialPos[i];
+            }
+        }
+
+        // // Disable particle system
+        Ctx._dashLightning.Stop();
     }
 
     public override void CheckSwitchStates()
@@ -161,9 +202,40 @@ public class PlayerDashState : PlayerBaseState
     {
         if (hit.gameObject.layer == LayerMask.NameToLayer("InvisibleWall"))
         {
-            Ctx.IsDashing = false;
-            CheckSwitchStates();
+            // Get the wall's normal
+            Vector3 wallNormal = hit.normal;
+
+            // Calculate the angle between player's forward direction and the wall
+            float angle = Vector3.Angle(Ctx.transform.forward, -wallNormal);
+
+            // If the angle is greater than a threshold (e.g., 45 degrees)
+            // This means the player is approaching the wall at an angle
+            if (angle > 42f)
+            {
+                // Calculate the direction the player should move along the wall
+                Vector3 newDirection = Vector3.ProjectOnPlane(Ctx.transform.forward, wallNormal).normalized;
+
+                // Rotate the player to face this new direction
+                Ctx.transform.rotation = Quaternion.LookRotation(newDirection);
+
+                // Adjust the remaining dash distance based on how far we've already dashed
+                float distanceCovered = Vector3.Distance(_startingPoint, Ctx.transform.position);
+                _dashDistance = Mathf.Max(_dashDistance - distanceCovered, 0f);
+
+                // Update the starting point for the new dash direction
+                _startingPoint = Ctx.transform.position;
+
+                // Continue with normal dash
+                return;
+            }
+
+            _stationaryDashDuration -= _normalDashTime;
+            _hitInvisibleWall = true;
+            Ctx._dashLightning.Clear();
+            Ctx._dashLightning.Stop();
+            Ctx._dashLightningOnHit.Play();
         }
+
     }
 
 

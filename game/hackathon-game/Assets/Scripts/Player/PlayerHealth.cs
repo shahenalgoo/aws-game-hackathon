@@ -32,7 +32,7 @@ public class PlayerHealth : MonoBehaviour
 
     public void TakeDamage(int amount)
     {
-        _currentHealth -= amount;
+        // _currentHealth -= amount;
 
         // Update the health bar
         HUDManager._targetHealthUpdater?.Invoke(_currentHealth);
