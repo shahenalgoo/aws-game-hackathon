@@ -8,7 +8,6 @@ public class TargetController : MonoBehaviour
     private float _nextFireTime;
     private bool _canShoot = false;
     private Transform _player;
-    // private bool _playerInRange;
     [SerializeField] private float _rotationSpeed = 5f;
     [SerializeField] private GameObject _bulletSpawnPoint;
 
@@ -38,10 +37,10 @@ public class TargetController : MonoBehaviour
 
         LookAtPlayer();
 
-        // if (_canShoot && Time.time >= _nextFireTime && CheckPlayerDistance())
-        // {
-        //     ShootPlayer();
-        // }
+        if (_canShoot && Time.time >= _nextFireTime && CheckPlayerDistance())
+        {
+            ShootPlayer();
+        }
     }
 
     void LookAtPlayer()

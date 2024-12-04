@@ -5,15 +5,11 @@ public class Minimap : MonoBehaviour
 {
     [SerializeField] private RectTransform minimapContainer; // Assign your container in inspector
     [SerializeField] private GameObject cellPrefab; // Create a prefab with a RawImage component
-    [SerializeField] private RawImage minimapImage;
     [SerializeField] private Color backgroundColor = Color.black;
     [SerializeField] private Color pathColor = Color.white;
     [SerializeField] private float mapSize = 216f;
     [SerializeField] private float padding = 20f;
-
     [SerializeField] private Transform player;  // Assign the player's transform in inspector
-    private Texture2D mapTexture;
-    private int textureSize = 512;
     [SerializeField] private float cellSize;
     [SerializeField] private int gridStartingX;
 
@@ -43,7 +39,7 @@ public class Minimap : MonoBehaviour
     }
 
 
-    private Vector2Int WorldToGridPosition(Vector3 worldPos)
+    public Vector2Int WorldToGridPosition(Vector3 worldPos)
     {
 
         // Starting position of the grid (28, 0) corresponds to grid (4, 0)
@@ -60,7 +56,7 @@ public class Minimap : MonoBehaviour
         );
     }
 
-    public void Init(int[,] gridData, int tileSize)
+    public void Init(int[,] gridData)
     {
         gridInstructions = gridData;
         gridDimensions = new Vector2Int(gridData.GetLength(0), gridData.GetLength(1));

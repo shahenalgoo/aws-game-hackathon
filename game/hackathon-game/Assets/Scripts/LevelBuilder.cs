@@ -1,3 +1,4 @@
+using System.Runtime.Serialization;
 using UnityEngine;
 
 public class LevelBuilder : MonoBehaviour
@@ -6,12 +7,18 @@ public class LevelBuilder : MonoBehaviour
 
     [SerializeField] private GameObject[] levelObjects;
 
-    private float yAdjustObject = -5f;
-    private float yAdjustTarget = 1f;
+    // private float yAdjustObject = -50f;
+    private float yAdjustObjectFinal = -5f;
+    private float yAdjustTarget = 6f;
     private int[,] grid;
+    private bool[,] isCellTriggered;
 
-    public CircularMinimapV2 minimap;
+    private Vector2Int startingGrid = new Vector2Int(4, 0);
+
+    // public CircularMinimapV2 minimap;
     public Minimap minimap2;
+    // [SerializeField] private Transform player;
+    // private Vector2Int prevPlayerPos;
 
 
     // Start is called before the first frame update
@@ -28,6 +35,10 @@ public class LevelBuilder : MonoBehaviour
             { 0, 0, 0, 3, 1, 2, 1, 0, 4, 0, 0, 0, 2, 4, 1, 0, 0, 5, 1, 1 },
             { 0, 0, 0, 1, 0, 0, 2, 5, 6, 3, 2, 0, 0, 0, 2, 1, 0, 0, 2, 0 },
         };
+
+        isCellTriggered = new bool[grid.GetLength(0), grid.GetLength(1)];
+        // prevPlayerPos = startingGrid;
+
 
         //     { 0, 0, 0, 2, 4, 1, 0, 0, 0, 6, 2, 0, 0, 0, 1, 5, 1, 0, 2, 7 },
         //     { 0, 1, 0, 1, 0, 2, 3, 1, 0, 3, 0, 0, 2, 1, 2, 0, 1, 2, 1, 0 },
@@ -49,7 +60,13 @@ public class LevelBuilder : MonoBehaviour
 
         // Initialize minimap
         // minimap.Init(grid, tileSize);
-        minimap2.Init(grid, tileSize);
+        minimap2.Init(grid);
+
+        // Set up starting floor since it's the most important one
+        Vector3 startingFloorPos = new Vector3(startingGrid.x * tileSize, -5f, startingGrid.y * tileSize);
+        CreateObject(levelObjects[1], startingFloorPos, Quaternion.identity);
+        AddWallInExtremity(startingGrid.x, startingGrid.y);
+        isCellTriggered[startingGrid.x, startingGrid.y] = true;
 
 
         // create 2d array for loop
@@ -57,6 +74,9 @@ public class LevelBuilder : MonoBehaviour
         {
             for (int j = 0; j < grid.GetLength(1); j++)
             {
+                // skip starting floor
+                if (i == startingGrid.x && j == startingGrid.y) continue;
+
                 int objectId = grid[i, j];
 
                 if (objectId == 0)
@@ -71,19 +91,19 @@ public class LevelBuilder : MonoBehaviour
                 }
 
 
-                Vector3 pos = new Vector3(i * tileSize, yAdjustObject, j * tileSize);
-
+                Vector3 pos = new Vector3(i * tileSize, yAdjustObjectFinal, j * tileSize);
                 GameObject obj = CreateObject(levelObjects[objectId], pos, Quaternion.identity);
 
                 // If a target or bonus teleporter
                 if (objectId == 2 || objectId == 7 || objectId == 8)
                 {
                     // Add a floor underneath
-                    CreateObject(levelObjects[1], pos, Quaternion.identity);
+                    GameObject floor = CreateObject(levelObjects[1], pos, Quaternion.identity);
 
 
                     // Adjust y of obj
-                    obj.transform.position = new Vector3(pos.x, yAdjustTarget, pos.z);
+                    obj.transform.position = new Vector3(pos.x, yAdjustTarget + yAdjustObjectFinal, pos.z);
+                    obj.transform.SetParent(floor.transform);
                 }
 
                 // If object is in extremity, Add wall in extreme row and column
@@ -130,5 +150,17 @@ public class LevelBuilder : MonoBehaviour
 
         return obj;
     }
+
+    // void Update()
+    // {
+    //     if (player == null) return;
+
+    //     Vector2Int gridPos = minimap2.WorldToGridPosition(player.position);
+    //     if (gridPos != prevPlayerPos)
+    //     {
+    //         Debug.Log("Player is in new cell");
+    //         prevPlayerPos = gridPos;
+    //     }
+    // }
 
 }
