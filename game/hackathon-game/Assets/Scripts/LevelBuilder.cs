@@ -10,7 +10,8 @@ public class LevelBuilder : MonoBehaviour
     private float yAdjustTarget = 1f;
     private int[,] grid;
 
-    public CircularMinimapV2 minimap;
+    // public CircularMinimapV2 minimap;
+    public CircularMinimap minimap;
 
 
     // Start is called before the first frame update

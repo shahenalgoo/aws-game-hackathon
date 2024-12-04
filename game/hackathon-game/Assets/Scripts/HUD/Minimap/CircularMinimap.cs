@@ -4,161 +4,166 @@ using UnityEngine.UI;
 public class CircularMinimap : MonoBehaviour
 {
     [SerializeField] private RawImage minimapImage;
-    [SerializeField] private Transform player; // Reference to player transform
-    [SerializeField] private float radius = 50f; // Detection radius around player
-    // [SerializeField] private float borderThickness = 5f;
+    [SerializeField] private RawImage playerMarker;
+    [SerializeField] private float mapSize = 216f;
+    [SerializeField] private Transform player;
+    [SerializeField] private Color backgroundColor = Color.black;
+    [SerializeField] private Color pathColor = Color.white;
 
-    [SerializeField] private Color backgroundColor;
+    private Texture2D mapTexture;
+    private int textureSize = 512; // Increased for better resolution
+    private float cellSize; // Size of each cell in texture space
+    private Vector2Int gridDimensions;
+    private RectTransform minimapRect;
+    private RectTransform markerRect;
 
-    private Texture2D minimapTexture;
-    private int textureSize = 256; // Size of the texture (power of 2 is best for textures)
-
-    void Start()
+    public void Init(int[,] gridInstructions, float worldCellSize)
     {
-        // Setup the UI image
-        minimapImage.material = new Material(Shader.Find("UI/Default"));
-        minimapImage.color = Color.white;
-
-        // Create the circular mask
-        CreateCircularMask();
-
-        // Setup RectTransform for top-right positioning and proper scaling
-        RectTransform rectTransform = minimapImage.GetComponent<RectTransform>();
-
-        // Set size relative to screen height
-        float size = Screen.height * 0.3f; // 20% of screen height, adjust this percentage as needed
-        rectTransform.sizeDelta = new Vector2(size, size);
-
-        // Position in top-right corner
-        rectTransform.anchorMin = new Vector2(1, 1);
-        rectTransform.anchorMax = new Vector2(1, 1);
-        rectTransform.pivot = new Vector2(1, 1);
-
-        // Offset from the corner (adjust these values as needed)
-        rectTransform.anchoredPosition = new Vector2(-12, -12);
+        gridDimensions = new Vector2Int(gridInstructions.GetLength(0), gridInstructions.GetLength(1));
+        InitializeMinimapUI();
+        CreateMapTexture(gridInstructions);
+        InitializePlayerMarker();
     }
 
-    void CreateCircularMask()
+    private void InitializeMinimapUI()
     {
-        minimapTexture = new Texture2D(textureSize, textureSize);
-        minimapTexture.filterMode = FilterMode.Bilinear;
+        minimapRect = minimapImage.GetComponent<RectTransform>();
+        minimapRect.sizeDelta = new Vector2(mapSize, mapSize);
+        minimapRect.anchorMin = new Vector2(1, 0);
+        minimapRect.anchorMax = new Vector2(1, 0);
+        minimapRect.pivot = new Vector2(1, 0);
+        minimapRect.anchoredPosition = new Vector2(-25, 25);
+    }
 
-        float center = textureSize / 2f;
-        float radius = textureSize / 2f;
-
-        // Create circular mask with border
-        for (int y = 0; y < textureSize; y++)
+    private void InitializePlayerMarker()
+    {
+        if (playerMarker == null)
         {
-            for (int x = 0; x < textureSize; x++)
-            {
-                float distance = Vector2.Distance(new Vector2(x, y), new Vector2(center, center));
+            GameObject markerObj = new GameObject("PlayerMarker");
+            playerMarker = markerObj.AddComponent<RawImage>();
+            markerObj.transform.SetParent(minimapImage.transform, false);
 
-                if (distance < radius)
+            // Create a triangle marker texture
+            Texture2D markerTex = new Texture2D(16, 16);
+            Color[] colors = new Color[256];
+            for (int i = 0; i < colors.Length; i++)
+            {
+                colors[i] = Color.clear;
+            }
+            // Draw a red triangle
+            for (int y = 0; y < 8; y++)
+            {
+                for (int x = y; x < 16 - y; x++)
                 {
-                    // Inside the circle (main minimap area)
-                    minimapTexture.SetPixel(x, y, backgroundColor);
+                    colors[y * 16 + x] = Color.red;
                 }
-                else
-                {
-                    // Outside the circle
-                    minimapTexture.SetPixel(x, y, Color.clear);
-                }
+            }
+            markerTex.SetPixels(colors);
+            markerTex.Apply();
+
+            playerMarker.texture = markerTex;
+
+            markerRect = playerMarker.GetComponent<RectTransform>();
+            markerRect.sizeDelta = new Vector2(16, 16);
+            markerRect.pivot = new Vector2(0.5f, 0.5f);
+        }
+    }
+
+    private void CreateMapTexture(int[,] gridInstructions)
+    {
+        mapTexture = new Texture2D(textureSize, textureSize);
+        mapTexture.filterMode = FilterMode.Point;
+
+        // Calculate cell size to maintain square aspect ratio
+        cellSize = textureSize / Mathf.Max(gridDimensions.x, gridDimensions.y);
+
+        // Calculate the offset to center the grid
+        float offsetX = (textureSize - (cellSize * gridDimensions.x)) * 0.5f;
+        float offsetY = (textureSize - (cellSize * gridDimensions.y)) * 0.5f;
+
+        // Fill background
+        for (int x = 0; x < textureSize; x++)
+        {
+            for (int y = 0; y < textureSize; y++)
+            {
+                mapTexture.SetPixel(x, y, Color.clear);
             }
         }
 
-        minimapTexture.Apply();
-        minimapImage.texture = minimapTexture;
-    }
-
-
-    void Update()
-    {
-        UpdateMinimap();
-    }
-
-    void UpdateMinimap()
-    {
-        if (player == null || minimapTexture == null) return;
-        float center = textureSize / 2f;
-        float rad = textureSize / 2f;
-        // Clear the texture
-        for (int y = 0; y < textureSize; y++)
+        // Draw grid cells
+        for (int gridX = 0; gridX < gridDimensions.x; gridX++)
         {
-            for (int x = 0; x < textureSize; x++)
+            for (int gridY = 0; gridY < gridDimensions.y; gridY++)
             {
-                float distance = Vector2.Distance(new Vector2(x, y), new Vector2(center, center));
-                if (distance < rad)
+                int startX = Mathf.RoundToInt(offsetX + (gridX * cellSize));
+                int startY = Mathf.RoundToInt(offsetY + (gridY * cellSize));
+
+                Color cellColor = gridInstructions[gridX, gridY] == 0 ? backgroundColor : pathColor;
+
+                // Draw square cell
+                for (int x = 0; x < cellSize - 1; x++)
                 {
-                    minimapTexture.SetPixel(x, y, backgroundColor); // Changed to white background
-                }
-            }
-        }
-
-        // Get all relevant objects within radius
-        Collider[] colliders = Physics.OverlapSphere(player.position, radius);
-
-        // Calculate rotation values for 45 degrees clockwise
-        float angle = 45f * Mathf.Deg2Rad; // Convert 45 degrees to radians
-        float cos = Mathf.Cos(angle);
-        float sin = Mathf.Sin(angle);
-
-        foreach (Collider collider in colliders)
-        {
-            // Get position relative to player
-            Vector3 directionToObject = (collider.transform.position - player.position);
-
-            // Rotate the position by 45 degrees clockwise
-            Vector2 minimapPosition = new Vector2(
-                directionToObject.x * cos + directionToObject.z * sin,   // Changed sign before sin
-                -directionToObject.x * sin + directionToObject.z * cos   // Changed sign before sin
-            );
-
-            // Scale and center the position on the minimap
-            minimapPosition = (minimapPosition / radius) * (textureSize / 2) + new Vector2(textureSize / 2, textureSize / 2);
-
-            // Draw the object on the minimap
-            if (collider.gameObject.tag == "MapItem")
-            {
-                DrawObjectOnMinimap(minimapPosition, Color.black, 11);
-            }
-        }
-
-        // Draw player in the center
-        Vector2 playerPos = new Vector2(textureSize / 2, textureSize / 2);
-        DrawObjectOnMinimap(playerPos, Color.red, 5);
-
-        minimapTexture.Apply();
-    }
-
-    void DrawObjectOnMinimap(Vector2 position, Color color, int size)
-    {
-
-        // Draw a diamond shape (rotated square)
-        for (int y = -size; y <= size; y++)
-        {
-            // Calculate the width of this row of the diamond
-            int rowWidth = size - Mathf.Abs(y);
-
-            for (int x = -rowWidth; x <= rowWidth; x++)
-            {
-                int pixelX = Mathf.RoundToInt(position.x + x);
-                int pixelY = Mathf.RoundToInt(position.y + y);
-
-                // Check if the pixel is within texture bounds and within the circle
-                if (pixelX >= 0 && pixelX < textureSize && pixelY >= 0 && pixelY < textureSize)
-                {
-                    float distanceFromCenter = Vector2.Distance(
-                        new Vector2(pixelX, pixelY),
-                        new Vector2(textureSize / 2, textureSize / 2)
-                    );
-
-                    if (distanceFromCenter <= textureSize / 2)
+                    for (int y = 0; y < cellSize - 1; y++)
                     {
-                        minimapTexture.SetPixel(pixelX, pixelY, color);
+                        int pixelX = startX + x;
+                        int pixelY = startY + y;
+
+                        if (pixelX < textureSize && pixelY < textureSize)
+                        {
+                            float distanceFromCenter = Vector2.Distance(
+                                new Vector2(pixelX, pixelY),
+                                new Vector2(textureSize / 2, textureSize / 2)
+                            );
+
+                            if (distanceFromCenter < textureSize / 2)
+                            {
+                                mapTexture.SetPixel(pixelX, pixelY, cellColor);
+                            }
+                        }
                     }
                 }
             }
         }
+
+        mapTexture.Apply();
+        minimapImage.texture = mapTexture;
     }
 
+    void Update()
+    {
+        if (player == null || playerMarker == null) return;
+
+        // Convert world position to grid position
+        Vector2 gridPos = WorldToGridPosition(player.position);
+
+        // Calculate viewport position (0-1 range)
+        Vector2 viewportPos = new Vector2(
+            gridPos.x / gridDimensions.x,
+            gridPos.y / gridDimensions.y
+        );
+
+        // Apply position to minimap image
+        minimapImage.uvRect = new Rect(
+            Mathf.Clamp01(viewportPos.x - 0.15f), // Center horizontally with some padding
+            Mathf.Clamp01(viewportPos.y - 0.15f), // Center vertically with some padding
+            0.3f, // Show 30% of the map width
+            0.3f  // Show 30% of the map height
+        );
+
+        // Keep player marker in center
+        markerRect.anchoredPosition = new Vector2(
+            minimapRect.rect.width * 0.5f,
+            minimapRect.rect.height * 0.5f
+        );
+    }
+
+    private Vector2 WorldToGridPosition(Vector3 worldPos)
+    {
+        // Assuming the player starts at world position (0,0,0) and should be at grid position (4,0)
+        // And each grid cell is 5 units in world space
+        float gridX = (worldPos.x / 5f) + 4f; // Offset by 4 to start at row 4
+        float gridY = (worldPos.z / 5f); // Z position maps to Y in grid coordinates
+
+        return new Vector2(gridX, gridY);
+    }
 }
