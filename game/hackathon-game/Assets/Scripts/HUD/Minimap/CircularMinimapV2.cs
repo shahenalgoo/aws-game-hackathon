@@ -21,11 +21,6 @@ public class CircularMinimapV2 : MonoBehaviour
 
     private Vector2Int prevPlayerGridPos;
 
-    void Start()
-    {
-
-    }
-
     public void Init(int[,] gridInstructions, float cellDimension)
     {
         InitializeMinimapUI();
@@ -139,6 +134,7 @@ public class CircularMinimapV2 : MonoBehaviour
         minimapTexture.Apply();
     }
 
+
     private Vector2Int WorldToGridPosition(Vector3 worldPos)
     {
 
@@ -165,11 +161,10 @@ public class CircularMinimapV2 : MonoBehaviour
 
         float scaleFactor = textureSize / (viewRange * 2f);
 
-
         return new Vector2(
-            (relativePos.x * scaleFactor) + (textureSize / 2f),
-            (relativePos.y * scaleFactor) + (textureSize / 2f)
-        );
+        (relativePos.x * scaleFactor) + (textureSize / 2f),
+        (relativePos.y * scaleFactor) + (textureSize / 2f)
+    );
     }
 
     private bool IsValidGridPosition(Vector2Int pos)
