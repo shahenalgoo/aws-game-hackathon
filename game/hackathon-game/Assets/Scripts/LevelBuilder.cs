@@ -11,6 +11,7 @@ public class LevelBuilder : MonoBehaviour
     private int[,] grid;
 
     public CircularMinimapV2 minimap;
+    public Minimap minimap2;
 
 
     // Start is called before the first frame update
@@ -47,7 +48,8 @@ public class LevelBuilder : MonoBehaviour
         grid = resolver.FixIsolatedRegions(4, 0);
 
         // Initialize minimap
-        minimap.Init(grid, tileSize);
+        // minimap.Init(grid, tileSize);
+        minimap2.Init(grid, tileSize);
 
 
         // create 2d array for loop
