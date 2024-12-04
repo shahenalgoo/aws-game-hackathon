@@ -11,14 +11,14 @@ public class PlayerDashState : PlayerBaseState
     private bool _isDashOver;
     private Vector3 _dash;
 
-    int layerMask = 1 << 6;
+    int layerMask = 1 << LayerMask.NameToLayer("Target");
     private Vector3 _startingPoint;
 
     private float _stationaryDashDuration = 0.25f; // Adjust this value as needed
     private bool _stationaryDashTimeElapsed = false;
     private float _stationaryDashTimer = 0f;
 
-    private bool _hitInvisibleWall = false;
+    private bool _stationaryDash = false;
     public float _normalDashTime;
     public override void EnterState()
     {
@@ -54,6 +54,15 @@ public class PlayerDashState : PlayerBaseState
         // Toggle lightning
         Ctx._dashLightning.Play();
 
+    }
+
+    public void ActivateStationaryDash()
+    {
+        _stationaryDashDuration -= _normalDashTime;
+        _stationaryDash = true;
+        Ctx._dashLightning.Clear();
+        Ctx._dashLightning.Stop();
+        Ctx._dashLightningOnHit.Play();
     }
 
     public void ToggleTrails(bool value)
@@ -114,7 +123,7 @@ public class PlayerDashState : PlayerBaseState
 
     public override void UpdateState()
     {
-        if (_hitInvisibleWall)
+        if (_stationaryDash)
         {
 
             // Stay in place but continue the dash animation/effects
@@ -141,8 +150,8 @@ public class PlayerDashState : PlayerBaseState
             _normalDashTime += Time.deltaTime;
         }
 
-        if (!_isDashOver && ((_hitInvisibleWall && _stationaryDashTimeElapsed) ||
-            (!_hitInvisibleWall && Vector3.Distance(_startingPoint, Ctx.transform.position) > _dashDistance)))
+        if (!_isDashOver && ((_stationaryDash && _stationaryDashTimeElapsed) ||
+            (!_stationaryDash && Vector3.Distance(_startingPoint, Ctx.transform.position) > _dashDistance)))
         {
             Ctx.IsDashing = false;
             CheckSwitchStates();
@@ -168,7 +177,7 @@ public class PlayerDashState : PlayerBaseState
         ToggleTrails(false);
 
         // Reset trail positions and colors
-        if (_hitInvisibleWall)
+        if (_stationaryDash)
         {
             // reset trail pos
             for (int i = 0; i < Ctx._dashTrails.Length; i++)
@@ -200,6 +209,13 @@ public class PlayerDashState : PlayerBaseState
 
     public override void CollisionEventHandler(ControllerColliderHit hit)
     {
+
+        if (hit.gameObject.layer == LayerMask.NameToLayer("Target"))
+        {
+            ActivateStationaryDash();
+        }
+
+
         if (hit.gameObject.layer == LayerMask.NameToLayer("InvisibleWall"))
         {
             // Get the wall's normal
@@ -229,11 +245,7 @@ public class PlayerDashState : PlayerBaseState
                 return;
             }
 
-            _stationaryDashDuration -= _normalDashTime;
-            _hitInvisibleWall = true;
-            Ctx._dashLightning.Clear();
-            Ctx._dashLightning.Stop();
-            Ctx._dashLightningOnHit.Play();
+            ActivateStationaryDash();
         }
 
     }
