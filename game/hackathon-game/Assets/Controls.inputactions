@@ -89,7 +89,7 @@
                 {
                     "name": "ToggleMap",
                     "type": "Button",
-                    "id": "4af222b6-b0fe-461b-bd71-51f847b611f6",
+                    "id": "8f690b18-a44d-4df9-a9f2-592ffb4609f5",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -319,7 +319,7 @@
                 },
                 {
                     "name": "",
-                    "id": "401d27d8-5fda-48d3-9ca1-32ef93bc425c",
+                    "id": "a0f8b132-1c52-4036-9ed8-d514654e3054",
                     "path": "<Keyboard>/#(M)",
                     "interactions": "",
                     "processors": "",
@@ -330,7 +330,7 @@
                 },
                 {
                     "name": "",
-                    "id": "59f7b943-ead7-444e-91a1-92f5f800f6c2",
+                    "id": "4ee4918f-9034-4e3e-a39c-d76d651b0ac5",
                     "path": "<DualShockGamepad>/touchpadButton",
                     "interactions": "",
                     "processors": "",
@@ -341,7 +341,7 @@
                 },
                 {
                     "name": "",
-                    "id": "31e6ae0f-9a60-496b-a418-0fdfea55183d",
+                    "id": "9b8e6b5e-10a0-4d0f-8cc5-191110095ca2",
                     "path": "<Gamepad>/dpad/up",
                     "interactions": "",
                     "processors": "",

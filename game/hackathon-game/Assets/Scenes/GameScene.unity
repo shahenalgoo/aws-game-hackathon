@@ -604,7 +604,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &611747749
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1533,6 +1533,89 @@ MonoBehaviour:
   player: {fileID: 910907061}
   cellSize: 7
   gridStartingX: 4
+--- !u!114 &1224442259
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1224442253}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Actions: {fileID: -944628639613478452, guid: 3e83a95d2167661408d29ff08c94b38b,
+    type: 3}
+  m_NotificationBehavior: 2
+  m_UIInputModule: {fileID: 0}
+  m_DeviceLostEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_DeviceRegainedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ControlsChangedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ActionEvents:
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 479c37f8-ea75-481a-b334-9749adfa3eef
+    m_ActionName: PlayerControls/Move[/Keyboard/w,/Keyboard/s,/Keyboard/a,/Keyboard/d]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 7794ec46-97f7-4503-a8f5-1935edda46aa
+    m_ActionName: PlayerControls/Look[/Mouse/position]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 6a0b014f-57fc-457d-bb87-69a547a4ec3a
+    m_ActionName: PlayerControls/AimRightStick
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: e11e7974-ca8b-4efb-b9c0-d6fdd22346f4
+    m_ActionName: PlayerControls/Dash[/Keyboard/space]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: d76203aa-2532-4dcc-a021-d2b05b74438b
+    m_ActionName: PlayerControls/Reload[/Keyboard/r,/Mouse/middleButton]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: f7f1b5b4-8cf3-4756-822a-e9dad262ba06
+    m_ActionName: PlayerControls/ShootAuto[/Mouse/leftButton]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 1cf7c90d-1dce-4a64-90ac-c5d9e87c025e
+    m_ActionName: PlayerControls/ShootSingle[/Mouse/leftButton]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 13310613-515f-4fc2-b1e0-22852c1df765
+    m_ActionName: PlayerControls/Restart[/Keyboard/backslash]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 1b4c3949-8bef-4a16-a019-0fd440660591
+    m_ActionName: PlayerControls/AimRightClick[/Mouse/rightButton]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1224442257}
+        m_TargetAssemblyTypeName: Minimap, Assembly-CSharp
+        m_MethodName: ToggleMap
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 8f690b18-a44d-4df9-a9f2-592ffb4609f5
+    m_ActionName: PlayerControls/ToggleMap[/Keyboard/m]
+  m_NeverAutoSwitchControlSchemes: 0
+  m_DefaultControlScheme: 
+  m_DefaultActionMap: PlayerControls
+  m_SplitScreenIndex: -1
+  m_Camera: {fileID: 0}
 --- !u!1 &1310111104
 GameObject:
   m_ObjectHideFlags: 0
@@ -1866,7 +1949,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1451792807
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2340,6 +2423,10 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 1224442257}
+    - targetCorrespondingSourceObject: {fileID: 5033154091354566267, guid: 2b7c3e854671540b69cbdc2639d609d7,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1224442259}
   m_SourcePrefab: {fileID: 100100000, guid: 2b7c3e854671540b69cbdc2639d609d7, type: 3}
 --- !u!1 &1902787070
 GameObject:
