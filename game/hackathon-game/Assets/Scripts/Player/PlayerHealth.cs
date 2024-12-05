@@ -14,6 +14,8 @@ public class PlayerHealth : MonoBehaviour
     [SerializeField] private float flashDuration = 0.2f;
     private Vignette vignette;
 
+    [SerializeField] public GameObject fallingTrailsObj;
+
     private bool isDead;
     public bool IsDead { get { return isDead; } }
     public void Start()

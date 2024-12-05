@@ -21,8 +21,10 @@ public class PitfallController : MonoBehaviour
 
             _playerCC = other.GetComponent<CharacterController>();
 
-            _playerCC.GetComponent<Animator>().Play("Falling");
+            other.GetComponent<Animator>().Play("Falling");
 
+            PlayerHealth playerHealth = other.GetComponent<PlayerHealth>();
+            playerHealth.fallingTrailsObj.SetActive(true);
             other.GetComponent<PlayerHealth>().DisablePlayer();
         }
 
