@@ -8,6 +8,7 @@ public class TargetController : MonoBehaviour
     private float _nextFireTime;
     private bool _canShoot = false;
     private Transform _player;
+    private PlayerHealth _playerHealth;
     [SerializeField] private float _rotationSpeed = 5f;
     [SerializeField] private GameObject _bulletSpawnPoint;
 
@@ -21,6 +22,7 @@ public class TargetController : MonoBehaviour
     void FindPlayer()
     {
         _player = GameObject.FindGameObjectWithTag("Player").transform;
+        _playerHealth = _player.gameObject.GetComponent<PlayerHealth>();
 
     }
 
@@ -34,6 +36,7 @@ public class TargetController : MonoBehaviour
     {
 
         if (_player == null) return;
+        if (_playerHealth.IsDead) return;
 
         LookAtPlayer();
 

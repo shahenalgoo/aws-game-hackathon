@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.Rendering;
@@ -13,7 +14,8 @@ public class PlayerHealth : MonoBehaviour
     [SerializeField] private float flashDuration = 0.2f;
     private Vignette vignette;
 
-    private PlayerFracture fracture;
+    private bool isDead;
+    public bool IsDead { get { return isDead; } }
     public void Start()
     {
         _currentHealth = _maxHealth;
@@ -83,29 +85,26 @@ public class PlayerHealth : MonoBehaviour
         vignette.intensity.Override(0f);
     }
 
+    public void DisablePlayer()
+    {
+        isDead = true;
+
+        // Disable controls, collision etc
+        // GetComponent<Animator>().enabled = false;
+        GetComponent<CharacterController>().detectCollisions = false;
+        GetComponent<PlayerStateMachine>().enabled = false;
+        GetComponentInChildren<GunManager>().gameObject.SetActive(false);
+    }
+
 
     private void Die()
     {
-        fracture = GetComponent<PlayerFracture>();
-
-        // Disable any animations or other components first
-        GetComponent<Animator>().enabled = false;
-
-        GetComponent<CharacterController>().enabled = false;
-
-        GetComponent<PlayerStateMachine>().enabled = false;
-
-        GetComponentInChildren<GunManager>().gameObject.SetActive(false);
+        DisablePlayer();
 
         // Shatter Effect
-        fracture.Shatter();
+        GetComponent<PlayerFracture>().Shatter();
 
-        // Hide original robot
-        // gameObject.SetActive(false);
 
-        // Die visuals & audio feedback
-
-        // Death screen
 
     }
 }

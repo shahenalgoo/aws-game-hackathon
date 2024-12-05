@@ -252,7 +252,6 @@ MonoBehaviour:
   - {fileID: 5058714055303174967, guid: 4f8587f264a774bc7b6082f5c11d17b4, type: 3}
   - {fileID: 5481567311206900813, guid: 74614b5405e58415c99ca5829d6642f4, type: 3}
   - {fileID: 1378970538917373638, guid: db4a3d752c4e04eda8db98f44fc65b97, type: 3}
-  minimap: {fileID: 1224442255}
   minimap2: {fileID: 1224442257}
 --- !u!4 &125806741
 Transform:
@@ -1498,18 +1497,6 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 1886732589}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1224442255 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 7752558932238330297, guid: 2b7c3e854671540b69cbdc2639d609d7,
-    type: 3}
-  m_PrefabInstance: {fileID: 1886732589}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1224442253}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 59a0de00a0403480ca363faeb5d29b7b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &1224442257
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1525,7 +1512,6 @@ MonoBehaviour:
   minimapContainer: {fileID: 611747749}
   cellPrefab: {fileID: 8310385347590076143, guid: e3b320f9aa19941d895bc4ad054ae42b,
     type: 3}
-  minimapImage: {fileID: 1451792808}
   backgroundColor: {r: 1, g: 1, b: 1, a: 0}
   pathColor: {r: 0, g: 0, b: 0, a: 0.9137255}
   mapSize: 1500
@@ -2012,22 +1998,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1702315784984996115, guid: ed6351fa37ed1a54bac66c908dc976f8,
-        type: 3}
-      propertyPath: fadeDelay
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 1702315784984996115, guid: ed6351fa37ed1a54bac66c908dc976f8,
-        type: 3}
-      propertyPath: fadeDuration
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 1702315784984996115, guid: ed6351fa37ed1a54bac66c908dc976f8,
-        type: 3}
-      propertyPath: explosionEffectPrefab
-      value: 
-      objectReference: {fileID: 6271241949191652176, guid: df0f4ba8385a347a4b42d8d90b3b8f77,
-        type: 3}
     - target: {fileID: 2777191392175198548, guid: ed6351fa37ed1a54bac66c908dc976f8,
         type: 3}
       propertyPath: m_ActionEvents.Array.data[7].m_PersistentCalls.m_Calls.Array.data[0].m_Target
@@ -2087,11 +2057,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6917377370588809671, guid: ed6351fa37ed1a54bac66c908dc976f8,
-        type: 3}
-      propertyPath: _maxHealth
-      value: 200
       objectReference: {fileID: 0}
     - target: {fileID: 7523127128763181994, guid: ed6351fa37ed1a54bac66c908dc976f8,
         type: 3}

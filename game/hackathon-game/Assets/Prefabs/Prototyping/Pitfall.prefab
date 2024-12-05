@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 7290628825374915786}
   - component: {fileID: 4385063345222835587}
   - component: {fileID: 2923120036883528795}
+  - component: {fileID: 6644402934008242925}
   m_Layer: 0
   m_Name: Pitfall
   m_TagString: MapItem
@@ -49,7 +50,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4320454627925534885}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -99,9 +100,21 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 1, y: 0.9898619, z: 1}
+  m_Center: {x: 0, y: -0.0050691366, z: 0}
+--- !u!114 &6644402934008242925
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4320454627925534885}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 18fa96fbac4c64fb89f2e0677b3cac43, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

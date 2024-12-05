@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 
@@ -7,13 +8,31 @@ public class CameraController : MonoBehaviour
     public GameObject player;
     private PlayerStateMachine stateMachine;
 
+    public static Action<bool> setCanFollow;
+
+    private bool canFollow = true;
+
     private void Awake()
     {
         stateMachine = player.GetComponent<PlayerStateMachine>();
     }
+
+    private void OnEnable()
+    {
+        setCanFollow += SetCanFollow;
+    }
+    private void OnDisable()
+    {
+        setCanFollow -= SetCanFollow;
+    }
+
+    public void SetCanFollow(bool value)
+    {
+        canFollow = value;
+    }
     void Update()
     {
-        if (player == null) return;
+        if (player == null || !canFollow) return;
 
 
         if (stateMachine.IsRunning)

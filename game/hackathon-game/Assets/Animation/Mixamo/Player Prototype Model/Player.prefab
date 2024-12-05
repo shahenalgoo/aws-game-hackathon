@@ -663,6 +663,10 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: 1b4c3949-8bef-4a16-a019-0fd440660591
     m_ActionName: PlayerControls/AimRightClick[/Mouse/rightButton]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 8f690b18-a44d-4df9-a9f2-592ffb4609f5
+    m_ActionName: PlayerControls/ToggleMap[/Keyboard/m]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: PlayerControls
@@ -751,7 +755,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f15856ec0c2bb4877b933f987c5148ba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _maxHealth: 10
+  _maxHealth: 100
   _currentHealth: 0
   damageVolume: {fileID: 6707294591469338254}
   flashDuration: 0.3
@@ -807,9 +811,10 @@ MonoBehaviour:
     m_ColorSpace: -1
     m_NumColorKeys: 2
     m_NumAlphaKeys: 2
-  fadeDelay: 4
-  fadeDuration: 4
-  explosionEffectPrefab: {fileID: 0}
+  fadeDelay: 3
+  fadeDuration: 2
+  explosionEffectPrefab: {fileID: 6271241949191652176, guid: df0f4ba8385a347a4b42d8d90b3b8f77,
+    type: 3}
   breakSound: {fileID: 0}
 --- !u!1 &4690184728610983714
 GameObject:
