@@ -53,7 +53,7 @@ TrailRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 22f5dc6f637907e499445accb0dec5ad, type: 2}
+  - {fileID: 2100000, guid: 1de9f01c7ba864c0487f9e7a3be4e645, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -74,7 +74,7 @@ TrailRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Time: 0.2
+  m_Time: 0.3
   m_PreviewTimeScale: 1
   m_Parameters:
     serializedVersion: 3
@@ -84,7 +84,7 @@ TrailRenderer:
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: 0.27895737
+        value: 0.028959066
         inSlope: 0
         outSlope: 0
         tangentMode: 0
@@ -93,7 +93,7 @@ TrailRenderer:
         outWeight: 0.33333334
       - serializedVersion: 3
         time: 1
-        value: 0
+        value: 0.034729004
         inSlope: 0
         outSlope: 0
         tangentMode: 0
@@ -403,8 +403,8 @@ TrailRenderer:
       serializedVersion: 2
       m_Curve:
       - serializedVersion: 3
-        time: 0.0017776489
-        value: 0.41111374
+        time: 0
+        value: 0.27222824
         inSlope: 0
         outSlope: 0
         tangentMode: 0
@@ -576,6 +576,7 @@ Transform:
   - {fileID: 2274990669231881271}
   - {fileID: 6537436275866607784}
   - {fileID: 6324987230768524942}
+  - {fileID: 1279475040125231188}
   - {fileID: 1131202390906576354}
   - {fileID: 8030946669594588412}
   - {fileID: 6259638122819980322}
@@ -619,7 +620,7 @@ MonoBehaviour:
   - {x: 0, y: 0, z: 0}
   - {x: 0, y: 0, z: 0}
   - {x: 0, y: 0, z: 0}
-  _dashLightning: {fileID: 4784633698147415233}
+  _dashLightning: {fileID: 2103032481968056311}
   _dashLightningOnHit: {fileID: 2496998712416738783}
   _fightMode: 0
   _fightModeCountdown: 2
@@ -901,7 +902,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f15856ec0c2bb4877b933f987c5148ba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _maxHealth: 100
+  _maxHealth: 20
   _currentHealth: 0
   damageVolume: {fileID: 6707294591469338254}
   flashDuration: 0.3
@@ -918,16 +919,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8277da48219bc400ca1f15ea298dd42e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pieceCount: 30
+  pieceCount: 20
   explosionForce: 500
   explosionRadius: 10
   upwardsModifier: 1
-  pieceMass: 1
+  pieceMass: 10
   pieceMaterial: {fileID: 2100000, guid: 7296af08362184bf2927e49ecbeb1068, type: 2}
   trailMaterial: {fileID: 2100000, guid: 843d2ca58da9a4a58a40be01ad245dde, type: 2}
-  trailTime: 0.3
+  trailTime: 0.1
   startWidth: 0.05
-  endWidth: 0
+  endWidth: 0.02
   trailColor:
     serializedVersion: 2
     key0: {r: 0.18369527, g: 0.8614802, b: 0.9056604, a: 1}
@@ -960,8 +961,7 @@ MonoBehaviour:
     m_NumAlphaKeys: 2
   fadeDelay: 3
   fadeDuration: 2
-  explosionEffectPrefab: {fileID: 6271241949191652176, guid: df0f4ba8385a347a4b42d8d90b3b8f77,
-    type: 3}
+  explosionEffectPrefab: {fileID: 0}
   breakSound: {fileID: 0}
 --- !u!1 &4165862966379360945
 GameObject:
@@ -1050,7 +1050,7 @@ TrailRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 22f5dc6f637907e499445accb0dec5ad, type: 2}
+  - {fileID: 2100000, guid: 1de9f01c7ba864c0487f9e7a3be4e645, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1071,7 +1071,7 @@ TrailRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Time: 0.2
+  m_Time: 0.3
   m_PreviewTimeScale: 1
   m_Parameters:
     serializedVersion: 3
@@ -1081,7 +1081,7 @@ TrailRenderer:
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: 0.255558
+        value: 0.03332901
         inSlope: 0
         outSlope: 0
         tangentMode: 0
@@ -1090,7 +1090,7 @@ TrailRenderer:
         outWeight: 0.33333334
       - serializedVersion: 3
         time: 1
-        value: 0
+        value: 0.027770996
         inSlope: 0
         outSlope: 0
         tangentMode: 0
@@ -1257,7 +1257,7 @@ TrailRenderer:
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: 0.255558
+        value: 0.15139008
         inSlope: 0
         outSlope: 0
         tangentMode: 0
@@ -1278,7 +1278,7 @@ TrailRenderer:
       m_RotationOrder: 4
     colorGradient:
       serializedVersion: 2
-      key0: {r: 0.051886797, g: 0.24941008, b: 1, a: 1}
+      key0: {r: 0.2509804, g: 0.39607847, b: 0.96470594, a: 1}
       key1: {r: 0.24705882, g: 0.40392157, b: 1, a: 1}
       key2: {r: 0, g: 0, b: 0, a: 0}
       key3: {r: 0, g: 0, b: 0, a: 0}
@@ -1371,7 +1371,7 @@ TrailRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 22f5dc6f637907e499445accb0dec5ad, type: 2}
+  - {fileID: 2100000, guid: 1de9f01c7ba864c0487f9e7a3be4e645, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1392,7 +1392,7 @@ TrailRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Time: 0.2
+  m_Time: 0.3
   m_PreviewTimeScale: 1
   m_Parameters:
     serializedVersion: 3
@@ -1402,7 +1402,7 @@ TrailRenderer:
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: 0.25444388
+        value: 0.03222674
         inSlope: 0
         outSlope: 0
         tangentMode: 0
@@ -1411,7 +1411,7 @@ TrailRenderer:
         outWeight: 0.33333334
       - serializedVersion: 3
         time: 1
-        value: 0
+        value: 0.027770996
         inSlope: 0
         outSlope: 0
         tangentMode: 0
@@ -1838,7 +1838,7 @@ TrailRenderer:
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: 0.5044439
+        value: 0.39332557
         inSlope: 0
         outSlope: 0
         tangentMode: 0
@@ -2013,6 +2013,146 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!1001 &1459268162921587808
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 5315199282729196132}
+    m_Modifications:
+    - target: {fileID: 396817511059735604, guid: eb546ae888ba144878a5fb8739fc7c54,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 396817511059735604, guid: eb546ae888ba144878a5fb8739fc7c54,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.36
+      objectReference: {fileID: 0}
+    - target: {fileID: 396817511059735604, guid: eb546ae888ba144878a5fb8739fc7c54,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0.725
+      objectReference: {fileID: 0}
+    - target: {fileID: 396817511059735604, guid: eb546ae888ba144878a5fb8739fc7c54,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 396817511059735604, guid: eb546ae888ba144878a5fb8739fc7c54,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 396817511059735604, guid: eb546ae888ba144878a5fb8739fc7c54,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 396817511059735604, guid: eb546ae888ba144878a5fb8739fc7c54,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 396817511059735604, guid: eb546ae888ba144878a5fb8739fc7c54,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 396817511059735604, guid: eb546ae888ba144878a5fb8739fc7c54,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 396817511059735604, guid: eb546ae888ba144878a5fb8739fc7c54,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 679801993768338327, guid: eb546ae888ba144878a5fb8739fc7c54,
+        type: 3}
+      propertyPath: playOnAwake
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 679801993768338327, guid: eb546ae888ba144878a5fb8739fc7c54,
+        type: 3}
+      propertyPath: simulationSpeed
+      value: 0.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 679801993768338327, guid: eb546ae888ba144878a5fb8739fc7c54,
+        type: 3}
+      propertyPath: ShapeModule.m_Scale.x
+      value: 0.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 679801993768338327, guid: eb546ae888ba144878a5fb8739fc7c54,
+        type: 3}
+      propertyPath: ShapeModule.m_Scale.y
+      value: 0.97
+      objectReference: {fileID: 0}
+    - target: {fileID: 679801993768338327, guid: eb546ae888ba144878a5fb8739fc7c54,
+        type: 3}
+      propertyPath: InitialModule.startSize.scalar
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 679801993768338327, guid: eb546ae888ba144878a5fb8739fc7c54,
+        type: 3}
+      propertyPath: InitialModule.startSpeed.scalar
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 679801993768338327, guid: eb546ae888ba144878a5fb8739fc7c54,
+        type: 3}
+      propertyPath: InitialModule.startSize.minScalar
+      value: 0.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 679801993768338327, guid: eb546ae888ba144878a5fb8739fc7c54,
+        type: 3}
+      propertyPath: EmissionModule.rateOverTime.scalar
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 679801993768338327, guid: eb546ae888ba144878a5fb8739fc7c54,
+        type: 3}
+      propertyPath: InitialModule.startLifetime.scalar
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 679801993768338327, guid: eb546ae888ba144878a5fb8739fc7c54,
+        type: 3}
+      propertyPath: InitialModule.startSpeed.minScalar
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 679801993768338327, guid: eb546ae888ba144878a5fb8739fc7c54,
+        type: 3}
+      propertyPath: InitialModule.startLifetime.minScalar
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5716325891667745770, guid: eb546ae888ba144878a5fb8739fc7c54,
+        type: 3}
+      propertyPath: m_Name
+      value: Lightning
+      objectReference: {fileID: 0}
+    - target: {fileID: 5716325891667745770, guid: eb546ae888ba144878a5fb8739fc7c54,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: eb546ae888ba144878a5fb8739fc7c54, type: 3}
+--- !u!4 &1279475040125231188 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 396817511059735604, guid: eb546ae888ba144878a5fb8739fc7c54,
+    type: 3}
+  m_PrefabInstance: {fileID: 1459268162921587808}
+  m_PrefabAsset: {fileID: 0}
+--- !u!198 &2103032481968056311 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 679801993768338327, guid: eb546ae888ba144878a5fb8739fc7c54,
+    type: 3}
+  m_PrefabInstance: {fileID: 1459268162921587808}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1696407986624758362
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3458,12 +3598,6 @@ PrefabInstance:
 --- !u!4 &1131202390906576354 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5130777086767435782, guid: ca23fc3f581294e3cbd044d63c4d7924,
-    type: 3}
-  m_PrefabInstance: {fileID: 5226137127790808548}
-  m_PrefabAsset: {fileID: 0}
---- !u!198 &4784633698147415233 stripped
-ParticleSystem:
-  m_CorrespondingSourceObject: {fileID: 783792330800052517, guid: ca23fc3f581294e3cbd044d63c4d7924,
     type: 3}
   m_PrefabInstance: {fileID: 5226137127790808548}
   m_PrefabAsset: {fileID: 0}

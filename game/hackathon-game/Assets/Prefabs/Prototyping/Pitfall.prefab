@@ -289,6 +289,26 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7645372305461758025, guid: d1290e256f7a74a27b405e6bc0c39a50,
+        type: 3}
+      propertyPath: ShapeModule.m_Scale.x
+      value: 0.67
+      objectReference: {fileID: 0}
+    - target: {fileID: 7645372305461758025, guid: d1290e256f7a74a27b405e6bc0c39a50,
+        type: 3}
+      propertyPath: ShapeModule.m_Scale.y
+      value: 0.55
+      objectReference: {fileID: 0}
+    - target: {fileID: 7645372305461758025, guid: d1290e256f7a74a27b405e6bc0c39a50,
+        type: 3}
+      propertyPath: ShapeModule.m_Scale.z
+      value: 0.15
+      objectReference: {fileID: 0}
+    - target: {fileID: 7645372305461758025, guid: d1290e256f7a74a27b405e6bc0c39a50,
+        type: 3}
+      propertyPath: EmissionModule.m_Bursts.Array.data[0].countCurve.scalar
+      value: 20
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -357,7 +377,7 @@ PrefabInstance:
     - target: {fileID: 3859937427972637875, guid: 82ba89df100574f0cbd028217fe0e3c1,
         type: 3}
       propertyPath: EmissionModule.rateOverTime.scalar
-      value: 100
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 6581325938825682815, guid: 82ba89df100574f0cbd028217fe0e3c1,
         type: 3}
