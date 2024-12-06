@@ -4,6 +4,7 @@ public class PitfallController : MonoBehaviour
 {
 
     private CharacterController _playerCC;
+    [SerializeField] private ParticleSystem _onBoost;
     void Update()
     {
         if (_playerCC == null) return;
@@ -12,6 +13,12 @@ public class PitfallController : MonoBehaviour
         _playerCC.Move(Physics.gravity * Time.deltaTime);
 
     }
+
+    public void PlayBooster()
+    {
+        _onBoost.Play();
+    }
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.CompareTag("Player"))

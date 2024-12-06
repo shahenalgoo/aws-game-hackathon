@@ -257,6 +257,8 @@ public class PlayerDashState : PlayerBaseState
         if (other.gameObject.CompareTag("DashBooster"))
         {
             _dashDistance *= 2;
+
+            other.GetComponentInParent<PitfallController>().PlayBooster();
         }
     }
 
