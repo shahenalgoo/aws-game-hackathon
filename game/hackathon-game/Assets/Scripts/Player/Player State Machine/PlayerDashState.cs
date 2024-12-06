@@ -17,9 +17,10 @@ public class PlayerDashState : PlayerBaseState
     private float _stationaryDashDuration = 0.25f; // Adjust this value as needed
     private bool _stationaryDashTimeElapsed = false;
     private float _stationaryDashTimer = 0f;
-
     private bool _stationaryDash = false;
     public float _normalDashTime;
+
+    private bool _isDashRedirected;
     public override void EnterState()
     {
 
@@ -209,7 +210,6 @@ public class PlayerDashState : PlayerBaseState
 
     public override void CollisionEventHandler(ControllerColliderHit hit)
     {
-
         if (hit.gameObject.layer == LayerMask.NameToLayer("Target"))
         {
             ActivateStationaryDash();
@@ -228,6 +228,8 @@ public class PlayerDashState : PlayerBaseState
             // This means the player is approaching the wall at an angle
             if (angle > 42f)
             {
+                _isDashRedirected = true;
+
                 // Calculate the direction the player should move along the wall
                 Vector3 newDirection = Vector3.ProjectOnPlane(Ctx.transform.forward, wallNormal).normalized;
 
@@ -241,7 +243,6 @@ public class PlayerDashState : PlayerBaseState
                 // Update the starting point for the new dash direction
                 _startingPoint = Ctx.transform.position;
 
-                // Continue with normal dash
                 return;
             }
 
@@ -254,12 +255,19 @@ public class PlayerDashState : PlayerBaseState
 
     public override void OnTriggerEventHandler(Collider other)
     {
+        if (_isDashRedirected && other.gameObject.CompareTag("DashRedirectStopper"))
+        {
+            ActivateStationaryDash();
+        }
+
         if (other.gameObject.CompareTag("DashBooster"))
         {
             _dashDistance *= 2;
 
             other.GetComponentInParent<PitfallController>().PlayBooster();
         }
+
+
     }
 
 
