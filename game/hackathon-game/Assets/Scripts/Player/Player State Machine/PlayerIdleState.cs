@@ -61,5 +61,7 @@ public class PlayerIdleState : PlayerBaseState
     }
 
     public override void CollisionEventHandler(ControllerColliderHit hit) { }
+    public override void OnTriggerEventHandler(Collider other) { }
+
 
 }

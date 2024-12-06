@@ -19,8 +19,13 @@ public class GunLaser : MonoBehaviour
         laserLine.endColor = laserColor;
         laserLine.positionCount = 2;
 
+        // Create a layer mask that ignores both InvisibleWall and DashBooster layers
+        int invisibleWallLayer = LayerMask.NameToLayer("InvisibleWall");
+        int dashBoosterLayer = LayerMask.NameToLayer("Particles");
+
         // Create a layer mask that ignores the InvisibleWall layer
-        layerMask = ~(1 << LayerMask.NameToLayer("InvisibleWall"));
+        // layerMask = ~(1 << LayerMask.NameToLayer("InvisibleWall"));
+        layerMask = ~((1 << invisibleWallLayer) | (1 << dashBoosterLayer));
     }
 
     void Update()

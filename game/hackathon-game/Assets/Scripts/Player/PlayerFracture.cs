@@ -198,7 +198,7 @@ public class PlayerFracture : MonoBehaviour
             // Setup rigidbody
             rb.mass = pieceMass;
             rb.AddExplosionForce(explosionForce, transform.position, explosionRadius, upwardsModifier);
-            rb.AddTorque(Random.insideUnitSphere * explosionForce);
+            // rb.AddTorque(Random.insideUnitSphere * explosionForce);
 
             pieces.Add(piece);
 
@@ -219,13 +219,36 @@ public class PlayerFracture : MonoBehaviour
 
     private void AddTrailRenderer(GameObject piece)
     {
-        TrailRenderer trail = piece.AddComponent<TrailRenderer>();
+        // TrailRenderer trail = piece.AddComponent<TrailRenderer>();
+
+        // Create a child GameObject at the center of the piece
+        GameObject trailObject = new GameObject("TrailPoint");
+        trailObject.transform.SetParent(piece.transform);
+
+        // Position it at the center of the piece's mesh
+        MeshFilter meshFilter = piece.GetComponent<MeshFilter>();
+        if (meshFilter != null && meshFilter.mesh != null)
+        {
+            // Use the mesh bounds center for positioning
+            trailObject.transform.localPosition = meshFilter.mesh.bounds.center;
+        }
+        else
+        {
+            // Fallback to local origin if no mesh is found
+            trailObject.transform.localPosition = Vector3.zero;
+        }
+
+        // Add TrailRenderer to the child object instead of the piece
+        TrailRenderer trail = trailObject.AddComponent<TrailRenderer>();
 
         // Basic trail settings
         trail.time = trailTime;
         trail.startWidth = startWidth;
         trail.endWidth = endWidth;
         trail.material = trailMaterial;
+        // trail.numCornerVertices = 0;  // Reduce corner vertices for sharper lines
+        // trail.numCapVertices = 0;     // Reduce cap vertices for sharper ends
+        // trail.alignment = LineAlignment.View; // Makes trail face the camera
 
         // Set trail color gradient
         if (trailColor.colorKeys.Length == 0)
@@ -258,7 +281,8 @@ public class PlayerFracture : MonoBehaviour
         yield return new WaitForSeconds(fadeDelay);
 
         MeshRenderer renderer = piece.GetComponent<MeshRenderer>();
-        TrailRenderer trail = piece.GetComponent<TrailRenderer>();
+        // TrailRenderer trail = piece.GetComponent<TrailRenderer>();
+        TrailRenderer trail = piece.GetComponentInChildren<TrailRenderer>();
         Material material = renderer.material;
         Color startColor = material.color;
         float elapsedTime = 0f;

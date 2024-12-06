@@ -6,6 +6,7 @@ TagManager:
   tags:
   - MapItem
   - Target
+  - DashBooster
   layers:
   - Default
   - TransparentFX

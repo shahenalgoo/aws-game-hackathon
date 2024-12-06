@@ -51,4 +51,6 @@ public class PlayerReloadState : PlayerBaseState
 
     public override void CollisionEventHandler(ControllerColliderHit hit) { }
 
+    public override void OnTriggerEventHandler(Collider other) { }
+
 }

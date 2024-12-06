@@ -248,6 +248,16 @@ public class PlayerDashState : PlayerBaseState
             ActivateStationaryDash();
         }
 
+
+
+    }
+
+    public override void OnTriggerEventHandler(Collider other)
+    {
+        if (other.gameObject.CompareTag("DashBooster"))
+        {
+            _dashDistance *= 2;
+        }
     }
 
 
