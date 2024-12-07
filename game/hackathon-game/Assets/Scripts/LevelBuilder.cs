@@ -7,13 +7,16 @@ public class LevelBuilder : MonoBehaviour
 
     [SerializeField] private GameObject[] levelObjects;
 
+    [SerializeField] private GameObject exitArea;
+
     // private float yAdjustObject = -50f;
-    private float yAdjustObjectFinal = -5f;
-    private float yAdjustTarget = 6f;
+    [SerializeField] private float yAdjustObjectFinal = -2.5f;
+    [SerializeField] private float yAdjustTarget = 3.5f;
     private int[,] grid;
     private bool[,] isCellTriggered;
 
     private Vector2Int startingGrid = new Vector2Int(4, 0);
+    private Vector2Int endGrid = new Vector2Int(0, 1);
 
     // public CircularMinimapV2 minimap;
     public Minimap minimap2;
@@ -24,6 +27,9 @@ public class LevelBuilder : MonoBehaviour
     // Start is called before the first frame update
     void Awake()
     {
+        yAdjustObjectFinal = levelObjects[1].transform.localScale.y / -2f;
+        yAdjustTarget = 1f - yAdjustObjectFinal;
+
         grid = new int[,] {
             { 0, 0, 0, 2, 4, 1, 0, 0, 0, 6, 2, 0, 0, 0, 1, 5, 1, 0, 2, 2 },
             { 0, 1, 0, 1, 0, 2, 3, 1, 0, 3, 0, 0, 2, 1, 2, 0, 1, 2, 1, 0 },
@@ -55,6 +61,16 @@ public class LevelBuilder : MonoBehaviour
 
     void BuildLevel()
     {
+        if (grid[startingGrid.x, startingGrid.y] != 1)
+        {
+            grid[startingGrid.x, startingGrid.y] = 1;
+        }
+
+        if (grid[endGrid.x, endGrid.y] != 1)
+        {
+            grid[endGrid.x, endGrid.y] = 1;
+        }
+
         GridResolver resolver = new GridResolver(grid);
         grid = resolver.FixIsolatedRegions(4, 0);
 
@@ -62,11 +78,19 @@ public class LevelBuilder : MonoBehaviour
         // minimap.Init(grid, tileSize);
         minimap2.Init(grid);
 
-        // Set up starting floor since it's the most important one
-        Vector3 startingFloorPos = new Vector3(startingGrid.x * tileSize, -5f, startingGrid.y * tileSize);
+        // Set up starting floor 
+        Vector3 startingFloorPos = new Vector3(startingGrid.x * tileSize, yAdjustObjectFinal, startingGrid.y * tileSize);
         CreateObject(levelObjects[1], startingFloorPos, Quaternion.identity);
         AddWallInExtremity(startingGrid.x, startingGrid.y);
-        isCellTriggered[startingGrid.x, startingGrid.y] = true;
+        // isCellTriggered[startingGrid.x, startingGrid.y] = true;
+
+        // Set up end floor
+        Vector3 endFloorPos = new Vector3(endGrid.x * tileSize, yAdjustObjectFinal, endGrid.y * tileSize);
+        CreateObject(levelObjects[1], endFloorPos, Quaternion.identity);
+        AddWallInExtremity(endGrid.x, endGrid.y);
+        // add exit 
+        Vector3 exitAreaPos = endFloorPos - new Vector3(0, yAdjustObjectFinal, 0);
+        Instantiate(exitArea, exitAreaPos, Quaternion.identity);
 
 
         // create 2d array for loop
@@ -74,13 +98,15 @@ public class LevelBuilder : MonoBehaviour
         {
             for (int j = 0; j < grid.GetLength(1); j++)
             {
-                // skip starting floor
+                // skip starting & end floor
                 if (i == startingGrid.x && j == startingGrid.y) continue;
+                if (i == endGrid.x && j == endGrid.y) continue;
 
                 int objectId = grid[i, j];
 
                 if (objectId == 0)
                 {
+
                     // check if at least 1 neighbor is not zero, place invisible wall so player cannot fall.
                     if (Helpers.HasNonZeroNeighbor(grid, i, j))
                     {
