@@ -92,10 +92,17 @@ public class PlayerHealth : MonoBehaviour
         isDead = true;
 
         // Disable controls, collision etc
-        // GetComponent<Animator>().enabled = false;
         GetComponent<CharacterController>().detectCollisions = false;
-        GetComponent<PlayerStateMachine>().enabled = false;
+
+        PlayerStateMachine psm = GetComponent<PlayerStateMachine>();
+        psm.CharacterAnimator.SetBool("isReloading", false);
+        psm.ToggleRigAndWeapon(false);
+        psm.CanDash = false;
+        psm.enabled = false;
+
         GetComponentInChildren<GunManager>().gameObject.SetActive(false);
+        GetComponentInChildren<Canvas>().gameObject.SetActive(false);
+
     }
 
 

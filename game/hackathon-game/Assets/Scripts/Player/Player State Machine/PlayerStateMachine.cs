@@ -81,6 +81,9 @@ public class PlayerStateMachine : MonoBehaviour
     private Vector3 _knockbackVelocity;
     public float _knockbackRecoverySpeed = 5f;
 
+    [Header("Interaction Variables")]
+    public static Action _interact;
+
 
     [Header("Animation Rigging variables")]
     [SerializeField] private Rig _rig;
@@ -220,6 +223,14 @@ public class PlayerStateMachine : MonoBehaviour
         CheckFightMode(_isShooting);
     }
 
+    /*PLAYER INTERACTS WITH WORLD*/
+    public void GetInteractInput(InputAction.CallbackContext ctx)
+    {
+        if (ctx.performed)
+        {
+            _interact?.Invoke();
+        }
+    }
 
     public void Update()
     {

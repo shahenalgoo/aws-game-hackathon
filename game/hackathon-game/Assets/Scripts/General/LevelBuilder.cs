@@ -13,10 +13,10 @@ public class LevelBuilder : MonoBehaviour
     [SerializeField] private float yAdjustObjectFinal = -2.5f;
     [SerializeField] private float yAdjustTarget = 3.5f;
     private int[,] grid;
-    private bool[,] isCellTriggered;
+    // private bool[,] isCellTriggered;
 
     private Vector2Int startingGrid = new Vector2Int(4, 0);
-    private Vector2Int endGrid = new Vector2Int(0, 1);
+    private Vector2Int endGrid = new Vector2Int(4, 1);
 
     // public CircularMinimapV2 minimap;
     public Minimap minimap2;
@@ -27,6 +27,7 @@ public class LevelBuilder : MonoBehaviour
     // Start is called before the first frame update
     void Awake()
     {
+        tileSize = (int)levelObjects[0].transform.localScale.x;
         yAdjustObjectFinal = levelObjects[1].transform.localScale.y / -2f;
         yAdjustTarget = 1f - yAdjustObjectFinal;
 
@@ -41,10 +42,6 @@ public class LevelBuilder : MonoBehaviour
             { 0, 0, 0, 3, 1, 2, 1, 0, 4, 0, 0, 0, 2, 4, 1, 0, 0, 5, 1, 1 },
             { 0, 0, 0, 1, 0, 0, 2, 5, 6, 3, 2, 0, 0, 0, 2, 1, 0, 0, 2, 0 },
         };
-
-        isCellTriggered = new bool[grid.GetLength(0), grid.GetLength(1)];
-        // prevPlayerPos = startingGrid;
-
 
         //     { 0, 0, 0, 2, 4, 1, 0, 0, 0, 6, 2, 0, 0, 0, 1, 5, 1, 0, 2, 7 },
         //     { 0, 1, 0, 1, 0, 2, 3, 1, 0, 3, 0, 0, 2, 1, 2, 0, 1, 2, 1, 0 },
@@ -76,7 +73,7 @@ public class LevelBuilder : MonoBehaviour
 
         // Initialize minimap
         // minimap.Init(grid, tileSize);
-        minimap2.Init(grid);
+        minimap2.Init(grid, tileSize);
 
         // Set up starting floor 
         Vector3 startingFloorPos = new Vector3(startingGrid.x * tileSize, yAdjustObjectFinal, startingGrid.y * tileSize);

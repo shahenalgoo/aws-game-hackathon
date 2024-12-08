@@ -56,8 +56,9 @@ public class Minimap : MonoBehaviour
         );
     }
 
-    public void Init(int[,] gridData)
+    public void Init(int[,] gridData, int tileSize)
     {
+        cellSize = tileSize;
         gridInstructions = gridData;
         gridDimensions = new Vector2Int(gridData.GetLength(0), gridData.GetLength(1));
         CreateGrid();

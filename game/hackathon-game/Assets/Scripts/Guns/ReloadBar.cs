@@ -9,7 +9,6 @@ public class ReloadBar : MonoBehaviour
     private float _reloadTime;
     private float _currentReloadTime;
     private bool _isReloading;
-    private Quaternion _initialRotation; // Store the initial rotation
     public static Action _activateReloadSlider;
     public static Action _cancelReloadSlider;
 
@@ -23,9 +22,6 @@ public class ReloadBar : MonoBehaviour
 
         _activateReloadSlider += StartReload;
         _cancelReloadSlider += DeactivateReload;
-
-        // Store the initial rotation we want to maintain
-        _initialRotation = transform.rotation;
 
         // Get animation length from animator
         _player = GameObject.FindGameObjectWithTag("Player");
@@ -68,10 +64,6 @@ public class ReloadBar : MonoBehaviour
         }
     }
 
-    void LateUpdate()
-    {
-        transform.rotation = _initialRotation;
-    }
     private void OnDestroy()
     {
         // IMPORTANT: Unsubscribe from static events
