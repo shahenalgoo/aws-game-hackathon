@@ -1,4 +1,3 @@
-using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -11,20 +10,19 @@ public class GameManager : MonoBehaviour
     [SerializeField] private int _lootCollected;
     public int LootCollected { get { return _lootCollected; } }
 
-    [SerializeField] private float _gameTimer;
+    [SerializeField] private int _totalTargets;
+    public int TotalTargets { get { return _totalTargets; } set { _totalTargets = value; } }
+
+
+    [SerializeField] private bool _canCountTime = true;
+    public bool CanCountTime { get { return _canCountTime; } set { _canCountTime = value; } }
     public float GameTimer { get { return _gameTimer; } }
+    [SerializeField] private float _gameTimer;
+
 
     private void Awake()
     {
         SingletonCheck();
-        InitializeGameState();
-    }
-
-    private void InitializeGameState()
-    {
-        _lootCollected = 0;
-        _gameTimer = 0;
-        HUDManager._lootUpdater?.Invoke(_lootCollected);
     }
 
     void SingletonCheck()
@@ -42,7 +40,7 @@ public class GameManager : MonoBehaviour
 
     void Update()
     {
-        TimeCounter();
+        if (_canCountTime) TimeCounter();
     }
 
 
@@ -60,5 +58,10 @@ public class GameManager : MonoBehaviour
     public void TimeCounter()
     {
         _gameTimer += Time.deltaTime;
+    }
+
+    public bool HasCollectedAll()
+    {
+        return _lootCollected == _totalTargets;
     }
 }

@@ -33,6 +33,9 @@ public class PitfallController : MonoBehaviour
             PlayerHealth playerHealth = other.GetComponent<PlayerHealth>();
             playerHealth.fallingTrailsObj.SetActive(true);
             other.GetComponent<PlayerHealth>().DisablePlayer();
+
+            // Stop time count
+            GameManager.Instance.CanCountTime = false;
         }
 
     }

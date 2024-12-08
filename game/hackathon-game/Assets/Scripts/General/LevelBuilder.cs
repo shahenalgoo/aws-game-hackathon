@@ -1,4 +1,3 @@
-using System.Runtime.Serialization;
 using UnityEngine;
 
 public class LevelBuilder : MonoBehaviour
@@ -8,28 +7,23 @@ public class LevelBuilder : MonoBehaviour
     [SerializeField] private GameObject[] levelObjects;
 
     [SerializeField] private GameObject exitArea;
-
-    // private float yAdjustObject = -50f;
-    [SerializeField] private float yAdjustObjectFinal = -2.5f;
+    [SerializeField] private float yAdjustObject = -2.5f;
     [SerializeField] private float yAdjustTarget = 3.5f;
     private int[,] grid;
-    // private bool[,] isCellTriggered;
 
     private Vector2Int startingGrid = new Vector2Int(4, 0);
     private Vector2Int endGrid = new Vector2Int(4, 1);
-
-    // public CircularMinimapV2 minimap;
     public Minimap minimap2;
-    // [SerializeField] private Transform player;
-    // private Vector2Int prevPlayerPos;
+
+    private int _targetCounter;
 
 
     // Start is called before the first frame update
     void Awake()
     {
         tileSize = (int)levelObjects[0].transform.localScale.x;
-        yAdjustObjectFinal = levelObjects[1].transform.localScale.y / -2f;
-        yAdjustTarget = 1f - yAdjustObjectFinal;
+        yAdjustObject = levelObjects[1].transform.localScale.y / -2f;
+        yAdjustTarget = 1f - yAdjustObject;
 
         grid = new int[,] {
             { 0, 0, 0, 2, 4, 1, 0, 0, 0, 6, 2, 0, 0, 0, 1, 5, 1, 0, 2, 2 },
@@ -76,17 +70,17 @@ public class LevelBuilder : MonoBehaviour
         minimap2.Init(grid, tileSize);
 
         // Set up starting floor 
-        Vector3 startingFloorPos = new Vector3(startingGrid.x * tileSize, yAdjustObjectFinal, startingGrid.y * tileSize);
+        Vector3 startingFloorPos = new Vector3(startingGrid.x * tileSize, yAdjustObject, startingGrid.y * tileSize);
         CreateObject(levelObjects[1], startingFloorPos, Quaternion.identity);
         AddWallInExtremity(startingGrid.x, startingGrid.y);
         // isCellTriggered[startingGrid.x, startingGrid.y] = true;
 
         // Set up end floor
-        Vector3 endFloorPos = new Vector3(endGrid.x * tileSize, yAdjustObjectFinal, endGrid.y * tileSize);
+        Vector3 endFloorPos = new Vector3(endGrid.x * tileSize, yAdjustObject, endGrid.y * tileSize);
         CreateObject(levelObjects[1], endFloorPos, Quaternion.identity);
         AddWallInExtremity(endGrid.x, endGrid.y);
         // add exit 
-        Vector3 exitAreaPos = endFloorPos - new Vector3(0, yAdjustObjectFinal, 0);
+        Vector3 exitAreaPos = endFloorPos - new Vector3(0, yAdjustObject, 0);
         Instantiate(exitArea, exitAreaPos, Quaternion.identity);
 
 
@@ -114,7 +108,7 @@ public class LevelBuilder : MonoBehaviour
                 }
 
 
-                Vector3 pos = new Vector3(i * tileSize, yAdjustObjectFinal, j * tileSize);
+                Vector3 pos = new Vector3(i * tileSize, yAdjustObject, j * tileSize);
                 GameObject obj = CreateObject(levelObjects[objectId], pos, Quaternion.identity);
 
                 // If a target or bonus teleporter
@@ -125,8 +119,11 @@ public class LevelBuilder : MonoBehaviour
 
 
                     // Adjust y of obj
-                    obj.transform.position = new Vector3(pos.x, yAdjustTarget + yAdjustObjectFinal, pos.z);
+                    obj.transform.position = new Vector3(pos.x, yAdjustTarget + yAdjustObject, pos.z);
                     obj.transform.SetParent(floor.transform);
+
+                    // Count targets
+                    if (objectId == 2) _targetCounter++;
                 }
 
                 // If object is in extremity, Add wall in extreme row and column
@@ -135,6 +132,15 @@ public class LevelBuilder : MonoBehaviour
 
             }
         }
+    }
+
+    public void Start()
+    {
+        GameManager.Instance.TotalTargets = _targetCounter;
+
+        // initialize loot counter on hud  
+        HUDManager._lootUpdater?.Invoke(0);
+
     }
 
     private void AddWallInExtremity(int row, int col)

@@ -254,7 +254,7 @@ MonoBehaviour:
   - {fileID: 1378970538917373638, guid: db4a3d752c4e04eda8db98f44fc65b97, type: 3}
   exitArea: {fileID: 4426621991517509651, guid: a2383c7d669a44c08be42ee7408983dd,
     type: 3}
-  yAdjustObjectFinal: -2.5
+  yAdjustObject: -2.5
   yAdjustTarget: 3.5
   minimap2: {fileID: 1224442257}
 --- !u!4 &125806741
@@ -1009,7 +1009,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: -380}
-  m_SizeDelta: {x: 612.4247, y: 50}
+  m_SizeDelta: {x: 1000, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &657702626
 MonoBehaviour:
@@ -2232,6 +2232,8 @@ MonoBehaviour:
   _targetLoot: {fileID: 1892878532141364688, guid: d78794dad934544eb928e588dc5e1a88,
     type: 3}
   _lootCollected: 0
+  _totalTargets: 0
+  _canCountTime: 1
   _gameTimer: 0
 --- !u!1 &1451792806
 GameObject:

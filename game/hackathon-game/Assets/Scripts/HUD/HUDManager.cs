@@ -51,7 +51,7 @@ public class HUDManager : MonoBehaviour
     }
     public void UpdateLootText(int amount)
     {
-        _lootText.text = "Loot Collected: " + amount.ToString("N0");
+        _lootText.text = "Loot Collected: " + amount.ToString("N0") + "/" + GameManager.Instance.TotalTargets;
     }
 
     public void UpdateAmmoText(int amount)

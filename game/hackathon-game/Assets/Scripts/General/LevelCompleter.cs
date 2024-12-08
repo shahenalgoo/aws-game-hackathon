@@ -14,10 +14,19 @@ public class LevelCompleter : MonoBehaviour
         if (other.gameObject.CompareTag("Player"))
         {
             if (_player == null) _player = other.gameObject;
-            PlayerStateMachine._interact += CompleteLevel;
+
+            if (GameManager.Instance.HasCollectedAll())
+            {
+
+                PlayerStateMachine._interact += CompleteLevel;
+                InteractTextController._setInteractionText(true, "Press 'E' to Extract");
+            }
+            else
+            {
+                InteractTextController._setInteractionText(true, "Collect All Loot To Extract.");
+            }
         }
 
-        InteractTextController._setInteractionText(true, "Press 'E' to Extract");
     }
 
     void OnDisable()
@@ -57,6 +66,8 @@ public class LevelCompleter : MonoBehaviour
         _completionTriggered = true;
         Invoke("CameraStopsFollowPlayer", _cameraFollowTime);
 
+        // Stop time count
+        GameManager.Instance.CanCountTime = false;
     }
 
     void CameraStopsFollowPlayer()

@@ -113,7 +113,7 @@ public class PlayerHealth : MonoBehaviour
         // Shatter Effect
         GetComponent<PlayerFracture>().Shatter();
 
-
-
+        // Stop time count
+        GameManager.Instance.CanCountTime = false;
     }
 }
