@@ -14,6 +14,9 @@ public class PlayerHealth : MonoBehaviour
     [SerializeField] private float flashDuration = 0.2f;
     private Vignette vignette;
 
+    [SerializeField] private ParticleSystem damageVfx;
+    public ParticleSystem DamageVfx { get { return damageVfx; } }
+
     [SerializeField] public GameObject fallingTrailsObj;
 
     private bool isDead;

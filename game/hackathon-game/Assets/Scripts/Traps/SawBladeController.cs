@@ -33,7 +33,9 @@ public class SawBladeController : MonoBehaviour
             // Vector3 collisionPoint = other.ClosestPoint(transform.position);
 
             int damageRoundUp = Mathf.CeilToInt(_damage);
-            other.gameObject.GetComponent<PlayerHealth>().TakeDamage(damageRoundUp);
+            PlayerHealth playerHealth = other.gameObject.GetComponent<PlayerHealth>();
+            playerHealth.TakeDamage(damageRoundUp);
+            playerHealth.DamageVfx.Play();
 
             // Add knockback using CharacterController
             CharacterController playerCC = other.gameObject.GetComponent<CharacterController>();

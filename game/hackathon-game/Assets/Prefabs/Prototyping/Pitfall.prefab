@@ -846,6 +846,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: downwardSparks
       objectReference: {fileID: 0}
+    - target: {fileID: 8755161499672944992, guid: f84b05488f2594ba3b50613473584acf,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
