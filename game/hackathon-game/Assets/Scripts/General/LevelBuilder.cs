@@ -2,7 +2,10 @@ using UnityEngine;
 
 public class LevelBuilder : MonoBehaviour
 {
+    public static LevelBuilder Instance { get; private set; }
+
     [SerializeField] private int tileSize;
+    public int TileSize { get => tileSize; }
 
     [SerializeField] private GameObject[] levelObjects;
 
@@ -10,9 +13,11 @@ public class LevelBuilder : MonoBehaviour
     [SerializeField] private float yAdjustObject;
     [SerializeField] private float yAdjustTarget;
     private int[,] grid;
+    public int[,] Grid { get => grid; }
+
 
     private Vector2Int startingGrid = new Vector2Int(4, 0);
-    private Vector2Int endGrid = new Vector2Int(4, 1);
+    private Vector2Int endGrid = new Vector2Int(1, 1);
     public Minimap minimap2;
 
     private int _targetCounter;
@@ -24,9 +29,22 @@ public class LevelBuilder : MonoBehaviour
     // 4 - floor - saw blades
     // 5 - floor - pitfall
     // 6 - floor - boulder/launcher
+    void SingletonCheck()
+    {
+        // If there is an instance, and it's not this one, delete this one
+        if (Instance != null && Instance != this)
+        {
+            Destroy(gameObject);
+            return;
+        }
 
+        // Set the instance
+        Instance = this;
+    }
     void Awake()
     {
+        SingletonCheck();
+
         tileSize = (int)levelObjects[0].transform.localScale.x;
 
         grid = new int[,] {
@@ -34,7 +52,7 @@ public class LevelBuilder : MonoBehaviour
             { 0, 1, 0, 1, 0, 2, 3, 1, 0, 3, 0, 0, 2, 1, 2, 0, 1, 2, 1, 0 },
             { 0, 1, 0, 0, 0, 0, 0, 1, 4, 1, 0, 0, 1, 0, 0, 0, 0, 5, 0, 0 },
             { 0, 5, 4, 1, 1, 0, 0, 0, 0, 2, 4, 1, 5, 0, 1, 3, 1, 2, 6, 0 },
-            { 1, 1, 0, 0, 5, 1, 3, 6, 0, 0, 0, 0, 1, 4, 2, 0, 0, 0, 2, 1 },
+            { 1, 4, 0, 0, 5, 1, 3, 6, 0, 0, 0, 0, 1, 4, 2, 0, 0, 0, 2, 1 },
             { 0, 0, 0, 0, 0, 0, 1, 5, 1, 5, 1, 0, 0, 0, 1, 3, 1, 0, 0, 0 },
             { 0, 1, 4, 2, 0, 0, 0, 0, 2, 0, 1, 3, 1, 0, 0, 0, 2, 1, 0, 2 },
             { 0, 0, 0, 3, 1, 2, 1, 0, 4, 0, 0, 0, 2, 4, 1, 0, 0, 5, 1, 1 },
