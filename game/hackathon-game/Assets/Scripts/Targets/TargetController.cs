@@ -76,7 +76,6 @@ public class TargetController : MonoBehaviour
         _nextFireTime = Time.time + _fireRate;
     }
 
-
     // Optional: Visualize the detection radius in the editorß
     void OnDrawGizmosSelected()
     {

@@ -47,11 +47,6 @@ public abstract class Singleton<T> : MonoBehaviour where T : MonoBehaviour
         }
 
         _instance = this as T;
-
-        if (transform.parent == null)
-        {
-            DontDestroyOnLoad(gameObject);
-        }
     }
 
     protected virtual void OnDestroy()

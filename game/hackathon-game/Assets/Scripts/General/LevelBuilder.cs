@@ -7,8 +7,8 @@ public class LevelBuilder : MonoBehaviour
     [SerializeField] private GameObject[] levelObjects;
 
     [SerializeField] private GameObject exitArea;
-    [SerializeField] private float yAdjustObject = -2.5f;
-    [SerializeField] private float yAdjustTarget = 3.5f;
+    [SerializeField] private float yAdjustObject;
+    [SerializeField] private float yAdjustTarget;
     private int[,] grid;
 
     private Vector2Int startingGrid = new Vector2Int(4, 0);
@@ -17,13 +17,17 @@ public class LevelBuilder : MonoBehaviour
 
     private int _targetCounter;
 
+    // 0 - void
+    // 1 - floor - default
+    // 2 - floor - target
+    // 3 - floor - spike trap
+    // 4 - floor - saw blades
+    // 5 - floor - pitfall
+    // 6 - floor - boulder/launcher
 
-    // Start is called before the first frame update
     void Awake()
     {
         tileSize = (int)levelObjects[0].transform.localScale.x;
-        yAdjustObject = levelObjects[1].transform.localScale.y / -2f;
-        yAdjustTarget = 1f - yAdjustObject;
 
         grid = new int[,] {
             { 0, 0, 0, 2, 4, 1, 0, 0, 0, 6, 2, 0, 0, 0, 1, 5, 1, 0, 2, 2 },
@@ -66,14 +70,12 @@ public class LevelBuilder : MonoBehaviour
         grid = resolver.FixIsolatedRegions(4, 0);
 
         // Initialize minimap
-        // minimap.Init(grid, tileSize);
         minimap2.Init(grid, tileSize);
 
         // Set up starting floor 
         Vector3 startingFloorPos = new Vector3(startingGrid.x * tileSize, yAdjustObject, startingGrid.y * tileSize);
         CreateObject(levelObjects[1], startingFloorPos, Quaternion.identity);
         AddWallInExtremity(startingGrid.x, startingGrid.y);
-        // isCellTriggered[startingGrid.x, startingGrid.y] = true;
 
         // Set up end floor
         Vector3 endFloorPos = new Vector3(endGrid.x * tileSize, yAdjustObject, endGrid.y * tileSize);
@@ -179,17 +181,5 @@ public class LevelBuilder : MonoBehaviour
 
         return obj;
     }
-
-    // void Update()
-    // {
-    //     if (player == null) return;
-
-    //     Vector2Int gridPos = minimap2.WorldToGridPosition(player.position);
-    //     if (gridPos != prevPlayerPos)
-    //     {
-    //         Debug.Log("Player is in new cell");
-    //         prevPlayerPos = gridPos;
-    //     }
-    // }
 
 }

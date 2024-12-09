@@ -4,7 +4,6 @@ using UnityEngine.InputSystem;
 
 public class UIManager : Singleton<UIManager>
 {
-    public GameObject _player;
     public GameObject _pausePanel;
 
     private bool _isPaused = false;
