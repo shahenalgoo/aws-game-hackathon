@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 8791935120364688523}
   m_Layer: 0
   m_Name: SawBladeColliderAnimator
-  m_TagString: Untagged
+  m_TagString: SawBlades
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -106,7 +106,7 @@ GameObject:
   - component: {fileID: 2520129147900098913}
   m_Layer: 0
   m_Name: Trap - Saw Blades
-  m_TagString: Untagged
+  m_TagString: SawBlades
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -210,7 +210,7 @@ GameObject:
   - component: {fileID: 4989602115513370386}
   m_Layer: 0
   m_Name: SawBladeParent
-  m_TagString: Untagged
+  m_TagString: SawBlades
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

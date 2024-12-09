@@ -198,7 +198,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: de4637f52340e6e4eb0dacd98f502295, type: 2}
+  - {fileID: 2100000, guid: 7220410f32b264a7e89dccad61e85568, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -280,4 +280,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _flySpeed: 10
   _lifeTime: 3
+  _damage: 0
+  _damageFalloffRate: 0
+  _currentDamage: 0
   _canFly: 0
+  _trail: {fileID: 0}

@@ -2498,6 +2498,21 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 268568525221080847, guid: ed6351fa37ed1a54bac66c908dc976f8,
+        type: 3}
+      propertyPath: laserColor.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 268568525221080847, guid: ed6351fa37ed1a54bac66c908dc976f8,
+        type: 3}
+      propertyPath: laserColor.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 268568525221080847, guid: ed6351fa37ed1a54bac66c908dc976f8,
+        type: 3}
+      propertyPath: laserColor.r
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1026669915073707410, guid: ed6351fa37ed1a54bac66c908dc976f8,
         type: 3}
       propertyPath: m_LocalRotation.x

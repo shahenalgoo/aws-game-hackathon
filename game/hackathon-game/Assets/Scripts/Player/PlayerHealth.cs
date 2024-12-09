@@ -97,6 +97,7 @@ public class PlayerHealth : MonoBehaviour
         PlayerStateMachine psm = GetComponent<PlayerStateMachine>();
         psm.CharacterAnimator.SetBool("isReloading", false);
         psm.ToggleRigAndWeapon(false);
+        psm._dashLightning.gameObject.SetActive(false);
         psm.CanDash = false;
         psm.enabled = false;
 

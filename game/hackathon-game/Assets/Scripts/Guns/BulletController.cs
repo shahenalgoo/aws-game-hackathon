@@ -18,5 +18,14 @@ public class BulletController : Bullet
 
             DisableBullet();
         }
+
+        if (other.gameObject.CompareTag("SawBlades"))
+        {
+            CancelInvoke("DisableBullet");
+            BulletImpactManager._impactSpawner?.Invoke(transform.position, Quaternion.identity);
+            DisableBullet();
+        }
+
+
     }
 }
