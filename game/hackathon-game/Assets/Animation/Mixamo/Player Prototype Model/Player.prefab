@@ -74,7 +74,7 @@ TrailRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Time: 0.3
+  m_Time: 0.15
   m_PreviewTimeScale: 1
   m_Parameters:
     serializedVersion: 3
@@ -602,11 +602,11 @@ MonoBehaviour:
   _currentInputDevice: 1
   _leftStickDeadzone: 0.4
   _moveDirection: {x: 0, y: 0, z: 0}
-  _moveSpeed: 7
+  _moveSpeed: 8
   _isRunning: 0
   _lookYOffset: 0.906
   _isDashing: 0
-  _dashDistance: 5
+  _dashDistance: 5.72
   _dashSpeed: 21
   _dashTime: 0.25
   _canDash: 1
@@ -814,6 +814,26 @@ MonoBehaviour:
       m_Calls: []
     m_ActionId: 8f690b18-a44d-4df9-a9f2-592ffb4609f5
     m_ActionName: PlayerControls/ToggleMap[/Keyboard/m]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 4269175703655125022}
+        m_TargetAssemblyTypeName: PlayerStateMachine, Assembly-CSharp
+        m_MethodName: GetInteractInput
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 1ce44ecf-e358-4b0b-9614-7ffad286fe51
+    m_ActionName: PlayerControls/Interact[/Keyboard/e]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: bf41591a-4099-4e45-adc5-3b6e2d8ee666
+    m_ActionName: PlayerControls/PauseGame[/Keyboard/p,/Keyboard/escape]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: PlayerControls
@@ -1071,7 +1091,7 @@ TrailRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Time: 0.3
+  m_Time: 0.15
   m_PreviewTimeScale: 1
   m_Parameters:
     serializedVersion: 3
@@ -1392,7 +1412,7 @@ TrailRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Time: 0.3
+  m_Time: 0.15
   m_PreviewTimeScale: 1
   m_Parameters:
     serializedVersion: 3
@@ -3206,10 +3226,35 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 5315199282729196132}
     m_Modifications:
+    - target: {fileID: 1441611083982146570, guid: f8ecb0bb037144428b5baecf7f4c67bd,
+        type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 1542550766506131961, guid: f8ecb0bb037144428b5baecf7f4c67bd,
+        type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
     - target: {fileID: 1599673993215271259, guid: f8ecb0bb037144428b5baecf7f4c67bd,
         type: 3}
       propertyPath: m_Name
       value: ReloadBarCanvas
+      objectReference: {fileID: 0}
+    - target: {fileID: 1599673993215271259, guid: f8ecb0bb037144428b5baecf7f4c67bd,
+        type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 4445272923750632068, guid: f8ecb0bb037144428b5baecf7f4c67bd,
+        type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 5537522558425049721, guid: f8ecb0bb037144428b5baecf7f4c67bd,
+        type: 3}
+      propertyPath: m_Layer
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 5557576774869220122, guid: f8ecb0bb037144428b5baecf7f4c67bd,
         type: 3}
@@ -3319,8 +3364,30 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 1599673993215271259, guid: f8ecb0bb037144428b5baecf7f4c67bd,
+        type: 3}
+      insertIndex: 5
+      addedObject: {fileID: 1576120918979574260}
   m_SourcePrefab: {fileID: 100100000, guid: f8ecb0bb037144428b5baecf7f4c67bd, type: 3}
+--- !u!1 &924798976028996815 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1599673993215271259, guid: f8ecb0bb037144428b5baecf7f4c67bd,
+    type: 3}
+  m_PrefabInstance: {fileID: 1938417841365357972}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1576120918979574260
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 924798976028996815}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 46973ffc252c2481b95be193be532459, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!224 &6324987230768524942 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 5557576774869220122, guid: f8ecb0bb037144428b5baecf7f4c67bd,

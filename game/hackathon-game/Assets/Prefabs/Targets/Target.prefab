@@ -168,7 +168,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _shootingDelayOnStart: 1
-  _detectionRadius: 16
+  _detectionRadius: 18
   _fireRate: 4
   _rotationSpeed: 100
   _bulletSpawnPoint: {fileID: 8578368738636583995}
