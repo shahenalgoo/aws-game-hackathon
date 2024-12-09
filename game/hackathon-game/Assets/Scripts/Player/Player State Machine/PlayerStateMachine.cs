@@ -144,6 +144,8 @@ public class PlayerStateMachine : MonoBehaviour
     /* GET INPUT FROM MOUSE CURSOR - FOR AIMING*/
     public void GetCursorPosition(InputAction.CallbackContext ctx)
     {
+        if (Time.timeScale == 0) return;
+
         Vector2 cursorValue = ctx.ReadValue<Vector2>();
         _cursorPosition = new Vector3(cursorValue.x, cursorValue.y, 0);
 
@@ -154,6 +156,8 @@ public class PlayerStateMachine : MonoBehaviour
     /* GET INPUT FROM RIGHT STICK [CONTROLLER] - FOR AIMING*/
     public void GetRightStickInput(InputAction.CallbackContext ctx)
     {
+        if (Time.timeScale == 0) return;
+
         Vector2 stickValue = ctx.ReadValue<Vector2>();
         _rightStickInput = new Vector3(stickValue.x, 0, stickValue.y);
 
@@ -190,16 +194,19 @@ public class PlayerStateMachine : MonoBehaviour
     /* GET INPUT FOR AIMING ONLY */
     public void GetAimingInput(InputAction.CallbackContext ctx)
     {
-        if (_isShooting) return;
-
-        ActivateFightMode();
-        CheckFightMode(false);
+        if (ctx.performed)
+        {
+            if (_isShooting) return;
+            ActivateFightMode();
+            CheckFightMode(false);
+        }
     }
 
 
     /* GET INPUT FOR SHOOTING AUTOMATIC*/
     public void GetAutomaticShootInput(InputAction.CallbackContext ctx)
     {
+
         if (Gun.FireStyle != FireType.Automatic) return;
         ActivateFightMode();
         _isShooting = ctx.ReadValue<float>() > 0.1f;

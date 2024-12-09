@@ -23,6 +23,7 @@ public class GameManager : MonoBehaviour
     private void Awake()
     {
         SingletonCheck();
+        Time.timeScale = 1f;
     }
 
     void SingletonCheck()
