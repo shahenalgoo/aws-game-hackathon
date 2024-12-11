@@ -249,7 +249,7 @@ MonoBehaviour:
   - {fileID: 3707230686394967408, guid: b5e3d10ef9d9d4b248671dae6dc5eaaf, type: 3}
   - {fileID: 5960792832718248027, guid: a7b3bffedfc63459ab9cb30e9fd02874, type: 3}
   - {fileID: 5080209234803536179, guid: c63bf51fce0964784b0dd2d5b317bead, type: 3}
-  - {fileID: 1984354046806001452, guid: fb9be772d96ae41dfa48408ef45d2934, type: 3}
+  - {fileID: 1984354046806001452, guid: 24e1f9b9dde144ebf88ade63e2ef4a74, type: 3}
   - {fileID: 5481567311206900813, guid: 74614b5405e58415c99ca5829d6642f4, type: 3}
   - {fileID: 1378970538917373638, guid: db4a3d752c4e04eda8db98f44fc65b97, type: 3}
   exitArea: {fileID: 4426621991517509651, guid: a2383c7d669a44c08be42ee7408983dd,
