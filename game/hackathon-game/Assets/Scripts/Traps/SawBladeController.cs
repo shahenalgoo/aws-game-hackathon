@@ -30,7 +30,6 @@ public class SawBladeController : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Player"))
         {
-
             PlayerHealth playerHealth = other.gameObject.GetComponent<PlayerHealth>();
             playerHealth.TakeDamage(_damage);
             playerHealth.DamageVfx.Play();

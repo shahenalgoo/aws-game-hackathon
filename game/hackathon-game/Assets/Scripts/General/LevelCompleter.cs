@@ -43,9 +43,9 @@ public class LevelCompleter : MonoBehaviour
 
     void Update()
     {
-        // Apply reverse gravity
         if (!_completionTriggered) return;
 
+        // Apply reverse gravity
         _playerCC.Move(Physics.gravity * Time.deltaTime * -1f * _flySpeed);
     }
 

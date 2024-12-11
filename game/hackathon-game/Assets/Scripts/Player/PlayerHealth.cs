@@ -104,8 +104,8 @@ public class PlayerHealth : MonoBehaviour
         psm.CanDash = false;
         psm.enabled = false;
 
-        GetComponentInChildren<GunManager>().gameObject.SetActive(false);
-        GetComponentInChildren<Canvas>().gameObject.SetActive(false);
+        GetComponentInChildren<GunManager>(true).gameObject.SetActive(false);
+        GetComponentInChildren<Canvas>(true).gameObject.SetActive(false);
 
     }
 

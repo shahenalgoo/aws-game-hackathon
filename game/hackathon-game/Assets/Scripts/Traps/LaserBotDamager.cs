@@ -1,14 +1,19 @@
+using System.Collections;
 using UnityEngine;
 
 public class LaserBotDamager : MonoBehaviour
 {
+    private float _cooldown = 0.1f;
+    private bool _canDamage = true;
     [SerializeField] private int _damage = 15;
     [SerializeField] private float _knockbackForce = 1f;
 
     void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.CompareTag("Player") && !other.GetComponent<PlayerStateMachine>().IsDashing)
+        if (_canDamage && other.gameObject.CompareTag("Player") && !other.GetComponent<PlayerStateMachine>().IsDashing)
         {
+            _canDamage = false;
+
             PlayerHealth playerHealth = other.gameObject.GetComponent<PlayerHealth>();
             playerHealth.TakeDamage(_damage);
             playerHealth.DamageVfx.Play();
@@ -27,6 +32,15 @@ public class LaserBotDamager : MonoBehaviour
                     psm.ApplyKnockback(knockbackDirection * _knockbackForce);
                 }
             }
+
+            // Trigger cooldown
+            StartCoroutine(CooldownLaser(_cooldown));
         }
+    }
+
+    private IEnumerator CooldownLaser(float waitTime)
+    {
+        yield return new WaitForSeconds(waitTime);
+        _canDamage = true;
     }
 }

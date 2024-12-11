@@ -131,8 +131,8 @@ public class LevelBuilder : MonoBehaviour
                 Vector3 pos = new Vector3(i * tileSize, yAdjustObject, j * tileSize);
                 GameObject obj = CreateObject(levelObjects[objectId], pos, Quaternion.identity);
 
-                // If a target or bonus teleporter
-                if (objectId == 2 || objectId == 7 || objectId == 8)
+                // If a target
+                if (objectId == 2)
                 {
                     // Add a floor underneath
                     GameObject floor = CreateObject(levelObjects[1], pos, Quaternion.identity);
