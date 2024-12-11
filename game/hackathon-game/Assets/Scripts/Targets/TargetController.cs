@@ -5,6 +5,7 @@ public class TargetController : MonoBehaviour
     [SerializeField] private float _shootingDelayOnStart = 2f;
     [SerializeField] private float _detectionRadius = 10f;
     [SerializeField] private float _fireRate = 5f; // Seconds between shots
+    private float _cooldown = 0f;
     private float _nextFireTime;
     private bool _canShoot = false;
     private Transform _player;
@@ -29,6 +30,7 @@ public class TargetController : MonoBehaviour
     void ActivateShooting()
     {
         _canShoot = true;
+        _cooldown = 0f;
     }
 
     // Update is called once per frame
@@ -40,9 +42,18 @@ public class TargetController : MonoBehaviour
 
         LookAtPlayer();
 
-        if (_canShoot && Time.time >= _nextFireTime && CheckPlayerDistance())
+        if (_canShoot)
         {
-            ShootPlayer();
+            if (CheckPlayerDistance()) ShootPlayer();
+        }
+        else
+        {
+            _cooldown += Time.deltaTime;
+
+            if (_cooldown >= _fireRate)
+            {
+                ActivateShooting();
+            }
         }
     }
 
@@ -73,7 +84,8 @@ public class TargetController : MonoBehaviour
         // Vector3 direction = (player.position - firePoint.position).normalized;
         Vector3 spawnPos = new Vector3(transform.position.x, _player.transform.position.y, transform.position.z);
         TargetBulletManager._bulletSpawner?.Invoke(_bulletSpawnPoint.transform.position, bulletRotation);
-        _nextFireTime = Time.time + _fireRate;
+        // _nextFireTime = Time.time + _fireRate;
+        _canShoot = false;
     }
 
     // Optional: Visualize the detection radius in the editorß

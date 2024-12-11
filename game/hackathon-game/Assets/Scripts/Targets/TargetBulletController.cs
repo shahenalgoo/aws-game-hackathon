@@ -16,7 +16,10 @@ public class TargetBulletController : Bullet
             Instantiate(_impact, collisionPoint, Quaternion.identity);
 
             int damageRoundUp = Mathf.CeilToInt(_currentDamage);
-            other.gameObject.GetComponent<PlayerHealth>().TakeDamage(damageRoundUp);
+            PlayerHealth playerHealth = other.gameObject.GetComponent<PlayerHealth>();
+            playerHealth.TakeDamage(damageRoundUp);
+            playerHealth.DamageVfx.Play();
+
 
             // Add knockback using CharacterController
             CharacterController playerCC = other.gameObject.GetComponent<CharacterController>();

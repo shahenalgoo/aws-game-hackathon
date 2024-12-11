@@ -1,36 +1,14 @@
 using UnityEngine;
 
-public enum MoveDirection
+public class LaserBotDamager : MonoBehaviour
 {
-    Left,
-    Right
-}
-public class SawBladeController : MonoBehaviour
-{
-    [SerializeField] private MoveDirection moveDirection;
-    [SerializeField] private int _damage = 20;
+    [SerializeField] private int _damage = 15;
     [SerializeField] private float _knockbackForce = 1f;
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        Animator animator = GetComponentInChildren<Animator>();
-        if (moveDirection == MoveDirection.Left)
-        {
-            animator.Play("MoveLeft");
-        }
-        else
-        {
-            animator.Play("MoveRight");
-
-        }
-    }
 
     void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.CompareTag("Player"))
+        if (other.gameObject.CompareTag("Player") && !other.GetComponent<PlayerStateMachine>().IsDashing)
         {
-
             PlayerHealth playerHealth = other.gameObject.GetComponent<PlayerHealth>();
             playerHealth.TakeDamage(_damage);
             playerHealth.DamageVfx.Play();

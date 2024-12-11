@@ -88,32 +88,28 @@ public class LaserBotController : MonoBehaviour
             _minBoundZAxis = ((0.5f * tileSize) + (topSide * tileSize) - _padding) * -1f;
             _maxBoundZAxis = (0.5f * tileSize) + (bottomSide * tileSize) - _padding;
         }
-
-        // if up + down greater, rotate platform
-
-        // calculate bounds for motion
     }
 
     // Update is called once per frame
     void Update()
     {
         // motion code
-        float newZPosition = Mathf.PingPong(Time.time * _moveSpeed, _maxBoundZAxis - _minBoundZAxis) + _minBoundZAxis;
-        transform.localPosition = new Vector3(transform.localPosition.x, transform.localPosition.y, newZPosition);
+        // float newZPosition = Mathf.PingPong(Time.deltaTime * _moveSpeed, _maxBoundZAxis - _minBoundZAxis) + _minBoundZAxis;
+        // transform.localPosition = new Vector3(transform.localPosition.x, transform.localPosition.y, newZPosition);
 
         // Move the object
-        // transform.Translate(0, 0, _moveSpeed * _direction * Time.deltaTime);
+        transform.Translate(0, 0, _moveSpeed * _direction * Time.deltaTime);
 
-        // // Check bounds and reverse direction
-        // if (transform.localPosition.z >= _maxBoundZAxis)
-        // {
-        //     transform.localPosition = new Vector3(transform.localPosition.x, transform.localPosition.y, _maxBoundZAxis);
-        //     _direction = -1;
-        // }
-        // else if (transform.localPosition.z <= _minBoundZAxis)
-        // {
-        //     transform.localPosition = new Vector3(transform.localPosition.x, transform.localPosition.y, _minBoundZAxis);
-        //     _direction = 1;
-        // }
+        // Check bounds and reverse direction
+        if (transform.localPosition.z >= _maxBoundZAxis)
+        {
+            transform.localPosition = new Vector3(transform.localPosition.x, transform.localPosition.y, _maxBoundZAxis);
+            _direction = -1;
+        }
+        else if (transform.localPosition.z <= _minBoundZAxis)
+        {
+            transform.localPosition = new Vector3(transform.localPosition.x, transform.localPosition.y, _minBoundZAxis);
+            _direction = 1;
+        }
     }
 }

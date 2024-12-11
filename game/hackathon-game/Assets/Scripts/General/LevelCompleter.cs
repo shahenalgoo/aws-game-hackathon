@@ -23,7 +23,7 @@ public class LevelCompleter : MonoBehaviour
             }
             else
             {
-                InteractTextController._setInteractionText(true, "Collect All Loot To Extract.");
+                InteractTextController._setInteractionText(true, "Collect All Loot To Extract");
             }
         }
 
