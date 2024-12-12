@@ -1,28 +1,38 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 
-public class UIManager : MonoBehaviour
+public class UIManager : Singleton<UIManager>
 {
-    public GameObject _pausePanel;
+    [Header("Pause Panel")]
 
+    public GameObject _pausePanel;
     private bool _isPaused = false;
     public bool IsPaused { get { return _isPaused; } }
     [SerializeField] private InputActionAsset inputActions;
     private InputActionMap _gameplayActions;
     private Vector3 _lastKnownCursorPosition;
 
-    [SerializeField] private PlayerStateMachine psm;
+    [Header("Death Panel")]
+    public GameObject _deathPanel;
+    private bool _playerDied;
+    [SerializeField] private float _enableDeathPanelDelay = 4f;
 
+    [SerializeField] private PlayerStateMachine psm;
     [SerializeField] private Minimap map;
 
-    public void Awake()
+
+    public void Start()
     {
         _gameplayActions = inputActions.FindActionMap("PlayerControls");
     }
 
     public void TogglePauseGame()
     {
+        // cannot pause if dead
+        if (_playerDied) return;
+
         _isPaused = !_isPaused;
         _pausePanel.SetActive(_isPaused);
 
@@ -61,5 +71,21 @@ public class UIManager : MonoBehaviour
     public void ExitToMainMenu()
     {
         SceneManager.LoadScene(SceneIndexes.MainMenuSceneIndex);
+    }
+
+    public IEnumerator DeathPanelSetup()
+    {
+        _playerDied = true;
+        _gameplayActions.Disable();
+
+        yield return new WaitForSeconds(_enableDeathPanelDelay);
+
+        EnableDeathPanel();
+    }
+
+    private void EnableDeathPanel()
+    {
+        Time.timeScale = 0;
+        _deathPanel.SetActive(true);
     }
 }

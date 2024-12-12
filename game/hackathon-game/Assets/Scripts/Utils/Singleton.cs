@@ -3,38 +3,26 @@ using UnityEngine;
 public abstract class Singleton<T> : MonoBehaviour where T : MonoBehaviour
 {
     private static T _instance;
-    private static readonly object _lock = new object();
-    private static bool _applicationIsQuitting = false;
-
     public static T Instance
     {
         get
         {
-            if (_applicationIsQuitting)
+            if (_instance == null)
             {
-                Debug.LogWarning($"[Singleton] Instance '{typeof(T)}' already destroyed. Returning null.");
-                return null;
-            }
+                // Search for existing instance
+                _instance = (T)FindObjectOfType(typeof(T));
 
-            lock (_lock)
-            {
+                // Create new instance if one doesn't already exist
                 if (_instance == null)
                 {
-                    // Search for existing instance
-                    _instance = (T)FindObjectOfType(typeof(T));
-
-                    // Create new instance if one doesn't already exist
-                    if (_instance == null)
-                    {
-                        // Create new GameObject
-                        GameObject singletonObject = new GameObject();
-                        _instance = singletonObject.AddComponent<T>();
-                        singletonObject.name = $"{typeof(T)} (Singleton)";
-                    }
+                    // Create new GameObject
+                    GameObject singletonObject = new GameObject();
+                    _instance = singletonObject.AddComponent<T>();
+                    singletonObject.name = $"{typeof(T)} (Singleton)";
                 }
-
-                return _instance;
             }
+
+            return _instance;
         }
     }
 
@@ -49,8 +37,4 @@ public abstract class Singleton<T> : MonoBehaviour where T : MonoBehaviour
         _instance = this as T;
     }
 
-    protected virtual void OnDestroy()
-    {
-        _applicationIsQuitting = true;
-    }
 }

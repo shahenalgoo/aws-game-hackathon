@@ -53,7 +53,7 @@ public class PlayerHealth : MonoBehaviour
 
         if (_currentHealth <= 0)
         {
-            Die();
+            Die(true);
         }
     }
 
@@ -109,15 +109,18 @@ public class PlayerHealth : MonoBehaviour
 
     }
 
-
-    private void Die()
+    public void Die(bool shatter)
     {
         DisablePlayer();
 
-        // Shatter Effect
-        GetComponent<PlayerFracture>().Shatter();
-
         // Stop time count
         GameManager.Instance.CanCountTime = false;
+
+        // Shatter Effect
+        if (shatter) GetComponent<PlayerFracture>().Shatter();
+
+        // Trigger Death Panel
+        StartCoroutine(UIManager.Instance.DeathPanelSetup());
+
     }
 }
