@@ -51,11 +51,6 @@ public class GameManager : MonoBehaviour
         HUDManager._lootUpdater?.Invoke(_lootCollected);
     }
 
-    public void RestartScene()
-    {
-        SceneManager.LoadScene(0);
-    }
-
     public void TimeCounter()
     {
         _gameTimer += Time.deltaTime;

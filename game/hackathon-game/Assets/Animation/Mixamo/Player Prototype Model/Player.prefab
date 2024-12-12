@@ -608,7 +608,7 @@ MonoBehaviour:
   _isRunning: 0
   _lookYOffset: 0.906
   _isDashing: 0
-  _dashDistance: 5.72
+  _dashDistance: 5.75
   _dashSpeed: 21
   _dashTime: 0.25
   _canDash: 1

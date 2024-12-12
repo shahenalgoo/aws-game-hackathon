@@ -4,6 +4,7 @@ using UnityEngine.UI;
 public class Minimap : MonoBehaviour
 {
     [SerializeField] private RectTransform minimapContainer; // Assign your container in inspector
+    public RectTransform MinimapContainer { get { return minimapContainer; } }
     [SerializeField] private GameObject cellPrefab; // Create a prefab with a RawImage component
     [SerializeField] private Color backgroundColor = Color.black;
     [SerializeField] private Color pathColor = Color.white;
@@ -21,6 +22,8 @@ public class Minimap : MonoBehaviour
 
     public void ToggleMap()
     {
+        if (Time.timeScale == 0) return;
+
         minimapContainer.gameObject.SetActive(!minimapContainer.gameObject.activeSelf);
     }
 
