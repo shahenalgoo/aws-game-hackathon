@@ -320,6 +320,9 @@ MonoBehaviour:
   laserLength: 50
   laserWidth: 0.03
   laserColor: {r: 0, g: 1, b: 1, a: 0.2509804}
+  layersToHit:
+    serializedVersion: 2
+    m_Bits: 151
 --- !u!1 &2548712664724357186
 GameObject:
   m_ObjectHideFlags: 0
@@ -783,8 +786,8 @@ MonoBehaviour:
   - m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
-        m_MethodName: RestartScene
+        m_TargetAssemblyTypeName: UIManager, Assembly-CSharp
+        m_MethodName: RestartLevel
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -836,6 +839,10 @@ MonoBehaviour:
       m_Calls: []
     m_ActionId: bf41591a-4099-4e45-adc5-3b6e2d8ee666
     m_ActionName: PlayerControls/PauseGame[/Keyboard/p,/Keyboard/escape]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: a48e6d6e-2176-4576-abc4-a754d17a7c47
+    m_ActionName: UIControls/PauseGame[/Keyboard/p,/Keyboard/escape]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: PlayerControls
@@ -3421,12 +3428,17 @@ PrefabInstance:
     - target: {fileID: 1599673993215271259, guid: f8ecb0bb037144428b5baecf7f4c67bd,
         type: 3}
       propertyPath: m_Name
-      value: ReloadBarCanvas
+      value: WorldSpaceCanvas
       objectReference: {fileID: 0}
     - target: {fileID: 1599673993215271259, guid: f8ecb0bb037144428b5baecf7f4c67bd,
         type: 3}
       propertyPath: m_Layer
       value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 3012384617359414146, guid: f8ecb0bb037144428b5baecf7f4c67bd,
+        type: 3}
+      propertyPath: m_AdditionalShaderChannelsFlag
+      value: 25
       objectReference: {fileID: 0}
     - target: {fileID: 4445272923750632068, guid: f8ecb0bb037144428b5baecf7f4c67bd,
         type: 3}

@@ -6,7 +6,7 @@ public class GunLaser : MonoBehaviour
     public float laserLength = 50f;
     public float laserWidth = 0.02f;
     public Color laserColor = Color.red;
-    private LayerMask layerMask;
+    [SerializeField] private LayerMask layersToHit;
     private bool isLaserEnabled = true;
 
     void Start()
@@ -18,14 +18,6 @@ public class GunLaser : MonoBehaviour
         laserLine.startColor = laserColor;
         laserLine.endColor = laserColor;
         laserLine.positionCount = 2;
-
-        // Create a layer mask that ignores both InvisibleWall and Particle layers
-        int invisibleWallLayer = LayerMask.NameToLayer("InvisibleWall");
-        int dashBoosterLayer = LayerMask.NameToLayer("Particles");
-
-        // Create a layer mask that ignores the InvisibleWall layer
-        // layerMask = ~(1 << LayerMask.NameToLayer("InvisibleWall"));
-        layerMask = ~((1 << invisibleWallLayer) | (1 << dashBoosterLayer));
     }
 
     void Update()
@@ -45,7 +37,7 @@ public class GunLaser : MonoBehaviour
         Vector3 endPosition;
 
         RaycastHit hit;
-        if (Physics.Raycast(startPosition, transform.right, out hit, laserLength, layerMask))
+        if (Physics.Raycast(startPosition, transform.right, out hit, laserLength, layersToHit))
         {
             endPosition = hit.point;
         }
