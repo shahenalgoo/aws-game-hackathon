@@ -1,10 +1,16 @@
 using System;
+using System.Collections;
 using UnityEngine;
 
 public class TargetController : MonoBehaviour
 {
     [SerializeField] private float _shootingDelayOnStart = 2f;
     [SerializeField] private float _detectionRadius = 10f;
+    [SerializeField] private float _meleeAttackRadius = 1.5f;
+    private bool _canMelee = true;
+    [SerializeField] private float _meleeCooldown = 2f;
+    [SerializeField] private Animator _meleeAnimator;
+
     [SerializeField] private float _fireRate = 5f; // Seconds between shots
     private float _cooldown = 0f;
     private bool _canShoot = false;
@@ -45,7 +51,7 @@ public class TargetController : MonoBehaviour
 
         if (_canShoot)
         {
-            if (CheckPlayerDistance()) ShootPlayer();
+            if (CheckPlayerDistance(_detectionRadius)) ShootPlayer();
         }
         else
         {
@@ -55,6 +61,12 @@ public class TargetController : MonoBehaviour
             {
                 ActivateShooting();
             }
+        }
+
+        // Check for melee attack
+        if (_canMelee && CheckPlayerDistance(_meleeAttackRadius))
+        {
+            TriggerMeleeAttack();
         }
     }
 
@@ -73,10 +85,10 @@ public class TargetController : MonoBehaviour
         _targetBarrel.transform.rotation = Quaternion.Slerp(_targetBarrel.transform.rotation, targetRotation, _rotationSpeed * Time.deltaTime);
     }
 
-    bool CheckPlayerDistance()
+    bool CheckPlayerDistance(float minDistance)
     {
         float distanceToPlayer = Vector3.Distance(transform.position, _player.position);
-        return distanceToPlayer <= _detectionRadius;
+        return distanceToPlayer <= minDistance;
     }
 
     void ShootPlayer()
@@ -87,10 +99,20 @@ public class TargetController : MonoBehaviour
         _canShoot = false;
     }
 
-    // void OnTriggerEnter(Collider other)
-    // {
-    //     Debug.Log("Hit Player");
-    // }
+    void TriggerMeleeAttack()
+    {
+        Debug.Log("Triggered");
+        _canMelee = false;
+        _meleeAnimator.Play("SpinAttack");
+        StartCoroutine(ResetMelee());
+
+    }
+
+    private IEnumerator ResetMelee()
+    {
+        yield return new WaitForSeconds(_meleeCooldown);
+        _canMelee = true;
+    }
 
     // Optional: Visualize the detection radius in the editorß
     void OnDrawGizmosSelected()

@@ -299,6 +299,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _shootingDelayOnStart: 1
   _detectionRadius: 18
+  _meleeAttackRadius: 2
+  _meleeCooldown: 2
+  _meleeAnimator: {fileID: 1545109240572908878}
   _fireRate: 4
   _rotationSpeed: 10
   _bulletSpawnPoint: {fileID: 6406464155250682650}

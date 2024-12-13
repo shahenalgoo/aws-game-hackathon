@@ -22,7 +22,7 @@ public class DefaultUISelection : MonoBehaviour
     {
         if (EventSystem.current != null && gameObject.activeInHierarchy)
         {
-            Debug.Log("event system exists");
+            // Debug.Log("event system exists");
             EventSystem.current.firstSelectedGameObject = gameObject;
             gameObject.GetComponent<Button>().Select();
         }
@@ -33,7 +33,7 @@ public class DefaultUISelection : MonoBehaviour
     {
         if (EventSystem.current && EventSystem.current.currentSelectedGameObject == gameObject)
         {
-            Debug.Log("set selected null");
+            // Debug.Log("set selected null");
 
             EventSystem.current.firstSelectedGameObject = null;
         }
