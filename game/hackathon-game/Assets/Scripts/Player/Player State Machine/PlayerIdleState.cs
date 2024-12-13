@@ -28,6 +28,12 @@ public class PlayerIdleState : PlayerBaseState
         {
             Ctx.CharController.Move(Physics.gravity * Time.deltaTime);
         }
+        else
+        {
+            Ctx.CharController.Move(Vector3.zero * Time.deltaTime);
+        }
+
+        // Apply force to move with collisions
 
         CheckSwitchStates();
 

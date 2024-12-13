@@ -29,10 +29,7 @@ public class HealthBar : MonoBehaviour
         canvas.renderMode = RenderMode.WorldSpace;
 
         // Set initial scale of the canvas to be small enough to fit your world
-        canvas.transform.localScale = new Vector3(0.01f, 0.01f, 0.01f);
-
-        // Set fixed rotation of -45 degrees on Y axis
-        // canvas.transform.rotation = Quaternion.Euler(0, -45, 0);
+        canvas.transform.localScale = new Vector3(0.02f, 0.02f, 0.02f);
 
         // Hide health bar initially
         canvas.enabled = false;

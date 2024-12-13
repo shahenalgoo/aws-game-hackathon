@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class TargetController : MonoBehaviour
@@ -6,20 +7,20 @@ public class TargetController : MonoBehaviour
     [SerializeField] private float _detectionRadius = 10f;
     [SerializeField] private float _fireRate = 5f; // Seconds between shots
     private float _cooldown = 0f;
-    private float _nextFireTime;
     private bool _canShoot = false;
     private Transform _player;
+    public Transform Player { get { return _player; } set { _player = value; } }
     private PlayerHealth _playerHealth;
     [SerializeField] private float _rotationSpeed = 5f;
     [SerializeField] private GameObject _bulletSpawnPoint;
+    [SerializeField] private GameObject _targetBarrel;
+    public GameObject TargetBarrel => _targetBarrel;
 
     void Start()
     {
-        // FindPlayer();
         Invoke("FindPlayer", _shootingDelayOnStart / 2);
         Invoke("ActivateShooting", _shootingDelayOnStart);
     }
-
     void FindPlayer()
     {
         _player = GameObject.FindGameObjectWithTag("Player").transform;
@@ -60,14 +61,16 @@ public class TargetController : MonoBehaviour
     void LookAtPlayer()
     {
         // Calculate direction to player
-        Vector3 directionToPlayer = _player.position - transform.position;
+        // Vector3 playerPos = _player.position + new Vector3(0, 1f, 0);
+        // Vector3 directionToPlayer = playerPos - _targetBarrel.transform.position;
+        Vector3 directionToPlayer = _player.position - _targetBarrel.transform.position;
         directionToPlayer.y = 0; // Keep rotation only on Y axis if this is a ground unit
 
         // Create the rotation we want to achieve
         Quaternion targetRotation = Quaternion.LookRotation(directionToPlayer);
 
         // Smoothly rotate towards the player
-        transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, _rotationSpeed * Time.deltaTime);
+        _targetBarrel.transform.rotation = Quaternion.Slerp(_targetBarrel.transform.rotation, targetRotation, _rotationSpeed * Time.deltaTime);
     }
 
     bool CheckPlayerDistance()
@@ -79,14 +82,15 @@ public class TargetController : MonoBehaviour
     void ShootPlayer()
     {
         // Convert the direction into a rotation
-        Quaternion bulletRotation = Quaternion.LookRotation(transform.forward);
-
-        // Vector3 direction = (player.position - firePoint.position).normalized;
-        Vector3 spawnPos = new Vector3(transform.position.x, _player.transform.position.y, transform.position.z);
+        Quaternion bulletRotation = Quaternion.LookRotation(_targetBarrel.transform.forward);
         TargetBulletManager._bulletSpawner?.Invoke(_bulletSpawnPoint.transform.position, bulletRotation);
-        // _nextFireTime = Time.time + _fireRate;
         _canShoot = false;
     }
+
+    // void OnTriggerEnter(Collider other)
+    // {
+    //     Debug.Log("Hit Player");
+    // }
 
     // Optional: Visualize the detection radius in the editorß
     void OnDrawGizmosSelected()
