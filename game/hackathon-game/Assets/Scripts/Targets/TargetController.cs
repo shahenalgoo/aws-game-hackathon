@@ -8,8 +8,10 @@ public class TargetController : MonoBehaviour
     [SerializeField] private float _detectionRadius = 10f;
     [SerializeField] private float _meleeAttackRadius = 1.5f;
     private bool _canMelee = true;
+    public bool CanMelee => _canMelee;
     [SerializeField] private float _meleeCooldown = 2f;
     [SerializeField] private Animator _meleeAnimator;
+    public Animator MeleeAnimator => _meleeAnimator;
 
     [SerializeField] private float _fireRate = 5f; // Seconds between shots
     private float _cooldown = 0f;
@@ -20,12 +22,14 @@ public class TargetController : MonoBehaviour
     [SerializeField] private float _rotationSpeed = 5f;
     [SerializeField] private GameObject _bulletSpawnPoint;
     [SerializeField] private GameObject _targetBarrel;
+    [SerializeField] private GameObject _meleeObject;
     public GameObject TargetBarrel => _targetBarrel;
 
     void Start()
     {
         Invoke("FindPlayer", _shootingDelayOnStart / 2);
         Invoke("ActivateShooting", _shootingDelayOnStart);
+        _meleeObject.SetActive(false);
     }
     void FindPlayer()
     {
@@ -101,17 +105,18 @@ public class TargetController : MonoBehaviour
 
     void TriggerMeleeAttack()
     {
-        Debug.Log("Triggered");
         _canMelee = false;
         _meleeAnimator.Play("SpinAttack");
         StartCoroutine(ResetMelee());
-
+        _meleeObject.SetActive(true);
     }
 
     private IEnumerator ResetMelee()
     {
         yield return new WaitForSeconds(_meleeCooldown);
         _canMelee = true;
+        _meleeObject.SetActive(false);
+
     }
 
     // Optional: Visualize the detection radius in the editorß
