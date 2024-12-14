@@ -26,9 +26,6 @@ public class PlayerReloadState : PlayerBaseState
             // Reward with ammo
             Ctx.Gun.ReloadMag();
 
-            // Check fight mode
-            Ctx.CheckFightMode(false);
-
             // exit state
             ExitState();
         }
@@ -36,6 +33,10 @@ public class PlayerReloadState : PlayerBaseState
 
     public override void ExitState()
     {
+
+        // Check fight mode
+        Ctx.CheckFightMode(false);
+
         Ctx.CharacterAnimator.SetBool("isReloading", false);
         Ctx.IsReloading = false;
         Ctx.ReloadAttempt = false;

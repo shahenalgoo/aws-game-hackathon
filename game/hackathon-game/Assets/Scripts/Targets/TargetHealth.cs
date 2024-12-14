@@ -11,16 +11,19 @@ public class TargetHealth : MonoBehaviour
     private HealthBar healthBar;
 
     // Reference to the health bar prefab
-    [SerializeField] private GameObject healthBarPrefab;
+    [SerializeField] private GameObject _healthBarPrefab;
     // Offset for health bar position
-    [SerializeField] private Vector3 healthBarOffset = new Vector3(0, 2f, 0);
+    [SerializeField] private Vector3 _healthBarOffset = new Vector3(0, 2f, 0);
 
-    [SerializeField] private float fadeOutDuration = 2f;
-    private MeshRenderer[] meshRenderers;
+    [SerializeField] private float _fadeOutDuration = 2f;
+    private MeshRenderer[] _meshRenderers;
+
+    [SerializeField] private GameObject _deathVfxObj;
+
 
     public void Start()
     {
-        meshRenderers = GetComponentsInChildren<MeshRenderer>();
+        _meshRenderers = GetComponentsInChildren<MeshRenderer>();
         _currentHealth = _maxHealth;
 
         // Spawn the health bar
@@ -30,7 +33,7 @@ public class TargetHealth : MonoBehaviour
     private void CreateHealthBar()
     {
         // Instantiate the health bar prefab as a child of this object
-        GameObject healthBarObject = Instantiate(healthBarPrefab, transform.position + healthBarOffset, Quaternion.Euler(0, -45, 0), transform);
+        GameObject healthBarObject = Instantiate(_healthBarPrefab, transform.position + _healthBarOffset, Quaternion.Euler(0, -45, 0), transform);
 
         // Get the HealthBar component
         healthBar = healthBarObject.GetComponent<HealthBar>();
@@ -76,6 +79,7 @@ public class TargetHealth : MonoBehaviour
         }
 
         // Play VFX
+        _deathVfxObj.SetActive(true);
 
         // Play SFX
 
@@ -116,10 +120,10 @@ public class TargetHealth : MonoBehaviour
         }
 
         // Fade out loop
-        while (elapsedTime < fadeOutDuration)
+        while (elapsedTime < _fadeOutDuration)
         {
             elapsedTime += Time.deltaTime;
-            float normalizedTime = elapsedTime / fadeOutDuration;
+            float normalizedTime = elapsedTime / _fadeOutDuration;
 
             // Update all materials
             for (int i = 0; i < allMaterials.Count; i++)
