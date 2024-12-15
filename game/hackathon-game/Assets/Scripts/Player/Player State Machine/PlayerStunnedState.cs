@@ -32,8 +32,10 @@ public class PlayerStunnedState : PlayerBaseState
     }
     public override void UpdateState()
     {
-        // Track move direction in case of dash
-        // Ctx.TrackMovement();
+        if (!Ctx.CharController.isGrounded)
+        {
+            Ctx.CharController.Move(Physics.gravity * Ctx.GravityMultiplier * Time.deltaTime);
+        }
 
         _counter += Time.deltaTime;
 

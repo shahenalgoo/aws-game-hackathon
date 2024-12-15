@@ -17,23 +17,20 @@ public class PlayerIdleState : PlayerBaseState
 
     public override void UpdateState()
     {
-        // Track move direction in case of dash
-        // Ctx.TrackMovement();
-
         //should follow cursor if fight mode
         Ctx.AimGun?.Invoke();
 
         // Apply Gravity
         if (!Ctx.CharController.isGrounded)
         {
-            Ctx.CharController.Move(Physics.gravity * Time.deltaTime);
+            Ctx.CharController.Move(Physics.gravity * Ctx.GravityMultiplier * Time.deltaTime);
         }
         else
         {
+            // Apply force to move with collisions
             Ctx.CharController.Move(Vector3.zero * Time.deltaTime);
         }
 
-        // Apply force to move with collisions
 
         CheckSwitchStates();
 

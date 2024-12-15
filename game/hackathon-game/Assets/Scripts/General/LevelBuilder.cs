@@ -97,7 +97,7 @@ public class LevelBuilder : MonoBehaviour
         grid = resolver.FixIsolatedRegions(4, 0);
 
         // Initialize minimap
-        minimap2.Init(grid, tileSize);
+        // minimap2.Init(grid, tileSize);
 
         // Set up starting floor 
         Vector3 startingFloorPos = new Vector3(startingGrid.x * tileSize, yAdjustObject, startingGrid.y * tileSize);

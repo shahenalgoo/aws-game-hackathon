@@ -14,6 +14,9 @@ public class PlayerStateMachine : MonoBehaviour
     public Vector3 MovementInput { get { return _movementInput; } set { _movementInput = value; } }
     public Vector3 CursorPosition { get { return _cursorPosition; } set { _cursorPosition = value; } }
 
+    private float _gravityMultiplier = 1f;
+    public float GravityMultiplier { get { return _gravityMultiplier; } set { _gravityMultiplier = value; } }
+
 
     [Header("Movement variables")]
     [SerializeField] private Vector3 _moveDirection;

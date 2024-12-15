@@ -18,9 +18,6 @@ public class PlayerRunState : PlayerBaseState
 
     public override void UpdateState()
     {
-        // // Track move direction
-        // Ctx.TrackMovement();
-
         // Apply motion
         Vector3 moveVelocity = Ctx.MovementInput.normalized * Ctx.MoveSpeed;
         Ctx.CharController.Move(moveVelocity.ToIso() * Time.deltaTime);
@@ -28,7 +25,7 @@ public class PlayerRunState : PlayerBaseState
         // Return to ground, if ever we go up
         if (!Ctx.CharController.isGrounded)
         {
-            Ctx.CharController.Move(Physics.gravity * Time.deltaTime);
+            Ctx.CharController.Move(Physics.gravity * Ctx.GravityMultiplier * Time.deltaTime);
         }
 
         // should check fight mode in order to follow cursor or not
