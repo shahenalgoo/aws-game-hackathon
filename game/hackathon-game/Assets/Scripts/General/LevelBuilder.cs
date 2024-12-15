@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class LevelBuilder : MonoBehaviour
@@ -8,7 +9,9 @@ public class LevelBuilder : MonoBehaviour
     public int TileSize { get => tileSize; }
 
     [SerializeField] private GameObject[] levelObjects;
+    [SerializeField] private GameObject modifiedInvisibleWall;
 
+    private List<Vector2Int> modifiedWallsGridPos;
     [SerializeField] private GameObject exitArea;
     [SerializeField] private float yAdjustObject;
     [SerializeField] private float yAdjustTarget;
@@ -48,6 +51,17 @@ public class LevelBuilder : MonoBehaviour
         tileSize = (int)levelObjects[0].transform.localScale.x;
 
         grid = new int[,] {
+            {1, 0, 0, 1, 2, 1, 0, 0, 2, 1, 4, 1, 0, 0, 0, 0, 2, 1, 0, 0},
+            {0, 2, 3, 1, 0, 4, 1, 0, 0, 3, 0, 5, 1, 2, 1, 0, 0, 4, 0, 0},
+            {0, 1, 0, 2, 0, 1, 2, 1, 0, 1, 0, 0, 0, 0, 5, 6, 0, 1, 0, 0},
+            {0, 5, 0, 1, 0, 0, 0, 3, 0, 4, 1, 4, 1, 0, 0, 2, 1, 3, 1, 0},
+            {1, 0, 0, 6, 2, 1, 4, 1, 1, 0, 0, 0, 2, 0, 2, 1, 2, 0, 2, 1},
+            {1, 0, 0, 0, 0, 3, 0, 0, 2, 1, 5, 0, 0, 0, 0, 3, 5, 0, 0, 0},
+            {0, 2, 6, 4, 1, 1, 0, 0, 0, 2, 1, 6, 1, 2, 1, 1, 2, 5, 0, 0},
+            {1, 0, 3, 0, 0, 5, 1, 2, 0, 0, 0, 0, 0, 0, 3, 2, 0, 2, 0, 0},
+            {0, 0, 2, 2, 0, 0, 0, 1, 4, 1, 2, 5, 2, 0, 1, 0, 0, 0, 0, 0}
+
+
             // {0, 0, 0, 1, 2, 1, 0, 0, 2, 1, 4, 1, 0, 0, 0, 0, 2, 1, 0, 0},
             // {0, 2, 3, 1, 0, 4, 1, 0, 0, 3, 0, 5, 1, 2, 1, 0, 0, 4, 0, 0},
             // {0, 1, 0, 2, 0, 1, 2, 1, 0, 1, 0, 0, 0, 0, 5, 6, 0, 1, 0, 0},
@@ -57,15 +71,18 @@ public class LevelBuilder : MonoBehaviour
             // {0, 2, 6, 4, 1, 1, 0, 0, 0, 2, 1, 6, 1, 2, 1, 1, 2, 5, 0, 0},
             // {0, 0, 3, 0, 0, 5, 1, 2, 0, 0, 0, 0, 0, 0, 3, 2, 0, 2, 0, 0},
             // {0, 0, 2, 2, 0, 0, 0, 1, 4, 1, 2, 5, 2, 0, 1, 0, 0, 0, 0, 0}
-            { 0, 0, 0, 2, 4, 1, 0, 0, 0, 6, 2, 0, 0, 0, 1, 5, 1, 0, 2, 2 },
-            { 0, 1, 0, 1, 0, 2, 3, 1, 0, 3, 0, 0, 2, 1, 2, 0, 1, 2, 1, 0 },
-            { 0, 1, 0, 0, 0, 0, 0, 1, 4, 1, 0, 0, 1, 0, 0, 0, 0, 5, 0, 0 },
-            { 0, 1, 4, 1, 1, 0, 0, 0, 0, 2, 4, 1, 5, 0, 1, 3, 1, 2, 6, 0 },
-            { 1, 2, 0, 0, 5, 1, 3, 6, 0, 0, 0, 0, 1, 4, 2, 0, 0, 0, 2, 1 },
-            { 0, 0, 0, 0, 0, 0, 1, 5, 1, 5, 1, 0, 0, 0, 1, 3, 1, 0, 0, 0 },
-            { 0, 1, 4, 2, 0, 0, 0, 0, 2, 0, 1, 3, 1, 0, 0, 0, 2, 1, 0, 2 },
-            { 0, 0, 0, 3, 1, 2, 1, 0, 4, 0, 0, 0, 2, 4, 1, 0, 0, 5, 1, 1 },
-            { 0, 0, 0, 1, 0, 0, 2, 5, 6, 3, 2, 0, 0, 0, 2, 1, 0, 0, 2, 0 },
+
+
+
+            // { 0, 0, 0, 2, 4, 1, 0, 0, 0, 6, 2, 0, 0, 0, 1, 5, 1, 0, 2, 2 },
+            // { 0, 1, 0, 1, 0, 2, 3, 1, 0, 3, 0, 0, 2, 1, 2, 0, 1, 2, 1, 0 },
+            // { 0, 1, 0, 0, 0, 0, 0, 1, 4, 1, 0, 0, 1, 0, 0, 0, 0, 5, 0, 0 },
+            // { 0, 1, 4, 1, 1, 0, 0, 0, 0, 2, 4, 1, 5, 0, 1, 3, 1, 2, 6, 0 },
+            // { 1, 2, 0, 0, 5, 1, 3, 6, 0, 0, 0, 0, 1, 4, 2, 0, 0, 0, 2, 1 },
+            // { 0, 0, 0, 0, 0, 0, 1, 5, 1, 5, 1, 0, 0, 0, 1, 3, 1, 0, 0, 0 },
+            // { 0, 1, 4, 2, 0, 0, 0, 0, 2, 0, 1, 3, 1, 0, 0, 0, 2, 1, 0, 2 },
+            // { 0, 0, 0, 3, 1, 2, 1, 0, 4, 0, 0, 0, 2, 4, 1, 0, 0, 5, 1, 1 },
+            // { 0, 0, 0, 1, 0, 0, 2, 5, 6, 3, 2, 0, 0, 0, 2, 1, 0, 0, 2, 0 },
         };
 
         //     { 0, 0, 0, 2, 4, 1, 0, 0, 0, 6, 2, 0, 0, 0, 1, 5, 1, 0, 2, 7 },
@@ -93,8 +110,8 @@ public class LevelBuilder : MonoBehaviour
             grid[endGrid.x, endGrid.y] = 1;
         }
 
-        GridResolver resolver = new GridResolver(grid);
-        grid = resolver.FixIsolatedRegions(4, 0);
+        // GridResolver resolver = new GridResolver(grid);
+        // grid = resolver.FixIsolatedRegions(4, 0);
 
         // Initialize minimap
         // minimap2.Init(grid, tileSize);
@@ -161,6 +178,8 @@ public class LevelBuilder : MonoBehaviour
 
             }
         }
+
+        FixDiagonallyConnectedWalls();
     }
 
     public void Start()
@@ -197,6 +216,85 @@ public class LevelBuilder : MonoBehaviour
 
         if (extremeRowWallPos != Vector3.zero) CreateObject(levelObjects[0], extremeRowWallPos, Quaternion.identity);
         if (extremeColWallPos != Vector3.zero) CreateObject(levelObjects[0], extremeColWallPos, Quaternion.identity);
+    }
+
+    private void FixDiagonallyConnectedWalls()
+    {
+        // We could technically put the modified walls directly everywhere but this way minimizes the use of mesh colliders
+
+        modifiedWallsGridPos = new List<Vector2Int>();
+
+        // we skip rows and columns at extremities
+        for (int i = 1; i < grid.GetLength(0) - 1; i++)
+        {
+            for (int j = 1; j < grid.GetLength(1) - 1; j++)
+            {
+                //ignore void spaces
+                if (grid[i, j] == 0) continue;
+
+                // check left, top 
+                if (grid[i, j - 1] == 0 && grid[i - 1, j] == 0 && grid[i - 1, j - 1] != 0)
+                {
+                    ReplaceInvisibleWall(i, j - 1, 0f);
+                    ReplaceInvisibleWall(i - 1, j, 180f);
+                }
+
+                // check left, bottom
+                if (grid[i, j - 1] == 0 && grid[i + 1, j] == 0 && grid[i + 1, j - 1] != 0)
+                {
+                    ReplaceInvisibleWall(i, j - 1, 90f);
+                    ReplaceInvisibleWall(i + 1, j, -90f);
+                }
+
+                // check right, top
+                if (grid[i, j + 1] == 0 && grid[i - 1, j] == 0 && grid[i - 1, j + 1] != 0)
+                {
+                    ReplaceInvisibleWall(i, j + 1, -90f);
+                    ReplaceInvisibleWall(i - 1, j, 90f);
+                }
+
+                // check right, bottom
+                if (grid[i, j + 1] == 0 && grid[i + 1, j] == 0 && grid[i + 1, j + 1] != 0)
+                {
+                    ReplaceInvisibleWall(i, j + 1, 180f);
+                    ReplaceInvisibleWall(i + 1, j, 0f);
+                }
+            }
+        }
+    }
+
+    private void ReplaceInvisibleWall(int row, int col, float rotation)
+    {
+        // replace if not already replaced
+        if (modifiedWallsGridPos.Contains(new Vector2Int(row, col)))
+        {
+            // Debug.Log("Already replaced at grid pos: [" + row + ", " + col + "]");
+            return;
+        }
+
+        // Debug.Log("Need to replace at grid pos: [" + row + ", " + col + "]");
+        Vector3 worldPos = new Vector3(row * tileSize, 0, col * tileSize);
+        GameObject invisibleWall = FindObjectAtPosition(worldPos);
+        // replace if found
+        if (invisibleWall != null)
+        {
+            Destroy(invisibleWall);
+            Quaternion rot = Quaternion.Euler(0, rotation, 0);
+            GameObject modifiedWall = CreateObject(modifiedInvisibleWall, worldPos, rot);
+
+            // keep record
+            modifiedWallsGridPos.Add(new Vector2Int(row, col));
+        }
+
+    }
+    public GameObject FindObjectAtPosition(Vector3 position, float radius = 0.1f)
+    {
+        Collider[] hitColliders = Physics.OverlapSphere(position, radius);
+        if (hitColliders.Length > 0)
+        {
+            return hitColliders[0].gameObject;
+        }
+        return null;
     }
 
     private GameObject CreateObject(GameObject prefab, Vector3 position, Quaternion rotation)

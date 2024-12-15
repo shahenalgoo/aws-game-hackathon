@@ -252,6 +252,8 @@ MonoBehaviour:
   - {fileID: 1984354046806001452, guid: 24e1f9b9dde144ebf88ade63e2ef4a74, type: 3}
   - {fileID: 7623388368473963989, guid: 0b2d71264925743359cf50eba0cdf112, type: 3}
   - {fileID: 1378970538917373638, guid: db4a3d752c4e04eda8db98f44fc65b97, type: 3}
+  modifiedInvisibleWall: {fileID: 1548405331545494401, guid: 9018f4ed513e147b88a09a11a6a2b814,
+    type: 3}
   exitArea: {fileID: 4426621991517509651, guid: a2383c7d669a44c08be42ee7408983dd,
     type: 3}
   yAdjustObject: -1
