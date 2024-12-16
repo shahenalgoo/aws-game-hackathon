@@ -325,7 +325,7 @@ MonoBehaviour:
   _healthBarPrefab: {fileID: 4246624257137828755, guid: fdb2145bbcd774fa29c12c723601f96f,
     type: 3}
   _healthBarOffset: {x: 0, y: 2.5, z: 0}
-  _fadeOutDuration: 2
+  _fadeOutDuration: 1
   _deathVfxObj: {fileID: 2228542044696592537}
 --- !u!65 &114188347528563265
 BoxCollider:

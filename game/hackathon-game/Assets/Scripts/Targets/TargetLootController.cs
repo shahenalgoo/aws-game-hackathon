@@ -7,6 +7,9 @@ public class TargetLootController : MonoBehaviour
     private Transform player;
     private bool isBeingPulled = false;
 
+    [SerializeField] private ParticleSystem _lootCollectVFX;
+    [SerializeField] private GameObject _trails;
+
     private void Start()
     {
         // Get reference to the player - assuming there's only one player with "Player" tag
@@ -23,14 +26,21 @@ public class TargetLootController : MonoBehaviour
             if (!isBeingPulled && distanceToPlayer <= magneticRange)
             {
                 isBeingPulled = true;
+
+                // activate trails
+                _trails.SetActive(true);
+
+                // stop hovering
+                GetComponent<Animator>().Play("Stop");
             }
 
             // If being pulled, continue pulling regardless of distance
             if (isBeingPulled)
             {
                 Vector3 targetPosition = player.position + new Vector3(0, 1, 0); // Slightly above player
-                transform.position = Vector3.MoveTowards(
-                    transform.position,
+                transform.parent.LookAt(targetPosition);
+                transform.parent.position = Vector3.MoveTowards(
+                    transform.parent.position,
                     targetPosition,
                     moveSpeed * Time.deltaTime
                 );
@@ -42,6 +52,12 @@ public class TargetLootController : MonoBehaviour
         if (other.gameObject.CompareTag("Player"))
         {
             GameManager.Instance.IncrementLoot();
+
+            _lootCollectVFX.transform.parent = null;
+            _lootCollectVFX.Play();
+            // Spawn VFX
+            // Instantiate(GameManager.Instance.LootCollectVFX, transform.position, Quaternion.identity);
+
             Destroy(gameObject);
         }
     }

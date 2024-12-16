@@ -5,21 +5,22 @@ public class GameManager : MonoBehaviour
 {
     // Static instance of GameManager which allows it to be accessed by any other script
     public static GameManager Instance { get; private set; }
-    public GameObject _targetLoot;
-    public GameObject TargetLoot { get { return _targetLoot; } }
-    [SerializeField] private int _lootCollected;
-    public int LootCollected { get { return _lootCollected; } }
 
+    [Header("TARGET & REWARD LOOT")]
     [SerializeField] private int _totalTargets;
     public int TotalTargets { get { return _totalTargets; } set { _totalTargets = value; } }
+    [SerializeField] private int _lootCollected;
+    public int LootCollected { get { return _lootCollected; } }
+    [SerializeField] private GameObject _targetLoot;
+    public GameObject TargetLoot { get { return _targetLoot; } }
 
-
+    [Header("TIMER")]
     [SerializeField] private bool _canCountTime = true;
     public bool CanCountTime { get { return _canCountTime; } set { _canCountTime = value; } }
     public float GameTimer { get { return _gameTimer; } }
     [SerializeField] private float _gameTimer;
 
-
+    [Header("PLAYER OPTIONS")]
     [SerializeField] private bool _usePlayerEntranceAnimation;
     public bool UsePlayerEntranceAnimation { get => _usePlayerEntranceAnimation; }
 
