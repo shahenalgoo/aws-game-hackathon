@@ -1,36 +1,22 @@
-"use client";
+import Login from "@/components/auth/login";
 
-import { Button } from "@/components/ui/button";
-import { useSession } from "next-auth/react";
-import { signOut } from "next-auth/react";
+// const fetchTestApi = async () => {
+// 	const res = await fetch("http://localhost:3000/api/test");
+// 	return await res.json();
+// };
 
-export default function Home() {
+export default async function Home() {
 
-	const { data: session } = useSession();
-
-	const handleSignIn = async (provider: string) => {
-		window.open(
-			`/auth-social/${provider}`,
-			"popup",
-			"width=600,height=600"
-		);
-	};
+	// const data = await fetchTestApi();
+	// console.log(data);
 
 
 	return (
 		<div>
-			Hello {session?.user?.name} <br />
-			<Button
-				onClick={() => handleSignIn("github")}
-			>
-				Sign in with Github
-			</Button>
+			<Login />
+			<hr className="my-4" />
 
-			<Button
-				onClick={() => signOut()}
-			>
-				Sign Out
-			</Button>
+			{/* <p>{data[0].name}</p> */}
 		</div>
 	);
 }
