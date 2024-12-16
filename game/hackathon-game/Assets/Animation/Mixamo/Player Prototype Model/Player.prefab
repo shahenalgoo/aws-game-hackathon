@@ -657,7 +657,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Actions: {fileID: -944628639613478452, guid: 3e83a95d2167661408d29ff08c94b38b,
+  m_Actions: {fileID: -944628639613478452, guid: 79b3885967c3e48758da7231b2ec42ec,
     type: 3}
   m_NotificationBehavior: 2
   m_UIInputModule: {fileID: 0}
@@ -685,8 +685,8 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-    m_ActionId: 479c37f8-ea75-481a-b334-9749adfa3eef
-    m_ActionName: PlayerControls/Move[/Keyboard/w,/Keyboard/s,/Keyboard/a,/Keyboard/d]
+    m_ActionId: 6214967d-6d67-4918-8bf9-0ef88c70e18d
+    m_ActionName: Gameplay/Move[/Keyboard/w,/Keyboard/s,/Keyboard/a,/Keyboard/d]
   - m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 4269175703655125022}
@@ -701,8 +701,8 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-    m_ActionId: 7794ec46-97f7-4503-a8f5-1935edda46aa
-    m_ActionName: PlayerControls/Look[/Mouse/position]
+    m_ActionId: ab2b9306-98ae-4a14-9f10-e3bfd191bd99
+    m_ActionName: Gameplay/Look[/Mouse/position]
   - m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 4269175703655125022}
@@ -717,8 +717,8 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-    m_ActionId: 6a0b014f-57fc-457d-bb87-69a547a4ec3a
-    m_ActionName: PlayerControls/AimRightStick
+    m_ActionId: 0eb395f3-dc58-4672-b45c-42e3a42786ab
+    m_ActionName: Gameplay/AimRightStick
   - m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 4269175703655125022}
@@ -733,24 +733,8 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-    m_ActionId: e11e7974-ca8b-4efb-b9c0-d6fdd22346f4
-    m_ActionName: PlayerControls/Dash[/Keyboard/space,/DualShock4GamepadHID/buttonEast,/DualShock4GamepadHID/leftShoulder]
-  - m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 4269175703655125022}
-        m_TargetAssemblyTypeName: PlayerStateMachine, Assembly-CSharp
-        m_MethodName: GetAutomaticShootInput
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-    m_ActionId: f7f1b5b4-8cf3-4756-822a-e9dad262ba06
-    m_ActionName: PlayerControls/Shoot[/Mouse/leftButton,/DualShock4GamepadHID/rightTrigger]
+    m_ActionId: f4004eb5-c21f-4bc8-b744-95494abcb6b6
+    m_ActionName: Gameplay/Dash[/Keyboard/space]
   - m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 4269175703655125022}
@@ -765,8 +749,24 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-    m_ActionId: d76203aa-2532-4dcc-a021-d2b05b74438b
-    m_ActionName: PlayerControls/Reload[/Keyboard/r,/DualShock4GamepadHID/buttonWest]
+    m_ActionId: 86100ccc-1091-46fd-81a3-ffe230ec1e59
+    m_ActionName: Gameplay/Reload[/Keyboard/r,/Mouse/middleButton]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 4269175703655125022}
+        m_TargetAssemblyTypeName: PlayerStateMachine, Assembly-CSharp
+        m_MethodName: GetAutomaticShootInput
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 3aac9afe-b55d-4819-bffb-8b972f6a166c
+    m_ActionName: Gameplay/ShootAuto[/Mouse/leftButton]
   - m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 4269175703655125022}
@@ -781,8 +781,8 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-    m_ActionId: 1cf7c90d-1dce-4a64-90ac-c5d9e87c025e
-    m_ActionName: PlayerControls/Dash1[/Keyboard/space,/DualShock4GamepadHID/buttonEast,/DualShock4GamepadHID/leftShoulder]
+    m_ActionId: 9ce468f4-c9db-4477-970a-86e91af307fd
+    m_ActionName: Gameplay/ShootSingle[/Mouse/leftButton]
   - m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 0}
@@ -797,8 +797,8 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-    m_ActionId: 13310613-515f-4fc2-b1e0-22852c1df765
-    m_ActionName: PlayerControls/Restart[/Keyboard/backslash]
+    m_ActionId: d75b0397-848b-49c3-a50d-1f08b03c6970
+    m_ActionName: Gameplay/Restart
   - m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 4269175703655125022}
@@ -813,12 +813,8 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-    m_ActionId: 1b4c3949-8bef-4a16-a019-0fd440660591
-    m_ActionName: PlayerControls/AimRightClick[/Mouse/rightButton]
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: 8f690b18-a44d-4df9-a9f2-592ffb4609f5
-    m_ActionName: PlayerControls/ToggleMap[/Keyboard/m]
+    m_ActionId: 52783492-3b79-4de4-ba4b-bd8a0291019c
+    m_ActionName: Gameplay/AimRightClick[/Mouse/rightButton]
   - m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 4269175703655125022}
@@ -833,19 +829,59 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-    m_ActionId: 1ce44ecf-e358-4b0b-9614-7ffad286fe51
-    m_ActionName: PlayerControls/Interact[/Keyboard/e]
+    m_ActionId: ac0801e2-0d8c-4236-a5fb-4b6c119d5e7c
+    m_ActionName: Gameplay/Interact[/Keyboard/e]
   - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: bf41591a-4099-4e45-adc5-3b6e2d8ee666
-    m_ActionName: PlayerControls/PauseGame[/Keyboard/p,/Keyboard/escape]
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: UIManager, Assembly-CSharp
+        m_MethodName: GetPauseInput
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 7012f28d-6090-4573-b815-ea1228572cbb
+    m_ActionName: Gameplay/Pause[/Keyboard/p,/Keyboard/escape]
   - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: a48e6d6e-2176-4576-abc4-a754d17a7c47
-    m_ActionName: UIControls/PauseGame[/Keyboard/p,/Keyboard/escape]
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: Minimap, Assembly-CSharp
+        m_MethodName: ToggleMap
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 776e7f69-8deb-4c68-b5cd-03a326669e86
+    m_ActionName: Gameplay/ToggleMap[/Keyboard/m]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: UIManager, Assembly-CSharp
+        m_MethodName: GetPauseInput
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 8a34c5a7-4227-42b0-96e5-d1b93a316fa4
+    m_ActionName: UI/Pause[/Keyboard/p,/Keyboard/escape]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
-  m_DefaultActionMap: PlayerControls
+  m_DefaultActionMap: Gameplay
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
 --- !u!143 &2402740627835444363
@@ -3558,6 +3594,11 @@ PrefabInstance:
     - target: {fileID: 5557576774869220122, guid: f8ecb0bb037144428b5baecf7f4c67bd,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7323698466573877431, guid: f8ecb0bb037144428b5baecf7f4c67bd,
+        type: 3}
+      propertyPath: m_Interactable
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8250911735084760638, guid: f8ecb0bb037144428b5baecf7f4c67bd,
