@@ -64,6 +64,7 @@ public class Minimap : MonoBehaviour
         cellSize = tileSize;
         gridInstructions = gridData;
         gridDimensions = new Vector2Int(gridData.GetLength(0), gridData.GetLength(1));
+        player = GameObject.FindGameObjectWithTag("Player").transform;
         CreateGrid();
     }
 

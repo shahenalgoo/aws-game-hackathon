@@ -5,24 +5,28 @@ using UnityEngine.InputSystem;
 public class PlayerEntrance : MonoBehaviour
 {
     private Animator _animator;
-    [SerializeField] private InputActionAsset inputActions;
-    private InputActionMap _gameplayActions;
+    [SerializeField] private InputActionAsset _inputActions;
+    [SerializeField] private InputActionMap _gameplayActions;
     [SerializeField] private Transform _playerTransform;
-    [SerializeField] private CharacterController _characterController;
+
+    void Awake()
+    {
+        if (_inputActions == null) Debug.Log("input actions not found");
+        _gameplayActions = _inputActions.FindActionMap("Gameplay");
+        if (_gameplayActions == null) Debug.Log("action map not found");
+        // Disable player controls
+        _gameplayActions.Disable();
+    }
     void Start()
     {
+        if (!GameManager.Instance.UsePlayerEntranceAnimation)
+        {
+            _gameplayActions.Enable();
+            Destroy(gameObject);
+            return;
+        }
+
         if (_playerTransform == null) return;
-
-        // Disable player controls
-        _gameplayActions = inputActions.FindActionMap("PlayerControls");
-        _gameplayActions.Disable();
-
-        // set player as parent of this
-        _playerTransform.SetParent(transform);
-
-        // Set parent and position
-        _playerTransform.SetParent(transform);
-        _playerTransform.localPosition = Vector3.zero;
 
         // Go to hovering state
         _animator = _playerTransform.GetComponent<Animator>();
@@ -42,14 +46,17 @@ public class PlayerEntrance : MonoBehaviour
         yield return new WaitForSeconds(1.5f);
         _animator.Play("Idle");
         _gameplayActions.Enable();
+
         _playerTransform.GetComponent<PlayerStateMachine>().GravityMultiplier = 1;
         _playerTransform.SetParent(null);
+        LevelBuilder.Instance.InitializeMinimap();
 
         Destroy(gameObject);
     }
 
-    void Update()
+    void LateUpdate()
     {
+        if (!GameManager.Instance.UsePlayerEntranceAnimation) return;
         _playerTransform.transform.position = gameObject.transform.position;
     }
 }

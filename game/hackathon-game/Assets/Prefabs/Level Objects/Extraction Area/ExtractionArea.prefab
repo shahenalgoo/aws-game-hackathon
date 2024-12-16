@@ -178,7 +178,7 @@ GameObject:
   - component: {fileID: 7555523056876991107}
   - component: {fileID: 8403216081794517592}
   m_Layer: 6
-  m_Name: ExitArea
+  m_Name: ExtractionArea
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

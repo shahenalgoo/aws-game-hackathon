@@ -17,7 +17,7 @@ public class UIManager : Singleton<UIManager>
     [Header("Death Panel")]
     public GameObject _deathPanel;
     private bool _playerDied;
-    [SerializeField] private float _enableDeathPanelDelay = 4f;
+    [SerializeField] private float _enableDeathPanelDelay = 2f;
 
     [SerializeField] private PlayerStateMachine psm;
     [SerializeField] private Minimap map;
@@ -25,7 +25,7 @@ public class UIManager : Singleton<UIManager>
 
     public void Start()
     {
-        _gameplayActions = inputActions.FindActionMap("PlayerControls");
+        _gameplayActions = inputActions.FindActionMap("Gameplay");
     }
 
     public void TogglePauseGame()

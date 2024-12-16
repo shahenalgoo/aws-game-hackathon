@@ -20,6 +20,10 @@ public class GameManager : MonoBehaviour
     [SerializeField] private float _gameTimer;
 
 
+    [SerializeField] private bool _usePlayerEntranceAnimation;
+    public bool UsePlayerEntranceAnimation { get => _usePlayerEntranceAnimation; }
+
+
     private void Awake()
     {
         SingletonCheck();
