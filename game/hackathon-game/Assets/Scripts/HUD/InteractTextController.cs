@@ -29,7 +29,6 @@ public class InteractTextController : MonoBehaviour
         else
         {
             gameObject.SetActive(false);
-
         }
     }
 }
