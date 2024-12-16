@@ -88,6 +88,11 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8485019491354575222, guid: a2383c7d669a44c08be42ee7408983dd,
+        type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.84
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 7555523056876991107, guid: a2383c7d669a44c08be42ee7408983dd, type: 3}
     - {fileID: 8403216081794517592, guid: a2383c7d669a44c08be42ee7408983dd, type: 3}
@@ -232,8 +237,6 @@ MonoBehaviour:
   _cameraFollowTime: 2
   _litUpMaterial: {fileID: 2100000, guid: aab3d4633bda54ec98e14bdd9ffa3e46, type: 2}
   _vfx: {fileID: 359382240317802241}
-  _noticeTimeToDisappear: 2
-  _platformReadyNoticeText: {fileID: 0}
 --- !u!136 &1413455980903617615
 CapsuleCollider:
   m_ObjectHideFlags: 0

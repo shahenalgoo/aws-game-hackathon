@@ -82,6 +82,7 @@ public class ExtractionController : MonoBehaviour
     void CompleteLevel()
     {
         PlayerStateMachine psm = _player.GetComponent<PlayerStateMachine>();
+        psm.HoverTornado.SetActive(true);
         psm.CharacterAnimator.SetBool("isReloading", false);
         psm.ToggleRigAndWeapon(false);
         psm.CanDash = false;
