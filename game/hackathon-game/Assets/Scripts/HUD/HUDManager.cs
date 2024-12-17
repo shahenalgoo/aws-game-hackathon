@@ -2,6 +2,7 @@ using System;
 using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
+using System.Collections;
 
 public class HUDManager : MonoBehaviour
 {
@@ -14,6 +15,13 @@ public class HUDManager : MonoBehaviour
     public static Action<int> _ammoUpdater;
     public TextMeshProUGUI _ammoText;
     public TextMeshProUGUI _timerText;
+
+
+    [Header("Notice")]
+    [SerializeField] private TextMeshProUGUI _noticeText;
+    [SerializeField] private float _noticeTimeToDisappear = 2f;
+    public static Action<string> _noticeUpdater;
+
 
     // Health bar lerp settings
     private float _targetHealth;
@@ -28,6 +36,7 @@ public class HUDManager : MonoBehaviour
         _ammoUpdater += UpdateAmmoText;
         _targetHealthUpdater += SetTargetHealth;
         _maxHealthUpdater += SetMaxHealthBar;
+        _noticeUpdater += NotifyOnHUD;
     }
 
     void Update()
@@ -51,12 +60,12 @@ public class HUDManager : MonoBehaviour
     }
     public void UpdateLootText(int amount)
     {
-        _lootText.text = "Loot Collected: " + amount.ToString("N0") + "/" + GameManager.Instance.TotalTargets;
+        _lootText.text = "Stars Collected: " + amount.ToString("N0") + "/" + GameManager.Instance.TotalTargets;
     }
 
     public void UpdateAmmoText(int amount)
     {
-        _ammoText.text = "Ammo: " + amount.ToString("N0") + "/∞";
+        _ammoText.text = amount.ToString("N0");
     }
 
     public void UpdateTimerText(float amount)
@@ -98,6 +107,20 @@ public class HUDManager : MonoBehaviour
         _targetHealth = maxHealth;
     }
 
+
+    public void NotifyOnHUD(string message)
+    {
+        StopCoroutine(TurnNoticeOff());
+        _noticeText.gameObject.SetActive(true);
+        _noticeText.text = message;
+        StartCoroutine(TurnNoticeOff());
+    }
+    private IEnumerator TurnNoticeOff()
+    {
+        yield return new WaitForSeconds(_noticeTimeToDisappear);
+        _noticeText.gameObject.SetActive(false);
+    }
+
     private void OnDestroy()
     {
         // IMPORTANT: Unsubscribe from static events
@@ -105,6 +128,7 @@ public class HUDManager : MonoBehaviour
         _ammoUpdater -= UpdateAmmoText;
         _targetHealthUpdater -= SetTargetHealth;
         _maxHealthUpdater -= SetMaxHealthBar;
+        _noticeUpdater -= NotifyOnHUD;
     }
 
 }

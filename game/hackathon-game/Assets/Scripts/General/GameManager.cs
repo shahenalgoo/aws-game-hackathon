@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -54,6 +53,12 @@ public class GameManager : MonoBehaviour
     {
         _lootCollected++;
         HUDManager._lootUpdater?.Invoke(_lootCollected);
+
+        if (_lootCollected == _totalTargets)
+        {
+            // activate platform
+            LevelBuilder.Instance.ExtractionController.ActivatePlatform();
+        }
     }
 
     public void TimeCounter()

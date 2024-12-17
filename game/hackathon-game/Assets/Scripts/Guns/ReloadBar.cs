@@ -14,7 +14,7 @@ public class ReloadBar : MonoBehaviour
 
     private GameObject _player;
     private CanvasGroup _canvasGroup;
-    private float alphaOn = 0.8f;
+    private float alphaOn = 1f;
 
     public void Start()
     {

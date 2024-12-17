@@ -9,6 +9,7 @@ public class PlayerEntrance : MonoBehaviour
     [SerializeField] private InputActionMap _gameplayActions;
     [SerializeField] private Transform _playerTransform;
 
+    private PlayerStateMachine _psm;
     void Awake()
     {
         if (_inputActions == null) Debug.Log("input actions not found");
@@ -27,6 +28,10 @@ public class PlayerEntrance : MonoBehaviour
         }
 
         if (_playerTransform == null) return;
+
+        // Turn on hover tornado
+        _psm = _playerTransform.GetComponent<PlayerStateMachine>();
+        _psm.ToggleHoverTornado(true);
 
         // Go to hovering state
         _animator = _playerTransform.GetComponent<Animator>();
@@ -47,7 +52,10 @@ public class PlayerEntrance : MonoBehaviour
         _animator.Play("Idle");
         _gameplayActions.Enable();
 
-        _playerTransform.GetComponent<PlayerStateMachine>().GravityMultiplier = 1;
+        // Turn off hover tornado
+        _psm.ToggleHoverTornado(false);
+
+        _psm.GravityMultiplier = 1;
         _playerTransform.SetParent(null);
         LevelBuilder.Instance.InitializeMinimap();
 

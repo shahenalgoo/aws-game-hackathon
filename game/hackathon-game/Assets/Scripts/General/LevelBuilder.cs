@@ -18,10 +18,12 @@ public class LevelBuilder : MonoBehaviour
     private int[,] _grid;
     public int[,] Grid { get => _grid; }
 
-
     private Vector2Int _startingGrid = new Vector2Int(4, 0);
     private Vector2Int _endGrid = new Vector2Int(1, 1);
     public Minimap _minimap;
+
+    private ExtractionController _extractionController;
+    public ExtractionController ExtractionController { get { return _extractionController; } }
 
 
     private int _targetCounter;
@@ -69,7 +71,7 @@ public class LevelBuilder : MonoBehaviour
             { 0, 1, 0, 1, 0, 2, 3, 1, 0, 3, 0, 0, 2, 1, 2, 0, 1, 2, 1, 0 },
             { 0, 1, 0, 0, 0, 0, 0, 1, 4, 1, 0, 0, 1, 0, 0, 0, 0, 5, 0, 0 },
             { 0, 1, 4, 1, 1, 0, 0, 0, 0, 2, 4, 1, 5, 0, 1, 3, 1, 2, 6, 0 },
-            { 1, 2, 0, 0, 5, 1, 3, 6, 0, 0, 0, 0, 1, 4, 2, 0, 0, 0, 2, 1 },
+            { 1, 7, 0, 0, 5, 1, 3, 6, 0, 0, 0, 0, 1, 4, 2, 0, 0, 0, 2, 1 },
             { 0, 0, 0, 0, 0, 0, 1, 5, 1, 5, 1, 0, 0, 0, 1, 3, 1, 0, 0, 0 },
             { 0, 1, 4, 2, 0, 0, 0, 0, 2, 0, 1, 3, 1, 0, 0, 0, 2, 1, 0, 2 },
             { 0, 0, 0, 3, 1, 2, 1, 0, 4, 0, 0, 0, 2, 4, 1, 0, 0, 5, 1, 1 },
@@ -113,11 +115,9 @@ public class LevelBuilder : MonoBehaviour
 
         // Set up end floor
         Vector3 endFloorPos = new Vector3(_endGrid.x * _tileSize, _yAdjustObject, _endGrid.y * _tileSize);
-        CreateObject(levelObjects[1], endFloorPos, Quaternion.identity);
+        GameObject extractionArea = CreateObject(_extractionArea, endFloorPos, Quaternion.identity);
         AddWallInExtremity(_endGrid.x, _endGrid.y);
-        // add extraction area
-        Vector3 exitAreaPos = endFloorPos - new Vector3(0, _yAdjustObject, 0);
-        CreateObject(_extractionArea, exitAreaPos, Quaternion.identity);
+        _extractionController = extractionArea.GetComponentInChildren<ExtractionController>();
 
 
         // create 2d array for loop

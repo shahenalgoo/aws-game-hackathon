@@ -104,6 +104,10 @@ public class PlayerStateMachine : MonoBehaviour
     public CharacterController CharController { get { return _characterController; } set { _characterController = value; } }
     public Animator CharacterAnimator { get { return _characterAnimator; } set { _characterAnimator = value; } }
 
+    [SerializeField] private GameObject _hoverTornado;
+    public GameObject HoverTornado { get { return _hoverTornado; } }
+
+
 
     [Header("State Variables")]
     PlayerBaseState _currentState;
@@ -343,7 +347,6 @@ public class PlayerStateMachine : MonoBehaviour
 
         _weapon.GetComponent<MeshRenderer>().enabled = value;
 
-
     }
 
     public void AllowShootDelayed() => Invoke("AllowShoot", 0.1f);
@@ -362,6 +365,12 @@ public class PlayerStateMachine : MonoBehaviour
             _characterController.Move(_knockbackVelocity * Time.deltaTime);
             _knockbackVelocity = Vector3.Lerp(_knockbackVelocity, Vector3.zero, _knockbackRecoverySpeed * Time.deltaTime);
         }
+    }
+
+    // Toggle Hover Tornado
+    public void ToggleHoverTornado(bool value)
+    {
+        _hoverTornado.SetActive(value);
     }
 
     // Feed collision info to current state

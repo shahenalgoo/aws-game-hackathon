@@ -19,8 +19,10 @@ public class UIManager : Singleton<UIManager>
     private bool _playerDied;
     [SerializeField] private float _enableDeathPanelDelay = 2f;
 
-    [SerializeField] private PlayerStateMachine psm;
-    [SerializeField] private Minimap map;
+
+
+    [SerializeField] private PlayerStateMachine _psm;
+    [SerializeField] private Minimap _map;
 
 
     public void Start()
@@ -39,12 +41,12 @@ public class UIManager : Singleton<UIManager>
         if (_isPaused)
         {
             // disable map if active
-            if (map != null && map.MinimapContainer.gameObject.activeSelf) map.MinimapContainer.gameObject.SetActive(false);
+            if (_map != null && _map.MinimapContainer.gameObject.activeSelf) _map.MinimapContainer.gameObject.SetActive(false);
             // deactivate player controls
-            if (psm != null) _lastKnownCursorPosition = psm.CursorPosition;
+            if (_psm != null) _lastKnownCursorPosition = _psm.CursorPosition;
             _gameplayActions.Disable();
             Time.timeScale = 0;
-            if (psm != null) psm.CursorPosition = _lastKnownCursorPosition;
+            if (_psm != null) _psm.CursorPosition = _lastKnownCursorPosition;
 
 
         }
@@ -88,4 +90,5 @@ public class UIManager : Singleton<UIManager>
         Time.timeScale = 0;
         _deathPanel.SetActive(true);
     }
+
 }

@@ -5,7 +5,6 @@ public class HealthBar : MonoBehaviour
 {
     [SerializeField] private Slider slider;
     [SerializeField] private Canvas canvas;
-    private Camera mainCamera;
     private Quaternion _initialRotation; // Store the initial rotation
 
     // Lerp settings
@@ -23,13 +22,8 @@ public class HealthBar : MonoBehaviour
         // Store the initial rotation we want to maintain
         _initialRotation = transform.rotation;
 
-        mainCamera = Camera.main;
-
         // Ensure the canvas is set to world space
         canvas.renderMode = RenderMode.WorldSpace;
-
-        // Set initial scale of the canvas to be small enough to fit your world
-        // canvas.transform.localScale = new Vector3(0.01f, 0.01f, 0.01f);
 
         // Hide health bar initially
         canvas.enabled = false;

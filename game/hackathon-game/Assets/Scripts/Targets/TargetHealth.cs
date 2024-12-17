@@ -8,22 +8,20 @@ public class TargetHealth : MonoBehaviour
     [SerializeField] private int _maxHealth = 100;
     [SerializeField] private int _currentHealth;
     private bool _isDead;
-    private HealthBar healthBar;
+    [SerializeField] private HealthBar healthBar;
 
     // Reference to the health bar prefab
-    [SerializeField] private GameObject _healthBarPrefab;
-    // Offset for health bar position
-    [SerializeField] private Vector3 _healthBarOffset = new Vector3(0, 2f, 0);
+    // [SerializeField] private GameObject _healthBarPrefab;
+    // // Offset for health bar position
+    // [SerializeField] private Vector3 _healthBarOffset = new Vector3(0, 2f, 0);
 
     [SerializeField] private float _fadeOutDuration = 2f;
-    private MeshRenderer[] _meshRenderers;
 
     [SerializeField] private GameObject _deathVfxObj;
 
 
     public void Start()
     {
-        _meshRenderers = GetComponentsInChildren<MeshRenderer>();
         _currentHealth = _maxHealth;
 
         // Spawn the health bar
@@ -32,11 +30,11 @@ public class TargetHealth : MonoBehaviour
 
     private void CreateHealthBar()
     {
-        // Instantiate the health bar prefab as a child of this object
-        GameObject healthBarObject = Instantiate(_healthBarPrefab, transform.position + _healthBarOffset, Quaternion.Euler(0, -45, 0), transform);
+        // // Instantiate the health bar prefab as a child of this object
+        // GameObject healthBarObject = Instantiate(_healthBarPrefab, transform.position + _healthBarOffset, Quaternion.Euler(0, -45, 0), transform);
 
         // Get the HealthBar component
-        healthBar = healthBarObject.GetComponent<HealthBar>();
+        // healthBar = healthBarObject.GetComponent<HealthBar>();
 
         // Set the initial max health
         healthBar.SetMaxHealth(_maxHealth);
