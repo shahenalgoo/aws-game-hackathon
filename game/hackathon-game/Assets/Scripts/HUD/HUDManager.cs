@@ -60,12 +60,12 @@ public class HUDManager : MonoBehaviour
     }
     public void UpdateLootText(int amount)
     {
-        _lootText.text = "Loot Collected: " + amount.ToString("N0") + "/" + GameManager.Instance.TotalTargets;
+        _lootText.text = "Stars Collected: " + amount.ToString("N0") + "/" + GameManager.Instance.TotalTargets;
     }
 
     public void UpdateAmmoText(int amount)
     {
-        _ammoText.text = "Ammo: " + amount.ToString("N0") + "/∞";
+        _ammoText.text = amount.ToString("N0");
     }
 
     public void UpdateTimerText(float amount)

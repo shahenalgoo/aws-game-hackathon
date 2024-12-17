@@ -29,11 +29,11 @@ public class ExtractionController : MonoBehaviour
             {
 
                 PlayerStateMachine._interact += CompleteLevel;
-                InteractTextController._setInteractionText(true, "Press 'E' to Extract");
+                InteractTextController._setInteractionText(true, "Press 'E' to Extract (▲ or Y on Controller)");
             }
             else
             {
-                InteractTextController._setInteractionText(true, "Collect All Loot To Extract");
+                InteractTextController._setInteractionText(true, "Collect All Stars To Extract");
             }
         }
 
@@ -73,7 +73,7 @@ public class ExtractionController : MonoBehaviour
         // play sfx
 
         // let player know on hud
-        HUDManager._noticeUpdater?.Invoke("Extraction platform is ready");
+        HUDManager._noticeUpdater?.Invoke("The extraction platform is ready");
 
     }
 
