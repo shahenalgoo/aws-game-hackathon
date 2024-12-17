@@ -147,20 +147,9 @@ public class LevelBuilder : MonoBehaviour
                 Vector3 pos = new Vector3(i * _tileSize, _yAdjustObject, j * _tileSize);
                 GameObject obj = CreateObject(levelObjects[objectId], pos, Quaternion.identity);
 
-                // If a target
-                if (objectId == 2)
-                {
-                    // Add a floor underneath
-                    GameObject floor = CreateObject(levelObjects[1], pos, Quaternion.identity);
-
-
-                    // Adjust y of obj
-                    obj.transform.position = new Vector3(pos.x, _yAdjustTarget + _yAdjustObject, pos.z);
-                    obj.transform.SetParent(floor.transform);
-
-                    // Count targets
-                    if (objectId == 2) _targetCounter++;
-                }
+                // Count targets
+                if (objectId == 2) _targetCounter++;
+                
 
                 // If object is in extremity, Add wall in extreme row and column
                 if (i == 0 || i == _grid.GetLength(0) - 1 || j == 0 || j == _grid.GetLength(1) - 1) AddWallInExtremity(i, j);
