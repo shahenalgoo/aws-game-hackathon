@@ -187,11 +187,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Materials.Array.data[2]
       value: 
-      objectReference: {fileID: 2100000, guid: 001d59183f0edc94485b5ee7f749032e, type: 2}
+      objectReference: {fileID: 2100000, guid: aab3d4633bda54ec98e14bdd9ffa3e46, type: 2}
     - target: {fileID: 919132149155446097, guid: b6efa04b9e9c045bcb08e188fec76098,
         type: 3}
       propertyPath: m_Name
       value: ExtractionPad
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: b6efa04b9e9c045bcb08e188fec76098,
+        type: 3}
+      propertyPath: m_Layer
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: b6efa04b9e9c045bcb08e188fec76098,
         type: 3}
@@ -235,7 +240,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _flySpeed: 2.5
   _cameraFollowTime: 2
-  _litUpMaterial: {fileID: 2100000, guid: aab3d4633bda54ec98e14bdd9ffa3e46, type: 2}
   _vfx: {fileID: 359382240317802241}
 --- !u!136 &1413455980903617615
 CapsuleCollider:

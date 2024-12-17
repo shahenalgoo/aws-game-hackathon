@@ -10,7 +10,6 @@ public class ExtractionController : MonoBehaviour
     private GameObject _player;
     private CharacterController _playerCC;
 
-    [SerializeField] private Material _litUpMaterial;
     [SerializeField] private GameObject _vfx;
 
 
@@ -27,7 +26,6 @@ public class ExtractionController : MonoBehaviour
 
             if (GameManager.Instance.HasCollectedAll())
             {
-
                 PlayerStateMachine._interact += CompleteLevel;
                 InteractTextController._setInteractionText(true, "Press 'E' to Extract (▲ or Y on Controller)");
             }
@@ -61,12 +59,6 @@ public class ExtractionController : MonoBehaviour
 
     public void ActivatePlatform()
     {
-        // change the last material to the lit up one
-        MeshRenderer meshRenderer = GetComponent<MeshRenderer>();
-        Material[] materials = meshRenderer.materials;
-        materials[2] = _litUpMaterial;
-        meshRenderer.materials = materials;
-
         // activate vfx
         _vfx.SetActive(true);
 
