@@ -81,6 +81,9 @@ public class GunManager : MonoBehaviour
         // play muzzle flash
         _muzzleFlash.Play(true);
 
+        // play sfx
+        AudioManager.Instance.PlaySfx(AudioManager.Instance._gunshotSfx);
+
         // decrement ammo
         _currentAmmo--;
 
@@ -90,11 +93,22 @@ public class GunManager : MonoBehaviour
         // Update ui
         HUDManager._ammoUpdater?.Invoke(_currentAmmo);
 
+
         if (_fireStyle == FireType.Single) _player.IsShooting = false;
     }
 
     public void AllowNextShot() => _canShoot = true;
-    public bool CanReload() => _currentAmmo != _magSize;
+    public bool CanReload()
+    {
+        if (_currentAmmo == _magSize)
+        {
+            // Play sfx
+            AudioManager.Instance.PlaySfx(AudioManager.Instance._magFullSfx);
+            return false;
+        }
+
+        return true;
+    }
     public void ReloadMag()
     {
         _currentAmmo = _magSize;

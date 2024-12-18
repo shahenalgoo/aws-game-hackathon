@@ -3155,6 +3155,34 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 76aaa47b9fbea4f74813c22012cd863b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _gunshotRef:
+    Guid:
+      Data1: -1123087605
+      Data2: 1116023060
+      Data3: 2087462829
+      Data4: 1476131273
+    Path: event:/Gunshot
+  _magOutRef:
+    Guid:
+      Data1: -577894264
+      Data2: 1147265136
+      Data3: 929915324
+      Data4: -1061939023
+    Path: event:/Mag Out
+  _reloadedRef:
+    Guid:
+      Data1: -631927029
+      Data2: 1075748825
+      Data3: 1181126309
+      Data4: -925679756
+    Path: event:/Reloaded
+  _magFullRef:
+    Guid:
+      Data1: 1599261794
+      Data2: 1237951578
+      Data3: 1306256309
+      Data4: -183280378
+    Path: event:/Mag full
 --- !u!4 &1334768874
 Transform:
   m_ObjectHideFlags: 0

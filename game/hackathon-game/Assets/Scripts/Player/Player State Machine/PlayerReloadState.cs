@@ -17,6 +17,9 @@ public class PlayerReloadState : PlayerBaseState
 
         // Activate reload bar
         ReloadBar._activateReloadSlider?.Invoke();
+
+        // Play sfx
+        AudioManager.Instance.PlaySfx(AudioManager.Instance._magOutSfx);
     }
 
     public override void UpdateState()
@@ -25,6 +28,10 @@ public class PlayerReloadState : PlayerBaseState
         {
             // Reward with ammo
             Ctx.Gun.ReloadMag();
+
+            // Reloaded sfx
+            AudioManager.Instance.PlaySfx(AudioManager.Instance._reloadedSfx);
+
 
             // exit state
             ExitState();
