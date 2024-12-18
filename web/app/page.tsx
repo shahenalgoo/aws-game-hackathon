@@ -3,7 +3,7 @@
 import { Button } from "@/components/ui/button";
 import { CircleUser, Fullscreen } from "lucide-react";
 // import Login from "@/components/auth/login";
-import React, { useRef } from "react";
+import React, { useEffect, useRef } from "react";
 
 import {
 	Sheet,
@@ -14,6 +14,10 @@ import {
 	SheetTrigger,
 } from "@/components/ui/sheet"
 import UnityPlayer from "@/components/unity/unity-player";
+import useGameStore from "@/store/useGameStore";
+
+// import useSound from 'use-sound';
+// const soundUrl = '/music/main-menu.mp3';
 
 // const fetchTestApi = async () => {
 // 	const res = await fetch("http://localhost:3000/api/test");
@@ -23,7 +27,23 @@ import UnityPlayer from "@/components/unity/unity-player";
 export default function Home() {
 
 	const containerRef = useRef<HTMLDivElement>(null);
+
+	const { isUnityLoaded } = useGameStore();
+
+	// const [isLoaded, setIsLoaded] = React.useState(false);
+	// const [isPlaying, setIsPlaying] = React.useState(false);
+	// const [play, { stop }] = useSound(soundUrl, {
+	// 	onload: () => setIsLoaded(true),
+	// 	onend: () => setIsPlaying(false),
+	// });
+
 	// const [isPaused, setIsPaused] = useState(false);
+
+
+	// useEffect(() => {
+	// 	play();
+	// 	setIsPlaying(true);
+	// }, [isLoaded]);
 
 
 
@@ -66,7 +86,6 @@ export default function Home() {
 		<div className="relative w-full h-screen" ref={containerRef}>
 			{/* <Login />
 			<hr className="my-4" /> */}
-
 			<UnityPlayer />
 
 			{/* Pause Overlay */}
@@ -82,35 +101,38 @@ export default function Home() {
 				</div>
 			)} */}
 
-			<div className="fixed top-0 right-0 flex gap-1 p-1">
+			{isUnityLoaded &&
+				<div className="fixed z-50 top-0 right-0 flex gap-1 p-1">
 
 
 
-				<Sheet>
-					<SheetTrigger asChild>
-						<Button variant={"secondary"} size={"icon"}>
-							<CircleUser />
-						</Button>
-					</SheetTrigger>
+					<Sheet>
+						<SheetTrigger asChild>
+							<Button variant={"secondary"} size={"icon"}>
+								<CircleUser />
+							</Button>
+						</SheetTrigger>
 
 
-					<SheetContent ref={containerRef} className="w-full !max-w-lg">
-						<SheetHeader>
-							<SheetTitle>Are you absolutely sure?</SheetTitle>
-							<SheetDescription>
-								This action cannot be undone. This will permanently delete your account
-								and remove your data from our servers.
-							</SheetDescription>
-						</SheetHeader>
-					</SheetContent>
+						<SheetContent ref={containerRef} className="w-full !max-w-lg">
+							<SheetHeader>
+								<SheetTitle>Are you absolutely sure?</SheetTitle>
+								<SheetDescription>
+									This action cannot be undone. This will permanently delete your account
+									and remove your data from our servers.
+								</SheetDescription>
+							</SheetHeader>
+						</SheetContent>
 
-				</Sheet>
+					</Sheet>
 
 
-				<Button variant={"secondary"} size={"icon"} onClick={handleFullscreen}>
-					<Fullscreen />
-				</Button>
-			</div>
+					<Button variant={"secondary"} size={"icon"} onClick={handleFullscreen}>
+						<Fullscreen />
+					</Button>
+				</div>
+			}
+
 		</div>
 	);
 }

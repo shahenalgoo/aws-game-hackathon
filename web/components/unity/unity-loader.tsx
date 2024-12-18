@@ -1,5 +1,5 @@
 import { FC } from "react";
-import StarField from "../starsfield";
+// import StarField from "../starsfield";
 import Image from "next/image";
 
 interface UnityLoaderProps {
@@ -13,16 +13,16 @@ export const UnityLoader: FC<UnityLoaderProps> = ({ isLoaded, loadingProgression
 	return !isLoaded ? (
 		<div className="fixed z-50 top-0 left-0 w-full h-full bg-black">
 
-			<StarField />
+			{/* <StarField /> */}
 
 			<div className="absolute top-0 left-0 w-full h-full flex items-center justify-center">
-				<div className="space-y-14 max-w-72 md:max-w-2xl w-full text-white">
+				<div className="max-w-72 md:max-w-2xl w-full text-white">
 
-					<Image src="/logo.png" alt="logo" width={720} height={215} className="mx-auto" priority />
+					{/* <Image src="/logo.png" alt="logo" width={720} height={215} className="mx-auto" priority /> */}
 
 					<div className="space-y-2">
 						<div className="text-xl">
-							Progress
+							Loading game...
 						</div>
 
 						<div className="relative">
