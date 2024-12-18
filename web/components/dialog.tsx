@@ -1,29 +1,24 @@
 "use client";
 
-import { FC, RefObject } from "react";
-import useGameStore from "@/store/useGameStore";
+import { FC } from "react";
+import useRefStore from "@/store/useRefStore";
+import { cn } from "@/lib/utils";
 import * as DialogPrimitive from "@radix-ui/react-dialog";
 import { X } from "lucide-react";
-import { cn } from "@/lib/utils";
 
 interface GameDialogProps {
-	container: RefObject<HTMLDivElement | null>,
-	className?: string
+	className?: string;
+	open: boolean | undefined;
+	onOpenChange: (open: boolean) => void;
 }
 
-const GameDialog: FC<GameDialogProps> = ({ container, className }) => {
+const GameDialog: FC<GameDialogProps> = ({ className, open, onOpenChange }) => {
 
-	const {
-		setIsUnityLoaded,
-		isMainMenuActive,
-		setIsMainMenuActive,
-		isLevelSelectorActive,
-		setIsLevelSelectorActive
-	} = useGameStore();
+	const { containerRef } = useRefStore();
 
 	return (
-		<DialogPrimitive.Root open={isLevelSelectorActive} onOpenChange={setIsLevelSelectorActive}>
-			<DialogPrimitive.Portal container={container.current}>
+		<DialogPrimitive.Root open={open} onOpenChange={onOpenChange}>
+			<DialogPrimitive.Portal container={containerRef?.current}>
 				<DialogPrimitive.Overlay className="fixed inset-0 z-50 bg-black/80  data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0" />
 				<DialogPrimitive.Content
 					className={cn(

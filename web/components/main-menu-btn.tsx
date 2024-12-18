@@ -10,14 +10,15 @@ const orbitron = Orbitron({
 });
 
 import useSound from 'use-sound';
+import { MoveRight } from "lucide-react";
 const SOUND_URL = '/sfx/ui-hover.wav';
 
-interface MenuButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
+interface MainMenuButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 	title: string;
 	description: string;
 }
 
-const MenuButton: FC<MenuButtonProps> = ({ onClick, title, description }) => {
+const MainMenuButton: FC<MainMenuButtonProps> = ({ onClick, title, description }) => {
 
 	const [isHovering, setIsHovering] = useState(false);
 	const [play, { stop }] = useSound(SOUND_URL, { volume: 1 });
@@ -40,7 +41,9 @@ const MenuButton: FC<MenuButtonProps> = ({ onClick, title, description }) => {
 				}}
 				className="group w-[22rem] space-y-1 py-4 px-6 rounded-2xl text-left transition-all border border-white/10 hover:border-primary bg-white/10 hover:bg-primary/5"
 			>
-				<div className={`${orbitron.className} text-2xl transition-all group-hover:text-primary`}>{title}</div>
+				<div className={`flex items-center justify-between ${orbitron.className} text-2xl tracking-normal transition-all group-hover:text-primary group-hover:tracking-wider`}>
+					{title} <MoveRight strokeWidth={2} className="mr-10 opacity-0 transition-all group-hover:mr-0 group-hover:opacity-100" />
+				</div>
 				<div className="transition-all text-white/70 group-hover:text-white">{description}</div>
 			</button>
 
@@ -48,4 +51,4 @@ const MenuButton: FC<MenuButtonProps> = ({ onClick, title, description }) => {
 	)
 }
 
-export default MenuButton;
+export default MainMenuButton;

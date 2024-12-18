@@ -1,19 +1,15 @@
 import { FC } from "react";
-// import StarField from "../starsfield";
-import Image from "next/image";
 
 interface UnityLoaderProps {
 	isLoaded: boolean;
 	loadingProgression: number;
 }
 
-export const UnityLoader: FC<UnityLoaderProps> = ({ isLoaded, loadingProgression }) => {
+const UnityLoader: FC<UnityLoaderProps> = ({ isLoaded, loadingProgression }) => {
 
 
 	return !isLoaded ? (
 		<div className="fixed z-50 top-0 left-0 w-full h-full bg-black">
-
-			{/* <StarField /> */}
 
 			<div className="absolute top-0 left-0 w-full h-full flex items-center justify-center">
 				<div className="max-w-72 md:max-w-2xl w-full text-white">
@@ -43,3 +39,5 @@ export const UnityLoader: FC<UnityLoaderProps> = ({ isLoaded, loadingProgression
 		</div>
 	) : null;
 }
+
+export default UnityLoader;
