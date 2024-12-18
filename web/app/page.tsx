@@ -16,6 +16,8 @@ import {
 import UnityPlayer from "@/components/unity/unity-player";
 import useGameStore from "@/store/useGameStore";
 
+import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogPortal, DialogTitle, DialogTrigger, } from "@/components/ui/dialog";
+
 // import useSound from 'use-sound';
 // const soundUrl = '/music/main-menu.mp3';
 
@@ -28,7 +30,9 @@ export default function Home() {
 
 	const containerRef = useRef<HTMLDivElement>(null);
 
-	const { isUnityLoaded } = useGameStore();
+	const {
+		isUnityLoaded,
+	} = useGameStore();
 
 	// const [isLoaded, setIsLoaded] = React.useState(false);
 	// const [isPlaying, setIsPlaying] = React.useState(false);
@@ -86,7 +90,8 @@ export default function Home() {
 		<div className="relative w-full h-screen" ref={containerRef}>
 			{/* <Login />
 			<hr className="my-4" /> */}
-			<UnityPlayer />
+			<UnityPlayer containerRef={containerRef} />
+
 
 			{/* Pause Overlay */}
 			{/* {isPaused && (
