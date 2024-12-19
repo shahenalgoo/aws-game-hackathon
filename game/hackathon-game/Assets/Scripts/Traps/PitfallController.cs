@@ -40,6 +40,9 @@ public class PitfallController : MonoBehaviour
     public void PlayBooster()
     {
         _onBoost.Play();
+
+        // Play sfx
+        AudioManager.Instance.PlaySfx(AudioManager.Instance._dashBoosterSfx);
     }
 
     private void OnTriggerEnter(Collider other)

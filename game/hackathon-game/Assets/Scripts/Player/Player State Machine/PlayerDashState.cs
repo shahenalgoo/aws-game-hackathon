@@ -28,6 +28,9 @@ public class PlayerDashState : PlayerBaseState
         _dashDistance = Ctx.DashDistance;
         _isDashOver = false;
 
+        // Play sfx
+        AudioManager.Instance.PlaySfx(AudioManager.Instance._dashSfx);
+
         // Determine valid destination
         // CalculatePossibleStopPoint();
 

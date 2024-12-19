@@ -3183,6 +3183,48 @@ MonoBehaviour:
       Data3: 1306256309
       Data4: -183280378
     Path: event:/Mag full
+  _dashRef:
+    Guid:
+      Data1: 1989297694
+      Data2: 1275250731
+      Data3: 1509281182
+      Data4: -1275766170
+    Path: event:/Dash - Metal Heavy 5
+  _dashBoosterRef:
+    Guid:
+      Data1: -1919910004
+      Data2: 1270393956
+      Data3: 1377824427
+      Data4: -737082250
+    Path: event:/Dash Booster - EMP Explosion 3
+  _playerDeathRef:
+    Guid:
+      Data1: -851189601
+      Data2: 1240297970
+      Data3: 578458497
+      Data4: 186400227
+    Path: event:/Player Death - Explosion Barrel
+  _targetShotRef:
+    Guid:
+      Data1: -991441416
+      Data2: 1142210953
+      Data3: -679526527
+      Data4: -407212378
+    Path: event:/Enemy Shot - Sci Fi Shotgun 2
+  _targetMeleeRef:
+    Guid:
+      Data1: -1730099140
+      Data2: 1283074786
+      Data3: 766263970
+      Data4: -200223950
+    Path: event:/Enemy Melee - Staff 10
+  _targetHitRef:
+    Guid:
+      Data1: -1591746134
+      Data2: 1310453611
+      Data3: 286634928
+      Data4: -175525391
+    Path: event:/Enemy Hit - Light  Metal footsteps 1
 --- !u!4 &1334768874
 Transform:
   m_ObjectHideFlags: 0
@@ -3764,6 +3806,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6917377370588809671, guid: ed6351fa37ed1a54bac66c908dc976f8,
+        type: 3}
+      propertyPath: _maxHealth
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 7523127128763181994, guid: ed6351fa37ed1a54bac66c908dc976f8,
         type: 3}
@@ -5399,6 +5446,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -863751419446884953, guid: e00e4b0c950694eefa0b534624889d47,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2464345215269904859, guid: e00e4b0c950694eefa0b534624889d47,
         type: 3}
       propertyPath: m_ClearFlags

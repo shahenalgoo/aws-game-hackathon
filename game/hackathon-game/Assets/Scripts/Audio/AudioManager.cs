@@ -16,6 +16,7 @@ public class AudioManager : MonoBehaviour
 
 
     [Header("SFXs")]
+    [Header("GUN")]
     [SerializeField] private EventReference _gunshotRef;
     public EventInstance _gunshotSfx;
 
@@ -27,6 +28,25 @@ public class AudioManager : MonoBehaviour
 
     [SerializeField] private EventReference _magFullRef;
     public EventInstance _magFullSfx;
+
+    [Header("PLAYER")]
+    [SerializeField] private EventReference _dashRef;
+    public EventInstance _dashSfx;
+    [SerializeField] private EventReference _dashBoosterRef;
+    public EventInstance _dashBoosterSfx;
+
+    [SerializeField] private EventReference _playerDeathRef;
+    public EventInstance _playerDeathSfx;
+
+    [Header("TARGETS/TURRETS")]
+    [SerializeField] private EventReference _targetShotRef;
+    public EventInstance _targetShotSfx;
+
+    [SerializeField] private EventReference _targetMeleeRef;
+    public EventInstance _targetMeleeSfx;
+
+    [SerializeField] private EventReference _targetHitRef;
+    public EventInstance _targetHitSfx;
 
 
 
@@ -74,6 +94,12 @@ public class AudioManager : MonoBehaviour
         _magOutSfx = RuntimeManager.CreateInstance(_magOutRef);
         _reloadedSfx = RuntimeManager.CreateInstance(_reloadedRef);
         _magFullSfx = RuntimeManager.CreateInstance(_magFullRef);
+        _dashSfx = RuntimeManager.CreateInstance(_dashRef);
+        _dashBoosterSfx = RuntimeManager.CreateInstance(_dashBoosterRef);
+        _playerDeathSfx = RuntimeManager.CreateInstance(_playerDeathRef);
+        _targetShotSfx = RuntimeManager.CreateInstance(_targetShotRef);
+        _targetMeleeSfx = RuntimeManager.CreateInstance(_targetMeleeRef);
+        _targetHitSfx = RuntimeManager.CreateInstance(_targetHitRef);
 
     }
 

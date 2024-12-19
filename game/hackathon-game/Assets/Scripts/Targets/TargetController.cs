@@ -100,6 +100,10 @@ public class TargetController : MonoBehaviour
         // Convert the direction into a rotation
         Quaternion bulletRotation = Quaternion.LookRotation(_targetBarrel.transform.forward);
         TargetBulletManager._bulletSpawner?.Invoke(_bulletSpawnPoint.transform.position, bulletRotation);
+
+        // Play sfx
+        AudioManager.Instance.PlaySfx(AudioManager.Instance._targetShotSfx);
+
         _canShoot = false;
     }
 
@@ -107,8 +111,19 @@ public class TargetController : MonoBehaviour
     {
         _canMelee = false;
         _meleeAnimator.Play("SpinAttack");
+        StartCoroutine(PlayMeleeSfx());
         StartCoroutine(ResetMelee());
         _meleeObject.SetActive(true);
+    }
+
+    private IEnumerator PlayMeleeSfx()
+    {
+        // Play sfx
+        AudioManager.Instance.PlaySfx(AudioManager.Instance._targetMeleeSfx);
+        yield return new WaitForSeconds(0.5f);
+        // Play sfx
+        AudioManager.Instance.PlaySfx(AudioManager.Instance._targetMeleeSfx);
+
     }
 
     private IEnumerator ResetMelee()

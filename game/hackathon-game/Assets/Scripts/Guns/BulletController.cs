@@ -14,6 +14,9 @@ public class BulletController : Bullet
 
             BulletImpactManager._impactSpawner?.Invoke(transform.position, Quaternion.identity);
 
+            // Play sfx
+            AudioManager.Instance.PlaySfx(AudioManager.Instance._targetHitSfx);
+
             int damageRoundUp = Mathf.CeilToInt(_currentDamage);
             other.gameObject.GetComponent<TargetHealth>().TakeDamage(damageRoundUp);
 

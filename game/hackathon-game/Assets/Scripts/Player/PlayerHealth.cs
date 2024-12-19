@@ -117,7 +117,14 @@ public class PlayerHealth : MonoBehaviour
         GameManager.Instance.CanCountTime = false;
 
         // Shatter Effect
-        if (shatter) GetComponent<PlayerFracture>().Shatter();
+        if (shatter)
+        {
+            GetComponent<PlayerFracture>().Shatter();
+
+            // Play sfx
+            AudioManager.Instance.PlaySfx(AudioManager.Instance._playerDeathSfx);
+        }
+
 
         // Trigger Death Panel
         StartCoroutine(UIManager.Instance.DeathPanelSetup());

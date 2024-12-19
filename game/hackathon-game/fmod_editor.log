@@ -2,12 +2,11 @@
 [LOG] Manager::init                            : maxchannels = 256 studioflags = 00000006 flags 00000000 extradriverdata 0x0.
 [LOG] SystemI::init                            : Initialize version=20226 (148250), maxchannels=256, flags=0x00020000
 [LOG] SystemI::setOutputInternal               : Setting output to 'FMOD Core Audio Output'
-[LOG] OutputCoreAudio::init                    : Output running 2 channels at 44100Hz sample rate.
-[LOG] OutputCoreAudio::init                    : Maximum hardware read size: 1024 samples, Software buffer size: 512 samples, Number of software buffers: 4.
-[LOG] SystemI::init                            : Output requires a sample rate of 44100Hz, resampling will occur.
+[LOG] OutputCoreAudio::init                    : Output running 2 channels at 48000Hz sample rate.
+[LOG] OutputCoreAudio::init                    : Maximum hardware read size: 512 samples, Software buffer size: 512 samples, Number of software buffers: 4.
 [LOG] Thread::initThread                       : Init FMOD stream thread. Affinity: 0x4000000000000003, Priority: 0xFFFF7FFB, Stack Size: 98304, Semaphore: No, Sleep Time: 10, Looping: Yes.
 [LOG] Thread::initThread                       : Init FMOD mixer thread. Affinity: 0x4000000000000001, Priority: 0xFFFF7FFA, Stack Size: 81920, Semaphore: Yes, Sleep Time: 0, Looping: Yes.
-[LOG] AsyncManager::init                       : manager 0x7f7cf5f24a08 isAsync 0 updatePeriod 0.02
+[LOG] AsyncManager::init                       : manager 0x7f7f0fa42008 isAsync 0 updatePeriod 0.02
 [LOG] AsyncManager::init                       : done
 [LOG] PlaybackSystem::init                     : 
 [LOG] Thread::initThread                       : Init FMOD Studio sample load thread. Affinity: 0x4000000000000003, Priority: 0xFFFF7FFD, Stack Size: 98304, Semaphore: No, Sleep Time: 1, Looping: No.
@@ -16,15 +15,45 @@
 [LOG] Manager::init                            : done.
 [LOG] Manager::readBank                        : fileversion = 142, compatVersion = 140 (oldest = 44, newest = 142)
 [LOG] Manager::readBank                        : fileversion = 142, compatVersion = 140 (oldest = 44, newest = 142)
-[LOG] Manager::readBank                        : fileversion = 142, compatVersion = 140 (oldest = 44, newest = 142)
 [LOG] PlaybackSystem::acquireMasterBus         : Setting master channel group format to 6
-[LOG] Manager::readBank                        : fileversion = 142, compatVersion = 140 (oldest = 44, newest = 142)
-[LOG] Manager::readBank                        : fileversion = 142, compatVersion = 140 (oldest = 44, newest = 142)
-[LOG] PlaybackSystem::acquireMasterBus         : Setting master channel group format to 6
+[LOG] SoundI::release                          :  (0x7f7effbcd228)
+[LOG] SoundI::release                          :     Sci Fi Assault Rifle 1 (0x7f7effbcd398)
+[LOG] SoundI::release                          :  (0x7f7effb04998)
+[LOG] SoundI::release                          :     Sci Fi Beam Reload 1 (0x7f7effb04b08)
+[LOG] SoundI::release                          :  (0x7f7effb767c8)
+[LOG] SoundI::release                          :     Metal Heavy 5 (0x7f7effb7a078)
+[LOG] SoundI::release                          :  (0x7f7effb7dba8)
+[LOG] SoundI::release                          :     Staff 10 (0x7f7effb8df08)
+[LOG] SoundI::release                          :  (0x7f7effbaeb28)
+[LOG] SoundI::release                          :     Body Armor 1 (0x7f7effbaec98)
+[LOG] SoundI::release                          :  (0x7f7effb85a78)
+[LOG] SoundI::release                          :     Dry shot 1 (0x7f7effb85be8)
+[LOG] SoundI::release                          :  (0x7f7effbccd98)
+[LOG] SoundI::release                          :     Sci Fi Grenade 1 (0x7f7effbccf08)
+[LOG] SoundI::release                          :  (0x7f7effbaefb8)
+[LOG] SoundI::release                          :     Mag Out (0x7f7effbcca78)
+[LOG] SoundI::release                          :  (0x7f7effb649d8)
+[LOG] SoundI::release                          :     EMP Explosion 3 (0x7f7effb64b48)
+[LOG] SoundI::release                          :  (0x7f7effb1ad98)
+[LOG] SoundI::release                          :     Explosion Small 3 (0x7f7effb1af08)
+[LOG] SoundI::release                          :  (0x7f7effb09968)
+[LOG] SoundI::release                          :     Explosion Barrel (0x7f7effb2af98)
+[LOG] SoundI::release                          :  (0x7f7effb164e8)
+[LOG] SoundI::release                          :     Light  Metal footsteps 1 (0x7f7effb5d388)
+[LOG] SoundI::release                          :  (0x7f7effbca9c8)
+[LOG] SoundI::release                          :     Impact Glass 1 (0x7f7effbcf8f8)
+[LOG] SoundI::release                          :  (0x7f7effb85f08)
+[LOG] SoundI::release                          :     Sci Fi Shotgun 2 (0x7f7effb86078)
+[LOG] SoundI::release                          :  (0x7f7effbbb1b8)
+[LOG] SoundI::release                          :     Explosion Small 5 (0x7f7effbd3918)
+[LOG] Thread::callback                         : FMOD Studio update thread finished.
 [LOG] Thread::callback                         : FMOD Studio bank load thread finished.
+[LOG] Profile::disconnectAll                   : Profiler disconnecting all clients
 [LOG] Thread::callback                         : FMOD Studio sample load thread finished.
 [LOG] LiveUpdate::release                      : 
 [LOG] LiveUpdate::reset                        : Reset connection (reason Disconnected)
 [LOG] Thread::callback                         : FMOD stream thread finished.
 [LOG] Thread::callback                         : FMOD mixer thread finished.
+[LOG] Profile::disconnectAll                   : Profiler disconnecting all clients
 [LOG] SystemI::close                           : Closed.
+[ERR] assert                                   : assertion: 'gSystemInitCount == 0' failed
