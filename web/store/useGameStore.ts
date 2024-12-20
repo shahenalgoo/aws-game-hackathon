@@ -7,6 +7,9 @@ interface GameStore {
 	isMainMenuActive: boolean;
 	setIsMainMenuActive: (isMainMenuActive: boolean) => void;
 
+	profileDialogActive: boolean;
+	setProfileDialogActive: (profileDialogActive: boolean) => void;
+
 	isLevelSelectorActive: boolean;
 	setIsLevelSelectorActive: (isLevelSelectorActive: boolean) => void;
 }
@@ -17,6 +20,9 @@ const useGameStore = create<GameStore>((set) => ({
 
 	isMainMenuActive: false,
 	setIsMainMenuActive: (isMainMenuActive) => set({ isMainMenuActive }),
+
+	profileDialogActive: false,
+	setProfileDialogActive: (profileDialogActive) => set({ profileDialogActive }),
 
 	isLevelSelectorActive: false,
 	setIsLevelSelectorActive: (isLevelSelectorActive) => set({ isLevelSelectorActive }),

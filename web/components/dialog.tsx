@@ -6,13 +6,13 @@ import { cn } from "@/lib/utils";
 import * as DialogPrimitive from "@radix-ui/react-dialog";
 import { X } from "lucide-react";
 
-interface GameDialogProps {
+interface DialogProps {
 	className?: string;
 	open: boolean | undefined;
 	onOpenChange: (open: boolean) => void;
 }
 
-const GameDialog: FC<GameDialogProps> = ({ className, open, onOpenChange }) => {
+const Dialog: FC<DialogProps> = ({ className, open, onOpenChange }) => {
 
 	const { containerRef } = useRefStore();
 
@@ -45,4 +45,4 @@ const GameDialog: FC<GameDialogProps> = ({ className, open, onOpenChange }) => {
 	)
 }
 
-export default GameDialog;
+export default Dialog;
