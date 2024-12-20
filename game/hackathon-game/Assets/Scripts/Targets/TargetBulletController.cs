@@ -11,6 +11,9 @@ public class TargetBulletController : Bullet
     {
         if (other.gameObject.CompareTag("Player") && !other.gameObject.GetComponent<PlayerStateMachine>().IsDashing)
         {
+            // Play SFX
+            AudioManager.Instance.PlaySfx(AudioManager.Instance._playerHurtBulletSfx);
+
             Vector3 collisionPoint = other.ClosestPoint(transform.position);
 
             Instantiate(_impact, collisionPoint, Quaternion.identity);

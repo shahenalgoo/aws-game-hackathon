@@ -80,6 +80,7 @@ public class TargetHealth : MonoBehaviour
         _deathVfxObj.SetActive(true);
 
         // Play SFX
+        AudioManager.Instance.PlaySfx(AudioManager.Instance._targetExplodeSfx);
 
         // Fade out obj
         StartCoroutine(FadeOut());

@@ -2,7 +2,7 @@
 <objects serializationModel="Studio.02.02.00">
 	<object class="Event" id="{ee998b77-bedd-4b53-99c8-824709ded3ae}">
 		<property name="name">
-			<value>Player Death - Sci Fi Grenade 1</value>
+			<value>Enemy Explode - Sci Fi Grenade 1</value>
 		</property>
 		<property name="outputFormat">
 			<value>1</value>
@@ -90,7 +90,7 @@
 	<object class="MixerBusPanner" id="{bf1c9903-caac-45d2-93bf-4c31a1c68e91}" />
 	<object class="SingleSound" id="{b43900c5-a974-4a5d-b295-2a52c218de5f}">
 		<property name="length">
-			<value>1.8000000000000003</value>
+			<value>1.25</value>
 		</property>
 		<relationship name="fadeOutCurve">
 			<destination>{2885076c-fea8-483e-aaab-1ce7980b3daf}</destination>
@@ -100,9 +100,6 @@
 		</relationship>
 	</object>
 	<object class="EventMixerGroup" id="{db79c5a8-9fb8-4aee-9e27-10b6a4ac5583}">
-		<property name="volume">
-			<value>8</value>
-		</property>
 		<property name="name">
 			<value>Audio 1</value>
 		</property>
@@ -140,7 +137,7 @@
 	<object class="MixerBusFader" id="{f7c0c32e-ec37-4b24-93a9-3c6c3a14cd9e}" />
 	<object class="AutomationPoint" id="{276aaade-fb1a-4151-b642-046c82c11b0c}">
 		<property name="position">
-			<value>0.5</value>
+			<value>0</value>
 		</property>
 		<property name="value">
 			<value>1</value>
@@ -151,7 +148,7 @@
 	</object>
 	<object class="AutomationPoint" id="{4ca9c0a1-a527-48b2-9833-7d3881aebde8}">
 		<property name="position">
-			<value>1.8</value>
+			<value>1.2499999999999998</value>
 		</property>
 		<property name="value">
 			<value>0</value>

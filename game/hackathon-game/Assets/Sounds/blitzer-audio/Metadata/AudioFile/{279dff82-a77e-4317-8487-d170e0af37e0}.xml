@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.02.00">
+	<object class="AudioFile" id="{279dff82-a77e-4317-8487-d170e0af37e0}">
+		<property name="assetPath">
+			<value>Sword impact (Flesh) 2.wav</value>
+		</property>
+		<property name="frequencyInKHz">
+			<value>44.0999985</value>
+		</property>
+		<property name="channelCount">
+			<value>2</value>
+		</property>
+		<property name="length">
+			<value>2.0769160997732428</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{302da032-5a04-477e-8bf5-cee54acd906c}</destination>
+		</relationship>
+	</object>
+</objects>

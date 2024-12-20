@@ -34,9 +34,18 @@ public class AudioManager : MonoBehaviour
     public EventInstance _dashSfx;
     [SerializeField] private EventReference _dashBoosterRef;
     public EventInstance _dashBoosterSfx;
+    [SerializeField] private EventReference _playerHurtBulletRef;
+    public EventInstance _playerHurtBulletSfx;
+    [SerializeField] private EventReference _playerHurtSharpRef;
+    public EventInstance _playerHurtSharpSfx;
 
     [SerializeField] private EventReference _playerDeathRef;
     public EventInstance _playerDeathSfx;
+    [SerializeField] private EventReference _playerDeath2Ref;
+    public EventInstance _playerDeath2Sfx;
+
+    [SerializeField] private EventReference _playerEntranceRef;
+    public EventInstance _playerEntranceSfx;
 
     [Header("TARGETS/TURRETS")]
     [SerializeField] private EventReference _targetShotRef;
@@ -47,6 +56,13 @@ public class AudioManager : MonoBehaviour
 
     [SerializeField] private EventReference _targetHitRef;
     public EventInstance _targetHitSfx;
+
+    [SerializeField] private EventReference _targetExplodeRef;
+    public EventInstance _targetExplodeSfx;
+
+    [SerializeField] private EventReference _starCollectedRef;
+    public EventInstance _starCollectedSfx;
+
 
 
 
@@ -96,10 +112,17 @@ public class AudioManager : MonoBehaviour
         _magFullSfx = RuntimeManager.CreateInstance(_magFullRef);
         _dashSfx = RuntimeManager.CreateInstance(_dashRef);
         _dashBoosterSfx = RuntimeManager.CreateInstance(_dashBoosterRef);
+        _playerHurtBulletSfx = RuntimeManager.CreateInstance(_playerHurtBulletRef);
+        _playerHurtSharpSfx = RuntimeManager.CreateInstance(_playerHurtSharpRef);
         _playerDeathSfx = RuntimeManager.CreateInstance(_playerDeathRef);
+        _playerDeath2Sfx = RuntimeManager.CreateInstance(_playerDeath2Ref);
+        _playerEntranceSfx = RuntimeManager.CreateInstance(_playerEntranceRef);
+
         _targetShotSfx = RuntimeManager.CreateInstance(_targetShotRef);
         _targetMeleeSfx = RuntimeManager.CreateInstance(_targetMeleeRef);
         _targetHitSfx = RuntimeManager.CreateInstance(_targetHitRef);
+        _targetExplodeSfx = RuntimeManager.CreateInstance(_targetExplodeRef);
+        _starCollectedSfx = RuntimeManager.CreateInstance(_starCollectedRef);
 
     }
 

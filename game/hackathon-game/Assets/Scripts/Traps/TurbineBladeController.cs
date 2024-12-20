@@ -10,6 +10,9 @@ public class TurbineBladeController : MonoBehaviour
         if (other.gameObject.CompareTag("Player") && !other.GetComponent<PlayerStateMachine>().IsDashing)
         {
 
+            // Play SFX
+            AudioManager.Instance.PlaySfx(AudioManager.Instance._playerHurtSharpSfx);
+
             PlayerHealth playerHealth = other.gameObject.GetComponent<PlayerHealth>();
             playerHealth.TakeDamage(_damage);
             playerHealth.DamageVfx.Play();

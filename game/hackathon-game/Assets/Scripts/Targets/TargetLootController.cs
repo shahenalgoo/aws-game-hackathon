@@ -53,10 +53,12 @@ public class TargetLootController : MonoBehaviour
         {
             GameManager.Instance.IncrementLoot();
 
+            // Spawn VFX
             _lootCollectVFX.transform.parent = null;
             _lootCollectVFX.Play();
-            // Spawn VFX
-            // Instantiate(GameManager.Instance.LootCollectVFX, transform.position, Quaternion.identity);
+
+            // Play SFX
+            AudioManager.Instance.PlaySfx(AudioManager.Instance._starCollectedSfx);
 
             Destroy(gameObject);
         }

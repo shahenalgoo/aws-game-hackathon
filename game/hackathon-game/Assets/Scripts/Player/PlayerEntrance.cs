@@ -37,6 +37,9 @@ public class PlayerEntrance : MonoBehaviour
         _animator = _playerTransform.GetComponent<Animator>();
         _animator.Play("Hovering");
 
+        // Play SFX
+        AudioManager.Instance.PlaySfx(AudioManager.Instance._playerEntranceSfx);
+
         // disable gravity
         _playerTransform.GetComponent<PlayerStateMachine>().GravityMultiplier = 0;
 

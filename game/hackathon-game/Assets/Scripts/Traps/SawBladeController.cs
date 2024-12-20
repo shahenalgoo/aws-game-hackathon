@@ -30,6 +30,9 @@ public class SawBladeController : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Player"))
         {
+            // Play SFX
+            AudioManager.Instance.PlaySfx(AudioManager.Instance._playerHurtSharpSfx);
+
             PlayerHealth playerHealth = other.gameObject.GetComponent<PlayerHealth>();
             playerHealth.TakeDamage(_damage);
             playerHealth.DamageVfx.Play();

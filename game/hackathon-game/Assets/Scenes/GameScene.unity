@@ -3197,13 +3197,41 @@ MonoBehaviour:
       Data3: 1377824427
       Data4: -737082250
     Path: event:/Dash Booster - EMP Explosion 3
+  _playerHurtBulletRef:
+    Guid:
+      Data1: -7540307
+      Data2: 1124162782
+      Data3: 450556555
+      Data4: -1025751227
+    Path: event:/Player Hurt Bullet - Impact 1
+  _playerHurtSharpRef:
+    Guid:
+      Data1: 913880931
+      Data2: 1260853967
+      Data3: -1699943017
+      Data4: 73505932
+    Path: event:/Player Hurt Sharp - Sword impact (Flesh) 2
   _playerDeathRef:
+    Guid:
+      Data1: 680075569
+      Data2: 1262056320
+      Data3: -1460659282
+      Data4: -855602477
+    Path: event:/Player Death - Glass 7
+  _playerDeath2Ref:
     Guid:
       Data1: -851189601
       Data2: 1240297970
       Data3: 578458497
       Data4: 186400227
     Path: event:/Player Death - Explosion Barrel
+  _playerEntranceRef:
+    Guid:
+      Data1: -1462162310
+      Data2: 1330305212
+      Data3: 462187689
+      Data4: -729964473
+    Path: event:/Player Entrance - Sweep 2
   _targetShotRef:
     Guid:
       Data1: -991441416
@@ -3213,18 +3241,32 @@ MonoBehaviour:
     Path: event:/Enemy Shot - Sci Fi Shotgun 2
   _targetMeleeRef:
     Guid:
-      Data1: -1730099140
-      Data2: 1283074786
-      Data3: 766263970
-      Data4: -200223950
-    Path: event:/Enemy Melee - Staff 10
+      Data1: 802502170
+      Data2: 1211360061
+      Data3: 554484382
+      Data4: -765244735
+    Path: event:/Enemy Melee - Sword Woosh 15
   _targetHitRef:
     Guid:
-      Data1: -1591746134
-      Data2: 1310453611
-      Data3: 286634928
-      Data4: -175525391
-    Path: event:/Enemy Hit - Light  Metal footsteps 1
+      Data1: 1529498410
+      Data2: 1332569525
+      Data3: -323846524
+      Data4: -1976696454
+    Path: event:/Enemy Hit - Metal Light 3
+  _targetExplodeRef:
+    Guid:
+      Data1: -291927177
+      Data2: 1263779549
+      Data3: 1199753369
+      Data4: -1361846775
+    Path: event:/Enemy Explode - Sci Fi Grenade 1
+  _starCollectedRef:
+    Guid:
+      Data1: 846613594
+      Data2: 1293205164
+      Data3: -1660234598
+      Data4: -389391489
+    Path: event:/Star Collect - Collect star 2
 --- !u!4 &1334768874
 Transform:
   m_ObjectHideFlags: 0
@@ -3810,7 +3852,7 @@ PrefabInstance:
     - target: {fileID: 6917377370588809671, guid: ed6351fa37ed1a54bac66c908dc976f8,
         type: 3}
       propertyPath: _maxHealth
-      value: 100
+      value: 200
       objectReference: {fileID: 0}
     - target: {fileID: 7523127128763181994, guid: ed6351fa37ed1a54bac66c908dc976f8,
         type: 3}

@@ -123,6 +123,7 @@ public class PlayerHealth : MonoBehaviour
 
             // Play sfx
             AudioManager.Instance.PlaySfx(AudioManager.Instance._playerDeathSfx);
+            AudioManager.Instance.PlaySfx(AudioManager.Instance._playerDeath2Sfx);
         }
 
 
