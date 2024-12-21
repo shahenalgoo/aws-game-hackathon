@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4972667491995303024}
   - component: {fileID: 4034396238556765884}
+  - component: {fileID: 2620488342600562223}
   m_Layer: 0
   m_Name: Laser Bots
   m_TagString: Untagged
@@ -48,6 +49,37 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _moveSpeed: 2
   _padding: 0.2
+--- !u!114 &2620488342600562223
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8767195826498478725}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CollisionTag: 
+  EventReference:
+    Guid:
+      Data1: -475762241
+      Data2: 1314234343
+      Data3: 1086815913
+      Data4: 153832093
+    Path: event:/Laser 3D - Welding 4
+  Event: 
+  EventPlayTrigger: 1
+  EventStopTrigger: 0
+  AllowFadeout: 1
+  TriggerOnce: 0
+  Preload: 0
+  NonRigidbodyVelocity: 0
+  Params: []
+  OverrideAttenuation: 1
+  OverrideMinDistance: 5.11
+  OverrideMaxDistance: 14
 --- !u!1001 &1677800507415345789
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -27,7 +27,10 @@ public class GameManager : MonoBehaviour
     private void Awake()
     {
         SingletonCheck();
+
+        // Clear possible previous states
         Time.timeScale = 1f;
+        AudioManager.Instance.PauseAudio(false);
     }
 
     void SingletonCheck()

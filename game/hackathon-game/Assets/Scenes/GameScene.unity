@@ -392,7 +392,6 @@ MonoBehaviour:
   _extractionArea: {fileID: 8105362297317527450, guid: 1fba6b1559d7c44bb91c1f2e7201fbfd,
     type: 3}
   _yAdjustObject: -1
-  _yAdjustTarget: 0.8
   _minimap: {fileID: 1224442257}
 --- !u!4 &125806741
 Transform:
@@ -1973,6 +1972,20 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1596745087}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &910907069
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 910907055}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 86c6556701af9e04380698b89f691b6e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  nonRigidbodyVelocity: 0
+  attenuationObject: {fileID: 0}
 --- !u!1 &944943484
 GameObject:
   m_ObjectHideFlags: 0
@@ -3220,11 +3233,11 @@ MonoBehaviour:
     Path: event:/Player Hurt Melee - Bloody stabs 8
   _playerHurtLaserRef:
     Guid:
-      Data1: 1478617556
-      Data2: 1191019482
-      Data3: 1994132105
-      Data4: -1715377263
-    Path: event:/Player Hurt Laser - Flame Whoosh 7
+      Data1: -1751970437
+      Data2: 1195323251
+      Data3: 1139953843
+      Data4: -826037269
+    Path: event:/Player Hurt Laser - Electric Spark 4
   _playerDeathRef:
     Guid:
       Data1: 680075569
@@ -3883,7 +3896,11 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 3928576000499327119, guid: ed6351fa37ed1a54bac66c908dc976f8,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 910907069}
   m_SourcePrefab: {fileID: 100100000, guid: ed6351fa37ed1a54bac66c908dc976f8, type: 3}
 --- !u!1 &1605711613
 GameObject:

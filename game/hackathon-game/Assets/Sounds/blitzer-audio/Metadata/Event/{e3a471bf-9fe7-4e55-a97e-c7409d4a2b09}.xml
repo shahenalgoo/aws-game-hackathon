@@ -2,10 +2,10 @@
 <objects serializationModel="Studio.02.02.00">
 	<object class="Event" id="{e3a471bf-9fe7-4e55-a97e-c7409d4a2b09}">
 		<property name="name">
-			<value>Laser - Welding 4</value>
+			<value>Laser 3D - Welding 4</value>
 		</property>
 		<property name="outputFormat">
-			<value>1</value>
+			<value>0</value>
 		</property>
 		<relationship name="folder">
 			<destination>{7ad80d15-e374-4a60-8883-906d268452ea}</destination>
@@ -31,6 +31,9 @@
 		<relationship name="timeline">
 			<destination>{b1574095-1523-482e-9371-552b4d612548}</destination>
 		</relationship>
+		<relationship name="banks">
+			<destination>{9aff8985-4469-4f28-8b5f-e637dc498bc7}</destination>
+		</relationship>
 	</object>
 	<object class="EventMixer" id="{6d73f1a3-0142-43db-b86f-5d80b8f474a0}">
 		<relationship name="masterBus">
@@ -50,7 +53,7 @@
 			<destination>{cbc491f2-9c76-45e1-8604-21620b49b7a5}</destination>
 		</relationship>
 		<relationship name="output">
-			<destination>{9465e7c7-499b-4cbb-89f1-0a9d52681c5e}</destination>
+			<destination>{dd2b51f6-a669-406c-869b-708edbf20957}</destination>
 		</relationship>
 	</object>
 	<object class="EventAutomatableProperties" id="{c6055aa4-a761-4fa0-93a8-809d58029f26}" />
@@ -127,6 +130,8 @@
 	<object class="MixerBusEffectChain" id="{09f96027-cf3f-4be6-ac0f-a2a6b24c6e2e}">
 		<relationship name="effects">
 			<destination>{cf7de8f0-9a81-40c9-af6c-445d234ce8e2}</destination>
+			<destination>{02490f00-9d44-47af-a892-6d97af3f75be}</destination>
+			<destination>{41e4654f-14d6-42cd-a826-36dd117180e0}</destination>
 		</relationship>
 	</object>
 	<object class="MixerBusPanner" id="{fdd0f666-bbab-4215-a51d-c6b7b666c669}" />
@@ -138,5 +143,11 @@
 	</object>
 	<object class="MixerBusPanner" id="{767ac95a-6cf3-4c08-8e32-eaf77e5a544e}" />
 	<object class="MixerBusFader" id="{cf7de8f0-9a81-40c9-af6c-445d234ce8e2}" />
+	<object class="SpatialiserEffect" id="{02490f00-9d44-47af-a892-6d97af3f75be}" />
+	<object class="PannerEffect" id="{41e4654f-14d6-42cd-a826-36dd117180e0}">
+		<property name="overridingOutputFormat">
+			<value>0</value>
+		</property>
+	</object>
 	<object class="MixerBusFader" id="{6ea5c8e1-ecfa-4d9d-a12c-1420b5306452}" />
 </objects>

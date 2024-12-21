@@ -4,16 +4,14 @@ using FMOD.Studio;
 
 public class AudioManager : MonoBehaviour
 {
-    private Bus musicBus;
-    private Bus sfxBus;
+    public static AudioManager Instance { get; private set; }
+    private Bus _musicBus;
+    private Bus _sfxBus;
 
-    private bool isSfxMuted = false;
-    private bool isMusicMuted = false;
-
+    private bool _isSfxMuted = false;
+    private bool _isMusicMuted = false;
     private const string SFX_MUTE_PREF_KEY = "SFXMuted";
     private const string MUSIC_MUTE_PREF_KEY = "MusicMuted";
-    public static AudioManager Instance { get; private set; }
-
 
     [Header("SFXs")]
     [Header("GUN")]
@@ -93,8 +91,8 @@ public class AudioManager : MonoBehaviour
     {
         // Get the specific buses
         // Note: Replace "bus:/SFX" and "bus:/Music" with your actual FMOD bus paths
-        sfxBus = RuntimeManager.GetBus("bus:/SFX");
-        musicBus = RuntimeManager.GetBus("bus:/Music");
+        _sfxBus = RuntimeManager.GetBus("bus:/SFX");
+        _musicBus = RuntimeManager.GetBus("bus:/Music");
 
         // Load saved states
         LoadAudioStates();
@@ -102,16 +100,19 @@ public class AudioManager : MonoBehaviour
         // Instantiate SFXs
         InstantiateSFXs();
         // Instantiate Music
+
+
+
     }
 
     private void LoadAudioStates()
     {
-        isSfxMuted = PlayerPrefs.GetInt(SFX_MUTE_PREF_KEY, 0) == 1;
-        isMusicMuted = PlayerPrefs.GetInt(MUSIC_MUTE_PREF_KEY, 0) == 1;
+        _isSfxMuted = PlayerPrefs.GetInt(SFX_MUTE_PREF_KEY, 0) == 1;
+        _isMusicMuted = PlayerPrefs.GetInt(MUSIC_MUTE_PREF_KEY, 0) == 1;
 
         // Apply saved states
-        SetSFXMute(isSfxMuted);
-        SetMusicMute(isMusicMuted);
+        SetSFXMute(_isSfxMuted);
+        SetMusicMute(_isMusicMuted);
     }
 
     public void InstantiateSFXs()
@@ -151,16 +152,22 @@ public class AudioManager : MonoBehaviour
         sfx.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
     }
 
+    public void PauseAudio(bool value)
+    {
+        _musicBus.setPaused(value);
+        _sfxBus.setPaused(value);
+    }
+
     // SFX Controls
     public void ToggleSFX()
     {
-        SetSFXMute(!isSfxMuted);
+        SetSFXMute(!_isSfxMuted);
     }
 
     public void SetSFXMute(bool mute)
     {
-        isSfxMuted = mute;
-        sfxBus.setMute(mute);
+        _isSfxMuted = mute;
+        _sfxBus.setMute(mute);
         PlayerPrefs.SetInt(SFX_MUTE_PREF_KEY, mute ? 1 : 0);
         PlayerPrefs.Save();
     }
@@ -168,13 +175,13 @@ public class AudioManager : MonoBehaviour
     // Music Controls
     public void ToggleMusic()
     {
-        SetMusicMute(!isMusicMuted);
+        SetMusicMute(!_isMusicMuted);
     }
 
     public void SetMusicMute(bool mute)
     {
-        isMusicMuted = mute;
-        musicBus.setMute(mute);
+        _isMusicMuted = mute;
+        _musicBus.setMute(mute);
         PlayerPrefs.SetInt(MUSIC_MUTE_PREF_KEY, mute ? 1 : 0);
         PlayerPrefs.Save();
     }
@@ -182,22 +189,22 @@ public class AudioManager : MonoBehaviour
     // Volume Controls (if you need them)
     public void SetSFXVolume(float volume)
     {
-        sfxBus.setVolume(volume);
+        _sfxBus.setVolume(volume);
     }
 
     public void SetMusicVolume(float volume)
     {
-        musicBus.setVolume(volume);
+        _musicBus.setVolume(volume);
     }
 
     // Status Checks
     public bool IsSFXMuted()
     {
-        return isSfxMuted;
+        return _isSfxMuted;
     }
 
     public bool IsMusicMuted()
     {
-        return isMusicMuted;
+        return _isMusicMuted;
     }
 }

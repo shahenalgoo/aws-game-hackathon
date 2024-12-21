@@ -47,14 +47,15 @@ public class UIManager : Singleton<UIManager>
             _gameplayActions.Disable();
             Time.timeScale = 0;
             if (_psm != null) _psm.CursorPosition = _lastKnownCursorPosition;
-
-
+            AudioManager.Instance.PauseAudio(true);
         }
         else
         {
             // reactiveate player controls
             _gameplayActions.Enable();
             Time.timeScale = 1;
+            AudioManager.Instance.PauseAudio(false);
+
         }
 
     }
@@ -88,6 +89,7 @@ public class UIManager : Singleton<UIManager>
     private void EnableDeathPanel()
     {
         Time.timeScale = 0;
+        AudioManager.Instance.PauseAudio(true);
         _deathPanel.SetActive(true);
     }
 
