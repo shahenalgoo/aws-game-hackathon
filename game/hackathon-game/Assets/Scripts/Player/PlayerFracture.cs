@@ -32,10 +32,11 @@ public class PlayerFracture : MonoBehaviour
     private SkinnedMeshRenderer skinnedMeshRenderer;
     private List<GameObject> pieces = new List<GameObject>();
 
+    [Header("Layer Collision Settings")]
     // Store the original layer collision state
-    private bool originalCollisionState;
+    private Dictionary<int, bool> originalCollisionStates = new Dictionary<int, bool>();
     private int piecesLayer;
-    private int invisibleWallLayer;
+    [SerializeField] private LayerMask layersToIgnore;
 
     private void Awake()
     {
@@ -46,17 +47,25 @@ public class PlayerFracture : MonoBehaviour
             pieceMaterial = skinnedMeshRenderer.material;
 
         // Store the layers we'll be working with
-        piecesLayer = LayerMask.NameToLayer("Default"); // Or whatever layer your pieces use
-        invisibleWallLayer = LayerMask.NameToLayer("InvisibleWall");
+        piecesLayer = LayerMask.NameToLayer("Default");
 
-        // Store the original collision state between these layers
-        originalCollisionState = Physics.GetIgnoreLayerCollision(piecesLayer, invisibleWallLayer);
+        // Store original collision states for all layers we'll ignore
+        for (int i = 0; i < 32; i++) // Unity supports 32 layers
+        {
+            if ((layersToIgnore.value & (1 << i)) != 0)
+            {
+                originalCollisionStates[i] = Physics.GetIgnoreLayerCollision(piecesLayer, i);
+            }
+        }
     }
 
     private void OnDestroy()
     {
-        // Restore the original collision state between layers
-        Physics.IgnoreLayerCollision(piecesLayer, invisibleWallLayer, originalCollisionState);
+        // Restore all original collision states
+        foreach (var layerState in originalCollisionStates)
+        {
+            Physics.IgnoreLayerCollision(piecesLayer, layerState.Key, layerState.Value);
+        }
     }
 
     public void Shatter()
@@ -173,7 +182,15 @@ public class PlayerFracture : MonoBehaviour
 
             // Set layer and ignore collisions
             piece.layer = piecesLayer;
-            Physics.IgnoreLayerCollision(piecesLayer, invisibleWallLayer, true);
+
+            // Ignore collisions with all selected layers
+            for (int i = 0; i < 32; i++)
+            {
+                if ((layersToIgnore.value & (1 << i)) != 0)
+                {
+                    Physics.IgnoreLayerCollision(piecesLayer, i, true);
+                }
+            }
 
             // Create mesh
             Mesh mesh = new Mesh();

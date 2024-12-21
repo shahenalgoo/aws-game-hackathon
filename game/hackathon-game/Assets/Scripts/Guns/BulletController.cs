@@ -24,6 +24,9 @@ public class BulletController : Bullet
         }
         if (other.gameObject.CompareTag("SawBlades"))
         {
+            // Play sfx
+            AudioManager.Instance.PlaySfx(AudioManager.Instance._targetHitSfx);
+
             CancelInvoke("DisableBullet");
             BulletImpactManager._impactSpawner?.Invoke(transform.position, Quaternion.identity);
             DisableBullet();

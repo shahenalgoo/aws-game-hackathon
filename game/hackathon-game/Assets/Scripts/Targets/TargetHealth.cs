@@ -10,11 +10,6 @@ public class TargetHealth : MonoBehaviour
     private bool _isDead;
     [SerializeField] private HealthBar healthBar;
 
-    // Reference to the health bar prefab
-    // [SerializeField] private GameObject _healthBarPrefab;
-    // // Offset for health bar position
-    // [SerializeField] private Vector3 _healthBarOffset = new Vector3(0, 2f, 0);
-
     [SerializeField] private float _fadeOutDuration = 2f;
 
     [SerializeField] private GameObject _deathVfxObj;
@@ -30,12 +25,6 @@ public class TargetHealth : MonoBehaviour
 
     private void CreateHealthBar()
     {
-        // // Instantiate the health bar prefab as a child of this object
-        // GameObject healthBarObject = Instantiate(_healthBarPrefab, transform.position + _healthBarOffset, Quaternion.Euler(0, -45, 0), transform);
-
-        // Get the HealthBar component
-        // healthBar = healthBarObject.GetComponent<HealthBar>();
-
         // Set the initial max health
         healthBar.SetMaxHealth(_maxHealth);
     }
