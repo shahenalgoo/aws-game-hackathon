@@ -4,7 +4,6 @@ public class TargetMeleeController : MonoBehaviour
 {
     [SerializeField] private int _damage = 20;
     [SerializeField] private float _knockbackForce = 6f;
-
     private TargetController _targetController;
 
     public void Start()
@@ -17,10 +16,12 @@ public class TargetMeleeController : MonoBehaviour
 
         if (_targetController.MeleeAnimator.GetCurrentAnimatorStateInfo(0).IsName("SpinAttack") && other.gameObject.CompareTag("Player") && !other.gameObject.GetComponent<PlayerStateMachine>().IsDashing)
         {
+            // Play sfx
+            AudioManager.Instance.PlaySfx(AudioManager.Instance._playerHurtMeleeSfx);
+
             PlayerHealth playerHealth = other.gameObject.GetComponent<PlayerHealth>();
             playerHealth.TakeDamage(_damage);
             playerHealth.DamageVfx.Play();
-
 
             // Add knockback using CharacterController
             CharacterController playerCC = other.gameObject.GetComponent<CharacterController>();

@@ -3,6 +3,7 @@ using UnityEngine;
 
 public class SpikeFloorController : MonoBehaviour
 {
+    [SerializeField] private float _sfxStartDelay;
     private Animator _spikes;
     [SerializeField] private float _detectionColliderHeightOnTrigger = 5f;
     [SerializeField] private float _detectionColliderReturnTime = 3f;
@@ -15,7 +16,14 @@ public class SpikeFloorController : MonoBehaviour
     public void TriggerSpikes()
     {
         _spikes.Play("SpikePlay");
+        StartCoroutine(PlaySpikeSFX());
+    }
 
+    private IEnumerator PlaySpikeSFX()
+    {
+        yield return new WaitForSeconds(_sfxStartDelay);
+        // Play sfx
+        AudioManager.Instance.PlaySfx(AudioManager.Instance._spikeTrapSfx);
     }
     void OnTriggerEnter(Collider other)
     {

@@ -66,6 +66,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a22562a53dd9d4a2196e5936910fbb3c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _sfxStartDelay: 0.5
   _detectionColliderHeightOnTrigger: 5
   _detectionColliderReturnTime: 2.5
 --- !u!1 &3707230686394967408

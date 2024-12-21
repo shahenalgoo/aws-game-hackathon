@@ -3211,6 +3211,20 @@ MonoBehaviour:
       Data3: -1699943017
       Data4: 73505932
     Path: event:/Player Hurt Sharp - Sword impact (Flesh) 2
+  _playerHurtMeleeRef:
+    Guid:
+      Data1: -1592233708
+      Data2: 1083044342
+      Data3: 581704347
+      Data4: 746843469
+    Path: event:/Player Hurt Melee - Bloody stabs 8
+  _playerHurtLaserRef:
+    Guid:
+      Data1: 1478617556
+      Data2: 1191019482
+      Data3: 1994132105
+      Data4: -1715377263
+    Path: event:/Player Hurt Laser - Flame Whoosh 7
   _playerDeathRef:
     Guid:
       Data1: 680075569
@@ -3267,6 +3281,13 @@ MonoBehaviour:
       Data3: -1660234598
       Data4: -389391489
     Path: event:/Star Collect - Collect star 2
+  _spikeTrapRef:
+    Guid:
+      Data1: 1773379152
+      Data2: 1093422002
+      Data3: -1951497824
+      Data4: -1105345084
+    Path: event:/Spike Trap - Metal Trap Closing
 --- !u!4 &1334768874
 Transform:
   m_ObjectHideFlags: 0

@@ -9,7 +9,9 @@ public class SpikeController : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Player"))
         {
-            // Vector3 collisionPoint = other.ClosestPoint(transform.position);
+
+            // Play sfx
+            AudioManager.Instance.PlaySfx(AudioManager.Instance._playerHurtMeleeSfx);
 
             int damageRoundUp = Mathf.CeilToInt(_damage);
             PlayerHealth playerHealth = other.gameObject.GetComponent<PlayerHealth>();

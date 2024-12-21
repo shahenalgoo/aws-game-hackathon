@@ -14,6 +14,9 @@ public class LaserBotDamager : MonoBehaviour
         {
             _canDamage = false;
 
+            // Play sfx
+            AudioManager.Instance.PlaySfx(AudioManager.Instance._playerHurtLaserSfx);
+
             PlayerHealth playerHealth = other.gameObject.GetComponent<PlayerHealth>();
             playerHealth.TakeDamage(_damage);
             playerHealth.DamageVfx.Play();

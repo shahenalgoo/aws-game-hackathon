@@ -39,6 +39,12 @@ public class AudioManager : MonoBehaviour
     [SerializeField] private EventReference _playerHurtSharpRef;
     public EventInstance _playerHurtSharpSfx;
 
+    [SerializeField] private EventReference _playerHurtMeleeRef;
+    public EventInstance _playerHurtMeleeSfx;
+
+    [SerializeField] private EventReference _playerHurtLaserRef;
+    public EventInstance _playerHurtLaserSfx;
+
     [SerializeField] private EventReference _playerDeathRef;
     public EventInstance _playerDeathSfx;
     [SerializeField] private EventReference _playerDeath2Ref;
@@ -62,6 +68,10 @@ public class AudioManager : MonoBehaviour
 
     [SerializeField] private EventReference _starCollectedRef;
     public EventInstance _starCollectedSfx;
+
+    [Header("TRAPS")]
+    [SerializeField] private EventReference _spikeTrapRef;
+    public EventInstance _spikeTrapSfx;
 
 
 
@@ -114,6 +124,8 @@ public class AudioManager : MonoBehaviour
         _dashBoosterSfx = RuntimeManager.CreateInstance(_dashBoosterRef);
         _playerHurtBulletSfx = RuntimeManager.CreateInstance(_playerHurtBulletRef);
         _playerHurtSharpSfx = RuntimeManager.CreateInstance(_playerHurtSharpRef);
+        _playerHurtMeleeSfx = RuntimeManager.CreateInstance(_playerHurtMeleeRef);
+        _playerHurtLaserSfx = RuntimeManager.CreateInstance(_playerHurtLaserRef);
         _playerDeathSfx = RuntimeManager.CreateInstance(_playerDeathRef);
         _playerDeath2Sfx = RuntimeManager.CreateInstance(_playerDeath2Ref);
         _playerEntranceSfx = RuntimeManager.CreateInstance(_playerEntranceRef);
@@ -123,6 +135,9 @@ public class AudioManager : MonoBehaviour
         _targetHitSfx = RuntimeManager.CreateInstance(_targetHitRef);
         _targetExplodeSfx = RuntimeManager.CreateInstance(_targetExplodeRef);
         _starCollectedSfx = RuntimeManager.CreateInstance(_starCollectedRef);
+
+        _spikeTrapSfx = RuntimeManager.CreateInstance(_spikeTrapRef);
+
 
     }
 
