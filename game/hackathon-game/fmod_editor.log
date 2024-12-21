@@ -7,7 +7,7 @@
 [LOG] SystemI::init                            : Output requires a sample rate of 44100Hz, resampling will occur.
 [LOG] Thread::initThread                       : Init FMOD stream thread. Affinity: 0x4000000000000003, Priority: 0xFFFF7FFB, Stack Size: 98304, Semaphore: No, Sleep Time: 10, Looping: Yes.
 [LOG] Thread::initThread                       : Init FMOD mixer thread. Affinity: 0x4000000000000001, Priority: 0xFFFF7FFA, Stack Size: 81920, Semaphore: Yes, Sleep Time: 0, Looping: Yes.
-[LOG] AsyncManager::init                       : manager 0x7fc3b8cf9c08 isAsync 0 updatePeriod 0.02
+[LOG] AsyncManager::init                       : manager 0x7fc3ae9a1008 isAsync 0 updatePeriod 0.02
 [LOG] AsyncManager::init                       : done
 [LOG] PlaybackSystem::init                     : 
 [LOG] Thread::initThread                       : Init FMOD Studio sample load thread. Affinity: 0x4000000000000003, Priority: 0xFFFF7FFD, Stack Size: 98304, Semaphore: No, Sleep Time: 1, Looping: No.
@@ -17,3 +17,84 @@
 [LOG] Manager::readBank                        : fileversion = 142, compatVersion = 140 (oldest = 44, newest = 142)
 [LOG] Manager::readBank                        : fileversion = 142, compatVersion = 140 (oldest = 44, newest = 142)
 [LOG] PlaybackSystem::acquireMasterBus         : Setting master channel group format to 6
+[LOG] SoundI::release                          :  (0x7fc3be1e7f48)
+[LOG] SoundI::release                          :     Sci Fi Assault Rifle 1 (0x7fc3bb27aa78)
+[LOG] SoundI::release                          :  (0x7fc3be108798)
+[LOG] SoundI::release                          :     Sci Fi Beam Reload 1 (0x7fc3bb2539f8)
+[LOG] SoundI::release                          :  (0x7fc3b4c49c28)
+[LOG] SoundI::release                          :     Bloody stabs 8 (0x7fc3b389d0b8)
+[LOG] SoundI::release                          :  (0x7fc3b3885e78)
+[LOG] SoundI::release                          :     Sword Woosh 15 (0x7fc3bce27cd8)
+[LOG] SoundI::release                          :  (0x7fc3b38d8a78)
+[LOG] SoundI::release                          :     Metal Heavy 5 (0x7fc3bced2ee8)
+[LOG] SoundI::release                          :  (0x7fc3b48976c8)
+[LOG] SoundI::release                          :     Metal Light 3 (0x7fc3bacd4038)
+[LOG] SoundI::release                          :  (0x7fc3b388aa28)
+[LOG] SoundI::release                          :     Glass 7 (0x7fc3be1e9fc8)
+[LOG] SoundI::release                          :  (0x7fc3bce224e8)
+[LOG] SoundI::release                          :     Body Armor 1 (0x7fc3bb295d28)
+[LOG] SoundI::release                          :  (0x7fc3b38ba348)
+[LOG] SoundI::release                          :     Impact Horn 4 (0x7fc3be168868)
+[LOG] SoundI::release                          :  (0x7fc3b38cf128)
+[LOG] SoundI::release                          :     EMP Explosion (0x7fc3be1efb78)
+[LOG] SoundI::release                          :  (0x7fc3baa314d8)
+[LOG] SoundI::release                          :     Metal Trap Closing (0x7fc3be14f138)
+[LOG] SoundI::release                          :  (0x7fc3bceaceb8)
+[LOG] SoundI::release                          :     Collect star 2 (0x7fc3bb2a65b8)
+[LOG] SoundI::release                          :  (0x7fc3b8477558)
+[LOG] SoundI::release                          :     Dry shot 1 (0x7fc3bce2bce8)
+[LOG] SoundI::release                          :  (0x7fc3bc8dda38)
+[LOG] SoundI::release                          :     Sword impact (Flesh) 2 (0x7fc3bb2a2548)
+[LOG] SoundI::release                          :  (0x7fc3bc8b8668)
+[LOG] SoundI::release                          :     Stabbing (Person) 4 (0x7fc3bb2f3de8)
+[LOG] SoundI::release                          :  (0x7fc3b841f468)
+[LOG] SoundI::release                          :     Sweep 3 (0x7fc3b489c028)
+[LOG] SoundI::release                          :  (0x7fc3bcee5288)
+[LOG] SoundI::release                          :     Sci Fi Grenade 1 (0x7fc3bb22a9a8)
+[LOG] SoundI::release                          :  (0x7fc3bb6cf798)
+[LOG] SoundI::release                          :     Sweep 2 (0x7fc3be0a7a98)
+[LOG] SoundI::release                          :  (0x7fc3be196818)
+[LOG] SoundI::release                          :     Electric Spark 4 (0x7fc3bb24e758)
+[LOG] SoundI::release                          :  (0x7fc3bceb1c48)
+[LOG] SoundI::release                          :     Mag Out (0x7fc3bb2aa188)
+[LOG] SoundI::release                          :  (0x7fc3be15f6f8)
+[LOG] SoundI::release                          :     Sweep_Water 1 (0x7fc3bb29afb8)
+[LOG] SoundI::release                          :  (0x7fc3b84c3f88)
+[LOG] SoundI::release                          :     EMP Explosion 3 (0x7fc3bce04d28)
+[LOG] SoundI::release                          :  (0x7fc3b84fb2c8)
+[LOG] SoundI::release                          :     Explosion Small 3 (0x7fc3bcee54d8)
+[LOG] SoundI::release                          :  (0x7fc3b9dd5c98)
+[LOG] SoundI::release                          :     Torch Swing (0x7fc3bb29bc28)
+[LOG] SoundI::release                          :  (0x7fc3b38146c8)
+[LOG] SoundI::release                          :     Fire put out 10 (0x7fc3b4f588b8)
+[LOG] SoundI::release                          :  (0x7fc3bc8feff8)
+[LOG] SoundI::release                          :     Explosion Barrel (0x7fc3bb2dc088)
+[LOG] SoundI::release                          :  (0x7fc3baaeb1c8)
+[LOG] SoundI::release                          :     Light  Metal footsteps 1 (0x7fc3be1730b8)
+[LOG] SoundI::release                          :  (0x7fc3b38886d8)
+[LOG] SoundI::release                          :     Impact 1 (0x7fc3be1e2fd8)
+[LOG] SoundI::release                          :  (0x7fc3b842eb88)
+[LOG] SoundI::release                          :     Welding 4 (0x7fc3bcee7f68)
+[LOG] SoundI::release                          :  (0x7fc3b4c77908)
+[LOG] SoundI::release                          :     Flame Whoosh 7 (0x7fc3b38b7ba8)
+[LOG] SoundI::release                          :  (0x7fc3b38d54e8)
+[LOG] SoundI::release                          :     Blow Torch Loop 4 (0x7fc3b384fbf8)
+[LOG] SoundI::release                          :  (0x7fc3b84542b8)
+[LOG] SoundI::release                          :     Sci Fi Shotgun 2 (0x7fc3bb2c4438)
+[LOG] SoundI::release                          :  (0x7fc3bce93498)
+[LOG] SoundI::release                          :     Impact Blood (0x7fc3bb283b78)
+[LOG] SoundI::release                          :  (0x7fc3bc880ee8)
+[LOG] SoundI::release                          :     Explosion Small 5 (0x7fc3bb22d7b8)
+[LOG] SoundI::release                          :  (0x7fc3be16c8b8)
+[LOG] SoundI::release                          :     Impact 6 (0x7fc3bb23ddf8)
+[LOG] Thread::callback                         : FMOD Studio update thread finished.
+[LOG] Thread::callback                         : FMOD Studio bank load thread finished.
+[LOG] Profile::disconnectAll                   : Profiler disconnecting all clients
+[LOG] Thread::callback                         : FMOD Studio sample load thread finished.
+[LOG] LiveUpdate::release                      : 
+[LOG] LiveUpdate::reset                        : Reset connection (reason Disconnected)
+[LOG] Thread::callback                         : FMOD stream thread finished.
+[LOG] Thread::callback                         : FMOD mixer thread finished.
+[LOG] Profile::disconnectAll                   : Profiler disconnecting all clients
+[LOG] SystemI::close                           : Closed.
+[ERR] assert                                   : assertion: 'gSystemInitCount == 0' failed

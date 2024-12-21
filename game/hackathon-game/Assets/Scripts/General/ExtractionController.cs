@@ -13,10 +13,10 @@ public class ExtractionController : MonoBehaviour
     [SerializeField] private GameObject _vfx;
 
 
-    // public void Start()
-    // {
-    //     Invoke("ActivatePlatform", 6f);
-    // }
+    public void Start()
+    {
+        Invoke("ActivatePlatform", 6f);
+    }
 
     void OnTriggerEnter(Collider other)
     {
@@ -24,15 +24,17 @@ public class ExtractionController : MonoBehaviour
         {
             if (_player == null) _player = other.gameObject;
 
-            if (GameManager.Instance.HasCollectedAll())
-            {
-                PlayerStateMachine._interact += CompleteLevel;
-                InteractTextController._setInteractionText(true, "Press 'E' to Extract (▲ or Y on Controller)");
-            }
-            else
-            {
-                InteractTextController._setInteractionText(true, "Collect All Stars To Extract");
-            }
+            PlayerStateMachine._interact += CompleteLevel;
+            InteractTextController._setInteractionText(true, "Press 'E' to Extract (▲ or Y on Controller)");
+            // if (GameManager.Instance.HasCollectedAll())
+            // {
+            //     PlayerStateMachine._interact += CompleteLevel;
+            //     InteractTextController._setInteractionText(true, "Press 'E' to Extract (▲ or Y on Controller)");
+            // }
+            // else
+            // {
+            //     InteractTextController._setInteractionText(true, "Collect All Stars To Extract");
+            // }
         }
 
     }
@@ -62,7 +64,8 @@ public class ExtractionController : MonoBehaviour
         // activate vfx
         _vfx.SetActive(true);
 
-        // play sfx
+        // Play sfx
+        AudioManager.Instance.PlaySfx(AudioManager.Instance._extractionReadySfx);
 
         // let player know on hud
         HUDManager._noticeUpdater?.Invoke("The extraction platform is ready");
@@ -87,6 +90,10 @@ public class ExtractionController : MonoBehaviour
         _playerCC = _player.GetComponent<CharacterController>();
         _playerCC.detectCollisions = false;
         _completionTriggered = true;
+
+        // Play sfx
+        AudioManager.Instance.PlaySfx(AudioManager.Instance._playerExtractSfx);
+
         Invoke("CameraStopsFollowPlayer", _cameraFollowTime);
 
         // Stop time count

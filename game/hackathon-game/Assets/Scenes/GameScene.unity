@@ -3301,6 +3301,20 @@ MonoBehaviour:
       Data3: -1951497824
       Data4: -1105345084
     Path: event:/Spike Trap - Metal Trap Closing
+  _extractionReadyRef:
+    Guid:
+      Data1: -1862662071
+      Data2: 1295626297
+      Data3: -654796904
+      Data4: -536352854
+    Path: event:/Extraction Ready - Impact Horn 4
+  _playerExtractRef:
+    Guid:
+      Data1: 1061035879
+      Data2: 1285717555
+      Data3: -1294154320
+      Data4: 1521354836
+    Path: event:/Player Extract - Sweep 3
 --- !u!4 &1334768874
 Transform:
   m_ObjectHideFlags: 0

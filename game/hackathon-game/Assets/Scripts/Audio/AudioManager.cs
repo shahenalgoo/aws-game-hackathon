@@ -71,6 +71,12 @@ public class AudioManager : MonoBehaviour
     [SerializeField] private EventReference _spikeTrapRef;
     public EventInstance _spikeTrapSfx;
 
+    [Header("EXTRACTION")]
+    [SerializeField] private EventReference _extractionReadyRef;
+    public EventInstance _extractionReadySfx;
+    [SerializeField] private EventReference _playerExtractRef;
+    public EventInstance _playerExtractSfx;
+
 
 
 
@@ -139,7 +145,8 @@ public class AudioManager : MonoBehaviour
 
         _spikeTrapSfx = RuntimeManager.CreateInstance(_spikeTrapRef);
 
-
+        _extractionReadySfx = RuntimeManager.CreateInstance(_extractionReadyRef);
+        _playerExtractSfx = RuntimeManager.CreateInstance(_playerExtractRef);
     }
 
     public void PlaySfx(EventInstance sfx)
