@@ -9,9 +9,10 @@ const orbitron = Orbitron({
 	display: 'swap',
 });
 
-import useSound from 'use-sound';
 import { MoveRight } from "lucide-react";
-const SOUND_URL = '/sfx/ui-hover.wav';
+
+import useSound from 'use-sound';
+const SOUND_URL = '/sfx/ui-click.wav';
 
 interface MainMenuButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 	title: string;
@@ -28,14 +29,6 @@ const MainMenuButton: FC<MainMenuButtonProps> = ({ onClick, title, description }
 		<>
 			<button
 				onClick={onClick}
-				// onMouseEnter={() => {
-				// 	setIsHovering(true);
-				// 	play();
-				// }}
-				// onMouseLeave={() => {
-				// 	setIsHovering(false);
-				// 	stop();
-				// }}
 				onMouseDown={() => {
 					play()
 				}}

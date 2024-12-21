@@ -6,11 +6,13 @@
 
 generator client {
     provider = "prisma-client-js"
+    // previewFeatures = ["driverAdapters"]
 }
 
 datasource db {
-    provider = "postgresql"
-    url      = env("DATABASE_URL")
+    provider  = "postgresql"
+    url       = env("DATABASE_URL")
+    directUrl = env("DIRECT_URL")
 }
 
 model User {
@@ -18,9 +20,11 @@ model User {
     name          String?
     email         String          @unique
     emailVerified DateTime?
+    username      String?         @unique
     image         String?
     accounts      Account[]
     sessions      Session[]
+    leaderboard   Leaderboard?
     // Optional for WebAuthn support
     Authenticator Authenticator[]
 
@@ -81,4 +85,12 @@ model Authenticator {
     user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 
     @@id([userId, credentialID])
+}
+
+model Leaderboard {
+    userId String @unique
+    user   User   @relation(fields: [userId], references: [id])
+    score  Int
+
+    @@id([userId])
 }

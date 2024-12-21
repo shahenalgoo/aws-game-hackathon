@@ -16,6 +16,7 @@ import MainMenu from "@/components/main-menu";
 import MainMenuButton from "@/components/main-menu-btn";
 import GameDialog from "@/components/dialog";
 import LevelSelector from "@/components/level-selector";
+import DialogAuth from "@/components/dialog-auth";
 
 
 export default function Game() {
@@ -147,6 +148,8 @@ export default function Game() {
 			</MainMenu>
 
 			<LevelSelector />
+
+			<DialogAuth />
 
 			{/* <GameDialog container={containerRef} className="" /> */}
 

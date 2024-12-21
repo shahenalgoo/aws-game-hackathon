@@ -9,10 +9,20 @@ import { Separator } from "./ui/separator";
 import { Button } from "./ui/button";
 import { CircleUser, Trophy } from "lucide-react";
 
+import useSound from 'use-sound';
+const SOUND_URL = '/sfx/ui-click.wav';
+
 interface MainMenuProps extends HTMLAttributes<HTMLDivElement> { }
 
 const MainMenu: FC<MainMenuProps> = ({ children, ...props }) => {
-	const { isMainMenuActive } = useGameStore();
+
+	const { isMainMenuActive, setProfileDialogActive } = useGameStore();
+	const [play] = useSound(SOUND_URL, { volume: 1 });
+
+	const handleProfileDialog = () => {
+		play();
+		setProfileDialogActive(true);
+	}
 
 	if (!isMainMenuActive) return null;
 
@@ -37,8 +47,8 @@ const MainMenu: FC<MainMenuProps> = ({ children, ...props }) => {
 					<Separator className="w-24 mx-auto" />
 
 					<div className="flex gap-2">
-						<Button variant={"secondary"} size={"lg"} className="w-full">
-							<CircleUser /> Profile
+						<Button onClick={handleProfileDialog} variant={"secondary"} size={"lg"} className="w-full">
+							<CircleUser /> Sign In
 						</Button>
 						<Button variant={"secondary"} size={"lg"} className="w-full">
 							<Trophy /> Leaderboard

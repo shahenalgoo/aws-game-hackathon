@@ -2,18 +2,16 @@ import { NextResponse } from "next/server";
 import { prisma } from "@/prisma/client";
 
 export async function GET() {
-	// const response = await prisma.leaderboard.create({
-	// 	data: {
-	// 		userId: "1",
-	// 		score: 10
-	// 	}
-	// });
-
-	// return NextResponse.json("Hello World");
 	const response = await prisma.leaderboard.findMany({
 		include: {
-			user: true
-		}
+			user: {
+				select: {
+					username: true,
+					image: true,
+				}
+			}
+		},
 	});
 	return NextResponse.json(response);
+
 }
