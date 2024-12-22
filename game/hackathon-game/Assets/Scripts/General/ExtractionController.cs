@@ -13,10 +13,10 @@ public class ExtractionController : MonoBehaviour
     [SerializeField] private GameObject _vfx;
 
 
-    public void Start()
-    {
-        Invoke("ActivatePlatform", 6f);
-    }
+    // public void Start()
+    // {
+    //     Invoke("ActivatePlatform", 6f);
+    // }
 
     void OnTriggerEnter(Collider other)
     {
@@ -24,17 +24,15 @@ public class ExtractionController : MonoBehaviour
         {
             if (_player == null) _player = other.gameObject;
 
-            PlayerStateMachine._interact += CompleteLevel;
-            InteractTextController._setInteractionText(true, "Press 'E' to Extract (▲ or Y on Controller)");
-            // if (GameManager.Instance.HasCollectedAll())
-            // {
-            //     PlayerStateMachine._interact += CompleteLevel;
-            //     InteractTextController._setInteractionText(true, "Press 'E' to Extract (▲ or Y on Controller)");
-            // }
-            // else
-            // {
-            //     InteractTextController._setInteractionText(true, "Collect All Stars To Extract");
-            // }
+            if (GameManager.Instance.HasCollectedAll())
+            {
+                PlayerStateMachine._interact += CompleteLevel;
+                InteractTextController._setInteractionText(true, "Press 'E' to Extract (▲ or Y on Controller)");
+            }
+            else
+            {
+                InteractTextController._setInteractionText(true, "Collect All Stars To Extract");
+            }
         }
 
     }

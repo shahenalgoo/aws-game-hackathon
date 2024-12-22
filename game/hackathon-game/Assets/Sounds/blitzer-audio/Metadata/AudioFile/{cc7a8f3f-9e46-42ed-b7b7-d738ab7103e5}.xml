@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.02.00">
+	<object class="AudioFile" id="{cc7a8f3f-9e46-42ed-b7b7-d738ab7103e5}">
+		<property name="assetPath">
+			<value>Mysterious space atmosphere_08.wav</value>
+		</property>
+		<property name="isStreaming">
+			<value>true</value>
+		</property>
+		<property name="frequencyInKHz">
+			<value>44.0999985</value>
+		</property>
+		<property name="channelCount">
+			<value>2</value>
+		</property>
+		<property name="length">
+			<value>91.408843537414967</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{302da032-5a04-477e-8bf5-cee54acd906c}</destination>
+		</relationship>
+	</object>
+</objects>

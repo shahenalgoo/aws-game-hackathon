@@ -2,12 +2,11 @@
 [LOG] Manager::init                            : maxchannels = 256 studioflags = 00000006 flags 00000000 extradriverdata 0x0.
 [LOG] SystemI::init                            : Initialize version=20226 (148250), maxchannels=256, flags=0x00020000
 [LOG] SystemI::setOutputInternal               : Setting output to 'FMOD Core Audio Output'
-[LOG] OutputCoreAudio::init                    : Output running 2 channels at 44100Hz sample rate.
+[LOG] OutputCoreAudio::init                    : Output running 2 channels at 48000Hz sample rate.
 [LOG] OutputCoreAudio::init                    : Maximum hardware read size: 512 samples, Software buffer size: 512 samples, Number of software buffers: 4.
-[LOG] SystemI::init                            : Output requires a sample rate of 44100Hz, resampling will occur.
 [LOG] Thread::initThread                       : Init FMOD stream thread. Affinity: 0x4000000000000003, Priority: 0xFFFF7FFB, Stack Size: 98304, Semaphore: No, Sleep Time: 10, Looping: Yes.
 [LOG] Thread::initThread                       : Init FMOD mixer thread. Affinity: 0x4000000000000001, Priority: 0xFFFF7FFA, Stack Size: 81920, Semaphore: Yes, Sleep Time: 0, Looping: Yes.
-[LOG] AsyncManager::init                       : manager 0x7fd02ac54e08 isAsync 0 updatePeriod 0.02
+[LOG] AsyncManager::init                       : manager 0x7ff2a9111a08 isAsync 0 updatePeriod 0.02
 [LOG] AsyncManager::init                       : done
 [LOG] PlaybackSystem::init                     : 
 [LOG] Thread::initThread                       : Init FMOD Studio sample load thread. Affinity: 0x4000000000000003, Priority: 0xFFFF7FFD, Stack Size: 98304, Semaphore: No, Sleep Time: 1, Looping: No.
@@ -17,76 +16,204 @@
 [LOG] Manager::readBank                        : fileversion = 142, compatVersion = 140 (oldest = 44, newest = 142)
 [LOG] Manager::readBank                        : fileversion = 142, compatVersion = 140 (oldest = 44, newest = 142)
 [LOG] PlaybackSystem::acquireMasterBus         : Setting master channel group format to 6
-[LOG] SoundI::release                          :  (0x7fd031250a48)
-[LOG] SoundI::release                          :     Sci Fi Assault Rifle 1 (0x7fd0312b4408)
-[LOG] SoundI::release                          :  (0x7fd0312b4728)
-[LOG] SoundI::release                          :     Sci Fi Beam Reload 1 (0x7fd0312b4898)
-[LOG] SoundI::release                          :  (0x7fd0268bed78)
-[LOG] SoundI::release                          :     Bloody stabs 8 (0x7fd0268beee8)
-[LOG] SoundI::release                          :  (0x7fd031207748)
-[LOG] SoundI::release                          :     Sword Woosh 15 (0x7fd0312078b8)
-[LOG] SoundI::release                          :  (0x7fd0312591a8)
-[LOG] SoundI::release                          :     Metal Heavy 5 (0x7fd031259318)
-[LOG] SoundI::release                          :  (0x7fd03125fbc8)
-[LOG] SoundI::release                          :     Metal Light 3 (0x7fd03125fd38)
-[LOG] SoundI::release                          :  (0x7fd0268b12f8)
-[LOG] SoundI::release                          :     Glass 7 (0x7fd0268b1468)
-[LOG] SoundI::release                          :  (0x7fd031263638)
-[LOG] SoundI::release                          :     Body Armor 1 (0x7fd0312637a8)
-[LOG] SoundI::release                          :  (0x7fd0312542c8)
-[LOG] SoundI::release                          :     Impact Horn 4 (0x7fd031219598)
-[LOG] SoundI::release                          :  (0x7fd026875248)
-[LOG] SoundI::release                          :     EMP Explosion (0x7fd0268753b8)
-[LOG] SoundI::release                          :  (0x7fd0268b15f8)
-[LOG] SoundI::release                          :     Metal Trap Closing (0x7fd026862218)
-[LOG] SoundI::release                          :  (0x7fd031263f58)
-[LOG] SoundI::release                          :     Collect star 2 (0x7fd031256be8)
-[LOG] SoundI::release                          :  (0x7fd0312c1fb8)
-[LOG] SoundI::release                          :     Dry shot 1 (0x7fd0312c2128)
-[LOG] SoundI::release                          :  (0x7fd031219d48)
-[LOG] SoundI::release                          :     Sword impact (Flesh) 2 (0x7fd03129b478)
-[LOG] SoundI::release                          :  (0x7fd0312198b8)
-[LOG] SoundI::release                          :     Stabbing (Person) 4 (0x7fd031219a28)
-[LOG] SoundI::release                          :  (0x7fd03129c0b8)
-[LOG] SoundI::release                          :     Sweep 3 (0x7fd03129c228)
-[LOG] SoundI::release                          :  (0x7fd031256f08)
-[LOG] SoundI::release                          :     Sci Fi Grenade 1 (0x7fd031257078)
-[LOG] SoundI::release                          :  (0x7fd03125f738)
-[LOG] SoundI::release                          :     Sweep 2 (0x7fd03125f8a8)
-[LOG] SoundI::release                          :  (0x7fd0312b4bb8)
-[LOG] SoundI::release                          :     Electric Spark 4 (0x7fd0312b4d28)
-[LOG] SoundI::release                          :  (0x7fd031263ac8)
-[LOG] SoundI::release                          :     Mag Out (0x7fd031263c38)
-[LOG] SoundI::release                          :  (0x7fd0312b5048)
-[LOG] SoundI::release                          :     Sweep_Water 1 (0x7fd0312583e8)
-[LOG] SoundI::release                          :  (0x7fd031214208)
-[LOG] SoundI::release                          :     EMP Explosion 3 (0x7fd031214378)
-[LOG] SoundI::release                          :  (0x7fd03129c548)
-[LOG] SoundI::release                          :     Explosion Small 3 (0x7fd03129c6b8)
-[LOG] SoundI::release                          :  (0x7fd03129bc28)
-[LOG] SoundI::release                          :     Torch Swing (0x7fd03129bd98)
-[LOG] SoundI::release                          :  (0x7fd031259638)
-[LOG] SoundI::release                          :     Fire put out 10 (0x7fd0312597a8)
-[LOG] SoundI::release                          :  (0x7fd03129b798)
-[LOG] SoundI::release                          :     Explosion Barrel (0x7fd03129b908)
-[LOG] SoundI::release                          :  (0x7fd0268f0bd8)
-[LOG] SoundI::release                          :     Light  Metal footsteps 1 (0x7fd02685b0c8)
-[LOG] SoundI::release                          :  (0x7fd026870fe8)
-[LOG] SoundI::release                          :     Impact 1 (0x7fd026871158)
-[LOG] SoundI::release                          :  (0x7fd031214508)
-[LOG] SoundI::release                          :     Welding 4 (0x7fd0312bb508)
-[LOG] SoundI::release                          :  (0x7fd031260058)
-[LOG] SoundI::release                          :     Flame Whoosh 7 (0x7fd0312601c8)
-[LOG] SoundI::release                          :  (0x7fd026880018)
-[LOG] SoundI::release                          :     Blow Torch Loop 4 (0x7fd026880188)
-[LOG] SoundI::release                          :  (0x7fd0312631a8)
-[LOG] SoundI::release                          :     Sci Fi Shotgun 2 (0x7fd031263318)
-[LOG] SoundI::release                          :  (0x7fd0312505b8)
-[LOG] SoundI::release                          :     Impact Blood (0x7fd031250728)
-[LOG] SoundI::release                          :  (0x7fd0268e3de8)
-[LOG] SoundI::release                          :     Explosion Small 5 (0x7fd0268e3f58)
-[LOG] SoundI::release                          :  (0x7fd031258708)
-[LOG] SoundI::release                          :     Impact 6 (0x7fd031258878)
+[LOG] SystemI::createSound                     : filename = Assets/Sounds/blitzer-audio/Build/Desktop/Master.bank : mode 02010082
+[LOG] SystemI::createSound                     : FMOD_NONBLOCKING specified.  Putting into queue to be opened asynchronously!
+[LOG] Thread::initThread                       : Init FMOD nonblocking thread (0). Affinity: 0x4000000000000003, Priority: 0xFFFF7FFC, Stack Size: 114688, Semaphore: Yes, Sleep Time: 0, Looping: Yes.
+[LOG] AsyncThread::add                         : add sound to async queue : soundi = 0x7ff2b5884b78, queue head = 0x7ff299963dc8, queue count = 0
+[LOG] AsyncThread::threadFunc                  : Starting Asynchronous operation on sound 0x7ff2b5884b78
+[LOG] SystemI::createSoundInternal             :     Create name='Assets/Sounds/blitzer-audio/Build/Desktop/Master.bank', mode=0x02010082
+[LOG] SystemI::createSoundInternal             :     exinfo->cbsize             = 224
+[LOG] SystemI::createSoundInternal             :     exinfo->length             = 2202240
+[LOG] SystemI::createSoundInternal             :     exinfo->fileoffset         = 41888
+[LOG] SystemI::createSoundInternal             :     exinfo->numsubsounds       = 1
+[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlist      = 0x7ff29ee1a440
+[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlistnum   = 1
+[LOG] SystemI::createSoundInternal             :     exinfo->suggestedsoundtype = 5
+[LOG] SystemI::createSoundInternal             :     exinfo->initialseekpostype = 1
+[LOG] SystemI::createSoundInternal             :     Stream 0/1: name='Mysterious space atmosphere_08', format=5, channels=2, frequency=48000, lengthbytes=1166688, lengthpcm=4387624, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.999969.
+[LOG] Thread::initThread                       :     Init FMOD file thread. Affinity: 0x4000000000000003, Priority: 0xFFFF7FFC, Stack Size: 65536, Semaphore: No, Sleep Time: 10, Looping: Yes.
+[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 0x7ff2b5884b78
+[LOG] AsyncThread::add                         : add sound to async queue : soundi = 0x7ff2a09fe318, queue head = 0x7ff299963dc8, queue count = 0
+[LOG] AsyncThread::threadFunc                  : Starting Asynchronous operation on sound 0x7ff2a09fe318
+[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 0x7ff2a09fe318
+[LOG] SystemI::createSound                     : filename = Assets/Sounds/blitzer-audio/Build/Desktop/Master.bank : mode 02010082
+[LOG] SystemI::createSound                     : FMOD_NONBLOCKING specified.  Putting into queue to be opened asynchronously!
+[LOG] AsyncThread::add                         : add sound to async queue : soundi = 0x7ff2ac523178, queue head = 0x7ff299963dc8, queue count = 0
+[LOG] AsyncThread::threadFunc                  : Starting Asynchronous operation on sound 0x7ff2ac523178
+[LOG] SystemI::createSoundInternal             :     Create name='Assets/Sounds/blitzer-audio/Build/Desktop/Master.bank', mode=0x02010082
+[LOG] SystemI::createSoundInternal             :     exinfo->cbsize             = 224
+[LOG] SystemI::createSoundInternal             :     exinfo->length             = 2202240
+[LOG] SystemI::createSoundInternal             :     exinfo->fileoffset         = 41888
+[LOG] SystemI::createSoundInternal             :     exinfo->numsubsounds       = 1
+[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlist      = 0x7ff2a6fb7230
+[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlistnum   = 1
+[LOG] SystemI::createSoundInternal             :     exinfo->suggestedsoundtype = 5
+[LOG] SystemI::createSoundInternal             :     exinfo->initialseekpostype = 1
+[LOG] SystemI::createSoundInternal             :     Stream 0/1: name='Mysterious space atmosphere_08', format=5, channels=2, frequency=48000, lengthbytes=1166688, lengthpcm=4387624, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.999969.
+[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 0x7ff2ac523178
+[LOG] SoundI::release                          : Mysterious space atmosphere_08 (0x7ff2b5884b78)
+[LOG] SoundI::release                          :     Mysterious space atmosphere_08 (0x7ff2a65fa288)
+[LOG] SoundI::release                          :     Mysterious space atmosphere_08 (0x7ff2a09fe318)
+[LOG] AsyncThread::add                         : add sound to async queue : soundi = 0x7ff2a6d076e8, queue head = 0x7ff299963dc8, queue count = 0
+[LOG] AsyncThread::threadFunc                  : Starting Asynchronous operation on sound 0x7ff2a6d076e8
+[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 0x7ff2a6d076e8
+[LOG] AsyncThread::add                         : add sound to async queue : soundi = 0x7ff2a6d076e8, queue head = 0x7ff299963dc8, queue count = 0
+[LOG] AsyncThread::threadFunc                  : Starting Asynchronous operation on sound 0x7ff2a6d076e8
+[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 0x7ff2a6d076e8
+[LOG] SystemI::createSound                     : filename = Assets/Sounds/blitzer-audio/Build/Desktop/Master.bank : mode 02010082
+[LOG] SystemI::createSound                     : FMOD_NONBLOCKING specified.  Putting into queue to be opened asynchronously!
+[LOG] AsyncThread::add                         : add sound to async queue : soundi = 0x7ff2a65c7b78, queue head = 0x7ff299963dc8, queue count = 0
+[LOG] AsyncThread::threadFunc                  : Starting Asynchronous operation on sound 0x7ff2a65c7b78
+[LOG] SystemI::createSoundInternal             :     Create name='Assets/Sounds/blitzer-audio/Build/Desktop/Master.bank', mode=0x02010082
+[LOG] SystemI::createSoundInternal             :     exinfo->cbsize             = 224
+[LOG] SystemI::createSoundInternal             :     exinfo->length             = 2202240
+[LOG] SystemI::createSoundInternal             :     exinfo->fileoffset         = 41888
+[LOG] SystemI::createSoundInternal             :     exinfo->numsubsounds       = 1
+[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlist      = 0x7ff2aae80880
+[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlistnum   = 1
+[LOG] SystemI::createSoundInternal             :     exinfo->suggestedsoundtype = 5
+[LOG] SystemI::createSoundInternal             :     exinfo->initialseekpostype = 1
+[LOG] SystemI::createSoundInternal             :     Stream 0/1: name='Mysterious space atmosphere_08', format=5, channels=2, frequency=48000, lengthbytes=1166688, lengthpcm=4387624, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.999969.
+[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 0x7ff2a65c7b78
+[LOG] SoundI::release                          : Mysterious space atmosphere_08 (0x7ff2ac523178)
+[LOG] SoundI::release                          :     Mysterious space atmosphere_08 (0x7ff2a6d07558)
+[LOG] SoundI::release                          :     Mysterious space atmosphere_08 (0x7ff2a6d076e8)
+[LOG] AsyncThread::add                         : add sound to async queue : soundi = 0x7ff2ac523428, queue head = 0x7ff299963dc8, queue count = 0
+[LOG] AsyncThread::threadFunc                  : Starting Asynchronous operation on sound 0x7ff2ac523428
+[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 0x7ff2ac523428
+[LOG] SoundI::release                          : Mysterious space atmosphere_08 (0x7ff2a65c7b78)
+[LOG] SoundI::release                          :     Mysterious space atmosphere_08 (0x7ff2a0737338)
+[LOG] SoundI::release                          :     Mysterious space atmosphere_08 (0x7ff2ac523428)
+[LOG] SystemI::createSound                     : filename = Assets/Sounds/blitzer-audio/Build/Desktop/Master.bank : mode 02010082
+[LOG] SystemI::createSound                     : FMOD_NONBLOCKING specified.  Putting into queue to be opened asynchronously!
+[LOG] AsyncThread::add                         : add sound to async queue : soundi = 0x7ff2ac523428, queue head = 0x7ff299963dc8, queue count = 0
+[LOG] AsyncThread::threadFunc                  : Starting Asynchronous operation on sound 0x7ff2ac523428
+[LOG] SystemI::createSoundInternal             :     Create name='Assets/Sounds/blitzer-audio/Build/Desktop/Master.bank', mode=0x02010082
+[LOG] SystemI::createSoundInternal             :     exinfo->cbsize             = 224
+[LOG] SystemI::createSoundInternal             :     exinfo->length             = 2202240
+[LOG] SystemI::createSoundInternal             :     exinfo->fileoffset         = 41888
+[LOG] SystemI::createSoundInternal             :     exinfo->numsubsounds       = 1
+[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlist      = 0x7ff2b06255b0
+[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlistnum   = 1
+[LOG] SystemI::createSoundInternal             :     exinfo->suggestedsoundtype = 5
+[LOG] SystemI::createSoundInternal             :     exinfo->initialseekpostype = 1
+[LOG] SystemI::createSoundInternal             :     Stream 0/1: name='Mysterious space atmosphere_08', format=5, channels=2, frequency=48000, lengthbytes=1166688, lengthpcm=4387624, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.999969.
+[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 0x7ff2ac523428
+[LOG] AsyncThread::add                         : add sound to async queue : soundi = 0x7ff2b5861ff8, queue head = 0x7ff299963dc8, queue count = 0
+[LOG] AsyncThread::threadFunc                  : Starting Asynchronous operation on sound 0x7ff2b5861ff8
+[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 0x7ff2b5861ff8
+[LOG] SoundI::release                          : Mysterious space atmosphere_08 (0x7ff2ac523428)
+[LOG] SoundI::release                          :     Mysterious space atmosphere_08 (0x7ff29ee211a8)
+[LOG] SoundI::release                          :     Mysterious space atmosphere_08 (0x7ff2b5861ff8)
+[LOG] SystemI::createSound                     : filename = Assets/Sounds/blitzer-audio/Build/Desktop/Master.bank : mode 02010082
+[LOG] SystemI::createSound                     : FMOD_NONBLOCKING specified.  Putting into queue to be opened asynchronously!
+[LOG] AsyncThread::add                         : add sound to async queue : soundi = 0x7ff2ac523428, queue head = 0x7ff299963dc8, queue count = 0
+[LOG] AsyncThread::threadFunc                  : Starting Asynchronous operation on sound 0x7ff2ac523428
+[LOG] SystemI::createSoundInternal             :     Create name='Assets/Sounds/blitzer-audio/Build/Desktop/Master.bank', mode=0x02010082
+[LOG] SystemI::createSoundInternal             :     exinfo->cbsize             = 224
+[LOG] SystemI::createSoundInternal             :     exinfo->length             = 2202240
+[LOG] SystemI::createSoundInternal             :     exinfo->fileoffset         = 41888
+[LOG] SystemI::createSoundInternal             :     exinfo->numsubsounds       = 1
+[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlist      = 0x7ff2a6fb7230
+[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlistnum   = 1
+[LOG] SystemI::createSoundInternal             :     exinfo->suggestedsoundtype = 5
+[LOG] SystemI::createSoundInternal             :     exinfo->initialseekpostype = 1
+[LOG] SystemI::createSoundInternal             :     Stream 0/1: name='Mysterious space atmosphere_08', format=5, channels=2, frequency=48000, lengthbytes=1166688, lengthpcm=4387624, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.999969.
+[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 0x7ff2ac523428
+[LOG] AsyncThread::add                         : add sound to async queue : soundi = 0x7ff2a9ad8b08, queue head = 0x7ff299963dc8, queue count = 0
+[LOG] AsyncThread::threadFunc                  : Starting Asynchronous operation on sound 0x7ff2a9ad8b08
+[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 0x7ff2a9ad8b08
+[LOG] SystemI::createSound                     : filename = Assets/Sounds/blitzer-audio/Build/Desktop/Master.bank : mode 02010082
+[LOG] SystemI::createSound                     : FMOD_NONBLOCKING specified.  Putting into queue to be opened asynchronously!
+[LOG] AsyncThread::add                         : add sound to async queue : soundi = 0x7ff2a6e3e1f8, queue head = 0x7ff299963dc8, queue count = 0
+[LOG] AsyncThread::threadFunc                  : Starting Asynchronous operation on sound 0x7ff2a6e3e1f8
+[LOG] SystemI::createSoundInternal             :     Create name='Assets/Sounds/blitzer-audio/Build/Desktop/Master.bank', mode=0x02010082
+[LOG] SystemI::createSoundInternal             :     exinfo->cbsize             = 224
+[LOG] SystemI::createSoundInternal             :     exinfo->length             = 2202240
+[LOG] SystemI::createSoundInternal             :     exinfo->fileoffset         = 41888
+[LOG] SystemI::createSoundInternal             :     exinfo->numsubsounds       = 1
+[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlist      = 0x7ff2a6e1e260
+[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlistnum   = 1
+[LOG] SystemI::createSoundInternal             :     exinfo->suggestedsoundtype = 5
+[LOG] SystemI::createSoundInternal             :     exinfo->initialseekpostype = 1
+[LOG] SystemI::createSoundInternal             :     Stream 0/1: name='Mysterious space atmosphere_08', format=5, channels=2, frequency=48000, lengthbytes=1166688, lengthpcm=4387624, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.999969.
+[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 0x7ff2a6e3e1f8
+[LOG] SoundI::release                          : Mysterious space atmosphere_08 (0x7ff2ac523428)
+[LOG] SoundI::release                          :     Mysterious space atmosphere_08 (0x7ff2a9ad8978)
+[LOG] SoundI::release                          :     Mysterious space atmosphere_08 (0x7ff2a9ad8b08)
+[LOG] SoundI::release                          : Mysterious space atmosphere_08 (0x7ff2a6e3e1f8)
+[LOG] SoundI::release                          :     Mysterious space atmosphere_08 (0x7ff2a6e3e918)
+[LOG] SoundI::release                          :     Mysterious space atmosphere_08 (0x7ff2a6de32b8)
+[LOG] SoundI::release                          :  (0x7ff2a0940f58)
+[LOG] SoundI::release                          :     Sci Fi Assault Rifle 1 (0x7ff2a09b77f8)
+[LOG] SoundI::release                          :  (0x7ff2aad95798)
+[LOG] SoundI::release                          :     Sci Fi Beam Reload 1 (0x7ff29ed46b08)
+[LOG] SoundI::release                          :  (0x7ff2a00dddc8)
+[LOG] SoundI::release                          :     Bloody stabs 8 (0x7ff2a0797078)
+[LOG] SoundI::release                          :  (0x7ff299aa2ae8)
+[LOG] SoundI::release                          :     Sword Woosh 15 (0x7ff2999fe9c8)
+[LOG] SoundI::release                          :  (0x7ff299afc958)
+[LOG] SoundI::release                          :     Metal Heavy 5 (0x7ff299aaa148)
+[LOG] SoundI::release                          :  (0x7ff2a00da108)
+[LOG] SoundI::release                          :     Metal Light 3 (0x7ff2990253c8)
+[LOG] SoundI::release                          :  (0x7ff2b5fc6768)
+[LOG] SoundI::release                          :     Glass 7 (0x7ff29f1e35d8)
+[LOG] SoundI::release                          :  (0x7ff2995e7818)
+[LOG] SoundI::release                          :     Body Armor 1 (0x7ff2b2d2ca48)
+[LOG] SoundI::release                          :  (0x7ff2a1be9908)
+[LOG] SoundI::release                          :     Impact Horn 4 (0x7ff2a08fcff8)
+[LOG] SoundI::release                          :  (0x7ff2a1be9448)
+[LOG] SoundI::release                          :     EMP Explosion (0x7ff29f0067d8)
+[LOG] SoundI::release                          :  (0x7ff2b2cf8b98)
+[LOG] SoundI::release                          :     Metal Trap Closing (0x7ff29f5a6238)
+[LOG] SoundI::release                          :  (0x7ff2a097e6f8)
+[LOG] SoundI::release                          :     Collect star 2 (0x7ff2a09f9d78)
+[LOG] SoundI::release                          :  (0x7ff2b2db5538)
+[LOG] SoundI::release                          :     Dry shot 1 (0x7ff2b2d68378)
+[LOG] SoundI::release                          :  (0x7ff29f6f1458)
+[LOG] SoundI::release                          :     Sword impact (Flesh) 2 (0x7ff2b5fb2298)
+[LOG] SoundI::release                          :  (0x7ff29a35fdb8)
+[LOG] SoundI::release                          :     Stabbing (Person) 4 (0x7ff29f76f818)
+[LOG] SoundI::release                          :  (0x7ff2aacd1248)
+[LOG] SoundI::release                          :     Sweep 3 (0x7ff29df47e98)
+[LOG] SoundI::release                          :  (0x7ff2a09a0838)
+[LOG] SoundI::release                          :     Sci Fi Grenade 1 (0x7ff2a0991b58)
+[LOG] SoundI::release                          :  (0x7ff2a09a15b8)
+[LOG] SoundI::release                          :     Sweep 2 (0x7ff2a1ae53e8)
+[LOG] SoundI::release                          :  (0x7ff2a1aa8a28)
+[LOG] SoundI::release                          :     Electric Spark 4 (0x7ff2a1ab93c8)
+[LOG] SoundI::release                          :  (0x7ff2a02e5008)
+[LOG] SoundI::release                          :     Mag Out (0x7ff2a06cd328)
+[LOG] SoundI::release                          :  (0x7ff2a0932018)
+[LOG] SoundI::release                          :     Sweep_Water 1 (0x7ff2aae561c8)
+[LOG] SoundI::release                          :  (0x7ff29f5a4888)
+[LOG] SoundI::release                          :     EMP Explosion 3 (0x7ff2a0d6e158)
+[LOG] SoundI::release                          :  (0x7ff2aacdac98)
+[LOG] SoundI::release                          :     Explosion Small 3 (0x7ff29df67318)
+[LOG] SoundI::release                          :  (0x7ff2a0355f38)
+[LOG] SoundI::release                          :     Torch Swing (0x7ff2a7843b78)
+[LOG] SoundI::release                          :  (0x7ff2a08d0c88)
+[LOG] SoundI::release                          :     Fire put out 10 (0x7ff2a0806ff8)
+[LOG] SoundI::release                          :  (0x7ff29f6ca208)
+[LOG] SoundI::release                          :     Explosion Barrel (0x7ff2b5fef468)
+[LOG] SoundI::release                          :  (0x7ff29a3d9cc8)
+[LOG] SoundI::release                          :     Light  Metal footsteps 1 (0x7ff29f70fb38)
+[LOG] SoundI::release                          :  (0x7ff2b5fe1998)
+[LOG] SoundI::release                          :     Impact 1 (0x7ff29a3c9268)
+[LOG] SoundI::release                          :  (0x7ff29ed1df78)
+[LOG] SoundI::release                          :     Welding 4 (0x7ff29ed579d8)
+[LOG] SoundI::release                          :  (0x7ff2a0082478)
+[LOG] SoundI::release                          :     Flame Whoosh 7 (0x7ff2b1c3c598)
+[LOG] SoundI::release                          :  (0x7ff2a008ac38)
+[LOG] SoundI::release                          :     Blow Torch Loop 4 (0x7ff2a07b07b8)
+[LOG] SoundI::release                          :  (0x7ff2984b1fa8)
+[LOG] SoundI::release                          :     Sci Fi Shotgun 2 (0x7ff2995e47d8)
+[LOG] SoundI::release                          :  (0x7ff2a097ab38)
+[LOG] SoundI::release                          :     Impact Blood (0x7ff2a09d5b08)
+[LOG] SoundI::release                          :  (0x7ff29edb0a58)
+[LOG] SoundI::release                          :     Explosion Small 5 (0x7ff29ed3d7c8)
+[LOG] SoundI::release                          :  (0x7ff2aaed9838)
+[LOG] SoundI::release                          :     Impact 6 (0x7ff2aae23cb8)
 [LOG] Thread::callback                         : FMOD Studio update thread finished.
 [LOG] Thread::callback                         : FMOD Studio bank load thread finished.
 [LOG] Profile::disconnectAll                   : Profiler disconnecting all clients

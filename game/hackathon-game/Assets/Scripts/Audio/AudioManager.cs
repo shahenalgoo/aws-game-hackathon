@@ -10,8 +10,8 @@ public class AudioManager : MonoBehaviour
 
     private bool _isSfxMuted = false;
     private bool _isMusicMuted = false;
-    private const string SFX_MUTE_PREF_KEY = "SFXMuted";
-    private const string MUSIC_MUTE_PREF_KEY = "MusicMuted";
+    // private const string SFX_MUTE_PREF_KEY = "SFXMuted";
+    // private const string MUSIC_MUTE_PREF_KEY = "MusicMuted";
 
     [Header("SFXs")]
     [Header("GUN")]
@@ -78,7 +78,10 @@ public class AudioManager : MonoBehaviour
     public EventInstance _playerExtractSfx;
 
 
-
+    [Header("MUSIC")]
+    [SerializeField] private EventReference _bgAmbianceRef;
+    public EventInstance _bgAmbiance;
+    private PLAYBACK_STATE _bgAmbianceState;
 
 
     private void Awake()
@@ -105,16 +108,15 @@ public class AudioManager : MonoBehaviour
 
         // Instantiate SFXs
         InstantiateSFXs();
+
         // Instantiate Music
-
-
-
+        InstantiateMusic();
     }
 
     private void LoadAudioStates()
     {
-        _isSfxMuted = PlayerPrefs.GetInt(SFX_MUTE_PREF_KEY, 0) == 1;
-        _isMusicMuted = PlayerPrefs.GetInt(MUSIC_MUTE_PREF_KEY, 0) == 1;
+        _isSfxMuted = PlayerPrefs.GetInt(PlayerConstants.SFX_MUTE_PREF_KEY, 0) == 1;
+        _isMusicMuted = PlayerPrefs.GetInt(PlayerConstants.MUSIC_MUTE_PREF_KEY, 0) == 1;
 
         // Apply saved states
         SetSFXMute(_isSfxMuted);
@@ -149,6 +151,31 @@ public class AudioManager : MonoBehaviour
         _playerExtractSfx = RuntimeManager.CreateInstance(_playerExtractRef);
     }
 
+    public void InstantiateMusic()
+    {
+
+        _bgAmbiance = RuntimeManager.CreateInstance(_bgAmbianceRef);
+        _bgAmbiance.getPlaybackState(out _bgAmbianceState);
+        SetMusic(true);
+    }
+
+
+    public void SetMusic(bool turnOn)
+    {
+        if (!_isMusicMuted && turnOn)
+        {
+            if (_bgAmbianceState != PLAYBACK_STATE.PLAYING)
+            {
+                _bgAmbiance.start();
+            }
+        }
+        else
+        {
+            _bgAmbiance.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
+        }
+
+    }
+
     public void PlaySfx(EventInstance sfx)
     {
         sfx.start();
@@ -175,7 +202,7 @@ public class AudioManager : MonoBehaviour
     {
         _isSfxMuted = mute;
         _sfxBus.setMute(mute);
-        PlayerPrefs.SetInt(SFX_MUTE_PREF_KEY, mute ? 1 : 0);
+        PlayerPrefs.SetInt(PlayerConstants.SFX_MUTE_PREF_KEY, mute ? 1 : 0);
         PlayerPrefs.Save();
     }
 
@@ -189,7 +216,7 @@ public class AudioManager : MonoBehaviour
     {
         _isMusicMuted = mute;
         _musicBus.setMute(mute);
-        PlayerPrefs.SetInt(MUSIC_MUTE_PREF_KEY, mute ? 1 : 0);
+        PlayerPrefs.SetInt(PlayerConstants.MUSIC_MUTE_PREF_KEY, mute ? 1 : 0);
         PlayerPrefs.Save();
     }
 

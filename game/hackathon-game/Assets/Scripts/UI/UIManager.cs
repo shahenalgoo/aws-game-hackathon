@@ -2,6 +2,7 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class UIManager : Singleton<UIManager>
 {
@@ -19,7 +20,9 @@ public class UIManager : Singleton<UIManager>
     private bool _playerDied;
     [SerializeField] private float _enableDeathPanelDelay = 2f;
 
-
+    [Header("Audio Toggles")]
+    [SerializeField] private Toggle _sfxToggle;
+    [SerializeField] private Toggle _musicToggle;
 
     [SerializeField] private PlayerStateMachine _psm;
     [SerializeField] private Minimap _map;
@@ -48,6 +51,9 @@ public class UIManager : Singleton<UIManager>
             Time.timeScale = 0;
             if (_psm != null) _psm.CursorPosition = _lastKnownCursorPosition;
             AudioManager.Instance.PauseAudio(true);
+
+            LoadToggleStates();
+
         }
         else
         {
@@ -91,6 +97,23 @@ public class UIManager : Singleton<UIManager>
         Time.timeScale = 0;
         AudioManager.Instance.PauseAudio(true);
         _deathPanel.SetActive(true);
+    }
+
+    public void LoadToggleStates()
+    {
+        _sfxToggle.isOn = PlayerPrefs.GetInt(PlayerConstants.SFX_MUTE_PREF_KEY, 0) == 0;
+        _musicToggle.isOn = PlayerPrefs.GetInt(PlayerConstants.MUSIC_MUTE_PREF_KEY, 0) == 0;
+    }
+
+    public void ToggleSFX(Toggle toggle)
+    {
+        AudioManager.Instance.SetSFXMute(!toggle.isOn);
+    }
+
+    public void ToggleMusic(Toggle toggle)
+    {
+        AudioManager.Instance.SetMusicMute(!toggle.isOn);
+        if (toggle.isOn) AudioManager.Instance.SetMusic(true);
     }
 
 }
