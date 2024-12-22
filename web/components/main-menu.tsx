@@ -10,6 +10,7 @@ import { Button } from "./ui/button";
 import { CircleUser, Trophy } from "lucide-react";
 
 import useSound from 'use-sound';
+import { useSession } from "next-auth/react";
 const SOUND_URL = '/sfx/ui-click.wav';
 
 interface MainMenuProps extends HTMLAttributes<HTMLDivElement> { }
@@ -17,6 +18,7 @@ interface MainMenuProps extends HTMLAttributes<HTMLDivElement> { }
 const MainMenu: FC<MainMenuProps> = ({ children, ...props }) => {
 
 	const { isMainMenuActive, setProfileDialogActive } = useGameStore();
+	const { data: session } = useSession();
 	const [play] = useSound(SOUND_URL, { volume: 1 });
 
 	const handleProfileDialog = () => {
@@ -48,7 +50,7 @@ const MainMenu: FC<MainMenuProps> = ({ children, ...props }) => {
 
 					<div className="flex gap-2">
 						<Button onClick={handleProfileDialog} variant={"secondary"} size={"lg"} className="w-full">
-							<CircleUser /> Sign In
+							<CircleUser /> {!session ? "Sign Up" : "My Account"}
 						</Button>
 						<Button variant={"secondary"} size={"lg"} className="w-full">
 							<Trophy /> Leaderboard
