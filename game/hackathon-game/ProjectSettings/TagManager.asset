@@ -10,6 +10,7 @@ TagManager:
   - DashRedirectStopper
   - SawBlades
   - SkyboxCamera
+  - Turbine
   layers:
   - Default
   - TransparentFX

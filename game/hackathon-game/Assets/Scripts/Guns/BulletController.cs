@@ -22,7 +22,7 @@ public class BulletController : Bullet
 
             DisableBullet();
         }
-        if (other.gameObject.CompareTag("SawBlades"))
+        if (other.gameObject.CompareTag("SawBlades") || other.gameObject.CompareTag("Turbine"))
         {
             // Play sfx
             AudioManager.Instance.PlaySfx(AudioManager.Instance._targetHitSfx);

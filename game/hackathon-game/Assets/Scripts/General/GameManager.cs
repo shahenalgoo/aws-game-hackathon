@@ -1,4 +1,6 @@
+using System;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -23,7 +25,6 @@ public class GameManager : MonoBehaviour
     [SerializeField] private bool _usePlayerEntranceAnimation;
     public bool UsePlayerEntranceAnimation { get => _usePlayerEntranceAnimation; }
 
-
     private void Awake()
     {
         SingletonCheck();
@@ -31,6 +32,11 @@ public class GameManager : MonoBehaviour
         // Clear possible previous states
         Time.timeScale = 1f;
         AudioManager.Instance.PauseAudio(false);
+    }
+
+    public void Start()
+    {
+        _gameTimer = PlayerPrefs.GetFloat(PlayerConstants.TIMER_PREF_KEY, 0f);
     }
 
     void SingletonCheck()
@@ -73,4 +79,31 @@ public class GameManager : MonoBehaviour
     {
         return _lootCollected == _totalTargets;
     }
+
+    public void GoToNextLevel()
+    {
+        // Save time
+        PlayerPrefs.SetFloat(PlayerConstants.TIMER_PREF_KEY, _gameTimer);
+        PlayerPrefs.Save();
+
+        // Getting playlist data
+        string playlistString = PlayerPrefs.GetString(PlayerConstants.PLAYLIST_PREF_KEY, "");
+        string[] playlist = playlistString.Split(new[] { "###" }, StringSplitOptions.None);
+        int playlistIndex = PlayerPrefs.GetInt(PlayerConstants.PLAYLIST_TRACKER_PREF_KEY, 0);
+
+        // Check if levels are over, send to boss fight
+        if (playlistIndex == playlist.Length - 1)
+        {
+            SceneManager.LoadScene(SceneIndexes.BossFightSceneIndex);
+        }
+        else
+        {
+            // else increment and reload scene
+            PlayerPrefs.SetInt(PlayerConstants.PLAYLIST_TRACKER_PREF_KEY, playlistIndex + 1);
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        }
+
+    }
+
+
 }

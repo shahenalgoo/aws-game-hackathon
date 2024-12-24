@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 8495221828825523569}
   m_Layer: 0
   m_Name: Floor - Turbine
-  m_TagString: Untagged
+  m_TagString: Turbine
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -416,6 +416,11 @@ PrefabInstance:
       propertyPath: m_CastShadows
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 869064743511520873, guid: 3f4189887b50242468e68a851f8613ef,
+        type: 3}
+      propertyPath: m_TagString
+      value: Turbine
+      objectReference: {fileID: 0}
     - target: {fileID: 5575001565055675749, guid: 3f4189887b50242468e68a851f8613ef,
         type: 3}
       propertyPath: m_LocalPosition.y
@@ -440,6 +445,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Trap - Turbine
+      objectReference: {fileID: 0}
+    - target: {fileID: 6074638232709924660, guid: 3f4189887b50242468e68a851f8613ef,
+        type: 3}
+      propertyPath: m_TagString
+      value: Turbine
       objectReference: {fileID: 0}
     - target: {fileID: 6847340488297471374, guid: 3f4189887b50242468e68a851f8613ef,
         type: 3}
@@ -490,6 +500,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7022475220149833664, guid: 3f4189887b50242468e68a851f8613ef,
+        type: 3}
+      propertyPath: m_TagString
+      value: Turbine
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
