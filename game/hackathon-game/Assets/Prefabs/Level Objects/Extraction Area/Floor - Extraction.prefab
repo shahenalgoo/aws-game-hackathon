@@ -239,7 +239,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _flySpeed: 2.5
-  _cameraFollowTime: 2
+  _waitTimeForDelayedActions: 1.5
   _vfx: {fileID: 359382240317802241}
 --- !u!136 &1413455980903617615
 CapsuleCollider:

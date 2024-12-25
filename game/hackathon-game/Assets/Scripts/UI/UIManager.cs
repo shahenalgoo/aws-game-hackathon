@@ -6,6 +6,9 @@ using UnityEngine.UI;
 
 public class UIManager : Singleton<UIManager>
 {
+    [Header("General")]
+    public GameObject _screenFader;
+
     [Header("Pause Panel")]
 
     public GameObject _pausePanel;

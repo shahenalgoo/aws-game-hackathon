@@ -1,6 +1,7 @@
 using System;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using System.Runtime.InteropServices;
 
 public class GameManager : MonoBehaviour
 {
@@ -25,13 +26,17 @@ public class GameManager : MonoBehaviour
     [SerializeField] private bool _usePlayerEntranceAnimation;
     public bool UsePlayerEntranceAnimation { get => _usePlayerEntranceAnimation; }
 
+
+    /** EXTERNAL COMM **/
+    [DllImport("__Internal")]
+    private static extern void SubmitScore(float time);
     private void Awake()
     {
         SingletonCheck();
 
         // Clear possible previous states
         Time.timeScale = 1f;
-        AudioManager.Instance.PauseAudio(false);
+        if (AudioManager.Instance != null) AudioManager.Instance.PauseAudio(false);
     }
 
     public void Start()
@@ -103,6 +108,18 @@ public class GameManager : MonoBehaviour
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         }
 
+    }
+
+    public void StartSubmission()
+    {
+        // #if UNITY_EDITOR == true
+        // #endif
+
+#if UNITY_WEBGL == true && UNITY_EDITOR == false
+            SubmitScore(_gameTimer);
+#endif
+
+        Debug.Log("Submitted time: " + _gameTimer);
     }
 
 

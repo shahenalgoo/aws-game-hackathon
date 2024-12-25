@@ -5,12 +5,14 @@ using UnityEngine;
 public class ExtractionController : MonoBehaviour
 {
     [SerializeField] private float _flySpeed;
-    [SerializeField] private float _cameraFollowTime;
+    [SerializeField] private float _waitTimeForDelayedActions;
     private bool _completionTriggered;
     private GameObject _player;
     private CharacterController _playerCC;
 
     [SerializeField] private GameObject _vfx;
+
+
 
 
     public void Start()
@@ -95,19 +97,28 @@ public class ExtractionController : MonoBehaviour
         // Play sfx
         AudioManager.Instance.PlaySfx(AudioManager.Instance._playerExtractSfx);
 
-        Invoke("CameraStopsFollowPlayer", _cameraFollowTime);
+        // Invoke("CameraStopsFollowPlayer", _cameraFollowTime);
 
         // Stop time count
         GameManager.Instance.CanCountTime = false;
 
-        // Go to Next Level
-        GameManager.Instance.GoToNextLevel();
+        StartCoroutine(TriggerDelayedActions());
     }
 
-    void CameraStopsFollowPlayer()
+    private IEnumerator TriggerDelayedActions()
     {
+        yield return new WaitForSeconds(_waitTimeForDelayedActions);
         // Make camera stop following
         CameraController.setCanFollow?.Invoke(false);
+
+        // Make screen fade out
+        UIManager.Instance._screenFader.GetComponent<Animator>().Play("Fade In");
+
+        // Allo time to fade in
+        yield return new WaitForSeconds(2f);
+
+        // Go to Next Level
+        GameManager.Instance.GoToNextLevel();
     }
 
 
