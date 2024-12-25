@@ -117,6 +117,9 @@ public class ExtractionController : MonoBehaviour
 
         // Go to Next Level
         GameManager.Instance?.GoToNextLevel();
+
+        // In case of tutorial
+        TutorialManager.Instance?.EndTutorial();
     }
 
 

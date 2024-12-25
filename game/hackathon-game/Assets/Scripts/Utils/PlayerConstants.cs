@@ -5,4 +5,5 @@ public static class PlayerConstants
     public const string PLAYLIST_PREF_KEY = "playlist";
     public const string PLAYLIST_TRACKER_PREF_KEY = "playlistTracker";
     public const string TIMER_PREF_KEY = "Timer";
+    public const string HAS_BOSS_PREF_KEY = "HasBossFight";
 }

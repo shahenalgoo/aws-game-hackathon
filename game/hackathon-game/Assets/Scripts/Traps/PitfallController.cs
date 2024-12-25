@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class PitfallController : MonoBehaviour
@@ -55,11 +56,44 @@ public class PitfallController : MonoBehaviour
             _playerCC = other.GetComponent<CharacterController>();
 
             other.GetComponent<Animator>().Play("Falling");
-
             PlayerHealth playerHealth = other.GetComponent<PlayerHealth>();
             playerHealth.fallingTrailsObj.SetActive(true);
             playerHealth.Die(false);
+
+            if (TutorialManager.Instance != null) StartCoroutine(RespawnPlayer());
+
         }
+
+    }
+
+    private IEnumerator RespawnPlayer()
+    {
+        // very dirty for now
+        yield return new WaitForSeconds(1f);
+        CameraController.setCanFollow?.Invoke(true);
+        _playerCC.gameObject.GetComponent<Animator>().Play("Idle");
+        _playerCC.transform.position = new Vector3(transform.position.x, 0, transform.position.z - 8f);
+        _playerCC.detectCollisions = true;
+        _playerCC.GetComponentInChildren<GunManager>(true).gameObject.SetActive(true);
+        _playerCC.GetComponentInChildren<Canvas>(true).gameObject.SetActive(true);
+
+        PlayerHealth playerHealth = _playerCC.GetComponent<PlayerHealth>();
+        playerHealth.IsDead = false;
+        playerHealth.fallingTrailsObj.SetActive(false);
+
+        PlayerStateMachine psm = _playerCC.gameObject.GetComponent<PlayerStateMachine>();
+        psm.enabled = true;
+        psm.CurrentState.SwitchState(psm._states.Idle());
+        psm._dashLightning.gameObject.SetActive(true);
+        psm.CanDash = true;
+        if (psm.IsFightMode) psm.ToggleRigAndWeapon(true);
+        psm.IsReloading = false;
+        psm.ReloadAttempt = false;
+        psm.IsShootingAllowed = true;
+
+        ReloadBar._cancelReloadSlider?.Invoke();
+
+        _playerCC = null;
 
     }
 }

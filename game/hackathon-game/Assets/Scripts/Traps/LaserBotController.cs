@@ -7,6 +7,13 @@ public class LaserBotController : MonoBehaviour
     private float _minBoundZAxis;
     private float _maxBoundZAxis;
     private int _direction = 1;
+
+    private FMODUnity.StudioEventEmitter _eventEmitter;
+
+    private void Awake()
+    {
+        _eventEmitter = GetComponent<FMODUnity.StudioEventEmitter>();
+    }
     void Start()
     {
         // get grid pos from world pos
@@ -110,6 +117,14 @@ public class LaserBotController : MonoBehaviour
         {
             transform.localPosition = new Vector3(transform.localPosition.x, transform.localPosition.y, _minBoundZAxis);
             _direction = 1;
+        }
+    }
+
+    private void OnDestroy()
+    {
+        if (_eventEmitter != null)
+        {
+            _eventEmitter.Stop();
         }
     }
 }

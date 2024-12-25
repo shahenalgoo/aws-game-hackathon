@@ -21,7 +21,7 @@ public class LevelBuilder : MonoBehaviour
     public int[,] Grid { get => _grid; }
 
     private Vector2Int _startingGrid = new Vector2Int(4, 0);
-    private Vector2Int _endGrid = new Vector2Int(1, 1);
+    [SerializeField] private Vector2Int _endGrid = new Vector2Int(1, 1);
     public Minimap _minimap;
 
     private ExtractionController _extractionController;

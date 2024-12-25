@@ -63,4 +63,10 @@ public static class Helpers
         PlayerPrefs.Save();
     }
 
+    public static void ModeHasBossFight(bool value)
+    {
+        PlayerPrefs.SetInt(PlayerConstants.HAS_BOSS_PREF_KEY, value ? 1 : 0);
+        PlayerPrefs.Save();
+    }
+
 }

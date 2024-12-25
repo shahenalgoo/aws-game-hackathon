@@ -280,6 +280,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ef3e9e68876a81c4f8a9ccff0d6437ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &910907079 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6917377370588809671, guid: ed6351fa37ed1a54bac66c908dc976f8,
+    type: 3}
+  m_PrefabInstance: {fileID: 1596745087}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 910907055}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f15856ec0c2bb4877b933f987c5148ba, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &1025662631 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 8233487035634907903, guid: 2b1b09cda95ce4ee8a0b88193eb18397,
@@ -336,6 +348,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 74c3107103ab343219e9d9f9379338c4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _playerHealth: {fileID: 910907079}
 --- !u!114 &1224442257 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 2112862241218350735, guid: 2b7c3e854671540b69cbdc2639d609d7,
@@ -466,6 +479,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6917377370588809671, guid: ed6351fa37ed1a54bac66c908dc976f8,
+        type: 3}
+      propertyPath: _maxHealth
+      value: 300
       objectReference: {fileID: 0}
     - target: {fileID: 7523127128763181994, guid: ed6351fa37ed1a54bac66c908dc976f8,
         type: 3}
@@ -1253,6 +1271,16 @@ PrefabInstance:
       propertyPath: _minimap
       value: 
       objectReference: {fileID: 1224442257}
+    - target: {fileID: 2467403809657644435, guid: 63c35a3423dc64b36bd7d39e0a981df9,
+        type: 3}
+      propertyPath: _endGrid.x
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 2467403809657644435, guid: 63c35a3423dc64b36bd7d39e0a981df9,
+        type: 3}
+      propertyPath: _endGrid.y
+      value: 19
+      objectReference: {fileID: 0}
     - target: {fileID: 2658375059827552384, guid: 63c35a3423dc64b36bd7d39e0a981df9,
         type: 3}
       propertyPath: m_LocalPosition.x

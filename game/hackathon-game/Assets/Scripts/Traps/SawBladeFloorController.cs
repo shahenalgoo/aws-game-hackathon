@@ -2,6 +2,11 @@ using UnityEngine;
 
 public class SawBladeFloorController : MonoBehaviour
 {
+    private FMODUnity.StudioEventEmitter _eventEmitter;
+    private void Awake()
+    {
+        _eventEmitter = GetComponent<FMODUnity.StudioEventEmitter>();
+    }
     // Start is called before the first frame update
     void Start()
     {
@@ -24,5 +29,13 @@ public class SawBladeFloorController : MonoBehaviour
         }
 
         return true;
+    }
+
+    private void OnDestroy()
+    {
+        if (_eventEmitter != null)
+        {
+            _eventEmitter.Stop();
+        }
     }
 }

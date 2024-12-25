@@ -120,4 +120,9 @@ public class UIManager : Singleton<UIManager>
         if (toggle.isOn) AudioManager.Instance.SetMusic(true);
     }
 
+    private void OnDestroy()
+    {
+        AudioManager.Instance.StopAllSFXEvents();
+    }
+
 }

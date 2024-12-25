@@ -33,6 +33,7 @@ public class MainMenuManager : MonoBehaviour
 
         // Reset trackers
         Helpers.ResetTrackingVariables();
+        Helpers.ModeHasBossFight(true);
 
         // Start game
         StartGame();
@@ -54,9 +55,24 @@ public class MainMenuManager : MonoBehaviour
 
         // Reset trackers
         Helpers.ResetTrackingVariables();
+        Helpers.ModeHasBossFight(false);
 
         // Start game
         StartGame();
+    }
+
+    public void StartTutorial()
+    {
+        // Set up array
+        string[] playlist = new string[1];
+        playlist[0] = "{\"grid\":[[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],[1,5,1,1,1,1,2,1,1,1,1,1,1,1,1,1,1,1,1,1],[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]]}";
+
+        // Set playlist
+        SetPlaylist(playlist);
+        // Reset trackers
+        Helpers.ResetTrackingVariables();
+        Helpers.ModeHasBossFight(false);
+        SceneManager.LoadScene(SceneIndexes.TutorialSceneIndex);
     }
 
     public void StartBossFight()

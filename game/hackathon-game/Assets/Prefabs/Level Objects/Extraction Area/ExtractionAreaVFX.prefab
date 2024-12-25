@@ -176,7 +176,6 @@ GameObject:
   m_Component:
   - component: {fileID: 3901618745891947177}
   - component: {fileID: 7555523056876991107}
-  - component: {fileID: 8403216081794517592}
   m_Layer: 6
   m_Name: ExtractionAreaVFX
   m_TagString: Untagged
@@ -224,20 +223,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 7, y: 2.5107293, z: 7}
   m_Center: {x: 0.0012421608, y: 1.2553647, z: 0}
---- !u!114 &8403216081794517592
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4426621991517509651}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c738024f3cfde45809b6d64c89194744, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _flySpeed: 2.5
-  _cameraFollowTime: 2
 --- !u!1 &5494078868181722087
 GameObject:
   m_ObjectHideFlags: 0

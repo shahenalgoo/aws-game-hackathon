@@ -206,6 +206,14 @@ public class AudioManager : MonoBehaviour
         PlayerPrefs.Save();
     }
 
+    public void StopAllSFXEvents()
+    {
+        if (_sfxBus.isValid())
+        {
+            _sfxBus.stopAllEvents(FMOD.Studio.STOP_MODE.IMMEDIATE);
+        }
+    }
+
     // Music Controls
     public void ToggleMusic()
     {
@@ -218,27 +226,5 @@ public class AudioManager : MonoBehaviour
         _musicBus.setMute(mute);
         PlayerPrefs.SetInt(PlayerConstants.MUSIC_MUTE_PREF_KEY, mute ? 1 : 0);
         PlayerPrefs.Save();
-    }
-
-    // Volume Controls (if you need them)
-    public void SetSFXVolume(float volume)
-    {
-        _sfxBus.setVolume(volume);
-    }
-
-    public void SetMusicVolume(float volume)
-    {
-        _musicBus.setVolume(volume);
-    }
-
-    // Status Checks
-    public bool IsSFXMuted()
-    {
-        return _isSfxMuted;
-    }
-
-    public bool IsMusicMuted()
-    {
-        return _isMusicMuted;
     }
 }

@@ -20,13 +20,10 @@ public class PlayerHealth : MonoBehaviour
     [SerializeField] public GameObject fallingTrailsObj;
 
     private bool isDead;
-    public bool IsDead { get { return isDead; } }
+    public bool IsDead { get { return isDead; } set { isDead = value; } }
     public void Start()
     {
-        _currentHealth = _maxHealth;
-
-        // Set max health
-        HUDManager._maxHealthUpdater?.Invoke(_currentHealth);
+        SetMaxHealth();
 
         // Get the vignette effect from the volume
         if (damageVolume != null && damageVolume.profile.TryGet(out vignette))
@@ -35,6 +32,14 @@ public class PlayerHealth : MonoBehaviour
             vignette.intensity.Override(0f);
             vignette.color.Override(Color.red);
         }
+    }
+
+    public void SetMaxHealth()
+    {
+        _currentHealth = _maxHealth;
+
+        // Set max health
+        HUDManager._maxHealthUpdater?.Invoke(_currentHealth);
     }
 
     public void TakeDamage(int amount)
@@ -55,6 +60,9 @@ public class PlayerHealth : MonoBehaviour
         {
             Die(true);
         }
+
+        // Refill health in tutorial
+        if (TutorialManager.Instance != null) StartCoroutine(TutorialManager.Instance.RefillHealth());
     }
 
     private IEnumerator FlashRed()
@@ -114,7 +122,7 @@ public class PlayerHealth : MonoBehaviour
         DisablePlayer();
 
         // Stop time count
-        GameManager.Instance.StopTimeCount();
+        GameManager.Instance?.StopTimeCount();
 
         // Shatter Effect
         if (shatter)
@@ -128,7 +136,7 @@ public class PlayerHealth : MonoBehaviour
 
 
         // Trigger Death Panel
-        StartCoroutine(UIManager.Instance.DeathPanelSetup());
+        if (TutorialManager.Instance == null) StartCoroutine(UIManager.Instance.DeathPanelSetup());
 
     }
 }

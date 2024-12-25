@@ -35,7 +35,7 @@ public class GameManager : MonoBehaviour
 
         // Clear possible previous states
         Time.timeScale = 1f;
-        if (AudioManager.Instance != null) AudioManager.Instance.PauseAudio(false);
+        AudioManager.Instance?.PauseAudio(false);
     }
 
     public void Start()
@@ -100,10 +100,20 @@ public class GameManager : MonoBehaviour
         string[] playlist = playlistString.Split(new[] { "###" }, StringSplitOptions.None);
         int playlistIndex = PlayerPrefs.GetInt(PlayerConstants.PLAYLIST_TRACKER_PREF_KEY, 0);
 
-        // Check if levels are over, send to boss fight
+        // Check if levels are over, send to boss fight if any
         if (playlistIndex == playlist.Length - 1)
         {
-            SceneManager.LoadScene(SceneIndexes.BossFightSceneIndex);
+            bool hasBossFight = PlayerPrefs.GetInt(PlayerConstants.HAS_BOSS_PREF_KEY, 0) == 1;
+
+            if (hasBossFight)
+            {
+
+                SceneManager.LoadScene(SceneIndexes.BossFightSceneIndex);
+            }
+            else
+            {
+                Debug.Log("No boss fight in this mode, show after game screen");
+            }
         }
         else
         {
