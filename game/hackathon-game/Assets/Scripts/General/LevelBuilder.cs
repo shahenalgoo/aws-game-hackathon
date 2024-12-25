@@ -180,13 +180,13 @@ public class LevelBuilder : MonoBehaviour
 
     public void Start()
     {
-        GameManager.Instance.TotalTargets = _targetCounter;
+        if (GameManager.Instance != null) GameManager.Instance.TotalTargets = _targetCounter;
 
         // initialize loot counter on hud  
         HUDManager._lootUpdater?.Invoke(0);
 
         // Create minimap if player entrance animation is skipped
-        if (!GameManager.Instance.UsePlayerEntranceAnimation) InitializeMinimap();
+        if (GameManager.Instance != null && !GameManager.Instance.UsePlayerEntranceAnimation) InitializeMinimap();
 
     }
 

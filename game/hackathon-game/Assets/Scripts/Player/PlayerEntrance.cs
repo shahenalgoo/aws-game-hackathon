@@ -20,7 +20,7 @@ public class PlayerEntrance : MonoBehaviour
     }
     void Start()
     {
-        if (!GameManager.Instance.UsePlayerEntranceAnimation)
+        if (GameManager.Instance != null && !GameManager.Instance.UsePlayerEntranceAnimation)
         {
             _gameplayActions.Enable();
             Destroy(gameObject);
@@ -67,7 +67,7 @@ public class PlayerEntrance : MonoBehaviour
 
     void LateUpdate()
     {
-        if (!GameManager.Instance.UsePlayerEntranceAnimation) return;
+        if (GameManager.Instance != null && !GameManager.Instance.UsePlayerEntranceAnimation) return;
         _playerTransform.transform.position = gameObject.transform.position;
     }
 }

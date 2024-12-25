@@ -114,7 +114,7 @@ public class PlayerHealth : MonoBehaviour
         DisablePlayer();
 
         // Stop time count
-        GameManager.Instance.CanCountTime = false;
+        GameManager.Instance.StopTimeCount();
 
         // Shatter Effect
         if (shatter)

@@ -1,0 +1,200 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1890072167732699946
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2406193192494564215}
+  - component: {fileID: 1042917020494564183}
+  m_Layer: 0
+  m_Name: AudioManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2406193192494564215
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1890072167732699946}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1223.1144, y: 613.0596, z: -4.772474}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1042917020494564183
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1890072167732699946}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 76aaa47b9fbea4f74813c22012cd863b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _gunshotRef:
+    Guid:
+      Data1: -1123087605
+      Data2: 1116023060
+      Data3: 2087462829
+      Data4: 1476131273
+    Path: event:/Gunshot
+  _magOutRef:
+    Guid:
+      Data1: -577894264
+      Data2: 1147265136
+      Data3: 929915324
+      Data4: -1061939023
+    Path: event:/Mag Out
+  _reloadedRef:
+    Guid:
+      Data1: -631927029
+      Data2: 1075748825
+      Data3: 1181126309
+      Data4: -925679756
+    Path: event:/Reloaded
+  _magFullRef:
+    Guid:
+      Data1: 1599261794
+      Data2: 1237951578
+      Data3: 1306256309
+      Data4: -183280378
+    Path: event:/Mag full
+  _dashRef:
+    Guid:
+      Data1: 1989297694
+      Data2: 1275250731
+      Data3: 1509281182
+      Data4: -1275766170
+    Path: event:/Dash - Metal Heavy 5
+  _dashBoosterRef:
+    Guid:
+      Data1: -1919910004
+      Data2: 1270393956
+      Data3: 1377824427
+      Data4: -737082250
+    Path: event:/Dash Booster - EMP Explosion 3
+  _playerHurtBulletRef:
+    Guid:
+      Data1: -7540307
+      Data2: 1124162782
+      Data3: 450556555
+      Data4: -1025751227
+    Path: event:/Player Hurt Bullet - Impact 1
+  _playerHurtSharpRef:
+    Guid:
+      Data1: 913880931
+      Data2: 1260853967
+      Data3: -1699943017
+      Data4: 73505932
+    Path: event:/Player Hurt Sharp - Sword impact (Flesh) 2
+  _playerHurtMeleeRef:
+    Guid:
+      Data1: -1592233708
+      Data2: 1083044342
+      Data3: 581704347
+      Data4: 746843469
+    Path: event:/Player Hurt Melee - Bloody stabs 8
+  _playerHurtLaserRef:
+    Guid:
+      Data1: -1751970437
+      Data2: 1195323251
+      Data3: 1139953843
+      Data4: -826037269
+    Path: event:/Player Hurt Laser - Electric Spark 4
+  _playerDeathRef:
+    Guid:
+      Data1: 680075569
+      Data2: 1262056320
+      Data3: -1460659282
+      Data4: -855602477
+    Path: event:/Player Death - Glass 7
+  _playerDeath2Ref:
+    Guid:
+      Data1: -851189601
+      Data2: 1240297970
+      Data3: 578458497
+      Data4: 186400227
+    Path: event:/Player Death - Explosion Barrel
+  _playerEntranceRef:
+    Guid:
+      Data1: -1462162310
+      Data2: 1330305212
+      Data3: 462187689
+      Data4: -729964473
+    Path: event:/Player Entrance - Sweep 2
+  _targetShotRef:
+    Guid:
+      Data1: -991441416
+      Data2: 1142210953
+      Data3: -679526527
+      Data4: -407212378
+    Path: event:/Enemy Shot - Sci Fi Shotgun 2
+  _targetMeleeRef:
+    Guid:
+      Data1: 802502170
+      Data2: 1211360061
+      Data3: 554484382
+      Data4: -765244735
+    Path: event:/Enemy Melee - Sword Woosh 15
+  _targetHitRef:
+    Guid:
+      Data1: 1529498410
+      Data2: 1332569525
+      Data3: -323846524
+      Data4: -1976696454
+    Path: event:/Enemy Hit - Metal Light 3
+  _targetExplodeRef:
+    Guid:
+      Data1: -291927177
+      Data2: 1263779549
+      Data3: 1199753369
+      Data4: -1361846775
+    Path: event:/Enemy Explode - Sci Fi Grenade 1
+  _starCollectedRef:
+    Guid:
+      Data1: 846613594
+      Data2: 1293205164
+      Data3: -1660234598
+      Data4: -389391489
+    Path: event:/Star Collect - Collect star 2
+  _spikeTrapRef:
+    Guid:
+      Data1: 1773379152
+      Data2: 1093422002
+      Data3: -1951497824
+      Data4: -1105345084
+    Path: event:/Spike Trap - Metal Trap Closing
+  _extractionReadyRef:
+    Guid:
+      Data1: -1862662071
+      Data2: 1295626297
+      Data3: -654796904
+      Data4: -536352854
+    Path: event:/Extraction Ready - Impact Horn 4
+  _playerExtractRef:
+    Guid:
+      Data1: 1061035879
+      Data2: 1285717555
+      Data3: -1294154320
+      Data4: 1521354836
+    Path: event:/Player Extract - Sweep 3
+  _bgAmbianceRef:
+    Guid:
+      Data1: -50424100
+      Data2: 1101187281
+      Data3: -121200503
+      Data4: -599454412
+    Path: event:/Music - Mysterious space atmosphere_08

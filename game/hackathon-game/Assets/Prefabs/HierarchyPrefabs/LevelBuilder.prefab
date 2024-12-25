@@ -1,0 +1,63 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &3353354555595407967
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2658375059827552384}
+  - component: {fileID: 2467403809657644435}
+  m_Layer: 0
+  m_Name: LevelBuilder
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2658375059827552384
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3353354555595407967}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2467403809657644435
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3353354555595407967}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 58e39e79445f44ae4af9e1aada5ef8f0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _tileSize: 8
+  levelObjects:
+  - {fileID: 4178509765388086979, guid: 3f57872ef1e2d48749563e40e6d5f0a0, type: 3}
+  - {fileID: 1984354046806001452, guid: fb9be772d96ae41dfa48408ef45d2934, type: 3}
+  - {fileID: 8858190910955411209, guid: 4f9de20684bf343439ba1e7454dcade2, type: 3}
+  - {fileID: 3707230686394967408, guid: b5e3d10ef9d9d4b248671dae6dc5eaaf, type: 3}
+  - {fileID: 5960792832718248027, guid: a7b3bffedfc63459ab9cb30e9fd02874, type: 3}
+  - {fileID: 5080209234803536179, guid: c63bf51fce0964784b0dd2d5b317bead, type: 3}
+  - {fileID: 1984354046806001452, guid: 24e1f9b9dde144ebf88ade63e2ef4a74, type: 3}
+  - {fileID: 2521554913002184078, guid: aaa03b9dd0c7b4411ad1300c7b36b210, type: 3}
+  - {fileID: 1378970538917373638, guid: db4a3d752c4e04eda8db98f44fc65b97, type: 3}
+  _modifiedInvisibleWall: {fileID: 1548405331545494401, guid: 9018f4ed513e147b88a09a11a6a2b814,
+    type: 3}
+  _extractionArea: {fileID: 8105362297317527450, guid: 1fba6b1559d7c44bb91c1f2e7201fbfd,
+    type: 3}
+  _yAdjustObject: -1
+  _minimap: {fileID: 0}

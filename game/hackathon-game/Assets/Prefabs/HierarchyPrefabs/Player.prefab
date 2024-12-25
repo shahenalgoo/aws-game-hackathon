@@ -555,6 +555,7 @@ GameObject:
   - component: {fileID: 1780676389079539620}
   - component: {fileID: 6917377370588809671}
   - component: {fileID: 1702315784984996115}
+  - component: {fileID: 1111300748462578239}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -969,7 +970,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f15856ec0c2bb4877b933f987c5148ba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _maxHealth: 200
+  _maxHealth: 100
   _currentHealth: 0
   damageVolume: {fileID: 6707294591469338254}
   flashDuration: 0.3
@@ -1031,6 +1032,23 @@ MonoBehaviour:
   fadeDuration: 2
   explosionEffectPrefab: {fileID: 0}
   breakSound: {fileID: 0}
+  layersToIgnore:
+    serializedVersion: 2
+    m_Bits: 136
+--- !u!114 &1111300748462578239
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3928576000499327119}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 86c6556701af9e04380698b89f691b6e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  nonRigidbodyVelocity: 0
+  attenuationObject: {fileID: 0}
 --- !u!1 &4165862966379360945
 GameObject:
   m_ObjectHideFlags: 0

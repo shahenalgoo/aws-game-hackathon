@@ -51,7 +51,7 @@ public class TargetLootController : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Player"))
         {
-            GameManager.Instance.IncrementLoot();
+            GameManager.Instance?.IncrementLoot();
 
             // Spawn VFX
             _lootCollectVFX.transform.parent = null;

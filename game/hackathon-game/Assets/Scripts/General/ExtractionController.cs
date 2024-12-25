@@ -97,10 +97,8 @@ public class ExtractionController : MonoBehaviour
         // Play sfx
         AudioManager.Instance.PlaySfx(AudioManager.Instance._playerExtractSfx);
 
-        // Invoke("CameraStopsFollowPlayer", _cameraFollowTime);
-
         // Stop time count
-        GameManager.Instance.CanCountTime = false;
+        GameManager.Instance?.StopTimeCount();
 
         StartCoroutine(TriggerDelayedActions());
     }
@@ -118,7 +116,7 @@ public class ExtractionController : MonoBehaviour
         yield return new WaitForSeconds(2f);
 
         // Go to Next Level
-        GameManager.Instance.GoToNextLevel();
+        GameManager.Instance?.GoToNextLevel();
     }
 
 

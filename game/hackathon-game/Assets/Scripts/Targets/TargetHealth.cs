@@ -76,7 +76,7 @@ public class TargetHealth : MonoBehaviour
 
         // Spawn loot
         Vector3 lootSpawnPos = transform.position + new Vector3(0, 1f, 0);
-        Instantiate(GameManager.Instance.TargetLoot, lootSpawnPos, Quaternion.Euler(0, -45f, 0));
+        if (GameManager.Instance != null) Instantiate(GameManager.Instance.TargetLoot, lootSpawnPos, Quaternion.Euler(0, -45f, 0));
     }
 
     private IEnumerator FadeOut()

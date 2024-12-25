@@ -41,7 +41,7 @@ public class HUDManager : MonoBehaviour
 
     void Update()
     {
-        UpdateTimerText(GameManager.Instance.GameTimer);
+        UpdateTimerText(GameManager.Instance != null ? GameManager.Instance.GameTimer : 0);
 
         UpdateHealthBar();
     }
@@ -60,7 +60,7 @@ public class HUDManager : MonoBehaviour
     }
     public void UpdateLootText(int amount)
     {
-        _lootText.text = "Stars Collected: " + amount.ToString("N0") + "/" + GameManager.Instance.TotalTargets;
+        _lootText.text = "Stars Collected: " + amount.ToString("N0") + "/" + GameManager.Instance?.TotalTargets;
     }
 
     public void UpdateAmmoText(int amount)

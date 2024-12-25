@@ -5,7 +5,6 @@ using System.Runtime.InteropServices;
 
 public class GameManager : MonoBehaviour
 {
-    // Static instance of GameManager which allows it to be accessed by any other script
     public static GameManager Instance { get; private set; }
 
     [Header("TARGET & REWARD LOOT")]
@@ -83,6 +82,11 @@ public class GameManager : MonoBehaviour
     public bool HasCollectedAll()
     {
         return _lootCollected == _totalTargets;
+    }
+
+    public void StopTimeCount()
+    {
+        _canCountTime = false;
     }
 
     public void GoToNextLevel()
