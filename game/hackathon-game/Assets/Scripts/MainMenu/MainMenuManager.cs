@@ -32,7 +32,7 @@ public class MainMenuManager : MonoBehaviour
         SetPlaylist(playlist);
 
         // Reset trackers
-        ResetTrackingVariables();
+        Helpers.ResetTrackingVariables();
 
         // Start game
         StartGame();
@@ -53,7 +53,7 @@ public class MainMenuManager : MonoBehaviour
         SetPlaylist(playlist);
 
         // Reset trackers
-        ResetTrackingVariables();
+        Helpers.ResetTrackingVariables();
 
         // Start game
         StartGame();
@@ -62,15 +62,8 @@ public class MainMenuManager : MonoBehaviour
     public void StartBossFight()
     {
         // Reset trackers
-        ResetTrackingVariables();
+        Helpers.ResetTrackingVariables();
         SceneManager.LoadScene(SceneIndexes.BossFightSceneIndex);
-    }
-
-    public void ResetTrackingVariables()
-    {
-        PlayerPrefs.SetInt(PlayerConstants.PLAYLIST_TRACKER_PREF_KEY, 0);
-        PlayerPrefs.SetFloat(PlayerConstants.TIMER_PREF_KEY, 0f);
-        PlayerPrefs.Save();
     }
 
     private void SetPlaylist(string[] playlist)

@@ -69,8 +69,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _flySpeed: 15
   _lifeTime: 4
-  _damage: 30
-  _damageFalloffRate: 30
+  _damage: 25
+  _damageFalloffRate: 25
   _currentDamage: 0
   _canFly: 1
   _trail: {fileID: 0}

@@ -56,4 +56,11 @@ public static class Helpers
         return gridPos;
     }
 
+    public static void ResetTrackingVariables()
+    {
+        PlayerPrefs.SetInt(PlayerConstants.PLAYLIST_TRACKER_PREF_KEY, 0);
+        PlayerPrefs.SetFloat(PlayerConstants.TIMER_PREF_KEY, 0f);
+        PlayerPrefs.Save();
+    }
+
 }

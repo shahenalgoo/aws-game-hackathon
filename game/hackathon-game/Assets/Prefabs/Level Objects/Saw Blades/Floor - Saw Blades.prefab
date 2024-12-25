@@ -453,6 +453,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: SawBladeParent 1
       objectReference: {fileID: 0}
+    - target: {fileID: 9219515392281298222, guid: 914ac4c7ecd2c4c10978b27d0b06b84f,
+        type: 3}
+      propertyPath: _damage
+      value: 15
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

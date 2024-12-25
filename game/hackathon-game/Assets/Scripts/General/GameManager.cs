@@ -29,7 +29,7 @@ public class GameManager : MonoBehaviour
 
     /** EXTERNAL COMM **/
     [DllImport("__Internal")]
-    private static extern void SubmitScore(float time);
+    private static extern void SubmitTime(float time);
     private void Awake()
     {
         SingletonCheck();
@@ -116,7 +116,7 @@ public class GameManager : MonoBehaviour
         // #endif
 
 #if UNITY_WEBGL == true && UNITY_EDITOR == false
-            SubmitScore(_gameTimer);
+            SubmitTime(_gameTimer);
 #endif
 
         Debug.Log("Submitted time: " + _gameTimer);

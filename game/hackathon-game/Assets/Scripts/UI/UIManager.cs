@@ -76,6 +76,7 @@ public class UIManager : Singleton<UIManager>
 
     public void RestartLevel()
     {
+        Helpers.ResetTrackingVariables();
         if (Time.timeScale == 0) Time.timeScale = 1;
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
