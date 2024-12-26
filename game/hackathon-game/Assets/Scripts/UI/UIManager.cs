@@ -16,6 +16,7 @@ public class UIManager : Singleton<UIManager>
     public bool IsPaused { get { return _isPaused; } }
     [SerializeField] private InputActionAsset inputActions;
     private InputActionMap _gameplayActions;
+    public InputActionMap GameplayActions { get { return _gameplayActions; } }
     private Vector3 _lastKnownCursorPosition;
 
     [Header("Death Panel")]

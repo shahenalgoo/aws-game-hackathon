@@ -6,7 +6,7 @@ public class CameraController : MonoBehaviour
 {
     public float panningSpeed;
     public GameObject player;
-    private PlayerStateMachine stateMachine;
+    public PlayerStateMachine stateMachine;
 
     public static Action<bool> setCanFollow;
 
@@ -30,7 +30,7 @@ public class CameraController : MonoBehaviour
     {
         canFollow = value;
     }
-    void Update()
+    void LateUpdate()
     {
         if (player == null || !canFollow) return;
 

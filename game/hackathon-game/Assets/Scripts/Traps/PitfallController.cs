@@ -8,7 +8,6 @@ public class PitfallController : MonoBehaviour
     [SerializeField] private ParticleSystem _onBoost;
 
     [SerializeField] private GameObject[] _safetyLedges; // 0 - left, 1 - top, 2 - right, 3 - down
-
     void Start()
     {
         // get grid pos from world pos
@@ -29,7 +28,7 @@ public class PitfallController : MonoBehaviour
         if (gridPos.x < grid.GetLength(0) - 1 && grid[gridPos.x + 1, gridPos.y] != 0) _safetyLedges[3].SetActive(true);
 
     }
-    void Update()
+    void LateUpdate()
     {
         if (_playerCC == null) return;
 
@@ -58,42 +57,55 @@ public class PitfallController : MonoBehaviour
             other.GetComponent<Animator>().Play("Falling");
             PlayerHealth playerHealth = other.GetComponent<PlayerHealth>();
             playerHealth.fallingTrailsObj.SetActive(true);
+
             playerHealth.Die(false);
 
-            if (TutorialManager.Instance != null) StartCoroutine(RespawnPlayer());
-
+            if (TutorialManager.Instance != null)
+            {
+                UIManager.Instance.GameplayActions.Disable();
+                StartCoroutine(RespawnPlayer());
+            }
         }
 
     }
-
     private IEnumerator RespawnPlayer()
     {
-        // very dirty for now
+        // DIRTY FOR NOW
         yield return new WaitForSeconds(1f);
-        CameraController.setCanFollow?.Invoke(true);
-        _playerCC.gameObject.GetComponent<Animator>().Play("Idle");
-        _playerCC.transform.position = new Vector3(transform.position.x, 0, transform.position.z - 8f);
-        _playerCC.detectCollisions = true;
-        _playerCC.GetComponentInChildren<GunManager>(true).gameObject.SetActive(true);
-        _playerCC.GetComponentInChildren<Canvas>(true).gameObject.SetActive(true);
+        CharacterController PlayerCC = _playerCC;
+        _playerCC = null;
+        UIManager.Instance.GameplayActions.Enable();
 
-        PlayerHealth playerHealth = _playerCC.GetComponent<PlayerHealth>();
+
+        PlayerCC.Move(Vector3.zero);
+        PlayerCC.gameObject.GetComponent<Animator>().Play("Idle");
+        PlayerCC.gameObject.transform.position = new Vector3(transform.position.x, 0.5f, transform.position.z - 8f);
+        PlayerCC.detectCollisions = true;
+        PlayerCC.enabled = false;
+        PlayerCC.GetComponentInChildren<GunManager>(true).gameObject.SetActive(true);
+        PlayerCC.GetComponentInChildren<Canvas>(true).gameObject.SetActive(true);
+
+        PlayerHealth playerHealth = PlayerCC.GetComponent<PlayerHealth>();
         playerHealth.IsDead = false;
         playerHealth.fallingTrailsObj.SetActive(false);
 
-        PlayerStateMachine psm = _playerCC.gameObject.GetComponent<PlayerStateMachine>();
-        psm.enabled = true;
-        psm.CurrentState.SwitchState(psm._states.Idle());
-        psm._dashLightning.gameObject.SetActive(true);
+        PlayerStateMachine psm = PlayerCC.gameObject.GetComponent<PlayerStateMachine>();
+        psm.GravityMultiplier = 0f;
         psm.CanDash = true;
-        if (psm.IsFightMode) psm.ToggleRigAndWeapon(true);
         psm.IsReloading = false;
         psm.ReloadAttempt = false;
         psm.IsShootingAllowed = true;
+        psm._dashLightning.gameObject.SetActive(true);
+        if (psm.IsFightMode) psm.ToggleRigAndWeapon(true);
 
         ReloadBar._cancelReloadSlider?.Invoke();
+        CameraController.setCanFollow?.Invoke(true);
 
-        _playerCC = null;
+        yield return new WaitForSeconds(0.1f);  // Small delay to ensure position is set
+        psm.enabled = true;
+        psm.GravityMultiplier = 1f;
+        PlayerCC.enabled = true;
+        psm.CurrentState.SwitchState(psm._states.Idle());
 
     }
 }

@@ -246,6 +246,8 @@ public class PlayerStateMachine : MonoBehaviour
 
     public void Update()
     {
+        if (!gameObject.activeSelf) return;
+
         TrackMovement();
         _currentState.UpdateStates();
         FightModeCountdown();

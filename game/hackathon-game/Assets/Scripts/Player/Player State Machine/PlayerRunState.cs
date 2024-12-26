@@ -25,7 +25,7 @@ public class PlayerRunState : PlayerBaseState
         // Return to ground, if ever we go up
         if (!Ctx.CharController.isGrounded)
         {
-            Ctx.CharController.Move(Physics.gravity * Ctx.GravityMultiplier * Time.deltaTime);
+            if (Ctx.GravityMultiplier != 0f) Ctx.CharController.Move(Physics.gravity * Ctx.GravityMultiplier * Time.deltaTime);
         }
 
         // should check fight mode in order to follow cursor or not
