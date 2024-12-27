@@ -236,7 +236,6 @@ MonoBehaviour:
   _ammoText: {fileID: 1310111106}
   _timerText: {fileID: 1321567878}
   _noticeText: {fileID: 653297684}
-  _noticeTimeToDisappear: 4
   _lerpSpeed: 10
 --- !u!224 &611747749 stripped
 RectTransform:
@@ -590,6 +589,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 220
+      objectReference: {fileID: 0}
+    - target: {fileID: 8019465284477853025, guid: 2b1b09cda95ce4ee8a0b88193eb18397,
+        type: 3}
+      propertyPath: m_SortingOrder
+      value: -1
       objectReference: {fileID: 0}
     - target: {fileID: 8626255080463259497, guid: 2b1b09cda95ce4ee8a0b88193eb18397,
         type: 3}

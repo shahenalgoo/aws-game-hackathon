@@ -19,8 +19,7 @@ public class HUDManager : MonoBehaviour
 
     [Header("Notice")]
     [SerializeField] private TextMeshProUGUI _noticeText;
-    [SerializeField] private float _noticeTimeToDisappear = 2f;
-    public static Action<string> _noticeUpdater;
+    public static Action<string, float> _noticeUpdater;
 
 
     // Health bar lerp settings
@@ -108,16 +107,16 @@ public class HUDManager : MonoBehaviour
     }
 
 
-    public void NotifyOnHUD(string message)
+    public void NotifyOnHUD(string message, float noticeTime)
     {
-        StopCoroutine(TurnNoticeOff());
+        StopCoroutine(TurnNoticeOff(noticeTime));
         _noticeText.gameObject.SetActive(true);
         _noticeText.text = message;
-        StartCoroutine(TurnNoticeOff());
+        StartCoroutine(TurnNoticeOff(noticeTime));
     }
-    private IEnumerator TurnNoticeOff()
+    private IEnumerator TurnNoticeOff(float noticeTime)
     {
-        yield return new WaitForSeconds(_noticeTimeToDisappear);
+        yield return new WaitForSeconds(noticeTime);
         _noticeText.gameObject.SetActive(false);
     }
 

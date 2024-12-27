@@ -1,6 +1,5 @@
 using System;
 using System.Collections;
-using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -37,6 +36,8 @@ public class TutorialManager : MonoBehaviour
     void Start()
     {
         CreateTutorialBoxes();
+
+        HUDManager._noticeUpdater?.Invoke("TUTORIAL", 3f);
     }
 
     public void EndTutorial()
@@ -63,10 +64,6 @@ public class TutorialManager : MonoBehaviour
     {
         for (int i = 0; i < _tutorialBoxSpecs.Length; i++)
         {
-            // Vector3 worldPos = new Vector3(_tutorialBoxSpecs[i]._gridPosition.x * _tileSize, 0, _tutorialBoxSpecs[i]._gridPosition.y * _tileSize);
-            // GameObject box = Instantiate(_tutorialBox, worldPos, Quaternion.identity);
-
-
             GameObject box = Instantiate(_tutorialBox, _tutorialBoxSpecs[i]._worldPosition, Quaternion.identity);
             box.transform.localScale = new Vector3(_tutorialBoxSpecs[i]._size.x * _tileSize, 1, _tutorialBoxSpecs[i]._size.y * _tileSize);
             box.GetComponent<TutorialBox>().TutorialInfo = _tutorialBoxSpecs[i]._info;
