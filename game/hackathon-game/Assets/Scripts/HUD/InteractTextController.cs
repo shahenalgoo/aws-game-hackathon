@@ -7,7 +7,7 @@ public class InteractTextController : MonoBehaviour
 
     public static Action<bool, string> _setInteractionText;
     public TextMeshProUGUI _interactionText;
-    void Start()
+    void Awake()
     {
         _setInteractionText += ShowText;
         _interactionText = GetComponent<TextMeshProUGUI>();

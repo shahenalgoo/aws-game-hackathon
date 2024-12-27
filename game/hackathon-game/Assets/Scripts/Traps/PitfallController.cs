@@ -79,7 +79,7 @@ public class PitfallController : MonoBehaviour
 
         PlayerCC.Move(Vector3.zero);
         PlayerCC.gameObject.GetComponent<Animator>().Play("Idle");
-        PlayerCC.gameObject.transform.position = new Vector3(transform.position.x, 0.5f, transform.position.z - 8f);
+        PlayerCC.gameObject.transform.position = new Vector3(transform.position.x - 8f, 0.5f, transform.position.z);
         PlayerCC.detectCollisions = true;
         PlayerCC.enabled = false;
         PlayerCC.GetComponentInChildren<GunManager>(true).gameObject.SetActive(true);

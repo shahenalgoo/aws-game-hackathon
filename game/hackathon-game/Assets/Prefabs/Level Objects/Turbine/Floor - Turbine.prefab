@@ -418,6 +418,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 869064743511520873, guid: 3f4189887b50242468e68a851f8613ef,
         type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 869064743511520873, guid: 3f4189887b50242468e68a851f8613ef,
+        type: 3}
       propertyPath: m_TagString
       value: Turbine
       objectReference: {fileID: 0}
@@ -445,6 +450,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Trap - Turbine
+      objectReference: {fileID: 0}
+    - target: {fileID: 6074638232709924660, guid: 3f4189887b50242468e68a851f8613ef,
+        type: 3}
+      propertyPath: m_Layer
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 6074638232709924660, guid: 3f4189887b50242468e68a851f8613ef,
         type: 3}
@@ -499,6 +509,11 @@ PrefabInstance:
     - target: {fileID: 6847340488297471374, guid: 3f4189887b50242468e68a851f8613ef,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7022475220149833664, guid: 3f4189887b50242468e68a851f8613ef,
+        type: 3}
+      propertyPath: m_Layer
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7022475220149833664, guid: 3f4189887b50242468e68a851f8613ef,

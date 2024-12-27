@@ -12,27 +12,28 @@ public class ExtractionController : MonoBehaviour
 
     [SerializeField] private GameObject _vfx;
 
+    [SerializeField] private string _interactionText;
 
-
-
-    public void Start()
-    {
-        Invoke("ActivatePlatform", 6f);
-    }
+    // public void Start()
+    // {
+    //     Invoke("ActivatePlatform", 6f);
+    // }
 
     void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.CompareTag("Player"))
         {
             if (_player == null) _player = other.gameObject;
-
             PlayerStateMachine._interact += CompleteLevel;
-            InteractTextController._setInteractionText(true, "Press 'E' to Extract (▲ or Y on Controller)");
+            InteractTextController._setInteractionText(true, _interactionText);
 
-            // if (GameManager.Instance.HasCollectedAll())
+            // bool isTutorial = TutorialManager.Instance != null;
+            // bool hasCollectedAll = GameManager.Instance != null && GameManager.Instance.HasCollectedAll();
+
+            // if (isTutorial || hasCollectedAll)
             // {
             //     PlayerStateMachine._interact += CompleteLevel;
-            //     InteractTextController._setInteractionText(true, "Press 'E' to Extract (▲ or Y on Controller)");
+            //     InteractTextController._setInteractionText(true, _interactionText);
             // }
             // else
             // {
@@ -64,14 +65,14 @@ public class ExtractionController : MonoBehaviour
 
     public void ActivatePlatform()
     {
-        // activate vfx
+        // Activate vfx
         _vfx.SetActive(true);
 
         // Play sfx
         AudioManager.Instance.PlaySfx(AudioManager.Instance._extractionReadySfx);
 
         // let player know on hud
-        HUDManager._noticeUpdater?.Invoke("The extraction platform is ready");
+        if (TutorialManager.Instance == null) HUDManager._noticeUpdater?.Invoke("The extraction platform is ready");
 
     }
 

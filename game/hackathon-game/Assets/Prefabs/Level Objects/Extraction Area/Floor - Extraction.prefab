@@ -241,6 +241,8 @@ MonoBehaviour:
   _flySpeed: 2.5
   _waitTimeForDelayedActions: 1.5
   _vfx: {fileID: 359382240317802241}
+  _interactionText: '<color="yellow">Extract</color><br>Keyboard: E<br>Xbox Controller:
+    Y<br>PS Controller: Triangle'
 --- !u!136 &1413455980903617615
 CapsuleCollider:
   m_ObjectHideFlags: 0

@@ -125,9 +125,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _flySpeed: 2.5
-  _cameraFollowTime: 2
-  _litUpMaterial: {fileID: 2100000, guid: aab3d4633bda54ec98e14bdd9ffa3e46, type: 2}
+  _waitTimeForDelayedActions: 0
   _vfx: {fileID: 6293956818607502002}
+  _interactionText: '<color="yellow">Extract</color><br>Keyboard: E<br>Xbox Controller:
+    Y<br>PS Controller: Triangle'
 --- !u!136 &731243178462958414
 CapsuleCollider:
   m_ObjectHideFlags: 0
