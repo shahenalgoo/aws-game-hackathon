@@ -14,10 +14,10 @@ public class ExtractionController : MonoBehaviour
 
     [SerializeField] private string _interactionText;
 
-    // public void Start()
-    // {
-    //     Invoke("ActivatePlatform", 6f);
-    // }
+    public void Start()
+    {
+        Invoke("ActivatePlatform", 6f);
+    }
 
     void OnTriggerEnter(Collider other)
     {

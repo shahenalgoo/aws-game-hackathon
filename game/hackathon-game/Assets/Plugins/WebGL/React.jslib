@@ -5,4 +5,7 @@ mergeInto(LibraryManager.library, {
   SubmitTime: function (time) {
     window.dispatchReactUnityEvent("SubmitTime", time);
   },
+  TakeScreenshot: function () {
+    window.dispatchReactUnityEvent("TakeScreenshot");
+  },
 });
