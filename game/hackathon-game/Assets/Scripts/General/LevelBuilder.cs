@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
-using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
 public class LevelBuilder : MonoBehaviour
@@ -38,6 +37,7 @@ public class LevelBuilder : MonoBehaviour
     // 5 - floor - pitfall
     // 6 - floor - boulder/launcher
     // 7 - floor - turning blades
+    // 8 - floor - extraction
     void SingletonCheck()
     {
         // If there is an instance, and it's not this one, delete this one
@@ -113,11 +113,6 @@ public class LevelBuilder : MonoBehaviour
             _grid[_startingGrid.x, _startingGrid.y] = 1;
         }
 
-        if (_grid[_endGrid.x, _endGrid.y] != 1)
-        {
-            _grid[_endGrid.x, _endGrid.y] = 1;
-        }
-
         GridResolver resolver = new GridResolver(_grid);
         _grid = resolver.FixIsolatedRegions(4, 0);
 
@@ -126,21 +121,14 @@ public class LevelBuilder : MonoBehaviour
         CreateObject(levelObjects[1], startingFloorPos, Quaternion.identity);
         AddWallInExtremity(_startingGrid.x, _startingGrid.y);
 
-        // Set up end floor
-        Vector3 endFloorPos = new Vector3(_endGrid.x * _tileSize, _yAdjustObject, _endGrid.y * _tileSize);
-        GameObject extractionArea = CreateObject(_extractionArea, endFloorPos, Quaternion.identity);
-        AddWallInExtremity(_endGrid.x, _endGrid.y);
-        _extractionController = extractionArea.GetComponentInChildren<ExtractionController>();
-
-
         // create 2d array for loop
         for (int i = 0; i < _grid.GetLength(0); i++)
         {
             for (int j = 0; j < _grid.GetLength(1); j++)
             {
-                // skip starting & end floor
+                // skip starting floor
                 if (i == _startingGrid.x && j == _startingGrid.y) continue;
-                if (i == _endGrid.x && j == _endGrid.y) continue;
+                // if (i == _endGrid.x && j == _endGrid.y) continue;
 
                 int objectId = _grid[i, j];
 
@@ -163,6 +151,8 @@ public class LevelBuilder : MonoBehaviour
                 // Count targets
                 if (objectId == 2) _targetCounter++;
 
+                // If extraction floor, get a reference to the controller
+                if (objectId == 8) _extractionController = obj.GetComponentInChildren<ExtractionController>();
 
                 // If object is in extremity, Add wall in extreme row and column
                 if (i == 0 || i == _grid.GetLength(0) - 1 || j == 0 || j == _grid.GetLength(1) - 1) AddWallInExtremity(i, j);

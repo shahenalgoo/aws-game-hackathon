@@ -1330,6 +1330,12 @@ PrefabInstance:
       propertyPath: _endGrid.y
       value: 19
       objectReference: {fileID: 0}
+    - target: {fileID: 2467403809657644435, guid: 63c35a3423dc64b36bd7d39e0a981df9,
+        type: 3}
+      propertyPath: levelObjects.Array.data[8]
+      value: 
+      objectReference: {fileID: 8105362297317527450, guid: 1fba6b1559d7c44bb91c1f2e7201fbfd,
+        type: 3}
     - target: {fileID: 2658375059827552384, guid: 63c35a3423dc64b36bd7d39e0a981df9,
         type: 3}
       propertyPath: m_LocalPosition.x
