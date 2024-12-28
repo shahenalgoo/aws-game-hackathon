@@ -9,9 +9,9 @@ public class AudioManager : MonoBehaviour
     private Bus _sfxBus;
 
     private bool _isSfxMuted = false;
+    public bool SfxMuted { get { return _isSfxMuted; } }
     private bool _isMusicMuted = false;
-    // private const string SFX_MUTE_PREF_KEY = "SFXMuted";
-    // private const string MUSIC_MUTE_PREF_KEY = "MusicMuted";
+    public bool MusicMuted { get { return _isMusicMuted; } }
 
     [Header("SFXs")]
     [Header("GUN")]

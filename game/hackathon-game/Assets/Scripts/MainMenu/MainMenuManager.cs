@@ -7,26 +7,9 @@ public class MainMenuManager : MonoBehaviour
     [DllImport("__Internal")]
     private static extern void ActivateMainMenu();
 
-    // Start is called before the first frame update
     void Awake()
     {
-        // for testing, delete key
-        // PlayerPrefs.DeleteKey(PlayerConstants.FIRST_TIME_PREF_KEY);
-
-        // Check first time and send to tutorial
-        bool firsTime = PlayerPrefs.GetInt(PlayerConstants.FIRST_TIME_PREF_KEY, 0) == 0;
-
-        if (firsTime)
-        {
-            PlayerPrefs.SetInt(PlayerConstants.FIRST_TIME_PREF_KEY, 1);
-            PlayerPrefs.Save();
-            StartTutorial();
-        }
-        else
-        {
-            RequestMainMenuFromReact();
-        }
-
+        RequestMainMenuFromReact();
     }
 
     public void RequestMainMenuFromReact()

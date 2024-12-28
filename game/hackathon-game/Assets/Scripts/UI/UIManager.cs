@@ -3,6 +3,8 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using System.Runtime.InteropServices;
+
 
 public class UIManager : Singleton<UIManager>
 {
@@ -32,6 +34,14 @@ public class UIManager : Singleton<UIManager>
     [SerializeField] private Minimap _map;
 
 
+
+    // For React
+    [DllImport("__Internal")]
+    private static extern void ActivatePauseMenu(int sfxMute, int musicMute);
+    [DllImport("__Internal")]
+    private static extern void ActivateDeathMenu();
+
+
     public void Start()
     {
         _gameplayActions = inputActions.FindActionMap("Gameplay");
@@ -43,7 +53,20 @@ public class UIManager : Singleton<UIManager>
         if (_playerDied) return;
 
         _isPaused = !_isPaused;
+
+#if UNITY_WEBGL == true && UNITY_EDITOR == false
+        if (_isPaused)
+        {
+            int sfxMute = PlayerPrefs.GetInt(PlayerConstants.SFX_MUTE_PREF_KEY, 0);
+            int musicMute = PlayerPrefs.GetInt(PlayerConstants.MUSIC_MUTE_PREF_KEY, 0);
+            ActivatePauseMenu(sfxMute, musicMute);
+            Debug.Log("Pause menu requested");
+        }
+#endif
+
+#if UNITY_EDITOR == true
         _pausePanel.SetActive(_isPaused);
+#endif
 
         if (_isPaused)
         {
@@ -65,7 +88,6 @@ public class UIManager : Singleton<UIManager>
             _gameplayActions.Enable();
             Time.timeScale = 1;
             AudioManager.Instance.PauseAudio(false);
-
         }
 
     }
@@ -94,7 +116,15 @@ public class UIManager : Singleton<UIManager>
 
         yield return new WaitForSeconds(_enableDeathPanelDelay);
 
+#if UNITY_WEBGL == true && UNITY_EDITOR == false
+    ActivateDeathMenu();
+    Debug.Log("Death menu requested");
+#endif
+
+#if UNITY_EDITOR == true
         EnableDeathPanel();
+#endif
+
     }
 
     private void EnableDeathPanel()
@@ -119,6 +149,14 @@ public class UIManager : Singleton<UIManager>
     {
         AudioManager.Instance.SetMusicMute(!toggle.isOn);
         if (toggle.isOn) AudioManager.Instance.SetMusic(true);
+    }
+    public void ToggleSFXFromReact()
+    {
+        AudioManager.Instance.SetSFXMute(!AudioManager.Instance.SfxMuted);
+    }
+    public void ToggleMusicFromReact()
+    {
+        AudioManager.Instance.SetSFXMute(!AudioManager.Instance.MusicMuted);
     }
 
     private void OnDestroy()

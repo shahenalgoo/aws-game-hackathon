@@ -113,6 +113,7 @@ public class GameManager : MonoBehaviour
             else
             {
                 Debug.Log("No boss fight in this mode, show after game screen");
+                StartSubmission();
             }
         }
         else
@@ -126,8 +127,9 @@ public class GameManager : MonoBehaviour
 
     public void StartSubmission()
     {
-        // #if UNITY_EDITOR == true
-        // #endif
+        Time.timeScale = 0;
+        AudioManager.Instance.PauseAudio(true);
+
 
 #if UNITY_WEBGL == true && UNITY_EDITOR == false
             SubmitTime(_gameTimer);
