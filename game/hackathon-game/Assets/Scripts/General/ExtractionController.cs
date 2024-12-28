@@ -72,7 +72,7 @@ public class ExtractionController : MonoBehaviour
         AudioManager.Instance.PlaySfx(AudioManager.Instance._extractionReadySfx);
 
         // let player know on hud
-        if (TutorialManager.Instance == null) HUDManager._noticeUpdater?.Invoke("The extraction platform is ready", 4f);
+        if (TutorialManager.Instance == null) HUDManager._noticeUpdater?.Invoke("The extraction platform is ready", 3f);
 
     }
 

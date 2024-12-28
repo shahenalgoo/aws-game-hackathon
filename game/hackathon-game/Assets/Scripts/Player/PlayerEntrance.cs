@@ -62,6 +62,9 @@ public class PlayerEntrance : MonoBehaviour
         _playerTransform.SetParent(null);
         LevelBuilder.Instance.InitializeMinimap();
 
+        // Give objective
+        if (TutorialManager.Instance == null) HUDManager._noticeUpdater?.Invoke("Collect all stars to extract", 3f);
+
         Destroy(gameObject);
     }
 

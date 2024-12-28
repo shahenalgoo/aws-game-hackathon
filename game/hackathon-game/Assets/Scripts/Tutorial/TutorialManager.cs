@@ -37,7 +37,7 @@ public class TutorialManager : MonoBehaviour
     {
         CreateTutorialBoxes();
 
-        HUDManager._noticeUpdater?.Invoke("TUTORIAL", 3f);
+        HUDManager._noticeUpdater?.Invoke("Complete the tutorial", 3f);
     }
 
     public void EndTutorial()

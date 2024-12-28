@@ -19,6 +19,7 @@ public class HUDManager : MonoBehaviour
 
     [Header("Notice")]
     [SerializeField] private TextMeshProUGUI _noticeText;
+    [SerializeField] private GameObject _noticeBox;
     public static Action<string, float> _noticeUpdater;
 
 
@@ -110,14 +111,14 @@ public class HUDManager : MonoBehaviour
     public void NotifyOnHUD(string message, float noticeTime)
     {
         StopCoroutine(TurnNoticeOff(noticeTime));
-        _noticeText.gameObject.SetActive(true);
+        _noticeBox.GetComponent<Animator>().Play("Roll In");
         _noticeText.text = message;
         StartCoroutine(TurnNoticeOff(noticeTime));
     }
     private IEnumerator TurnNoticeOff(float noticeTime)
     {
         yield return new WaitForSeconds(noticeTime);
-        _noticeText.gameObject.SetActive(false);
+        _noticeBox.GetComponent<Animator>().Play("Roll Out");
     }
 
     private void OnDestroy()
