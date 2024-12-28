@@ -1118,8 +1118,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5a3dbf5120be643a195efe46a05cfc30, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _screenshotCameraPos: {x: 32, y: -5, z: 78}
-  _screenshotCameraSize: 50
+  _screenshotCameraPos: {x: 24, y: -5, z: 74}
+  _screenshotCameraSize: 34
 --- !u!1001 &4897642682032924726
 PrefabInstance:
   m_ObjectHideFlags: 0

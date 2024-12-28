@@ -29,17 +29,20 @@ public class ScreenshotController : MonoBehaviour
         int uiLayer = LayerMask.NameToLayer("UI");
         Camera.main.cullingMask &= ~(1 << uiLayer);
 
+        StartCoroutine(OnScreenshotTaken());
+    }
+
+    private IEnumerator OnScreenshotTaken()
+    {
+        yield return new WaitForSeconds(0.5f);
+
         // send out event to take screenshot
 #if UNITY_WEBGL == true && UNITY_EDITOR == false
         TakeScreenshot();
         Debug.Log("Screenshot requested");
 #endif
 
-        OnScreenshotTaken();
-    }
-
-    public void OnScreenshotTaken()
-    {
+        yield return new WaitForSeconds(0.5f);
         // set hud canvas to overlay
         Canvas hudCanvas = HUDManager.Instance.gameObject.GetComponent<Canvas>();
         hudCanvas.renderMode = RenderMode.ScreenSpaceOverlay;
