@@ -8,7 +8,7 @@ public class MainMenuManager : MonoBehaviour
     private static extern void ActivateMainMenu();
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         // for testing, delete key
         // PlayerPrefs.DeleteKey(PlayerConstants.FIRST_TIME_PREF_KEY);

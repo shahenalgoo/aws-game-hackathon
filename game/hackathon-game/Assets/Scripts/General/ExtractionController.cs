@@ -110,8 +110,9 @@ public class ExtractionController : MonoBehaviour
         // Make camera stop following
         CameraController.setCanFollow?.Invoke(false);
 
-        // Make screen fade out
+        // Make screen fade 
         UIManager.Instance._screenFader.GetComponent<Animator>().Play("Fade In");
+        HUDManager.Instance.gameObject.GetComponent<Animator>().Play("Fade Out");
 
         // Allo time to fade in
         yield return new WaitForSeconds(2f);

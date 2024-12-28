@@ -157,7 +157,7 @@ public class AudioManager : MonoBehaviour
 
         _bgAmbiance = RuntimeManager.CreateInstance(_bgAmbianceRef);
         _bgAmbiance.getPlaybackState(out _bgAmbianceState);
-        SetMusic(true);
+        // SetMusic(true);
     }
 
 

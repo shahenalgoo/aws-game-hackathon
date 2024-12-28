@@ -25,9 +25,9 @@ public class ScreenshotController : MonoBehaviour
         transform.position = _screenshotCameraPos;
         Camera.main.orthographicSize = _screenshotCameraSize;
 
-        // Remove UI layer from culling mask
-        int uiLayer = LayerMask.NameToLayer("UI");
-        Camera.main.cullingMask &= ~(1 << uiLayer);
+        // Remove HUD layer from culling mask
+        int hudLayer = LayerMask.NameToLayer("HUD");
+        Camera.main.cullingMask &= ~(1 << hudLayer);
 
         StartCoroutine(OnScreenshotTaken());
     }
@@ -48,9 +48,9 @@ public class ScreenshotController : MonoBehaviour
         hudCanvas.renderMode = RenderMode.ScreenSpaceOverlay;
         hudCanvas.worldCamera = null;
 
-        Canvas uiCanvas = UIManager.Instance.gameObject.GetComponent<Canvas>();
-        uiCanvas.renderMode = RenderMode.ScreenSpaceOverlay;
-        uiCanvas.worldCamera = null;
+        // Canvas uiCanvas = UIManager.Instance.gameObject.GetComponent<Canvas>();
+        // uiCanvas.renderMode = RenderMode.ScreenSpaceOverlay;
+        // uiCanvas.worldCamera = null;
 
         // Restore ui layer
         Camera.main.cullingMask = _originalCullingMask;
