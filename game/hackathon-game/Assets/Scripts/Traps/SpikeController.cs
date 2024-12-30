@@ -9,7 +9,6 @@ public class SpikeController : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Player"))
         {
-
             // Play sfx
             AudioManager.Instance.PlaySfx(AudioManager.Instance._playerHurtMeleeSfx);
 
