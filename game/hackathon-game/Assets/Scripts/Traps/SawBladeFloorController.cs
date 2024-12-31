@@ -14,21 +14,26 @@ public class SawBladeFloorController : MonoBehaviour
         Vector2Int gridPos = Helpers.GetGridPosition(transform);
         int[,] grid = LevelBuilder.Instance.Grid;
 
-        // if both left and right are 0, rotate floor
-        if (CheckWithinColumnRange(gridPos, grid) && grid[gridPos.x, gridPos.y - 1] == 0 && grid[gridPos.x, gridPos.y + 1] == 0)
+        int horizontalConnections = 0;
+        int verticalConnections = 0;
+
+        //check left
+        if (gridPos.y > 0 && grid[gridPos.x, gridPos.y - 1] != 0) horizontalConnections++;
+
+        //check right
+        if (gridPos.y < grid.GetLength(1) - 1 && grid[gridPos.x, gridPos.y + 1] != 0) horizontalConnections++;
+
+        // check top
+        if (gridPos.x > 0 && grid[gridPos.x - 1, gridPos.y] != 0) verticalConnections++;
+
+        // check bottom
+        if (gridPos.x < grid.GetLength(0) - 1 && grid[gridPos.x + 1, gridPos.y] != 0) verticalConnections++;
+
+        // if vertical has more floors, rotate trap
+        if (verticalConnections > horizontalConnections)
         {
             transform.Rotate(0, -90f, 0);
         }
-    }
-
-    private bool CheckWithinColumnRange(Vector2Int gridPos, int[,] grid)
-    {
-        if (gridPos.y == 0 || gridPos.y == grid.GetLength(1) - 1)
-        {
-            return false;
-        }
-
-        return true;
     }
 
     private void OnDestroy()
