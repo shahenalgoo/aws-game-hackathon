@@ -30,7 +30,7 @@ public class TutorialManager : MonoBehaviour
 
         // Clear possible previous states
         Time.timeScale = 1f;
-        if (AudioManager.Instance != null) AudioManager.Instance.PauseAudio(false);
+        AudioManager.Instance?.PauseAudio(false);
     }
 
     void Start()

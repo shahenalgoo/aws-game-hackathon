@@ -5,6 +5,9 @@ mergeInto(LibraryManager.library, {
   ActivatePauseMenu: function (sfxMute, musicMute) {
     window.dispatchReactUnityEvent("ActivatePauseMenu", sfxMute, musicMute);
   },
+  DeactivatePauseMenu: function () {
+    window.dispatchReactUnityEvent("DeactivatePauseMenu");
+  },
   ActivateDeathMenu: function () {
     window.dispatchReactUnityEvent("ActivateDeathMenu");
   },

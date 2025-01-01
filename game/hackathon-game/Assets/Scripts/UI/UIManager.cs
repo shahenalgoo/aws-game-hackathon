@@ -39,6 +39,8 @@ public class UIManager : Singleton<UIManager>
     [DllImport("__Internal")]
     private static extern void ActivatePauseMenu(int sfxMute, int musicMute);
     [DllImport("__Internal")]
+    private static extern void DeactivatePauseMenu();
+    [DllImport("__Internal")]
     private static extern void ActivateDeathMenu();
 
 
@@ -61,6 +63,8 @@ public class UIManager : Singleton<UIManager>
             int musicMute = PlayerPrefs.GetInt(PlayerConstants.MUSIC_MUTE_PREF_KEY, 0);
             ActivatePauseMenu(sfxMute, musicMute);
             Debug.Log("Pause menu requested");
+        } else {
+            DeactivatePauseMenu();
         }
 #endif
 
@@ -75,6 +79,7 @@ public class UIManager : Singleton<UIManager>
             // deactivate player controls
             if (_psm != null) _lastKnownCursorPosition = _psm.CursorPosition;
             _gameplayActions.Disable();
+            _gameplayActions.FindAction("Pause").Enable();
             Time.timeScale = 0;
             if (_psm != null) _psm.CursorPosition = _lastKnownCursorPosition;
             AudioManager.Instance.PauseAudio(true);

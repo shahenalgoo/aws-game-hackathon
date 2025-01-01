@@ -95,9 +95,11 @@ public class AudioManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
+    }
 
+    void Start()
+    {
         // Get the specific buses
-        // Note: Replace "bus:/SFX" and "bus:/Music" with your actual FMOD bus paths
         _sfxBus = RuntimeManager.GetBus("bus:/SFX");
         _musicBus = RuntimeManager.GetBus("bus:/Music");
 
@@ -109,9 +111,6 @@ public class AudioManager : MonoBehaviour
 
         // Instantiate Music
         InstantiateMusic();
-    }
-    void Start()
-    {
     }
 
     private void LoadAudioStates()
