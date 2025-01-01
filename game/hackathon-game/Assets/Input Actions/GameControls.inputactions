@@ -370,17 +370,6 @@
                 },
                 {
                     "name": "",
-                    "id": "9f11ec44-3993-4b2f-9708-0ef76d4b1750",
-                    "path": "<Keyboard>/escape",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Pause",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
                     "id": "895bc2eb-028c-455d-bdea-5e6b2393725b",
                     "path": "<Gamepad>/start",
                     "interactions": "",
