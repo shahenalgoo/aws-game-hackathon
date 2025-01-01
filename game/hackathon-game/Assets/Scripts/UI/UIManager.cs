@@ -161,7 +161,9 @@ public class UIManager : Singleton<UIManager>
     }
     public void ToggleMusicFromReact()
     {
-        AudioManager.Instance.SetSFXMute(!AudioManager.Instance.MusicMuted);
+        bool isMuted = !AudioManager.Instance.MusicMuted;
+        AudioManager.Instance.SetMusicMute(isMuted);
+        if (!isMuted) AudioManager.Instance.SetMusic(true);
     }
 
     private void OnDestroy()
