@@ -8,6 +8,7 @@ public class PlayerEntrance : MonoBehaviour
     [SerializeField] private InputActionAsset _inputActions;
     [SerializeField] private InputActionMap _gameplayActions;
     [SerializeField] private Transform _playerTransform;
+    [SerializeField] private string _playerObjective = "Collect all stars to extract";
 
     private PlayerStateMachine _psm;
     void Awake()
@@ -60,10 +61,10 @@ public class PlayerEntrance : MonoBehaviour
 
         _psm.GravityMultiplier = 1;
         _playerTransform.SetParent(null);
-        LevelBuilder.Instance.InitializeMinimap();
+        LevelBuilder.Instance?.InitializeMinimap();
 
         // Give objective
-        if (TutorialManager.Instance == null) HUDManager._noticeUpdater?.Invoke("Collect all stars to extract", 3f);
+        HUDManager._noticeUpdater?.Invoke(_playerObjective, 3f);
 
         Destroy(gameObject);
     }

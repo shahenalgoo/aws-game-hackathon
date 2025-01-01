@@ -24,6 +24,8 @@ public class Minimap : MonoBehaviour
     {
         if (Time.timeScale == 0) return;
 
+        if (!gameObject.activeSelf) return;
+
         minimapContainer.gameObject.SetActive(!minimapContainer.gameObject.activeSelf);
     }
 
@@ -70,12 +72,6 @@ public class Minimap : MonoBehaviour
 
     private void CreateGrid()
     {
-        // Clear existing cells if any
-        foreach (Transform child in minimapContainer)
-        {
-            // Destroy(child.gameObject);
-        }
-
         // Calculate available space and cell size
         float availableWidth = mapSize - (padding * 2);
         float cellSize = availableWidth / gridDimensions.y;

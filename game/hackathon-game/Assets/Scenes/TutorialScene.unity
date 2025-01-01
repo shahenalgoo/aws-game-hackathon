@@ -1091,6 +1091,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8248483346402128365, guid: 73b46a90c51f643879dc37e1edc0d0f7,
         type: 3}
+      propertyPath: _playerObjective
+      value: Complete the tutorial
+      objectReference: {fileID: 0}
+    - target: {fileID: 8248483346402128365, guid: 73b46a90c51f643879dc37e1edc0d0f7,
+        type: 3}
       propertyPath: _playerTransform
       value: 
       objectReference: {fileID: 910907061}

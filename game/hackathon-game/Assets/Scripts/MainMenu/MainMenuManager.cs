@@ -118,7 +118,3 @@ public class MainMenuManager : MonoBehaviour
         SceneManager.LoadScene(SceneIndexes.GameSceneIndex);
     }
 }
-
-
-// <color="yellow">Shoot</color><br>Mouse: Left Click | Controller: Right Trigger<br><color="yellow">Aim Only</color><br>Mouse: Right Click | Controller: Right Stick<br>
-// <color="yellow">Reload</color><br>Keyboard: R | Controller: X (Xbox) / Square (PS)
