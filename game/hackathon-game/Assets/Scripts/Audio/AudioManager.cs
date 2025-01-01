@@ -2,6 +2,8 @@ using UnityEngine;
 using FMODUnity;
 using FMOD.Studio;
 
+
+[DefaultExecutionOrder(-100)]
 public class AudioManager : MonoBehaviour
 {
     public static AudioManager Instance { get; private set; }
@@ -95,10 +97,7 @@ public class AudioManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
-    }
 
-    void Start()
-    {
         // Get the specific buses
         _sfxBus = RuntimeManager.GetBus("bus:/SFX");
         _musicBus = RuntimeManager.GetBus("bus:/Music");
@@ -111,6 +110,10 @@ public class AudioManager : MonoBehaviour
 
         // Instantiate Music
         InstantiateMusic();
+    }
+
+    void Start()
+    {
     }
 
     private void LoadAudioStates()
