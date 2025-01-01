@@ -22,9 +22,6 @@ public class TurbineBladeController : MonoBehaviour
             if (playerCC != null)
             {
                 Vector3 collisionPoint = other.ClosestPoint(transform.position);
-                // Use the player's negative forward for direction
-                // Vector3 knockbackDirection = (playerCC.transform.position - collisionPoint).normalized;
-
                 // Calculate the tangential direction at the point of impact
                 Vector3 radiusVector = collisionPoint - transform.position;
                 Vector3 rotationAxis = transform.up; // Assuming the blade rotates around its Y-axis

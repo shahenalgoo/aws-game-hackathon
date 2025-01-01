@@ -10,28 +10,34 @@ public class BulletController : Bullet
 
         if (other.gameObject.CompareTag("Target"))
         {
-            CancelInvoke("DisableBullet");
-
-            BulletImpactManager._impactSpawner?.Invoke(transform.position, Quaternion.identity);
-
-            // Play sfx
-            AudioManager.Instance.PlaySfx(AudioManager.Instance._targetHitSfx);
-
             int damageRoundUp = Mathf.CeilToInt(_currentDamage);
             other.gameObject.GetComponent<TargetHealth>().TakeDamage(damageRoundUp);
 
-            DisableBullet();
+            OnBulletCollision();
+            return;
         }
         if (other.gameObject.CompareTag("SawBlades") || other.gameObject.CompareTag("Turbine"))
         {
-            // Play sfx
-            AudioManager.Instance.PlaySfx(AudioManager.Instance._targetHitSfx);
+            OnBulletCollision();
+            return;
+        }
 
-            CancelInvoke("DisableBullet");
-            BulletImpactManager._impactSpawner?.Invoke(transform.position, Quaternion.identity);
-            DisableBullet();
+        if (other.gameObject.CompareTag("BossShield"))
+        {
+            OnBulletCollision();
+            return;
         }
 
 
+    }
+
+    public void OnBulletCollision()
+    {
+        // Play sfx
+        AudioManager.Instance.PlaySfx(AudioManager.Instance._targetHitSfx);
+
+        CancelInvoke("DisableBullet");
+        BulletImpactManager._impactSpawner?.Invoke(transform.position, Quaternion.identity);
+        DisableBullet();
     }
 }

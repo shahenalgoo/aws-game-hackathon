@@ -11,6 +11,7 @@ TagManager:
   - SawBlades
   - SkyboxCamera
   - Turbine
+  - BossShield
   layers:
   - Default
   - TransparentFX

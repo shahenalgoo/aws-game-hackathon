@@ -35,6 +35,7 @@ public class RicochetSawBlade : MonoBehaviour
         _ricochetCount = 0;
         _isHome = false;
         CalculateDirection();
+        transform.parent.parent = null;
     }
 
     void Update()
@@ -73,6 +74,8 @@ public class RicochetSawBlade : MonoBehaviour
     private void OnReachedHome()
     {
         // Do something when the blade reaches home
+        transform.parent.parent = _homePosition.transform;
+
         _canGoHome = false;
         _canFly = false;
         Invoke("StartFlight", 5f);

@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using UnityEngine;
 
@@ -77,8 +76,6 @@ public class TargetController : MonoBehaviour
     void LookAtPlayer()
     {
         // Calculate direction to player
-        // Vector3 playerPos = _player.position + new Vector3(0, 1f, 0);
-        // Vector3 directionToPlayer = playerPos - _targetBarrel.transform.position;
         Vector3 directionToPlayer = _player.position - _targetBarrel.transform.position;
         directionToPlayer.y = 0; // Keep rotation only on Y axis if this is a ground unit
 
