@@ -17,7 +17,7 @@ public class LaserBotController : MonoBehaviour
     void Start()
     {
         // get grid pos from world pos
-        Vector2Int gridPos = Helpers.GetGridPosition(transform);
+        Vector2Int gridPos = Helpers.GetGridPosition(transform, LevelBuilder.Instance.TileSize);
         int[,] grid = LevelBuilder.Instance.Grid;
 
         // count all the non-zero floors to the left

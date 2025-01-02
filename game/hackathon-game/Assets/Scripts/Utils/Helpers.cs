@@ -47,10 +47,8 @@ public static class Helpers
         return false;
     }
 
-    public static Vector2Int GetGridPosition(Transform transform)
+    public static Vector2Int GetGridPosition(Transform transform, int tileSize)
     {
-        int tileSize = LevelBuilder.Instance.TileSize;
-
         // get grid pos from world pos
         Vector2Int gridPos = new Vector2Int(Mathf.RoundToInt(transform.position.x / tileSize), Mathf.RoundToInt(transform.position.z / tileSize));
         return gridPos;

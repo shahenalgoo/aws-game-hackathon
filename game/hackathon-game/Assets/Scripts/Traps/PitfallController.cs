@@ -11,7 +11,7 @@ public class PitfallController : MonoBehaviour
     void Start()
     {
         // get grid pos from world pos
-        Vector2Int gridPos = Helpers.GetGridPosition(transform);
+        Vector2Int gridPos = Helpers.GetGridPosition(transform, LevelBuilder.Instance.TileSize);
         int[,] grid = LevelBuilder.Instance.Grid;
 
 
