@@ -1201,6 +1201,8 @@ MonoBehaviour:
   _intervalBetweenMissiles: 0.5
   _missileAmountPerAttack: 3
   _bossPos: {x: 1, y: 2}
+  _explosionPrefab: {fileID: 6271241949191652176, guid: 83ecc6f6026394b50b79051f6238947e,
+    type: 3}
 --- !u!1 &834592145
 GameObject:
   m_ObjectHideFlags: 0
@@ -3135,7 +3137,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &2065474410
 Transform:
   m_ObjectHideFlags: 0
@@ -8815,6 +8817,16 @@ PrefabInstance:
       propertyPath: player
       value: 
       objectReference: {fileID: 910907055}
+    - target: {fileID: 3168166298730144426, guid: e00e4b0c950694eefa0b534624889d47,
+        type: 3}
+      propertyPath: orthographic size
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 6319453697723194095, guid: e00e4b0c950694eefa0b534624889d47,
+        type: 3}
+      propertyPath: orthographic size
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 7474903365916893035, guid: e00e4b0c950694eefa0b534624889d47,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -9310,79 +9322,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 0.57, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!1001 &6913500534199942238
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 3322414335739041965, guid: 60beb67b190ff4f469b5be17fddc81d1,
-        type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 24
-      objectReference: {fileID: 0}
-    - target: {fileID: 3322414335739041965, guid: 60beb67b190ff4f469b5be17fddc81d1,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3322414335739041965, guid: 60beb67b190ff4f469b5be17fddc81d1,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 8
-      objectReference: {fileID: 0}
-    - target: {fileID: 3322414335739041965, guid: 60beb67b190ff4f469b5be17fddc81d1,
-        type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3322414335739041965, guid: 60beb67b190ff4f469b5be17fddc81d1,
-        type: 3}
-      propertyPath: m_LocalRotation.x
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3322414335739041965, guid: 60beb67b190ff4f469b5be17fddc81d1,
-        type: 3}
-      propertyPath: m_LocalRotation.y
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3322414335739041965, guid: 60beb67b190ff4f469b5be17fddc81d1,
-        type: 3}
-      propertyPath: m_LocalRotation.z
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3322414335739041965, guid: 60beb67b190ff4f469b5be17fddc81d1,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3322414335739041965, guid: 60beb67b190ff4f469b5be17fddc81d1,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3322414335739041965, guid: 60beb67b190ff4f469b5be17fddc81d1,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4947703837033533640, guid: 60beb67b190ff4f469b5be17fddc81d1,
-        type: 3}
-      propertyPath: m_Name
-      value: MissileDropZone
-      objectReference: {fileID: 0}
-    - target: {fileID: 4947703837033533640, guid: 60beb67b190ff4f469b5be17fddc81d1,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 60beb67b190ff4f469b5be17fddc81d1, type: 3}
 --- !u!1 &7290071801804211236
 GameObject:
   m_ObjectHideFlags: 0
@@ -9398,7 +9337,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!1001 &7322273721321764449
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -9788,4 +9727,3 @@ SceneRoots:
   - {fileID: 1631742553}
   - {fileID: 1493959278}
   - {fileID: 2065474410}
-  - {fileID: 6913500534199942238}

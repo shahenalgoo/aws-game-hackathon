@@ -14,6 +14,9 @@ public class MissileLauncher : MonoBehaviour
 
     [Header("Getting a ref to the boss' positions so we can ignore it when calculating target locations")]
     [SerializeField] private Vector2Int _bossPos;
+
+    [Header("Explosion")]
+    [SerializeField] public GameObject _explosionPrefab;
     void Start()
     {
         _player = GameObject.FindGameObjectWithTag("Player").transform;
@@ -32,12 +35,14 @@ public class MissileLauncher : MonoBehaviour
         playerGridPos = new Vector2Int(playerGridPos.x - 1, playerGridPos.y);
         List<Vector2Int> targetPositions = GetMissileTargetGridPositions(playerGridPos);
         List<Vector3> targetWorldPositions = new();
+        GameObject[] dropZoneIndicators = new GameObject[targetPositions.Count];
         for (int i = 0; i < targetPositions.Count; i++)
         {
             Vector3 worldPos = new Vector3((targetPositions[i].x + 1f) * 8f, 0f, targetPositions[i].y * 8f);
             targetWorldPositions.Add(worldPos);
-            GameObject missilePointer = Instantiate(_missileDropPointer, worldPos, Quaternion.identity);
-            Destroy(missilePointer, 2f);
+            GameObject dropZone = Instantiate(_missileDropPointer, worldPos, Quaternion.identity);
+            dropZone.GetComponent<MeshRenderer>().enabled = false;
+            dropZoneIndicators[i] = dropZone;
         }
 
         // Shoot missiles
@@ -46,7 +51,10 @@ public class MissileLauncher : MonoBehaviour
             yield return new WaitForSeconds(_intervalBetweenMissiles);
             // Shoot missile
             GameObject missile = Instantiate(_missilePrefab, transform.position, Quaternion.identity);
-            missile.GetComponent<MissileController>().DropPosition = targetWorldPositions[i];
+            MissileController missileController = missile.GetComponent<MissileController>();
+            missileController.DropPosition = targetWorldPositions[i];
+            missileController.MissileLauncher = this;
+            missileController.DropZoneIndicator = dropZoneIndicators[i];
         }
     }
 
@@ -93,7 +101,6 @@ public class MissileLauncher : MonoBehaviour
         {
             int randomIndex = Random.Range(0, validPositions.Count);
             targetPositions.Add(validPositions[randomIndex]);
-            Debug.Log(validPositions[randomIndex]);
             validPositions.RemoveAt(randomIndex);
         }
 
