@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class BossController : MonoBehaviour
@@ -11,6 +12,7 @@ public class BossController : MonoBehaviour
     [Header("Weapons")]
     [SerializeField] private BossTurret _turret;
     [SerializeField] private RicochetSawBlade _sawBlade;
+    public RicochetSawBlade SawBlade { get => _sawBlade; }
     [SerializeField] private MissileLauncher _missileLauncher;
     [SerializeField] private GameObject[] _laserBeams;
     public void ActivatePhaseTwo()
@@ -29,14 +31,20 @@ public class BossController : MonoBehaviour
 
         _turret.gameObject.SetActive(false);
 
-        _missileLauncher.StopAttack();
-        _missileLauncher.MissileAmountPerAttack = 4;
-        _missileLauncher.StartRepeatingAttack();
 
         for (int i = 0; i < _laserBeams.Length; i++)
         {
             _laserBeams[i].gameObject.SetActive(true);
         }
+        _missileLauncher.StopAttack();
+        StartCoroutine(ActivateMissileLauncher());
+    }
+
+    private IEnumerator ActivateMissileLauncher()
+    {
+        yield return new WaitForSeconds(2f);
+        _missileLauncher.MissileAmountPerAttack = 4;
+        _missileLauncher.StartRepeatingAttack();
 
     }
 }

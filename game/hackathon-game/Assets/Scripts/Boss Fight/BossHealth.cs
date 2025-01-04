@@ -46,6 +46,7 @@ public class BossHealth : MonoBehaviour
 
     public void Die()
     {
+        _bossController.SawBlade.gameObject.SetActive(false);
         transform.parent.gameObject.SetActive(false);
     }
 }
