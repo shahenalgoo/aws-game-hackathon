@@ -28,6 +28,14 @@ public class BulletController : Bullet
             return;
         }
 
+        if (other.gameObject.CompareTag("Boss"))
+        {
+            int damageRoundUp = Mathf.CeilToInt(_currentDamage);
+            other.gameObject.GetComponent<BossHealth>().TakeDamage(damageRoundUp);
+            OnBulletCollision();
+            return;
+        }
+
 
     }
 

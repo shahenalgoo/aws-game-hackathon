@@ -55,8 +55,21 @@ public class BossTurret : MonoBehaviour
 
     public void StartBurstAttack()
     {
+
         StartCoroutine(BurstAttack());
     }
+
+    public void StopAttack()
+    {
+        CancelInvoke();
+        StopCoroutine(BurstAttack());
+    }
+
+    public void OnDisable()
+    {
+        StopAttack();
+    }
+
 
     private IEnumerator BurstAttack()
     {

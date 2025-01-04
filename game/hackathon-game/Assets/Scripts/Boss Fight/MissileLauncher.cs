@@ -10,6 +10,7 @@ public class MissileLauncher : MonoBehaviour
     [SerializeField] private GameObject _missileDropPointer;
     [SerializeField] private float _intervalBetweenMissiles = 0.5f;
     [SerializeField] private int _missileAmountPerAttack = 3;
+    public int MissileAmountPerAttack { get { return _missileAmountPerAttack; } set { _missileAmountPerAttack = value; } }
     private int[,] _gridSize = new int[4, 4];
 
     [Header("Getting a ref to the boss' positions so we can ignore it when calculating target locations")]
@@ -17,33 +18,42 @@ public class MissileLauncher : MonoBehaviour
 
     [Header("Explosion")]
     [SerializeField] public GameObject _explosionPrefab;
+
+    private MissileController[] _activeMissiles;
+    [SerializeField] private Vector3[] _dropLocations;
     void Start()
     {
         _player = GameObject.FindGameObjectWithTag("Player").transform;
+        StartRepeatingAttack();
+    }
+
+    public void StartRepeatingAttack()
+    {
+
         InvokeRepeating(nameof(StartMissileAttack), 3f, 5f);
     }
 
     public void StartMissileAttack()
     {
-        StartCoroutine(MissileAttack());
+        StartCoroutine(ShootMissiles());
     }
 
-    private IEnumerator MissileAttack()
+    public void StopAttack()
     {
-        // Spawn drop zones
-        Vector2Int playerGridPos = Helpers.GetGridPosition(_player, 8);
-        playerGridPos = new Vector2Int(playerGridPos.x - 1, playerGridPos.y);
-        List<Vector2Int> targetPositions = GetMissileTargetGridPositions(playerGridPos);
-        List<Vector3> targetWorldPositions = new();
-        GameObject[] dropZoneIndicators = new GameObject[targetPositions.Count];
-        for (int i = 0; i < targetPositions.Count; i++)
-        {
-            Vector3 worldPos = new Vector3((targetPositions[i].x + 1f) * 8f, 0f, targetPositions[i].y * 8f);
-            targetWorldPositions.Add(worldPos);
-            GameObject dropZone = Instantiate(_missileDropPointer, worldPos, Quaternion.identity);
-            dropZone.GetComponent<MeshRenderer>().enabled = false;
-            dropZoneIndicators[i] = dropZone;
-        }
+        CancelInvoke();
+        StopCoroutine(ShootMissiles());
+
+    }
+
+    public void OnDisable()
+    {
+        StopAttack();
+    }
+
+    private IEnumerator ShootMissiles()
+    {
+        _activeMissiles = new MissileController[_missileAmountPerAttack];
+        _dropLocations = new Vector3[_missileAmountPerAttack];
 
         // Shoot missiles
         for (int i = 0; i < _missileAmountPerAttack; i++)
@@ -52,10 +62,35 @@ public class MissileLauncher : MonoBehaviour
             // Shoot missile
             GameObject missile = Instantiate(_missilePrefab, transform.position, Quaternion.identity);
             MissileController missileController = missile.GetComponent<MissileController>();
-            missileController.DropPosition = targetWorldPositions[i];
             missileController.MissileLauncher = this;
-            missileController.DropZoneIndicator = dropZoneIndicators[i];
+            missileController.MissileIndex = i;
+            _activeMissiles[i] = missileController;
         }
+    }
+
+    public void GetDropLocation(int missileIndex)
+    {
+        // The drop locations will be chosen on the first request only by missile index 0
+        if (_dropLocations[0] == Vector3.zero)
+        {
+            // Spawn drop zones
+            Vector2Int playerGridPos = Helpers.GetGridPosition(_player, 8);
+            playerGridPos = new Vector2Int(playerGridPos.x - 1, playerGridPos.y);
+            List<Vector2Int> targetPositions = GetMissileTargetGridPositions(playerGridPos);
+
+            for (int i = 0; i < _missileAmountPerAttack; i++)
+            {
+                Vector3 worldPos = new Vector3((targetPositions[i].x + 1f) * 8f, 0f, targetPositions[i].y * 8f);
+                _dropLocations[i] = worldPos;
+            }
+        }
+
+        GameObject[] dropZoneIndicators = new GameObject[_missileAmountPerAttack];
+        GameObject dropZone = Instantiate(_missileDropPointer, _dropLocations[missileIndex], Quaternion.identity);
+        dropZone.GetComponent<MeshRenderer>().enabled = false;
+        dropZoneIndicators[missileIndex] = dropZone;
+        _activeMissiles[missileIndex].DropPosition = _dropLocations[missileIndex];
+        _activeMissiles[missileIndex].DropZoneIndicator = dropZoneIndicators[missileIndex];
     }
 
     private List<Vector2Int> GetMissileTargetGridPositions(Vector2Int playerGridPos)

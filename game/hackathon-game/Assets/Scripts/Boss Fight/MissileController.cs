@@ -14,20 +14,18 @@ public class MissileController : MonoBehaviour
     public Vector3 DropPosition { get => _dropPosition; set => _dropPosition = value; }
     private bool _canRelease = false;
     [SerializeField] private float _delayToRelease = 2f;
+    private int _missileIndex;
+    public int MissileIndex { get => _missileIndex; set => _missileIndex = value; }
     private MissileLauncher _missileLauncher;
     public MissileLauncher MissileLauncher { get => _missileLauncher; set => _missileLauncher = value; }
     private GameObject _dropZoneIndicator;
     public GameObject DropZoneIndicator { get => _dropZoneIndicator; set => _dropZoneIndicator = value; }
-    private bool _hasExploded = false;
     [SerializeField] private float _explosionRadius = 5f;
 
     [Header("Damage")]
     [SerializeField] private int _damage = 20;
     [SerializeField] private float _knockbackForce = 1f;
 
-
-
-    // Update is called once per frame
     void Update()
     {
 
@@ -45,6 +43,7 @@ public class MissileController : MonoBehaviour
             {
                 _readyPosReached = true;
                 StartCoroutine(StartReleaseWithDelay());
+                _missileLauncher.GetDropLocation(_missileIndex);
                 _dropZoneIndicator.GetComponent<MeshRenderer>().enabled = true;
             }
         }
@@ -69,35 +68,34 @@ public class MissileController : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        if (_hasExploded) return;
-        if (!_canRelease) return;
-        if (other.gameObject.CompareTag("Player")) return;
-
-        _hasExploded = true;
-
-        // Create overlap sphere check
-        Collider[] hitColliders = Physics.OverlapSphere(transform.position, _explosionRadius);
-        foreach (Collider hitCollider in hitColliders)
+        if (other.gameObject.CompareTag("Floor"))
         {
-            if (hitCollider.CompareTag("Player"))
+            // Create overlap sphere check
+            Collider[] hitColliders = Physics.OverlapSphere(transform.position, _explosionRadius);
+            foreach (Collider hitCollider in hitColliders)
             {
-                // Player was caught in explosion radius
-                PlayerHealth playerHealth = hitCollider.gameObject.GetComponent<PlayerHealth>();
-                playerHealth.TakeDamage(_damage);
-                playerHealth.DamageVfx.Play();
-
-                // Apply the knockback through your player movement script
-                PlayerStateMachine psm = hitCollider.gameObject.GetComponent<PlayerStateMachine>();
-                if (psm != null)
+                if (hitCollider.CompareTag("Player"))
                 {
-                    psm.ApplyKnockback(-psm.transform.forward * _knockbackForce);
+                    // Player was caught in explosion radius
+                    PlayerHealth playerHealth = hitCollider.gameObject.GetComponent<PlayerHealth>();
+                    playerHealth.TakeDamage(_damage);
+                    playerHealth.DamageVfx.Play();
+
+                    // Apply the knockback through your player movement script
+                    PlayerStateMachine psm = hitCollider.gameObject.GetComponent<PlayerStateMachine>();
+                    if (psm != null)
+                    {
+                        Vector3 dir = (psm.transform.position - transform.position).normalized;
+                        psm.ApplyKnockback(dir * _knockbackForce);
+                    }
                 }
             }
-        }
 
-        GameObject explosion = Instantiate(_missileLauncher._explosionPrefab, transform.position, Quaternion.identity);
-        Destroy(_dropZoneIndicator);
-        Destroy(gameObject);
+            GameObject explosion = Instantiate(_missileLauncher._explosionPrefab, transform.position, Quaternion.identity);
+            Destroy(_dropZoneIndicator);
+            Destroy(gameObject);
+        };
+
 
     }
 

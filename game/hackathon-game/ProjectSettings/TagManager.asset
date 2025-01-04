@@ -12,6 +12,8 @@ TagManager:
   - SkyboxCamera
   - Turbine
   - BossShield
+  - Floor
+  - Boss
   layers:
   - Default
   - TransparentFX

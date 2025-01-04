@@ -101,7 +101,7 @@ MonoBehaviour:
   _readyPosition: {x: 16, y: 40, z: 16}
   _readyPosReachedThreshold: 0.1
   _flySpeed: 100
-  _delayToRelease: 2
+  _delayToRelease: 0.3
   _explosionRadius: 3.5
   _damage: 20
   _knockbackForce: 8
