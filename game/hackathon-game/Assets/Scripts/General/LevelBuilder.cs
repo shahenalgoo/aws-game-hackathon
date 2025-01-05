@@ -318,4 +318,9 @@ public class LevelBuilder : MonoBehaviour
 
     #endregion
 
+    void OnDisable()
+    {
+        Instance = null;
+    }
+
 }

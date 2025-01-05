@@ -95,6 +95,14 @@ public class GameManager : MonoBehaviour
         PlayerPrefs.SetFloat(PlayerConstants.TIMER_PREF_KEY, _gameTimer);
         PlayerPrefs.Save();
 
+        // If we are in a boss fight, trigger submission directly
+        if (SceneManager.GetActiveScene().buildIndex == SceneIndexes.BossFightSceneIndex)
+        {
+            Debug.Log("Boss defeated");
+            StartSubmission();
+            return;
+        }
+
         // Getting playlist data
         string playlistString = PlayerPrefs.GetString(PlayerConstants.PLAYLIST_PREF_KEY, "");
         string[] playlist = playlistString.Split(new[] { "###" }, StringSplitOptions.None);
@@ -120,6 +128,7 @@ public class GameManager : MonoBehaviour
         {
             // else increment and reload scene
             PlayerPrefs.SetInt(PlayerConstants.PLAYLIST_TRACKER_PREF_KEY, playlistIndex + 1);
+            PlayerPrefs.Save();
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         }
 

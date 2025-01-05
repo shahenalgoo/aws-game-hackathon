@@ -81,7 +81,7 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: b6efa04b9e9c045bcb08e188fec76098,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -125,7 +125,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _flySpeed: 2.5
-  _waitTimeForDelayedActions: 0
+  _waitTimeForDelayedActions: 1.5
   _vfx: {fileID: 6293956818607502002}
   _interactionText: '<color="yellow">Extract</color><br>Keyboard: E<br>Xbox Controller:
     Y<br>PS Controller: Triangle'

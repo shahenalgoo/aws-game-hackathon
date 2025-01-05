@@ -25,13 +25,24 @@ public class PlayerHealth : MonoBehaviour
     {
         SetMaxHealth();
 
-        // Get the vignette effect from the volume
-        if (damageVolume != null && damageVolume.profile.TryGet(out vignette))
+        // Make sure the volume has a profile assigned
+        if (damageVolume == null || damageVolume.profile == null)
         {
-            // Initialize vignette settings
-            vignette.intensity.Override(0f);
-            vignette.color.Override(Color.red);
+            Debug.LogError("Damage volume or profile is not assigned!");
+            return;
         }
+
+        // Get or add the vignette effect
+        if (!damageVolume.profile.TryGet(out vignette))
+        {
+            // If vignette doesn't exist, add it to the profile
+            vignette = damageVolume.profile.Add<Vignette>(false);
+        }
+
+        // Initialize vignette settings
+        vignette.active = true;
+        vignette.intensity.Override(0f);
+        vignette.color.Override(Color.red);
     }
 
     public void SetMaxHealth()
@@ -67,30 +78,37 @@ public class PlayerHealth : MonoBehaviour
 
     private IEnumerator FlashRed()
     {
-        if (vignette == null) yield break;
+        if (vignette == null)
+        {
+            Debug.LogWarning("Vignette effect not found!");
+            yield break;
+        }
 
         float elapsedTime = 0f;
         float startIntensity = 0f;
         float targetIntensity = 0.5f;
 
         // Fade in
-        while (elapsedTime < flashDuration / 2)
+        while (elapsedTime < flashDuration / 2f)
         {
             elapsedTime += Time.deltaTime;
-            float newIntensity = Mathf.Lerp(startIntensity, targetIntensity, elapsedTime / (flashDuration / 2));
+            float newIntensity = Mathf.Lerp(startIntensity, targetIntensity, elapsedTime / (flashDuration / 2f));
             vignette.intensity.Override(newIntensity);
             yield return null;
         }
+
+        // Ensure we reach the target intensity
+        vignette.intensity.Override(targetIntensity);
 
         // Fade out
         elapsedTime = 0f;
         startIntensity = targetIntensity;
         targetIntensity = 0f;
 
-        while (elapsedTime < flashDuration / 2)
+        while (elapsedTime < flashDuration / 2f)
         {
             elapsedTime += Time.deltaTime;
-            float newIntensity = Mathf.Lerp(startIntensity, targetIntensity, elapsedTime / (flashDuration / 2));
+            float newIntensity = Mathf.Lerp(startIntensity, targetIntensity, elapsedTime / (flashDuration / 2f));
             vignette.intensity.Override(newIntensity);
             yield return null;
         }

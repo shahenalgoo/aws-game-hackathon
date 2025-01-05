@@ -46,7 +46,13 @@ public class BossHealth : MonoBehaviour
 
     public void Die()
     {
+        _bossHUD.gameObject.SetActive(false);
         _bossController.SawBlade.gameObject.SetActive(false);
+
+        // Find extraction platform and activate it
+        GameObject.FindObjectOfType<ExtractionPlatformFadeIn>().StartFadeIn();
+
+
         transform.parent.gameObject.SetActive(false);
     }
 }
