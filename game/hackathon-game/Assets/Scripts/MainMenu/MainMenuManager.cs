@@ -6,9 +6,10 @@ public class MainMenuManager : MonoBehaviour
 {
     [DllImport("__Internal")]
     private static extern void ActivateMainMenu();
-
     void Awake()
     {
+        Time.timeScale = 1f;
+
         RequestMainMenuFromReact();
     }
 
