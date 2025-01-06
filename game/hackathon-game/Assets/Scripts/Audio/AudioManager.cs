@@ -1,6 +1,7 @@
 using UnityEngine;
 using FMODUnity;
 using FMOD.Studio;
+using UnityEngine.SceneManagement;
 
 
 [DefaultExecutionOrder(-100)]
@@ -101,6 +102,10 @@ public class AudioManager : MonoBehaviour
     public EventInstance _bgAmbiance;
     private PLAYBACK_STATE _bgAmbianceState;
 
+    [SerializeField] private EventReference _bossMusicRef;
+    public EventInstance _bossMusic;
+    private PLAYBACK_STATE _bossMusicState;
+
 
     private void Awake()
     {
@@ -182,7 +187,9 @@ public class AudioManager : MonoBehaviour
 
         _bgAmbiance = RuntimeManager.CreateInstance(_bgAmbianceRef);
         _bgAmbiance.getPlaybackState(out _bgAmbianceState);
-        // SetMusic(true);
+
+        _bossMusic = RuntimeManager.CreateInstance(_bossMusicRef);
+        _bossMusic.getPlaybackState(out _bossMusicState);
     }
 
 
@@ -190,6 +197,19 @@ public class AudioManager : MonoBehaviour
     {
         if (!_isMusicMuted && turnOn)
         {
+            // play boss music
+            if (SceneManager.GetActiveScene().buildIndex == SceneIndexes.BossFightSceneIndex)
+            {
+                bool isBossDead = GameObject.FindObjectOfType<BossHealth>(true).IsDead;
+
+                if (_bossMusicState != PLAYBACK_STATE.PLAYING & !isBossDead)
+                {
+                    _bossMusic.start();
+                }
+
+                return;
+            }
+
             if (_bgAmbianceState != PLAYBACK_STATE.PLAYING)
             {
                 _bgAmbiance.start();
@@ -198,6 +218,7 @@ public class AudioManager : MonoBehaviour
         else
         {
             _bgAmbiance.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
+            _bossMusic.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
         }
 
     }

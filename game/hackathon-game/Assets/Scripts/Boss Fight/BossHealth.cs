@@ -7,6 +7,8 @@ public class BossHealth : MonoBehaviour
 
     [SerializeField] private BossHUDManager _bossHUD;
     [SerializeField] private BossController _bossController;
+    private bool _isDead;
+    public bool IsDead => _isDead;
 
 
     public void Start()
@@ -46,13 +48,20 @@ public class BossHealth : MonoBehaviour
 
     public void Die()
     {
+        _isDead = true;
         _bossHUD.gameObject.SetActive(false);
         _bossController.SawBlade.gameObject.SetActive(false);
 
         // Find extraction platform and activate it
         GameObject.FindObjectOfType<ExtractionPlatformFadeIn>().StartFadeIn();
 
+        // fade out music
+        // AudioManager.Instance._bossMusic.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+        // AudioManager.Instance._bossMusic.release();
+        MusicManager.Instance.FadeBossMusic();
 
         transform.parent.gameObject.SetActive(false);
+
+
     }
 }

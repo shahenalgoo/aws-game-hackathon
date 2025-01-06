@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class RicochetSawBlade : MonoBehaviour
@@ -6,6 +7,8 @@ public class RicochetSawBlade : MonoBehaviour
     [SerializeField] private int _damage = 20;
     [SerializeField] private float _knockbackForce = 1f;
     [SerializeField] private float _flySpeed = 5f;
+    [SerializeField] private float _delayBeforeFlight = 3f;
+    [SerializeField] private float _intervalBetweenFlight = 5f;
 
     private bool _canFly = false;
     private Vector3 _flyDirection;
@@ -20,6 +23,7 @@ public class RicochetSawBlade : MonoBehaviour
     [SerializeField] private float _homeReachedThreshold = 0.1f;
 
     [SerializeField] private float _height;
+    [SerializeField] private ParticleSystem _sparks;
 
     void Start()
     {
@@ -30,6 +34,19 @@ public class RicochetSawBlade : MonoBehaviour
 
     void StartFlight()
     {
+        GetComponentInChildren<Animator>().Play("Spin");
+        StartCoroutine(Fly());
+    }
+
+    void OnDisable()
+    {
+        CancelInvoke();
+        StopCoroutine(Fly());
+    }
+
+    private IEnumerator Fly()
+    {
+        yield return new WaitForSeconds(_delayBeforeFlight);
         _canFly = true;
         _canGoHome = false;
         _ricochetCount = 0;
@@ -81,7 +98,9 @@ public class RicochetSawBlade : MonoBehaviour
 
         _canGoHome = false;
         _canFly = false;
-        Invoke("StartFlight", 5f);
+        GetComponentInChildren<Animator>().Play("Stop");
+
+        Invoke("StartFlight", _intervalBetweenFlight);
     }
 
     void OnTriggerEnter(Collider other)
@@ -115,8 +134,12 @@ public class RicochetSawBlade : MonoBehaviour
         {
             AudioManager.Instance.PlaySfx(AudioManager.Instance._sawBladeRicochetSfx);
 
-            _ricochetCount++;
+            Vector3 hitPoint = other.ClosestPoint(transform.position);
+            _sparks.transform.position = hitPoint;
+            _sparks.Play();
 
+
+            _ricochetCount++;
             if (_ricochetCount <= _ricochetMax)
             {
                 CalculateDirection();

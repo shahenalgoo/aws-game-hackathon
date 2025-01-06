@@ -15,6 +15,7 @@ public class BossController : MonoBehaviour
     public RicochetSawBlade SawBlade { get => _sawBlade; }
     [SerializeField] private MissileLauncher _missileLauncher;
     [SerializeField] private GameObject[] _laserBeams;
+
     public void ActivatePhaseTwo()
     {
         _phaseTwoActivated = true;

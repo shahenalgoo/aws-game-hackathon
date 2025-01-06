@@ -33,9 +33,6 @@ public class ExtractionPlatformFadeIn : MonoBehaviour
 
         // Disable collider
         GetComponent<CapsuleCollider>().enabled = false;
-
-        // Invoke("StartFadeIn", 6f);
-
     }
 
     private void SetupMaterialsForFade()
@@ -77,14 +74,13 @@ public class ExtractionPlatformFadeIn : MonoBehaviour
 
     public void StartFadeIn()
     {
-        Debug.Log("Fade in starts");
         // Enable the renderer
         StartCoroutine(FadeIn());
     }
 
     private IEnumerator FadeIn()
     {
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(3f);
         meshRenderer.enabled = true;
 
         float elapsedTime = 0;

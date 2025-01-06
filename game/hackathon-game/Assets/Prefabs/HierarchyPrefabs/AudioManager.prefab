@@ -191,6 +191,41 @@ MonoBehaviour:
       Data3: -1294154320
       Data4: 1521354836
     Path: event:/Player Extract - Sweep 3
+  _sawBladeLaunchRef:
+    Guid:
+      Data1: -1780054248
+      Data2: 1239483359
+      Data3: -1827800183
+      Data4: 418063077
+    Path: event:/Ricochet Saw Blade - Launch
+  _sawBladeRicochetRef:
+    Guid:
+      Data1: -917610298
+      Data2: 1076150139
+      Data3: 1121163454
+      Data4: -1021946445
+    Path: event:/Saw Blade Ricochet - Metal Light 4
+  _missileLaunchRef:
+    Guid:
+      Data1: 1031947902
+      Data2: 1213356184
+      Data3: -77473111
+      Data4: -774613070
+    Path: event:/Missile Launch - Infantry Rifle
+  _missileExplodeRef:
+    Guid:
+      Data1: 725366672
+      Data2: 1103686990
+      Data3: 1247865991
+      Data4: 694162197
+    Path: event:/Missile - Explode
+  _laserbeamFireRef:
+    Guid:
+      Data1: 1183574383
+      Data2: 1255366766
+      Data3: -1922454643
+      Data4: -1255219857
+    Path: event:/Beam Laser Fire - Sci Fi Blaster 4
   _bgAmbianceRef:
     Guid:
       Data1: -50424100
@@ -198,3 +233,10 @@ MonoBehaviour:
       Data3: -121200503
       Data4: -599454412
     Path: event:/Music - Mysterious space atmosphere_08
+  _bossMusicRef:
+    Guid:
+      Data1: 651166425
+      Data2: 1249901763
+      Data3: 1111309216
+      Data4: -1211632447
+    Path: event:/Boss Music - strata-119686

@@ -1,5 +1,4 @@
 using System.Collections;
-using TMPro;
 using UnityEngine;
 
 public class ExtractionController : MonoBehaviour
@@ -16,7 +15,7 @@ public class ExtractionController : MonoBehaviour
 
     // public void Start()
     // {
-    //     Invoke("ActivatePlatform", 6f);
+    //     Invoke("ActivatePlatform", 4f);
     // }
 
     void OnTriggerEnter(Collider other)
@@ -24,6 +23,7 @@ public class ExtractionController : MonoBehaviour
         if (other.gameObject.CompareTag("Player"))
         {
             if (_player == null) _player = other.gameObject;
+
             PlayerStateMachine._interact += CompleteLevel;
             InteractTextController._setInteractionText(true, _interactionText);
 

@@ -11,6 +11,8 @@ public class SawBladeController : MonoBehaviour
     [SerializeField] private int _damage = 20;
     [SerializeField] private float _knockbackForce = 1f;
 
+    [SerializeField] private Animator _sawBladeAnimator;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -24,6 +26,8 @@ public class SawBladeController : MonoBehaviour
             animator.Play("MoveRight");
 
         }
+
+        _sawBladeAnimator.Play("Spin");
     }
 
     void OnTriggerEnter(Collider other)
