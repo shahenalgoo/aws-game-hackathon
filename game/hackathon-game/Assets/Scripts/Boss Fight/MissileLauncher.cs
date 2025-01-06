@@ -30,7 +30,7 @@ public class MissileLauncher : MonoBehaviour
     public void StartRepeatingAttack()
     {
 
-        InvokeRepeating(nameof(StartMissileAttack), 3f, 5f);
+        InvokeRepeating(nameof(StartMissileAttack), 1f, 5f);
     }
 
     public void StartMissileAttack()

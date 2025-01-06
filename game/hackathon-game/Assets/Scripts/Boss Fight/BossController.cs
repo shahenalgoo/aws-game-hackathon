@@ -14,6 +14,9 @@ public class BossController : MonoBehaviour
     [SerializeField] private RicochetSawBlade _sawBlade;
     public RicochetSawBlade SawBlade { get => _sawBlade; }
     [SerializeField] private MissileLauncher _missileLauncher;
+
+    [SerializeField] private Animator[] _shieldPieces;
+
     [SerializeField] private GameObject[] _laserBeams;
 
     public void ActivatePhaseTwo()
@@ -33,12 +36,8 @@ public class BossController : MonoBehaviour
         _turret.gameObject.SetActive(false);
 
 
-        for (int i = 0; i < _laserBeams.Length; i++)
-        {
-            _laserBeams[i].gameObject.SetActive(true);
-        }
-        // Play SFX
-        AudioManager.Instance.PlaySfx(AudioManager.Instance._laserbeamFireSfx);
+        StartCoroutine(FireLaserBeams());
+
 
         _missileLauncher.StopAttack();
         StartCoroutine(ActivateMissileLauncher());
@@ -46,10 +45,27 @@ public class BossController : MonoBehaviour
 
     private IEnumerator ActivateMissileLauncher()
     {
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(3f);
         _missileLauncher.MissileAmountPerAttack = 4;
         _missileLauncher.StartRepeatingAttack();
 
+    }
+
+    private IEnumerator FireLaserBeams()
+    {
+        for (int i = 0; i < _shieldPieces.Length; i++)
+        {
+            _shieldPieces[i].Play("Open");
+        }
+
+        yield return new WaitForSeconds(1.2f);
+
+        for (int i = 0; i < _laserBeams.Length; i++)
+        {
+            _laserBeams[i].gameObject.SetActive(true);
+        }
+        // Play SFX
+        AudioManager.Instance.PlaySfx(AudioManager.Instance._laserbeamFireSfx);
     }
 }
 

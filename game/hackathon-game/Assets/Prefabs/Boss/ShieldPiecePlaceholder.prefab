@@ -156,7 +156,7 @@ GameObject:
   - component: {fileID: 6808042440549277983}
   - component: {fileID: 1740036524751081138}
   m_Layer: 0
-  m_Name: ShieldPiece
+  m_Name: ShieldPiecePlaceholder
   m_TagString: BossShield
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
