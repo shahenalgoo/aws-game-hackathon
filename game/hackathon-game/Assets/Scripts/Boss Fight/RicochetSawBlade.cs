@@ -36,6 +36,9 @@ public class RicochetSawBlade : MonoBehaviour
         _isHome = false;
         CalculateDirection();
         transform.parent.parent = null;
+
+        // Play sfx
+        AudioManager.Instance.PlaySfx(AudioManager.Instance._sawBladeLaunchSfx);
     }
 
     void Update()
@@ -110,6 +113,8 @@ public class RicochetSawBlade : MonoBehaviour
 
         if (other.gameObject.layer == LayerMask.NameToLayer("InvisibleWall"))
         {
+            AudioManager.Instance.PlaySfx(AudioManager.Instance._sawBladeRicochetSfx);
+
             _ricochetCount++;
 
             if (_ricochetCount <= _ricochetMax)

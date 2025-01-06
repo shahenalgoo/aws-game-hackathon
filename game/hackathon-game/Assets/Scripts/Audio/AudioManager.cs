@@ -79,6 +79,22 @@ public class AudioManager : MonoBehaviour
     [SerializeField] private EventReference _playerExtractRef;
     public EventInstance _playerExtractSfx;
 
+    [Header("BOSS SFX")]
+    [SerializeField] private EventReference _sawBladeLaunchRef;
+    public EventInstance _sawBladeLaunchSfx;
+
+    [SerializeField] private EventReference _sawBladeRicochetRef;
+    public EventInstance _sawBladeRicochetSfx;
+
+    [SerializeField] private EventReference _missileLaunchRef;
+    public EventInstance _missileLaunchSfx;
+    [SerializeField] private EventReference _missileExplodeRef;
+    public EventInstance _missileExplodeSfx;
+
+    [SerializeField] private EventReference _laserbeamFireRef;
+    public EventInstance _laserbeamFireSfx;
+
+
 
     [Header("MUSIC")]
     [SerializeField] private EventReference _bgAmbianceRef;
@@ -152,6 +168,13 @@ public class AudioManager : MonoBehaviour
 
         _extractionReadySfx = RuntimeManager.CreateInstance(_extractionReadyRef);
         _playerExtractSfx = RuntimeManager.CreateInstance(_playerExtractRef);
+        _sawBladeLaunchSfx = RuntimeManager.CreateInstance(_sawBladeLaunchRef);
+        _sawBladeRicochetSfx = RuntimeManager.CreateInstance(_sawBladeRicochetRef);
+
+        _missileLaunchSfx = RuntimeManager.CreateInstance(_missileLaunchRef);
+        _missileExplodeSfx = RuntimeManager.CreateInstance(_missileExplodeRef);
+
+        _laserbeamFireSfx = RuntimeManager.CreateInstance(_laserbeamFireRef);
     }
 
     public void InstantiateMusic()

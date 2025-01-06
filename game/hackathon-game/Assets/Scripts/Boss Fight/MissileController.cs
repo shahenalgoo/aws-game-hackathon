@@ -92,6 +92,10 @@ public class MissileController : MonoBehaviour
             }
 
             GameObject explosion = Instantiate(_missileLauncher._explosionPrefab, transform.position, Quaternion.identity);
+
+            // Play sfx
+            AudioManager.Instance.PlaySfx(AudioManager.Instance._missileExplodeSfx);
+
             Destroy(_dropZoneIndicator);
             Destroy(gameObject);
         };

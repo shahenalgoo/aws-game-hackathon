@@ -65,6 +65,9 @@ public class MissileLauncher : MonoBehaviour
             missileController.MissileLauncher = this;
             missileController.MissileIndex = i;
             _activeMissiles[i] = missileController;
+
+            // Play sfx
+            AudioManager.Instance.PlaySfx(AudioManager.Instance._missileLaunchSfx);
         }
     }
 

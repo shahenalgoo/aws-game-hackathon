@@ -15,7 +15,7 @@ public class BeamController : MonoBehaviour
         {
             _canDamage = false;
             // Play SFX
-            AudioManager.Instance.PlaySfx(AudioManager.Instance._playerHurtSharpSfx);
+            AudioManager.Instance.PlaySfx(AudioManager.Instance._playerHurtLaserSfx);
 
             PlayerHealth playerHealth = other.gameObject.GetComponent<PlayerHealth>();
             playerHealth.TakeDamage(_damage);

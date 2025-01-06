@@ -39221,7 +39221,7 @@ GameObject:
   - component: {fileID: 6271241949894043096}
   - component: {fileID: 6271241949894043101}
   - component: {fileID: 6271241949894043098}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Burnmark
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -36,6 +36,9 @@ public class BossController : MonoBehaviour
         {
             _laserBeams[i].gameObject.SetActive(true);
         }
+        // Play SFX
+        AudioManager.Instance.PlaySfx(AudioManager.Instance._laserbeamFireSfx);
+
         _missileLauncher.StopAttack();
         StartCoroutine(ActivateMissileLauncher());
     }
