@@ -64,8 +64,10 @@ public class MissileLauncher : MonoBehaviour
             // Shoot missile
             GameObject missile = Instantiate(_missilePrefab, transform.position, Quaternion.identity);
             MissileController missileController = missile.GetComponent<MissileController>();
+
             missileController.MissileLauncher = this;
             missileController.MissileIndex = i;
+            missileController.ReadyPosition = new Vector3(transform.position.x, 40f, transform.position.z);
             _activeMissiles[i] = missileController;
 
             // Play sfx

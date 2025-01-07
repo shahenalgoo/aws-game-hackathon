@@ -33,7 +33,9 @@ public class BossController : MonoBehaviour
         _phaseThreeActivated = true;
         Debug.Log("Phase 3 activated");
 
-        _turret.gameObject.SetActive(false);
+        _turret.StopAttack();
+        _turret.BurstAttackAmount = 1;
+        _turret.StartRepeatingBurstAttack();
 
 
         StartCoroutine(FireLaserBeams());
@@ -76,4 +78,4 @@ public class BossController : MonoBehaviour
 // Turret, Ricochet Blade, 1 Missile 
 
 // Phase 3
-// Ricochet Blade, 4 missiles, laser beam
+// Ricochet Blade, 4 missiles, laser beam, turret 1 bullet

@@ -6,6 +6,8 @@ public class MainMenuManager : MonoBehaviour
 {
     [DllImport("__Internal")]
     private static extern void ActivateMainMenu();
+
+    [SerializeField] private GameObject _menu;
     void Awake()
     {
         Time.timeScale = 1f;
@@ -16,6 +18,7 @@ public class MainMenuManager : MonoBehaviour
     public void RequestMainMenuFromReact()
     {
 #if UNITY_WEBGL == true && UNITY_EDITOR == false
+    _menu.SetActive(false);
     ActivateMainMenu();
     Debug.Log("Main menu requested");
 #endif

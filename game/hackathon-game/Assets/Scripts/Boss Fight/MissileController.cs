@@ -7,7 +7,8 @@ using UnityEngine;
 public class MissileController : MonoBehaviour
 {
     private bool _readyPosReached = false;
-    [SerializeField] private Vector3 _readyPosition;
+    private Vector3 _readyPosition;
+    public Vector3 ReadyPosition { get { return _readyPosition; } set { _readyPosition = value; } }
     [SerializeField] private float _readyPosReachedThreshold = 0.1f;
     [SerializeField] private float _flySpeed = 5f;
     private Vector3 _dropPosition;

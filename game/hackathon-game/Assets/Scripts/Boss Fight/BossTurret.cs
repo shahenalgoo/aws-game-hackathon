@@ -8,13 +8,21 @@ public class BossTurret : MonoBehaviour
     [SerializeField] private float _rotationSpeed = 5f;
     [SerializeField] private float _burstAttackInterval = 0.2f;
     [SerializeField] private int _burstAttackAmount = 5;
+    public int BurstAttackAmount { get { return _burstAttackAmount; } set { _burstAttackAmount = value; } }
+
+    [SerializeField] private Transform _spawnPoint;
 
     void Start()
     {
         FindPlayer();
-        // InvokeRepeating(nameof(ShootPlayer), 3f, 2f);
+        StartRepeatingBurstAttack();
+    }
+
+    public void StartRepeatingBurstAttack()
+    {
         InvokeRepeating(nameof(StartBurstAttack), 3f, 5f);
     }
+
     void FindPlayer()
     {
         _player = GameObject.FindGameObjectWithTag("Player").transform;
@@ -47,7 +55,7 @@ public class BossTurret : MonoBehaviour
     {
         // Convert the direction into a rotation
         Quaternion bulletRotation = Quaternion.LookRotation(transform.forward);
-        TargetBulletManager._bulletSpawner?.Invoke(transform.position, bulletRotation);
+        TargetBulletManager._bulletSpawner?.Invoke(_spawnPoint.position, bulletRotation);
 
         // Play sfx
         AudioManager.Instance.PlaySfx(AudioManager.Instance._targetShotSfx);
