@@ -70,7 +70,7 @@ public class BossTurret : MonoBehaviour
     public void StopAttack()
     {
         CancelInvoke();
-        StopCoroutine(BurstAttack());
+        StopAllCoroutines();
     }
 
     public void OnDisable()

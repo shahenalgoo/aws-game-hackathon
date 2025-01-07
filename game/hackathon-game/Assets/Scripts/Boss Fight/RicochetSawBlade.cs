@@ -12,6 +12,7 @@ public class RicochetSawBlade : MonoBehaviour
 
     private bool _canFly = false;
     private Vector3 _flyDirection;
+    public Vector3 FlyDirection { get { return _flyDirection; } }
     private Transform _player;
 
     [SerializeField] private int _ricochetMax = 5;
@@ -92,7 +93,7 @@ public class RicochetSawBlade : MonoBehaviour
         _flyDirection.Normalize();
     }
 
-    private void OnReachedHome()
+    public void OnReachedHome()
     {
         // Do something when the blade reaches home
         transform.parent.parent = _homePosition.transform;

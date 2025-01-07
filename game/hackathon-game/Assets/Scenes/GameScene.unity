@@ -907,11 +907,46 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2450375143656045998, guid: e00e4b0c950694eefa0b534624889d47,
+        type: 3}
+      propertyPath: _screenshotCameraSize
+      value: 34
+      objectReference: {fileID: 0}
+    - target: {fileID: 2450375143656045998, guid: e00e4b0c950694eefa0b534624889d47,
+        type: 3}
+      propertyPath: _screenshotCameraPos.x
+      value: 24
+      objectReference: {fileID: 0}
+    - target: {fileID: 2450375143656045998, guid: e00e4b0c950694eefa0b534624889d47,
+        type: 3}
+      propertyPath: _screenshotCameraPos.y
+      value: -5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2450375143656045998, guid: e00e4b0c950694eefa0b534624889d47,
+        type: 3}
+      propertyPath: _screenshotCameraPos.z
+      value: 74
+      objectReference: {fileID: 0}
+    - target: {fileID: 2464345215269904859, guid: e00e4b0c950694eefa0b534624889d47,
+        type: 3}
+      propertyPath: orthographic size
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 3096403595217000957, guid: e00e4b0c950694eefa0b534624889d47,
         type: 3}
       propertyPath: player
       value: 
       objectReference: {fileID: 910907055}
+    - target: {fileID: 3168166298730144426, guid: e00e4b0c950694eefa0b534624889d47,
+        type: 3}
+      propertyPath: orthographic size
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 6319453697723194095, guid: e00e4b0c950694eefa0b534624889d47,
+        type: 3}
+      propertyPath: orthographic size
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 7474903365916893035, guid: e00e4b0c950694eefa0b534624889d47,
         type: 3}
       propertyPath: m_LocalPosition.x

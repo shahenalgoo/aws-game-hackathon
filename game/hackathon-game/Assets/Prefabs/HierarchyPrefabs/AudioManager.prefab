@@ -226,6 +226,13 @@ MonoBehaviour:
       Data3: -1922454643
       Data4: -1255219857
     Path: event:/Beam Laser Fire - Sci Fi Blaster 4
+  _bossDeathRef:
+    Guid:
+      Data1: -851225092
+      Data2: 1118673286
+      Data3: 662949000
+      Data4: 949034183
+    Path: event:/Enemy Explode - Impact 6
   _bgAmbianceRef:
     Guid:
       Data1: -50424100
@@ -235,8 +242,8 @@ MonoBehaviour:
     Path: event:/Music - Mysterious space atmosphere_08
   _bossMusicRef:
     Guid:
-      Data1: 651166425
-      Data2: 1249901763
-      Data3: 1111309216
-      Data4: -1211632447
-    Path: event:/Boss Music - strata-119686
+      Data1: -246359949
+      Data2: 1176886036
+      Data3: 1789185171
+      Data4: 2030089849
+    Path: event:/Boss Music Edited - strata-119687

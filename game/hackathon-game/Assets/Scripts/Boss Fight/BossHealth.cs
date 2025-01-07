@@ -48,19 +48,26 @@ public class BossHealth : MonoBehaviour
 
     public void Die()
     {
+        if (_isDead) return;
         _isDead = true;
         _bossHUD.gameObject.SetActive(false);
         _bossController.SawBlade.gameObject.SetActive(false);
 
         // Find extraction platform and activate it
-        GameObject.FindObjectOfType<ExtractionPlatformFadeIn>().StartFadeIn();
+        FindObjectOfType<ExtractionPlatformFadeIn>().StartFadeIn();
 
         // fade out music
-        // AudioManager.Instance._bossMusic.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
-        // AudioManager.Instance._bossMusic.release();
         MusicManager.Instance.FadeBossMusic();
 
-        transform.parent.gameObject.SetActive(false);
+        // Disable all attacks
+        GetComponent<BossController>().Explode();
+
+
+
+        GetComponent<CapsuleCollider>().enabled = false;
+
+        // gameObject.SetActive(false);
+
 
 
     }

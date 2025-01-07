@@ -145,7 +145,7 @@ public class PlayerHealth : MonoBehaviour
         // Shatter Effect
         if (shatter)
         {
-            GetComponent<PlayerFracture>().Shatter();
+            GetComponent<Fracture>().Shatter();
 
             // Play sfx
             AudioManager.Instance.PlaySfx(AudioManager.Instance._playerDeathSfx);

@@ -2,7 +2,8 @@ using UnityEngine;
 using System.Collections.Generic;
 using System.Collections;
 
-public class PlayerFracture : MonoBehaviour
+// This script fractures Skinned Mesh Renderers only
+public class Fracture : MonoBehaviour
 {
     [Header("Fracture Settings")]
     [SerializeField] private int pieceCount = 15;
@@ -24,10 +25,6 @@ public class PlayerFracture : MonoBehaviour
     [Header("Fade Settings")]
     [SerializeField] private float fadeDelay = 3f;
     [SerializeField] private float fadeDuration = 3f;
-
-    [Header("Effects")]
-    [SerializeField] private GameObject explosionEffectPrefab;
-    [SerializeField] private AudioClip breakSound;
 
     private SkinnedMeshRenderer skinnedMeshRenderer;
     private List<GameObject> pieces = new List<GameObject>();
@@ -84,9 +81,6 @@ public class PlayerFracture : MonoBehaviour
 
         // Assign vertices to nearest Voronoi point
         AssignVerticesToPoints(voronoiPoints, vertices, triangles, uvs);
-
-        // Play effects
-        PlayBreakEffects();
 
         // Create pieces
         CreatePieces(voronoiPoints);
@@ -340,20 +334,6 @@ public class PlayerFracture : MonoBehaviour
         material.SetFloat("_Blend", 0f);   // 0 = alpha, 1 = premultiply
         material.renderQueue = 3000;        // Transparent queue
         material.SetShaderPassEnabled("ShadowCaster", false);
-    }
-
-
-    private void PlayBreakEffects()
-    {
-        if (explosionEffectPrefab != null)
-        {
-            Instantiate(explosionEffectPrefab, transform.position, Quaternion.identity);
-        }
-
-        if (breakSound != null)
-        {
-            AudioSource.PlayClipAtPoint(breakSound, transform.position);
-        }
     }
 }
 

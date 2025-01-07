@@ -42,7 +42,7 @@ public class MissileLauncher : MonoBehaviour
     public void StopAttack()
     {
         CancelInvoke();
-        StopCoroutine(ShootMissiles());
+        StopAllCoroutines();
 
     }
 

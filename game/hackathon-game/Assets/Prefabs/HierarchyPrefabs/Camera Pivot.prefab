@@ -71,11 +71,11 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 8
+  orthographic size: 10
   m_Depth: 0
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 3263
+    m_Bits: 3519
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
@@ -215,7 +215,7 @@ Camera:
   far clip plane: 140
   field of view: 60
   orthographic: 1
-  orthographic size: 8
+  orthographic size: 10
   m_Depth: 0
   m_CullingMask:
     serializedVersion: 2
@@ -336,8 +336,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5a3dbf5120be643a195efe46a05cfc30, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _screenshotCameraPos: {x: 24, y: -5, z: 74}
-  _screenshotCameraSize: 34
+  _screenshotCameraPos: {x: 15, y: -4, z: 17}
+  _screenshotCameraSize: 20
 --- !u!1 &8488295212919687290
 GameObject:
   m_ObjectHideFlags: 0
@@ -406,7 +406,7 @@ Camera:
   far clip plane: 140
   field of view: 60
   orthographic: 1
-  orthographic size: 8
+  orthographic size: 10
   m_Depth: 0
   m_CullingMask:
     serializedVersion: 2

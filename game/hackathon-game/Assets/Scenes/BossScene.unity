@@ -2477,9 +2477,12 @@ GameObject:
   m_Component:
   - component: {fileID: 1493959278}
   - component: {fileID: 1493959279}
+  - component: {fileID: 1493959281}
+  - component: {fileID: 1493959282}
+  - component: {fileID: 1493959280}
   m_Layer: 0
   m_Name: Boss
-  m_TagString: Untagged
+  m_TagString: Boss
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2517,6 +2520,7 @@ MonoBehaviour:
   _turret: {fileID: 5430694484293341507}
   _sawBlade: {fileID: 4256760159417049083}
   _missileLauncher: {fileID: 829505810}
+  _shield: {fileID: 2065474409}
   _shieldPieces:
   - {fileID: 2000002615}
   - {fileID: 1315982342}
@@ -2527,6 +2531,101 @@ MonoBehaviour:
   - {fileID: 1315982341}
   - {fileID: 865405198}
   - {fileID: 1006339361}
+--- !u!136 &1493959280
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1493959277}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 1.22
+  m_Height: 0
+  m_Direction: 1
+  m_Center: {x: 0, y: -0.36, z: 0}
+--- !u!114 &1493959281
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1493959277}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce228fde9f1e3467d841ec9751a34e29, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _maxHealth: 200
+  _currentHealth: 0
+  _bossHUD: {fileID: 1194397042}
+  _bossController: {fileID: 1493959279}
+--- !u!114 &1493959282
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1493959277}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ca57a473232b94860849d67a2b87c2ce, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pieceCount: 30
+  explosionForce: 300
+  explosionRadius: 2
+  upwardsModifier: 0.2
+  pieceMass: 1
+  trailMaterial: {fileID: 2100000, guid: 843d2ca58da9a4a58a40be01ad245dde, type: 2}
+  trailTime: 0.5
+  startWidth: 0.1
+  endWidth: 0
+  trailColor:
+    serializedVersion: 2
+    key0: {r: 1, g: 1, b: 1, a: 1}
+    key1: {r: 1, g: 1, b: 1, a: 1}
+    key2: {r: 0, g: 0, b: 0, a: 0}
+    key3: {r: 0, g: 0, b: 0, a: 0}
+    key4: {r: 0, g: 0, b: 0, a: 0}
+    key5: {r: 0, g: 0, b: 0, a: 0}
+    key6: {r: 0, g: 0, b: 0, a: 0}
+    key7: {r: 0, g: 0, b: 0, a: 0}
+    ctime0: 0
+    ctime1: 65535
+    ctime2: 0
+    ctime3: 0
+    ctime4: 0
+    ctime5: 0
+    ctime6: 0
+    ctime7: 0
+    atime0: 0
+    atime1: 65535
+    atime2: 0
+    atime3: 0
+    atime4: 0
+    atime5: 0
+    atime6: 0
+    atime7: 0
+    m_Mode: 0
+    m_ColorSpace: -1
+    m_NumColorKeys: 2
+    m_NumAlphaKeys: 2
+  fadeDelay: 3
+  fadeDuration: 3
+  layersToIgnore:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!1 &1502946374
 GameObject:
   m_ObjectHideFlags: 0
@@ -2830,11 +2929,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 2572608761414172316, guid: ed6351fa37ed1a54bac66c908dc976f8,
-        type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 2777191392175198548, guid: ed6351fa37ed1a54bac66c908dc976f8,
         type: 3}
       propertyPath: m_ActionEvents.Array.data[7].m_PersistentCalls.m_Calls.Array.data[0].m_Target
@@ -2909,16 +3003,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6707294591469338254, guid: ed6351fa37ed1a54bac66c908dc976f8,
-        type: 3}
-      propertyPath: priority
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6707294591469338254, guid: ed6351fa37ed1a54bac66c908dc976f8,
-        type: 3}
-      propertyPath: m_IsGlobal
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7523127128763181994, guid: ed6351fa37ed1a54bac66c908dc976f8,
         type: 3}
@@ -3928,54 +4012,13 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1211295613637230896}
-  - component: {fileID: 1982905852652575628}
-  - component: {fileID: 1982905852652575627}
   m_Layer: 0
-  m_Name: bossBody2
+  m_Name: body
   m_TagString: Boss
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1982905852652575627
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1982905852652575626}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ce228fde9f1e3467d841ec9751a34e29, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _maxHealth: 3000
-  _currentHealth: 0
-  _bossHUD: {fileID: 1194397042}
-  _bossController: {fileID: 1493959279}
---- !u!136 &1982905852652575628
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1982905852652575626}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 1.22
-  m_Height: 0
-  m_Direction: 1
-  m_Center: {x: 0, y: 0.62, z: 0}
 --- !u!1 &2250556851273880945
 GameObject:
   m_ObjectHideFlags: 0
@@ -4416,7 +4459,7 @@ MeshRenderer:
   m_RendererPriority: 0
   m_Materials:
   - {fileID: 2100000, guid: 5e6fde33d0e7743d0a002f2281da4352, type: 2}
-  - {fileID: 2100000, guid: fbfea7c27b6854225be115ad83386817, type: 2}
+  - {fileID: 2100000, guid: 8417ea74923a340b8a4134c70175427d, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -4547,66 +4590,16 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 2191493503355372501, guid: e00e4b0c950694eefa0b534624889d47,
-        type: 3}
-      propertyPath: m_RenderPostProcessing
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2450375143656045998, guid: e00e4b0c950694eefa0b534624889d47,
-        type: 3}
-      propertyPath: _screenshotCameraSize
-      value: 20
-      objectReference: {fileID: 0}
-    - target: {fileID: 2450375143656045998, guid: e00e4b0c950694eefa0b534624889d47,
-        type: 3}
-      propertyPath: _screenshotCameraPos.x
-      value: 15
-      objectReference: {fileID: 0}
-    - target: {fileID: 2450375143656045998, guid: e00e4b0c950694eefa0b534624889d47,
-        type: 3}
-      propertyPath: _screenshotCameraPos.y
-      value: -4
-      objectReference: {fileID: 0}
-    - target: {fileID: 2450375143656045998, guid: e00e4b0c950694eefa0b534624889d47,
-        type: 3}
-      propertyPath: _screenshotCameraPos.z
-      value: 17
-      objectReference: {fileID: 0}
-    - target: {fileID: 2464345215269904859, guid: e00e4b0c950694eefa0b534624889d47,
-        type: 3}
-      propertyPath: orthographic size
-      value: 10
-      objectReference: {fileID: 0}
     - target: {fileID: 2464345215269904859, guid: e00e4b0c950694eefa0b534624889d47,
         type: 3}
       propertyPath: m_CullingMask.m_Bits
-      value: 3263
+      value: 19903
       objectReference: {fileID: 0}
     - target: {fileID: 3096403595217000957, guid: e00e4b0c950694eefa0b534624889d47,
         type: 3}
       propertyPath: player
       value: 
       objectReference: {fileID: 910907055}
-    - target: {fileID: 3168166298730144426, guid: e00e4b0c950694eefa0b534624889d47,
-        type: 3}
-      propertyPath: orthographic size
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 6053507896498497783, guid: e00e4b0c950694eefa0b534624889d47,
-        type: 3}
-      propertyPath: m_RenderPostProcessing
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6053507896498497783, guid: e00e4b0c950694eefa0b534624889d47,
-        type: 3}
-      propertyPath: m_VolumeLayerMask.m_Bits
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6319453697723194095, guid: e00e4b0c950694eefa0b534624889d47,
-        type: 3}
-      propertyPath: orthographic size
-      value: 10
-      objectReference: {fileID: 0}
     - target: {fileID: 7474903365916893035, guid: e00e4b0c950694eefa0b534624889d47,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -4675,31 +4668,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1042917020494564183, guid: e2582a82f142e460fb41428083ff5394,
-        type: 3}
-      propertyPath: _bossMusicRef.Path
-      value: event:/Boss Music Edited - strata-119687
-      objectReference: {fileID: 0}
-    - target: {fileID: 1042917020494564183, guid: e2582a82f142e460fb41428083ff5394,
-        type: 3}
-      propertyPath: _bossMusicRef.Guid.Data1
-      value: -246359949
-      objectReference: {fileID: 0}
-    - target: {fileID: 1042917020494564183, guid: e2582a82f142e460fb41428083ff5394,
-        type: 3}
-      propertyPath: _bossMusicRef.Guid.Data2
-      value: 1176886036
-      objectReference: {fileID: 0}
-    - target: {fileID: 1042917020494564183, guid: e2582a82f142e460fb41428083ff5394,
-        type: 3}
-      propertyPath: _bossMusicRef.Guid.Data3
-      value: 1789185171
-      objectReference: {fileID: 0}
-    - target: {fileID: 1042917020494564183, guid: e2582a82f142e460fb41428083ff5394,
-        type: 3}
-      propertyPath: _bossMusicRef.Guid.Data4
-      value: 2030089849
-      objectReference: {fileID: 0}
     - target: {fileID: 1890072167732699946, guid: e2582a82f142e460fb41428083ff5394,
         type: 3}
       propertyPath: m_Name
@@ -5591,6 +5559,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 2065474410}
     m_Modifications:
+    - target: {fileID: 197341053550188022, guid: da254a983da9b4c1fab904388a387cfa,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 691823723971603112, guid: da254a983da9b4c1fab904388a387cfa,
         type: 3}
       propertyPath: m_LocalScale.z

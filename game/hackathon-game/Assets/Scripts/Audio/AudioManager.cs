@@ -95,6 +95,9 @@ public class AudioManager : MonoBehaviour
     [SerializeField] private EventReference _laserbeamFireRef;
     public EventInstance _laserbeamFireSfx;
 
+    [SerializeField] private EventReference _bossDeathRef;
+    public EventInstance _bossDeathSfx;
+
 
 
     [Header("MUSIC")]
@@ -180,6 +183,7 @@ public class AudioManager : MonoBehaviour
         _missileExplodeSfx = RuntimeManager.CreateInstance(_missileExplodeRef);
 
         _laserbeamFireSfx = RuntimeManager.CreateInstance(_laserbeamFireRef);
+        _bossDeathSfx = RuntimeManager.CreateInstance(_bossDeathRef);
     }
 
     public void InstantiateMusic()

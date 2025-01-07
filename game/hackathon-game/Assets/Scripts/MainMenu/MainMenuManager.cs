@@ -8,7 +8,7 @@ public class MainMenuManager : MonoBehaviour
     private static extern void ActivateMainMenu();
 
     [SerializeField] private GameObject _menu;
-    void Awake()
+    void Start()
     {
         Time.timeScale = 1f;
 

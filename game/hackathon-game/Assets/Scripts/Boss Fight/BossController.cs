@@ -15,6 +15,7 @@ public class BossController : MonoBehaviour
     public RicochetSawBlade SawBlade { get => _sawBlade; }
     [SerializeField] private MissileLauncher _missileLauncher;
 
+    [SerializeField] private GameObject _shield;
     [SerializeField] private Animator[] _shieldPieces;
 
     [SerializeField] private GameObject[] _laserBeams;
@@ -48,6 +49,11 @@ public class BossController : MonoBehaviour
     private IEnumerator ActivateMissileLauncher()
     {
         yield return new WaitForSeconds(1f);
+
+        if (_missileLauncher == null)
+        {
+            yield break;
+        }
         _missileLauncher.MissileAmountPerAttack = 4;
         _missileLauncher.StartRepeatingAttack();
 
@@ -64,10 +70,52 @@ public class BossController : MonoBehaviour
 
         for (int i = 0; i < _laserBeams.Length; i++)
         {
+            if (_laserBeams[i] == null)
+            {
+                yield break;
+            }
             _laserBeams[i].gameObject.SetActive(true);
         }
         // Play SFX
         AudioManager.Instance.PlaySfx(AudioManager.Instance._laserbeamFireSfx);
+    }
+
+    public void Explode()
+    {
+        // turret
+        _turret.StopAttack();
+        // _turret.enabled = false;
+
+        // ricochet blade
+        _sawBlade.transform.parent.parent = transform;
+        _sawBlade.enabled = false;
+
+        // missiles
+        _missileLauncher.StopAttack();
+        _missileLauncher.enabled = false;
+
+        // lasers
+        for (int i = 0; i < _laserBeams.Length; i++)
+        {
+            _laserBeams[i].gameObject.SetActive(false);
+        }
+
+        // shield
+        _shield.GetComponent<Rotator>().enabled = false;
+
+        // Play sfx
+        AudioManager.Instance.PlaySfx(AudioManager.Instance._bossDeathSfx);
+
+        // Shatter everything
+        GetComponent<BossFracture>().Shatter();
+
+
+        // Destroy all children
+        foreach (Transform child in transform)
+        {
+            Destroy(child.gameObject);
+        }
+
     }
 }
 
