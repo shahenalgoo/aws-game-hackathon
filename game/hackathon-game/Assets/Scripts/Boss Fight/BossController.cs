@@ -45,7 +45,7 @@ public class BossController : MonoBehaviour
 
     private IEnumerator ActivateMissileLauncher()
     {
-        yield return new WaitForSeconds(3f);
+        yield return new WaitForSeconds(1f);
         _missileLauncher.MissileAmountPerAttack = 4;
         _missileLauncher.StartRepeatingAttack();
 

@@ -21,6 +21,7 @@ public class MissileLauncher : MonoBehaviour
 
     private MissileController[] _activeMissiles;
     [SerializeField] private Vector3[] _dropLocations;
+    private bool _newBatch;
     void Start()
     {
         _player = GameObject.FindGameObjectWithTag("Player").transform;
@@ -52,6 +53,7 @@ public class MissileLauncher : MonoBehaviour
 
     private IEnumerator ShootMissiles()
     {
+        _newBatch = true;
         _activeMissiles = new MissileController[_missileAmountPerAttack];
         _dropLocations = new Vector3[_missileAmountPerAttack];
 
@@ -74,18 +76,28 @@ public class MissileLauncher : MonoBehaviour
     public void GetDropLocation(int missileIndex)
     {
         // The drop locations will be chosen on the first request only by missile index 0
-        if (_dropLocations[0] == Vector3.zero)
+        if (_newBatch)
         {
             // Spawn drop zones
             Vector2Int playerGridPos = Helpers.GetGridPosition(_player, 8);
             playerGridPos = new Vector2Int(playerGridPos.x - 1, playerGridPos.y);
             List<Vector2Int> targetPositions = GetMissileTargetGridPositions(playerGridPos);
 
-            for (int i = 0; i < _missileAmountPerAttack; i++)
+            for (int i = 0; i < targetPositions.Count; i++)
             {
-                Vector3 worldPos = new Vector3((targetPositions[i].x + 1f) * 8f, 0f, targetPositions[i].y * 8f);
-                _dropLocations[i] = worldPos;
+                try
+                {
+                    Vector3 worldPos = new Vector3((targetPositions[i].x + 1f) * 8f, 0f, targetPositions[i].y * 8f);
+                    _dropLocations[i] = worldPos;
+                }
+                catch (System.Exception)
+                {
+                    Debug.LogWarning("Missile index error: " + i);
+
+                    throw;
+                }
             }
+            _newBatch = false;
         }
 
         GameObject[] dropZoneIndicators = new GameObject[_missileAmountPerAttack];

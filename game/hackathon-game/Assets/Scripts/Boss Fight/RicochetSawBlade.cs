@@ -62,7 +62,6 @@ public class RicochetSawBlade : MonoBehaviour
     {
         if (_canGoHome)
         {
-            // Vector3 targetPosition = _homePosition.position;
             Vector3 targetPosition = new Vector3(_homePosition.position.x, _height, _homePosition.position.z);
             transform.parent.position = Vector3.MoveTowards(
                 transform.parent.position,

@@ -3359,7 +3359,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 412f695761bfd4ec1bb30385cb00c131, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _rotationSpeed: 25
+  _rotationSpeed: 30
 --- !u!1 &2080570730
 GameObject:
   m_ObjectHideFlags: 0
@@ -4180,7 +4180,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0d3ebb8506e9b449186f2eab2031f4fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _damage: 10
+  _damage: 15
   _knockbackForce: 20
   _flySpeed: 20
   _delayBeforeFlight: 3
@@ -4348,6 +4348,31 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1042917020494564183, guid: e2582a82f142e460fb41428083ff5394,
+        type: 3}
+      propertyPath: _bossMusicRef.Path
+      value: event:/Boss Music Edited - strata-119687
+      objectReference: {fileID: 0}
+    - target: {fileID: 1042917020494564183, guid: e2582a82f142e460fb41428083ff5394,
+        type: 3}
+      propertyPath: _bossMusicRef.Guid.Data1
+      value: -246359949
+      objectReference: {fileID: 0}
+    - target: {fileID: 1042917020494564183, guid: e2582a82f142e460fb41428083ff5394,
+        type: 3}
+      propertyPath: _bossMusicRef.Guid.Data2
+      value: 1176886036
+      objectReference: {fileID: 0}
+    - target: {fileID: 1042917020494564183, guid: e2582a82f142e460fb41428083ff5394,
+        type: 3}
+      propertyPath: _bossMusicRef.Guid.Data3
+      value: 1789185171
+      objectReference: {fileID: 0}
+    - target: {fileID: 1042917020494564183, guid: e2582a82f142e460fb41428083ff5394,
+        type: 3}
+      propertyPath: _bossMusicRef.Guid.Data4
+      value: 2030089849
+      objectReference: {fileID: 0}
     - target: {fileID: 1890072167732699946, guid: e2582a82f142e460fb41428083ff5394,
         type: 3}
       propertyPath: m_Name
