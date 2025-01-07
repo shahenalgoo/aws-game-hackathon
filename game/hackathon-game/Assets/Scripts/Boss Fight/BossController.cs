@@ -34,7 +34,7 @@ public class BossController : MonoBehaviour
         Debug.Log("Phase 3 activated");
 
         _turret.StopAttack();
-        _turret.BurstAttackAmount = 1;
+        _turret.BurstAttackAmount = 2;
         _turret.StartRepeatingBurstAttack();
 
 
