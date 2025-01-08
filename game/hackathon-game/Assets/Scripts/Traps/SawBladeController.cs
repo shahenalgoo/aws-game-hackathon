@@ -10,10 +10,8 @@ public class SawBladeController : MonoBehaviour
     [SerializeField] private MoveDirection moveDirection;
     [SerializeField] private int _damage = 20;
     [SerializeField] private float _knockbackForce = 1f;
-
     [SerializeField] private Animator _sawBladeAnimator;
 
-    // Start is called before the first frame update
     void Start()
     {
         Animator animator = GetComponentInChildren<Animator>();

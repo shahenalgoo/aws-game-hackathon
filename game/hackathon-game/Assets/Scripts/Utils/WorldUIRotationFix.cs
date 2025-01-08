@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class WorldUIRotationFix : MonoBehaviour
 {
-    private Quaternion _initialRotation; // Store the initial rotation
+    private Quaternion _initialRotation;
     public void Start()
     {
         // Store the initial rotation we want to maintain

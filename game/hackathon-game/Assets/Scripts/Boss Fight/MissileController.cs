@@ -3,11 +3,11 @@ using UnityEngine;
 
 public class MissileController : MonoBehaviour
 {
+    [SerializeField] private float _flySpeed = 5f;
     private bool _readyPosReached = false;
     private Vector3 _readyPosition;
     public Vector3 ReadyPosition { get { return _readyPosition; } set { _readyPosition = value; } }
-    [SerializeField] private float _readyPosReachedThreshold = 0.1f;
-    [SerializeField] private float _flySpeed = 5f;
+    private float _readyPosReachedThreshold = 0.1f;
     private Vector2Int _targetGridPos;
     private Vector3 _targetPosition;
     private bool _canRelease = false;
@@ -122,6 +122,5 @@ public class MissileController : MonoBehaviour
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, _explosionRadius);
     }
-
 
 }

@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class InteractTextController : MonoBehaviour
 {
-
     public static Action<bool, string> _setInteractionText;
     public TextMeshProUGUI _interactionText;
     void Awake()

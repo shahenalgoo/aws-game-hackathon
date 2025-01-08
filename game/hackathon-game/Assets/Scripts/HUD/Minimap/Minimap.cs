@@ -13,9 +13,7 @@ public class Minimap : MonoBehaviour
     [SerializeField] private Transform player;  // Assign the player's transform in inspector
     [SerializeField] private float cellSize;
     [SerializeField] private int gridStartingX;
-
     private Vector2Int prevPlayerGridPos = new Vector2Int(-1, -1);
-
     private RawImage[,] gridCells;
     private Vector2Int gridDimensions;
     private int[,] gridInstructions;

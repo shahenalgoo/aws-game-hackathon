@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
+// UNUSED
 public class CircularMinimapV3 : MonoBehaviour
 {
     [SerializeField] private RawImage mapImage; // Reference to the Map Image

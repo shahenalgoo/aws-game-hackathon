@@ -29,21 +29,22 @@ public class BossHealth : MonoBehaviour
         // Update the health bar
         _bossHUD.SetTargetHealth(_currentHealth);
 
-        if (_currentHealth <= 0)
-        {
-            Die();
-            return;
-        }
 
+        // Activate 2nd phase at 2/3 health
         if (!_bossController.PhaseTwoActivated && _currentHealth <= Mathf.CeilToInt(_maxHealth * 0.66f))
         {
             _bossController.ActivatePhaseTwo();
         }
+
+        // Activate 3rd phase at 1/3 health
+
         else if (!_bossController.PhaseThreeActivated && _currentHealth <= Mathf.CeilToInt(_maxHealth * 0.33f))
         {
             _bossController.ActivatePhaseThree();
         }
 
+        // Check death
+        if (_currentHealth <= 0) Die();
     }
 
     public void Die()
@@ -56,19 +57,14 @@ public class BossHealth : MonoBehaviour
         // Find extraction platform and activate it
         FindObjectOfType<ExtractionPlatformFadeIn>().StartFadeIn();
 
-        // fade out music
-        MusicManager.Instance.FadeBossMusic();
+        // Fade out music
+        StartCoroutine(AudioManager.Instance.FadeOutBossMusic(2f));
 
-        // Disable all attacks
+        // Explode boss
         GetComponent<BossController>().Explode();
 
-
-
+        // Disable collision
         GetComponent<CapsuleCollider>().enabled = false;
-
-        // gameObject.SetActive(false);
-
-
 
     }
 }

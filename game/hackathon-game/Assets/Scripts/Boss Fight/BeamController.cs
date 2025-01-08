@@ -14,6 +14,7 @@ public class BeamController : MonoBehaviour
         if (_canDamage && other.gameObject.CompareTag("Player") && !other.GetComponent<PlayerStateMachine>().IsDashing)
         {
             _canDamage = false;
+
             // Play SFX
             AudioManager.Instance.PlaySfx(AudioManager.Instance._playerHurtLaserSfx);
 
@@ -31,7 +32,6 @@ public class BeamController : MonoBehaviour
 
             // Keep it on the horizontal plane
             knockbackDirection.y = 0f;
-
 
             // Apply the knockback through your player movement script
             PlayerStateMachine psm = other.gameObject.GetComponent<PlayerStateMachine>();

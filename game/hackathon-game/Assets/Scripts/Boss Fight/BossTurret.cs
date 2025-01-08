@@ -23,6 +23,20 @@ public class BossTurret : MonoBehaviour
         InvokeRepeating(nameof(StartBurstAttack), 3f, 5f);
     }
 
+    public void StartBurstAttack()
+    {
+        StartCoroutine(BurstAttack());
+    }
+
+    private IEnumerator BurstAttack()
+    {
+        for (int i = 0; i < _burstAttackAmount; i++)
+        {
+            yield return new WaitForSeconds(_burstAttackInterval);
+            ShootPlayer();
+        }
+    }
+
     void FindPlayer()
     {
         _player = GameObject.FindGameObjectWithTag("Player").transform;
@@ -61,12 +75,6 @@ public class BossTurret : MonoBehaviour
         AudioManager.Instance.PlaySfx(AudioManager.Instance._targetShotSfx);
     }
 
-    public void StartBurstAttack()
-    {
-
-        StartCoroutine(BurstAttack());
-    }
-
     public void StopAttack()
     {
         CancelInvoke();
@@ -77,15 +85,4 @@ public class BossTurret : MonoBehaviour
     {
         StopAttack();
     }
-
-
-    private IEnumerator BurstAttack()
-    {
-        for (int i = 0; i < _burstAttackAmount; i++)
-        {
-            yield return new WaitForSeconds(_burstAttackInterval);
-            ShootPlayer();
-        }
-    }
-
 }

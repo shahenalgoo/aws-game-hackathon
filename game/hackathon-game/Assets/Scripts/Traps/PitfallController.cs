@@ -50,7 +50,7 @@ public class PitfallController : MonoBehaviour
         if (other.gameObject.CompareTag("Player"))
         {
             // Make camera stop following
-            CameraController.setCanFollow?.Invoke(false);
+            CameraController._setCanFollow?.Invoke(false);
 
             _playerCC = other.GetComponent<CharacterController>();
 
@@ -68,6 +68,8 @@ public class PitfallController : MonoBehaviour
         }
 
     }
+
+    // Respawn in tutorial
     private IEnumerator RespawnPlayer()
     {
         // DIRTY FOR NOW
@@ -99,7 +101,7 @@ public class PitfallController : MonoBehaviour
         if (psm.IsFightMode) psm.ToggleRigAndWeapon(true);
 
         ReloadBar._cancelReloadSlider?.Invoke();
-        CameraController.setCanFollow?.Invoke(true);
+        CameraController._setCanFollow?.Invoke(true);
 
         yield return new WaitForSeconds(0.1f);  // Small delay to ensure position is set
         psm.enabled = true;

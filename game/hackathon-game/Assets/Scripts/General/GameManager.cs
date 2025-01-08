@@ -61,7 +61,6 @@ public class GameManager : MonoBehaviour
         if (_canCountTime) TimeCounter();
     }
 
-
     public void IncrementLoot()
     {
         _lootCollected++;
@@ -79,10 +78,7 @@ public class GameManager : MonoBehaviour
         _gameTimer += Time.deltaTime;
     }
 
-    public bool HasCollectedAll()
-    {
-        return _lootCollected == _totalTargets;
-    }
+    public bool HasCollectedAll() => _lootCollected == _totalTargets;
 
     public void StopTimeCount()
     {

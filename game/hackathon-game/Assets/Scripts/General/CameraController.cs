@@ -4,46 +4,45 @@ using UnityEngine;
 
 public class CameraController : MonoBehaviour
 {
-    public float panningSpeed;
-    public GameObject player;
-    public PlayerStateMachine stateMachine;
-
-    public static Action<bool> setCanFollow;
-
-    private bool canFollow = true;
+    [SerializeField] private float _panningSpeed = 7f;
+    private GameObject _player;
+    private PlayerStateMachine _stateMachine;
+    private bool _canFollow = true;
+    public static Action<bool> _setCanFollow;
 
     private void Awake()
     {
-        stateMachine = player.GetComponent<PlayerStateMachine>();
+        _stateMachine = FindObjectOfType<PlayerStateMachine>();
+        _player = _stateMachine.gameObject;
     }
 
     private void OnEnable()
     {
-        setCanFollow += SetCanFollow;
+        _setCanFollow += SetCanFollow;
     }
     private void OnDisable()
     {
-        setCanFollow -= SetCanFollow;
+        _setCanFollow -= SetCanFollow;
     }
 
     public void SetCanFollow(bool value)
     {
-        canFollow = value;
+        _canFollow = value;
     }
     void LateUpdate()
     {
-        if (player == null || !canFollow) return;
+        if (_stateMachine == null || !_canFollow) return;
 
 
-        if (stateMachine.IsRunning)
+        if (_stateMachine.IsRunning)
         {
-            Vector3 followTransform = player.transform.position;
-            this.transform.position = Vector3.Lerp(this.transform.position, followTransform, panningSpeed * Time.deltaTime);
+            Vector3 followTransform = _player.transform.position;
+            transform.position = Vector3.Lerp(transform.position, followTransform, _panningSpeed * Time.deltaTime);
         }
         else
         {
-            Vector3 followTransform = player.transform.position;
-            this.transform.position = Vector3.Lerp(this.transform.position, followTransform, panningSpeed / 2 * Time.deltaTime);
+            Vector3 followTransform = _player.transform.position;
+            transform.position = Vector3.Lerp(transform.position, followTransform, _panningSpeed / 2f * Time.deltaTime);
         }
     }
 

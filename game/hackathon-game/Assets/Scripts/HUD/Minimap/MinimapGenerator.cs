@@ -1,8 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-
-// [RequireComponent(typeof(AspectRatioFitter))]
+// UNUSED
 public class MinimapGenerator : MonoBehaviour
 {
     [SerializeField] private RawImage minimapImage;

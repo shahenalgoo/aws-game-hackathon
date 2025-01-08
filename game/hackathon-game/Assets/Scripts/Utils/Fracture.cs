@@ -209,7 +209,6 @@ public class Fracture : MonoBehaviour
             // Setup rigidbody
             rb.mass = pieceMass;
             rb.AddExplosionForce(explosionForce, transform.position, explosionRadius, upwardsModifier);
-            // rb.AddTorque(Random.insideUnitSphere * explosionForce);
 
             pieces.Add(piece);
 
@@ -257,9 +256,6 @@ public class Fracture : MonoBehaviour
         trail.startWidth = startWidth;
         trail.endWidth = endWidth;
         trail.material = trailMaterial;
-        // trail.numCornerVertices = 0;  // Reduce corner vertices for sharper lines
-        // trail.numCapVertices = 0;     // Reduce cap vertices for sharper ends
-        // trail.alignment = LineAlignment.View; // Makes trail face the camera
 
         // Set trail color gradient
         if (trailColor.colorKeys.Length == 0)
@@ -292,7 +288,7 @@ public class Fracture : MonoBehaviour
         yield return new WaitForSeconds(fadeDelay);
 
         MeshRenderer renderer = piece.GetComponent<MeshRenderer>();
-        // TrailRenderer trail = piece.GetComponent<TrailRenderer>();
+
         TrailRenderer trail = piece.GetComponentInChildren<TrailRenderer>();
         Material material = renderer.material;
         Color startColor = material.color;

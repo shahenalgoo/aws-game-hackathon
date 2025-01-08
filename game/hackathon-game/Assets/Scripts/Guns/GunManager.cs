@@ -93,7 +93,6 @@ public class GunManager : MonoBehaviour
         // Update ui
         HUDManager._ammoUpdater?.Invoke(_currentAmmo);
 
-
         if (_fireStyle == FireType.Single) _player.IsShooting = false;
     }
 

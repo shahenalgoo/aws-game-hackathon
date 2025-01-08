@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
+// UNUSED
 public class DefaultUISelection : MonoBehaviour
 {
     private void OnEnable()

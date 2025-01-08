@@ -76,8 +76,6 @@ public class LaserBotController : MonoBehaviour
             }
         }
 
-        // Debug.Log("Grid Pos: " + gridPos + ", total left: " + leftSide + ", total right: " + rightSide + ", total top: " + topSide + ", total bottom: " + bottomSide);
-
         // Compare columns/corridors
         int tileSize = LevelBuilder.Instance.TileSize;
 
@@ -100,10 +98,6 @@ public class LaserBotController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        // motion code
-        // float newZPosition = Mathf.PingPong(Time.deltaTime * _moveSpeed, _maxBoundZAxis - _minBoundZAxis) + _minBoundZAxis;
-        // transform.localPosition = new Vector3(transform.localPosition.x, transform.localPosition.y, newZPosition);
-
         // Move the object
         transform.Translate(0, 0, _moveSpeed * _direction * Time.deltaTime);
 

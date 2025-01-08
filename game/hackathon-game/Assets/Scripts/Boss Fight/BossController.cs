@@ -3,7 +3,6 @@ using UnityEngine;
 
 public class BossController : MonoBehaviour
 {
-
     private bool _phaseTwoActivated;
     private bool _phaseThreeActivated;
     public bool PhaseTwoActivated { get => _phaseTwoActivated; }
@@ -14,16 +13,13 @@ public class BossController : MonoBehaviour
     [SerializeField] private RicochetSawBlade _sawBlade;
     public RicochetSawBlade SawBlade { get => _sawBlade; }
     [SerializeField] private MissileLauncher _missileLauncher;
-
     [SerializeField] private GameObject _shield;
     [SerializeField] private Animator[] _shieldPieces;
-
     [SerializeField] private GameObject[] _laserBeams;
 
     public void ActivatePhaseTwo()
     {
         _phaseTwoActivated = true;
-
         _missileLauncher.gameObject.SetActive(true);
         _missileLauncher.MissileAmountPerAttack = 2;
     }
@@ -78,23 +74,23 @@ public class BossController : MonoBehaviour
 
     public void Explode()
     {
-        // turret
+        // Turret
         _turret.StopAttack();
 
-        // ricochet blade
+        // Ricochet blade
         _sawBlade.enabled = false;
 
-        // missiles
+        // Missiles
         _missileLauncher.StopAttack();
         _missileLauncher.enabled = false;
 
-        // lasers
+        // Lasers
         for (int i = 0; i < _laserBeams.Length; i++)
         {
             _laserBeams[i].gameObject.SetActive(false);
         }
 
-        // shield
+        // Shield
         _shield.GetComponent<Rotator>().enabled = false;
 
         // Play sfx
@@ -108,7 +104,6 @@ public class BossController : MonoBehaviour
         {
             Destroy(child.gameObject);
         }
-
     }
 }
 

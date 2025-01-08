@@ -2,6 +2,7 @@ using UnityEngine;
 using FMODUnity;
 using FMOD.Studio;
 using UnityEngine.SceneManagement;
+using System.Collections;
 
 
 [DefaultExecutionOrder(-100)]
@@ -136,10 +137,6 @@ public class AudioManager : MonoBehaviour
         InstantiateMusic();
     }
 
-    void Start()
-    {
-    }
-
     private void LoadAudioStates()
     {
         _isSfxMuted = PlayerPrefs.GetInt(PlayerConstants.SFX_MUTE_PREF_KEY, 0) == 1;
@@ -226,6 +223,13 @@ public class AudioManager : MonoBehaviour
         }
 
     }
+    public void PauseAudio(bool value)
+    {
+        _musicBus.setPaused(value);
+        _sfxBus.setPaused(value);
+    }
+
+    /*** SFX CONTROLS ***/
 
     public void PlaySfx(EventInstance sfx)
     {
@@ -237,13 +241,7 @@ public class AudioManager : MonoBehaviour
         sfx.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
     }
 
-    public void PauseAudio(bool value)
-    {
-        _musicBus.setPaused(value);
-        _sfxBus.setPaused(value);
-    }
 
-    // SFX Controls
     public void ToggleSFX()
     {
         SetSFXMute(!_isSfxMuted);
@@ -265,7 +263,7 @@ public class AudioManager : MonoBehaviour
         }
     }
 
-    // Music Controls
+    /*** MUSIC CONTROLS ***/
     public void ToggleMusic()
     {
         SetMusicMute(!_isMusicMuted);
@@ -277,5 +275,39 @@ public class AudioManager : MonoBehaviour
         _musicBus.setMute(mute);
         PlayerPrefs.SetInt(PlayerConstants.MUSIC_MUTE_PREF_KEY, mute ? 1 : 0);
         PlayerPrefs.Save();
+    }
+
+    public IEnumerator FadeOutBossMusic(float fadeTime)
+    {
+        if (AudioManager.Instance == null)
+        {
+            Debug.LogWarning("AudioManager not available");
+            yield break;
+        }
+
+        float startVolume = 1f;
+        float currentTime = 0;
+
+        while (currentTime <= fadeTime)
+        {
+
+            if (AudioManager.Instance == null)
+            {
+                Debug.LogWarning("Audio system became unavailable during fade");
+                yield break;
+            }
+
+            currentTime += Time.deltaTime;
+            float normalizedTime = Mathf.Clamp01(currentTime / fadeTime);
+            float volume = Mathf.Lerp(startVolume, 0f, normalizedTime);
+
+            AudioManager.Instance._bossMusic.setVolume(volume);
+            yield return null;
+        }
+
+        // Ensure we hit absolute zero volume
+        AudioManager.Instance._bossMusic.setVolume(0f);
+        AudioManager.Instance._bossMusic.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
+        AudioManager.Instance._bossMusic.setVolume(startVolume);
     }
 }

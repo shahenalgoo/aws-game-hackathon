@@ -15,8 +15,13 @@ public class ScreenshotController : MonoBehaviour
     private int _originalCullingMask;
     void Start()
     {
+        // set hud canvas to screen space camera
+        Canvas hudCanvas = HUDManager.Instance.gameObject.GetComponent<Canvas>();
+        hudCanvas.renderMode = RenderMode.ScreenSpaceCamera;
+        hudCanvas.worldCamera = Camera.main;
+
         // stop follow player
-        CameraController.setCanFollow?.Invoke(false);
+        CameraController._setCanFollow?.Invoke(false);
 
         _initialPos = transform.position;
         _initialSize = Camera.main.orthographicSize;
@@ -48,16 +53,12 @@ public class ScreenshotController : MonoBehaviour
         hudCanvas.renderMode = RenderMode.ScreenSpaceOverlay;
         hudCanvas.worldCamera = null;
 
-        // Canvas uiCanvas = UIManager.Instance.gameObject.GetComponent<Canvas>();
-        // uiCanvas.renderMode = RenderMode.ScreenSpaceOverlay;
-        // uiCanvas.worldCamera = null;
-
         // Restore ui layer
         Camera.main.cullingMask = _originalCullingMask;
 
         // start following player
         transform.position = _initialPos;
         Camera.main.orthographicSize = _initialSize;
-        CameraController.setCanFollow?.Invoke(true);
+        CameraController._setCanFollow?.Invoke(true);
     }
 }

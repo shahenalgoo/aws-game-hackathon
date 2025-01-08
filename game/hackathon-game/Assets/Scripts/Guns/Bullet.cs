@@ -22,14 +22,13 @@ public class Bullet : MonoBehaviour
     {
         if (_canFly) transform.position += transform.forward * Time.deltaTime * _flySpeed;
 
-
         if (_currentDamage > 1f)
         {
             _currentDamage -= _damageFalloffRate * Time.deltaTime;
         }
         else
         {
-            _currentDamage = 1f;
+            _currentDamage = 5f;
         }
     }
 

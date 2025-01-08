@@ -53,9 +53,6 @@ public class RicochetSawBlade : MonoBehaviour
         _ricochetCount = 0;
         _isHome = false;
         CalculateDirection();
-        // transform.parent.parent = null;
-
-
 
         // Play sfx
         AudioManager.Instance.PlaySfx(AudioManager.Instance._sawBladeLaunchSfx);
@@ -81,7 +78,6 @@ public class RicochetSawBlade : MonoBehaviour
             return;
         }
 
-
         if (_canFly) transform.parent.position += _flyDirection * Time.deltaTime * _flySpeed;
 
     }
@@ -95,13 +91,9 @@ public class RicochetSawBlade : MonoBehaviour
 
     public void OnReachedHome()
     {
-        // Do something when the blade reaches home
-        // transform.parent.parent = _homePosition.transform;
-
         _canGoHome = false;
         _canFly = false;
         GetComponentInChildren<Animator>().Play("Stop");
-
         Invoke("StartFlight", _intervalBetweenFlight);
     }
 

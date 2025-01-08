@@ -3,8 +3,6 @@ using UnityEngine;
 // The player's bullet controller
 public class BulletController : Bullet
 {
-
-    // Or add this function for physics-based collision
     private void OnTriggerEnter(Collider other)
     {
 

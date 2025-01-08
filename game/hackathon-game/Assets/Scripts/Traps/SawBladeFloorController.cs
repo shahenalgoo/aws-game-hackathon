@@ -7,7 +7,7 @@ public class SawBladeFloorController : MonoBehaviour
     {
         _eventEmitter = GetComponent<FMODUnity.StudioEventEmitter>();
     }
-    // Start is called before the first frame update
+
     void Start()
     {
         // get grid pos from world pos

@@ -17,7 +17,7 @@ public class HUDManager : MonoBehaviour
     public TextMeshProUGUI _timerText;
 
 
-    [Header("Notice")]
+    [Header("Notice Box")]
     [SerializeField] private TextMeshProUGUI _noticeText;
     [SerializeField] private GameObject _noticeBox;
     public static Action<string, float> _noticeUpdater;

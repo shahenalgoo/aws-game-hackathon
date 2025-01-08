@@ -31,9 +31,7 @@ public class PlayerIdleState : PlayerBaseState
             Ctx.CharController.Move(Vector3.zero * Time.deltaTime);
         }
 
-
         CheckSwitchStates();
-
     }
 
     public override void CheckSwitchStates()
@@ -44,7 +42,6 @@ public class PlayerIdleState : PlayerBaseState
             SwitchState(Factory.Stunned());
         }
 
-
         //if movement input is not 0, we have to switch to run
         if (Ctx.MovementInput != Vector3.zero) SwitchState(Factory.Run());
 
@@ -54,7 +51,6 @@ public class PlayerIdleState : PlayerBaseState
             SetSubState(Factory.Reload());
             CurrentSubState.EnterState();
         }
-
     }
 
     public override void ExitState() { }

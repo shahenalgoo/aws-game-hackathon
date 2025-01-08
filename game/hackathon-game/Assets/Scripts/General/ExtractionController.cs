@@ -13,11 +13,6 @@ public class ExtractionController : MonoBehaviour
 
     [SerializeField] private string _interactionText;
 
-    // public void Start()
-    // {
-    //     Invoke("ActivatePlatform", 4f);
-    // }
-
     void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.CompareTag("Player"))
@@ -52,7 +47,6 @@ public class ExtractionController : MonoBehaviour
     {
         PlayerStateMachine._interact -= CompleteLevel;
         InteractTextController._setInteractionText(false, "");
-
     }
 
     void Update()
@@ -73,10 +67,7 @@ public class ExtractionController : MonoBehaviour
 
         // let player know on hud
         if (TutorialManager.Instance == null) HUDManager._noticeUpdater?.Invoke("The extraction platform is ready", 3f);
-
     }
-
-
 
     void CompleteLevel()
     {
@@ -108,7 +99,7 @@ public class ExtractionController : MonoBehaviour
     {
         yield return new WaitForSeconds(_waitTimeForDelayedActions);
         // Make camera stop following
-        CameraController.setCanFollow?.Invoke(false);
+        CameraController._setCanFollow?.Invoke(false);
 
         // Make screen fade 
         UIManager.Instance._screenFader.GetComponent<Animator>().Play("Fade In");
