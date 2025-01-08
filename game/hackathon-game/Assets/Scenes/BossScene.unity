@@ -2583,9 +2583,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ca57a473232b94860849d67a2b87c2ce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pieceCount: 30
+  pieceCount: 15
   explosionForce: 300
-  explosionRadius: 2
+  explosionRadius: 6
   upwardsModifier: 0.2
   pieceMass: 1
   trailMaterial: {fileID: 2100000, guid: 843d2ca58da9a4a58a40be01ad245dde, type: 2}
@@ -2622,8 +2622,8 @@ MonoBehaviour:
     m_ColorSpace: -1
     m_NumColorKeys: 2
     m_NumAlphaKeys: 2
-  fadeDelay: 3
-  fadeDuration: 3
+  fadeDelay: 2
+  fadeDuration: 2
   layersToIgnore:
     serializedVersion: 2
     m_Bits: 0
@@ -4557,10 +4557,7 @@ MonoBehaviour:
   _delayBeforeFlight: 2
   _intervalBetweenFlight: 4
   _ricochetMax: 5
-  _ricochetCount: 0
   _homePosition: {fileID: 1493959278}
-  _homeReachedThreshold: 0.1
-  _height: 0
   _sparks: {fileID: 461986374}
 --- !u!95 &4602399630065668390
 Animator:
@@ -4591,6 +4588,16 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 605258929897107711, guid: e00e4b0c950694eefa0b534624889d47,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2464345215269904859, guid: e00e4b0c950694eefa0b534624889d47,
+        type: 3}
+      propertyPath: m_ClearFlags
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 2464345215269904859, guid: e00e4b0c950694eefa0b534624889d47,
         type: 3}
       propertyPath: m_CullingMask.m_Bits

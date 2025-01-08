@@ -82,7 +82,6 @@ public class BossController : MonoBehaviour
         _turret.StopAttack();
 
         // ricochet blade
-        _sawBlade.transform.parent.parent = transform;
         _sawBlade.enabled = false;
 
         // missiles

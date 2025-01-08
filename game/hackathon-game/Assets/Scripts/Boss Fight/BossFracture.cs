@@ -61,6 +61,7 @@ public class BossFracture : MonoBehaviour
     }
     public void Shatter()
     {
+
         foreach (MeshRenderer meshRenderer in meshRenderers)
         {
             // Get the MeshFilter component
@@ -230,16 +231,18 @@ public class BossFracture : MonoBehaviour
         trail.colorGradient = trailColor;
     }
 
-    private void SetupTransparentMaterial(Material mat)
+    private void SetupTransparentMaterial(Material material)
     {
-        mat.SetFloat("_Mode", 3);
-        mat.SetInt("_SrcBlend", (int)UnityEngine.Rendering.BlendMode.SrcAlpha);
-        mat.SetInt("_DstBlend", (int)UnityEngine.Rendering.BlendMode.OneMinusSrcAlpha);
-        mat.SetInt("_ZWrite", 0);
-        mat.DisableKeyword("_ALPHATEST_ON");
-        mat.EnableKeyword("_ALPHABLEND_ON");
-        mat.DisableKeyword("_ALPHAPREMULTIPLY_ON");
-        mat.renderQueue = 3000;
+        // Setup material for transparency
+        material.SetFloat("_Surface", 1f);
+        material.SetInt("_SrcBlend", (int)UnityEngine.Rendering.BlendMode.SrcAlpha);
+        material.SetInt("_DstBlend", (int)UnityEngine.Rendering.BlendMode.OneMinusSrcAlpha);
+        material.EnableKeyword("_SURFACE_TYPE_TRANSPARENT");
+        material.renderQueue = 3000;
+
+        // Ensure the material is set to transparent mode
+        material.SetOverrideTag("RenderType", "Transparent");
+        material.SetShaderPassEnabled("ShadowCaster", false);
     }
 
     private IEnumerator FadeOutPiece(GameObject piece)
