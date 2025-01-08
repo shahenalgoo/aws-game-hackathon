@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Collections;
 
 // This script fractures Skinned Mesh Renderers only
+// By Amazon Q
 public class Fracture : MonoBehaviour
 {
     [Header("Fracture Settings")]

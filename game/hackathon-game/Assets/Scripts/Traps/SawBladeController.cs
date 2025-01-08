@@ -7,7 +7,7 @@ public enum MoveDirection
 }
 public class SawBladeController : MonoBehaviour
 {
-    [SerializeField] private MoveDirection moveDirection;
+    [SerializeField] private MoveDirection _moveDirection;
     [SerializeField] private int _damage = 20;
     [SerializeField] private float _knockbackForce = 1f;
     [SerializeField] private Animator _sawBladeAnimator;
@@ -15,7 +15,7 @@ public class SawBladeController : MonoBehaviour
     void Start()
     {
         Animator animator = GetComponentInChildren<Animator>();
-        if (moveDirection == MoveDirection.Left)
+        if (_moveDirection == MoveDirection.Left)
         {
             animator.Play("MoveLeft");
         }

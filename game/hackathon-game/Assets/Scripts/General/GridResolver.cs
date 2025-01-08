@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-
+// By Amazon Q
 public class GridResolver
 {
     private int[,] grid;

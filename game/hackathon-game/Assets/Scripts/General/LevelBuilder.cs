@@ -10,11 +10,10 @@ public class LevelBuilder : MonoBehaviour
     [SerializeField] private int _tileSize;
     public int TileSize { get => _tileSize; }
 
-    [SerializeField] private GameObject[] levelObjects;
+    [SerializeField] private GameObject[] _levelObjects;
     [SerializeField] private GameObject _modifiedInvisibleWall;
 
     private List<Vector2Int> modifiedWallsGridPos;
-    [SerializeField] private GameObject _extractionArea;
     [SerializeField] private float _yAdjustObject;
     private int[,] _grid;
     public int[,] Grid { get => _grid; }
@@ -55,7 +54,7 @@ public class LevelBuilder : MonoBehaviour
         SingletonCheck();
         _grid = GetGridData();
 
-        _tileSize = (int)levelObjects[0].transform.localScale.x;
+        _tileSize = (int)_levelObjects[0].transform.localScale.x;
 
         // { 0, 0, 0, 2, 4, 1, 0, 0, 0, 6, 2, 0, 0, 0, 1, 5, 1, 0, 2, 7 },
         // { 0, 1, 0, 1, 0, 2, 3, 1, 0, 3, 0, 0, 2, 1, 2, 0, 1, 2, 1, 0 },
@@ -84,7 +83,7 @@ public class LevelBuilder : MonoBehaviour
 
         // Set up starting floor 
         Vector3 startingFloorPos = new Vector3(_startingGrid.x * _tileSize, _yAdjustObject, _startingGrid.y * _tileSize);
-        CreateObject(levelObjects[1], startingFloorPos, Quaternion.identity);
+        CreateObject(_levelObjects[1], startingFloorPos, Quaternion.identity);
         AddWallInExtremity(_startingGrid.x, _startingGrid.y);
 
         // create 2d array for loop
@@ -105,14 +104,14 @@ public class LevelBuilder : MonoBehaviour
                     if (Helpers.HasNonZeroNeighbor(_grid, i, j))
                     {
                         Vector3 wallPos = new Vector3(i * _tileSize, 0, j * _tileSize);
-                        CreateObject(levelObjects[objectId], wallPos, Quaternion.identity);
+                        CreateObject(_levelObjects[objectId], wallPos, Quaternion.identity);
                     }
                     continue;
                 }
 
 
                 Vector3 pos = new Vector3(i * _tileSize, _yAdjustObject, j * _tileSize);
-                GameObject obj = CreateObject(levelObjects[objectId], pos, Quaternion.identity);
+                GameObject obj = CreateObject(_levelObjects[objectId], pos, Quaternion.identity);
 
                 // Count targets
                 if (objectId == 2) _targetCounter++;
@@ -171,8 +170,8 @@ public class LevelBuilder : MonoBehaviour
         }
 
 
-        if (extremeRowWallPos != Vector3.zero) CreateObject(levelObjects[0], extremeRowWallPos, Quaternion.identity);
-        if (extremeColWallPos != Vector3.zero) CreateObject(levelObjects[0], extremeColWallPos, Quaternion.identity);
+        if (extremeRowWallPos != Vector3.zero) CreateObject(_levelObjects[0], extremeRowWallPos, Quaternion.identity);
+        if (extremeColWallPos != Vector3.zero) CreateObject(_levelObjects[0], extremeColWallPos, Quaternion.identity);
     }
 
     private void FixDiagonallyConnectedWalls()

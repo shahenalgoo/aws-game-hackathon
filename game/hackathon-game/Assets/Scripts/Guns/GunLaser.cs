@@ -1,5 +1,5 @@
 using UnityEngine;
-
+// By Amazon Q
 public class GunLaser : MonoBehaviour
 {
     private LineRenderer laserLine;

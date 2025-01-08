@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Collections;
 
 // This script fractures all MeshRenderers in children
+// By Amazon Q
 public class BossFracture : MonoBehaviour
 {
     [Header("Fracture Settings")]

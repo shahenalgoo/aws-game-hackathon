@@ -479,7 +479,7 @@ GameObject:
   - component: {fileID: 6537436275866607784}
   - component: {fileID: 2572608761414172316}
   - component: {fileID: 6707294591469338254}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: DamageVignette
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -972,10 +972,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _maxHealth: 100
   _currentHealth: 0
-  damageVolume: {fileID: 6707294591469338254}
-  flashDuration: 0.3
-  damageVfx: {fileID: 6067900719400683301}
-  fallingTrailsObj: {fileID: 4165862966379360945}
+  _damageVolume: {fileID: 6707294591469338254}
+  _flashDuration: 0.3
+  _damageVfx: {fileID: 6067900719400683301}
+  _fallingTrailsObj: {fileID: 4165862966379360945}
 --- !u!114 &1702315784984996115
 MonoBehaviour:
   m_ObjectHideFlags: 0

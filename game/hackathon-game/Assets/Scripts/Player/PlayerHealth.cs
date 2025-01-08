@@ -9,14 +9,14 @@ public class PlayerHealth : MonoBehaviour
     [SerializeField] private int _currentHealth;
 
     [Header("Damage Effect")]
-    [SerializeField] private Volume damageVolume;
-    [SerializeField] private float flashDuration = 0.2f;
-    private Vignette vignette;
+    [SerializeField] private Volume _damageVolume;
+    [SerializeField] private float _flashDuration = 0.3f;
+    private Vignette _vignette;
 
-    [SerializeField] private ParticleSystem damageVfx;
-    public ParticleSystem DamageVfx { get { return damageVfx; } }
+    [SerializeField] private ParticleSystem _damageVfx;
+    public ParticleSystem DamageVfx { get { return _damageVfx; } }
 
-    [SerializeField] public GameObject fallingTrailsObj;
+    [SerializeField] public GameObject _fallingTrailsObj;
 
     private bool isDead;
     public bool IsDead { get { return isDead; } set { isDead = value; } }
@@ -25,23 +25,23 @@ public class PlayerHealth : MonoBehaviour
         SetMaxHealth();
 
         // Make sure the volume has a profile assigned
-        if (damageVolume == null || damageVolume.profile == null)
+        if (_damageVolume == null || _damageVolume.profile == null)
         {
             Debug.LogError("Damage volume or profile is not assigned!");
             return;
         }
 
-        // Get or add the vignette effect
-        if (!damageVolume.profile.TryGet(out vignette))
+        // Get or add the _vignette effect
+        if (!_damageVolume.profile.TryGet(out _vignette))
         {
-            // If vignette doesn't exist, add it to the profile
-            vignette = damageVolume.profile.Add<Vignette>(false);
+            // If _vignette doesn't exist, add it to the profile
+            _vignette = _damageVolume.profile.Add<Vignette>(false);
         }
 
-        // Initialize vignette settings
-        vignette.active = true;
-        vignette.intensity.Override(0f);
-        vignette.color.Override(Color.red);
+        // Initialize _vignette settings
+        _vignette.active = true;
+        _vignette.intensity.Override(0f);
+        _vignette.color.Override(Color.red);
     }
 
     public void SetMaxHealth()
@@ -77,7 +77,7 @@ public class PlayerHealth : MonoBehaviour
 
     private IEnumerator FlashRed()
     {
-        if (vignette == null)
+        if (_vignette == null)
         {
             Debug.LogWarning("Vignette effect not found!");
             yield break;
@@ -88,31 +88,31 @@ public class PlayerHealth : MonoBehaviour
         float targetIntensity = 0.5f;
 
         // Fade in
-        while (elapsedTime < flashDuration / 2f)
+        while (elapsedTime < _flashDuration / 2f)
         {
             elapsedTime += Time.deltaTime;
-            float newIntensity = Mathf.Lerp(startIntensity, targetIntensity, elapsedTime / (flashDuration / 2f));
-            vignette.intensity.Override(newIntensity);
+            float newIntensity = Mathf.Lerp(startIntensity, targetIntensity, elapsedTime / (_flashDuration / 2f));
+            _vignette.intensity.Override(newIntensity);
             yield return null;
         }
 
         // Ensure we reach the target intensity
-        vignette.intensity.Override(targetIntensity);
+        _vignette.intensity.Override(targetIntensity);
 
         // Fade out
         elapsedTime = 0f;
         startIntensity = targetIntensity;
         targetIntensity = 0f;
 
-        while (elapsedTime < flashDuration / 2f)
+        while (elapsedTime < _flashDuration / 2f)
         {
             elapsedTime += Time.deltaTime;
-            float newIntensity = Mathf.Lerp(startIntensity, targetIntensity, elapsedTime / (flashDuration / 2f));
-            vignette.intensity.Override(newIntensity);
+            float newIntensity = Mathf.Lerp(startIntensity, targetIntensity, elapsedTime / (_flashDuration / 2f));
+            _vignette.intensity.Override(newIntensity);
             yield return null;
         }
 
-        vignette.intensity.Override(0f);
+        _vignette.intensity.Override(0f);
     }
 
     public void DisablePlayer()

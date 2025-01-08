@@ -8,7 +8,7 @@ public class TargetHealth : MonoBehaviour
     [SerializeField] private int _maxHealth = 100;
     [SerializeField] private int _currentHealth;
     private bool _isDead;
-    [SerializeField] private HealthBar healthBar;
+    [SerializeField] private HealthBar _healthBar;
 
     [SerializeField] private float _fadeOutDuration = 2f;
 
@@ -26,7 +26,7 @@ public class TargetHealth : MonoBehaviour
     private void CreateHealthBar()
     {
         // Set the initial max health
-        healthBar.SetMaxHealth(_maxHealth);
+        _healthBar.SetMaxHealth(_maxHealth);
     }
     public void TakeDamage(int amount)
     {
@@ -35,7 +35,7 @@ public class TargetHealth : MonoBehaviour
         _currentHealth -= amount;
 
         // Update the health bar
-        healthBar.UpdateHealthBar(_currentHealth);
+        _healthBar.UpdateHealthBar(_currentHealth);
 
         if (_currentHealth <= 0)
         {
@@ -49,7 +49,7 @@ public class TargetHealth : MonoBehaviour
         _isDead = true;
 
         // turn off health bar
-        healthBar.gameObject.SetActive(false);
+        _healthBar.gameObject.SetActive(false);
 
         // stop interacting with player
         TargetController targetController = GetComponent<TargetController>();

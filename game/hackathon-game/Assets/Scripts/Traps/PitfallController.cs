@@ -56,7 +56,7 @@ public class PitfallController : MonoBehaviour
 
             other.GetComponent<Animator>().Play("Falling");
             PlayerHealth playerHealth = other.GetComponent<PlayerHealth>();
-            playerHealth.fallingTrailsObj.SetActive(true);
+            playerHealth._fallingTrailsObj.SetActive(true);
 
             playerHealth.Die(false);
 
@@ -89,7 +89,7 @@ public class PitfallController : MonoBehaviour
 
         PlayerHealth playerHealth = PlayerCC.GetComponent<PlayerHealth>();
         playerHealth.IsDead = false;
-        playerHealth.fallingTrailsObj.SetActive(false);
+        playerHealth._fallingTrailsObj.SetActive(false);
 
         PlayerStateMachine psm = PlayerCC.gameObject.GetComponent<PlayerStateMachine>();
         psm.GravityMultiplier = 0f;

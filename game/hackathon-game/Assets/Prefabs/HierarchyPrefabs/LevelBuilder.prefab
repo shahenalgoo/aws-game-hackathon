@@ -45,7 +45,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _tileSize: 8
-  levelObjects:
+  _levelObjects:
   - {fileID: 4178509765388086979, guid: 3f57872ef1e2d48749563e40e6d5f0a0, type: 3}
   - {fileID: 1984354046806001452, guid: fb9be772d96ae41dfa48408ef45d2934, type: 3}
   - {fileID: 8858190910955411209, guid: 4f9de20684bf343439ba1e7454dcade2, type: 3}
@@ -54,10 +54,9 @@ MonoBehaviour:
   - {fileID: 5080209234803536179, guid: c63bf51fce0964784b0dd2d5b317bead, type: 3}
   - {fileID: 1984354046806001452, guid: 24e1f9b9dde144ebf88ade63e2ef4a74, type: 3}
   - {fileID: 2521554913002184078, guid: aaa03b9dd0c7b4411ad1300c7b36b210, type: 3}
-  - {fileID: 1378970538917373638, guid: db4a3d752c4e04eda8db98f44fc65b97, type: 3}
+  - {fileID: 8105362297317527450, guid: 1fba6b1559d7c44bb91c1f2e7201fbfd, type: 3}
   _modifiedInvisibleWall: {fileID: 1548405331545494401, guid: 9018f4ed513e147b88a09a11a6a2b814,
     type: 3}
-  _extractionArea: {fileID: 8105362297317527450, guid: 1fba6b1559d7c44bb91c1f2e7201fbfd,
-    type: 3}
   _yAdjustObject: -1
+  _endGrid: {x: 1, y: 1}
   _minimap: {fileID: 0}

@@ -1,6 +1,6 @@
 using System.Collections;
 using UnityEngine;
-
+// By Amazon Q
 public class ExtractionPlatformFadeIn : MonoBehaviour
 {
     private MeshRenderer meshRenderer;

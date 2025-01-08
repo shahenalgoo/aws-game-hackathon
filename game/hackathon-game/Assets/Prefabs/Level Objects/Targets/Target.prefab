@@ -323,7 +323,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _maxHealth: 100
   _currentHealth: 0
-  healthBar: {fileID: 3875301483551694739}
+  _healthBar: {fileID: 3875301483551694739}
   _fadeOutDuration: 1
   _deathVfxObj: {fileID: 2228542044696592537}
 --- !u!65 &114188347528563265

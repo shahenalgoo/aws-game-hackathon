@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
+// By Amazon Q
 public class Minimap : MonoBehaviour
 {
     [SerializeField] private RectTransform minimapContainer; // Assign your container in inspector
