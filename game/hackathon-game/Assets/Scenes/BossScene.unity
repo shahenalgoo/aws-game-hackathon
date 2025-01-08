@@ -1374,16 +1374,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4f802ad00fd1423ca3edb5fe4080d6b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _missilePrefab: {fileID: 1438717285876914798, guid: 06340e3aa20514c00b880658c0712804,
-    type: 3}
-  _missileDropPointer: {fileID: 7316218943862745983, guid: 167e291f4127c44a3a76f3229a0fa89c,
-    type: 3}
   _intervalBetweenMissiles: 0.5
   _missileAmountPerAttack: 4
-  _bossPos: {x: 1, y: 2}
+  _missilePrefab: {fileID: 1438717285876914798, guid: 06340e3aa20514c00b880658c0712804,
+    type: 3}
+  _missileDropIndicatorPrefab: {fileID: 7316218943862745983, guid: 167e291f4127c44a3a76f3229a0fa89c,
+    type: 3}
   _explosionPrefab: {fileID: 6271241949191652176, guid: 83ecc6f6026394b50b79051f6238947e,
     type: 3}
-  _dropLocations: []
+  _bossPos: {x: 1, y: 2}
+  _targetPositions: []
+  _playerGridPos: {x: 0, y: 0}
 --- !u!1001 &865405196
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2566,7 +2567,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce228fde9f1e3467d841ec9751a34e29, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _maxHealth: 200
+  _maxHealth: 3000
   _currentHealth: 0
   _bossHUD: {fileID: 1194397042}
   _bossController: {fileID: 1493959279}
@@ -3625,7 +3626,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 412f695761bfd4ec1bb30385cb00c131, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _rotationSpeed: 40
+  _rotationSpeed: 32
 --- !u!4 &2130885989 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1207536246177095062, guid: fb9be772d96ae41dfa48408ef45d2934,
@@ -3825,7 +3826,7 @@ PrefabInstance:
     - target: {fileID: 6322643284954892612, guid: 2b1b09cda95ce4ee8a0b88193eb18397,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -338.69995
+      value: -338.6999
       objectReference: {fileID: 0}
     - target: {fileID: 6810405959713074003, guid: 2b1b09cda95ce4ee8a0b88193eb18397,
         type: 3}
@@ -4553,8 +4554,8 @@ MonoBehaviour:
   _damage: 15
   _knockbackForce: 20
   _flySpeed: 25
-  _delayBeforeFlight: 3
-  _intervalBetweenFlight: 5
+  _delayBeforeFlight: 2
+  _intervalBetweenFlight: 4
   _ricochetMax: 5
   _ricochetCount: 0
   _homePosition: {fileID: 1493959278}

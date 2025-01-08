@@ -1,9 +1,6 @@
 using System.Collections;
 using UnityEngine;
 
-// move to position
-// after countdown, crash to drop location
-// reset
 public class MissileController : MonoBehaviour
 {
     private bool _readyPosReached = false;
@@ -11,21 +8,19 @@ public class MissileController : MonoBehaviour
     public Vector3 ReadyPosition { get { return _readyPosition; } set { _readyPosition = value; } }
     [SerializeField] private float _readyPosReachedThreshold = 0.1f;
     [SerializeField] private float _flySpeed = 5f;
-    private Vector3 _dropPosition;
-    public Vector3 DropPosition { get => _dropPosition; set => _dropPosition = value; }
+    private Vector2Int _targetGridPos;
+    private Vector3 _targetPosition;
     private bool _canRelease = false;
     [SerializeField] private float _delayToRelease = 2f;
-    private int _missileIndex;
-    public int MissileIndex { get => _missileIndex; set => _missileIndex = value; }
+    [SerializeField] private float _delayToRetry = 2f;
     private MissileLauncher _missileLauncher;
-    public MissileLauncher MissileLauncher { get => _missileLauncher; set => _missileLauncher = value; }
+    public MissileLauncher MissileLauncher { set { _missileLauncher = value; } }
     private GameObject _dropZoneIndicator;
-    public GameObject DropZoneIndicator { get => _dropZoneIndicator; set => _dropZoneIndicator = value; }
-    [SerializeField] private float _explosionRadius = 5f;
 
     [Header("Damage")]
     [SerializeField] private int _damage = 20;
     [SerializeField] private float _knockbackForce = 1f;
+    [SerializeField] private float _explosionRadius = 5f;
 
     void Update()
     {
@@ -44,8 +39,7 @@ public class MissileController : MonoBehaviour
             {
                 _readyPosReached = true;
                 StartCoroutine(StartReleaseWithDelay());
-                _missileLauncher.GetDropLocation(_missileIndex);
-                _dropZoneIndicator.GetComponent<MeshRenderer>().enabled = true;
+
             }
         }
 
@@ -53,16 +47,30 @@ public class MissileController : MonoBehaviour
         {
             transform.position = Vector3.MoveTowards(
                         transform.position,
-                        _dropPosition,
+                        _targetPosition,
                         _flySpeed * Time.deltaTime
                     );
 
-            transform.LookAt(_dropPosition);
+            transform.LookAt(_targetPosition);
         }
     }
 
     private IEnumerator StartReleaseWithDelay()
     {
+        _targetGridPos = _missileLauncher.GetTargetPosition();
+
+        // handle no available positions
+        if (_targetGridPos == new Vector2Int(-1, -1))
+        {
+            Debug.Log("No available positions, trying again soon");
+            yield return new WaitForSeconds(_delayToRetry);
+            StartCoroutine(StartReleaseWithDelay());
+            yield break;
+        }
+
+        _targetPosition = new Vector3((_targetGridPos.x + 1f) * 8f, 0f, _targetGridPos.y * 8f);
+        _dropZoneIndicator = Instantiate(_missileLauncher._missileDropIndicatorPrefab, _targetPosition, Quaternion.identity);
+
         yield return new WaitForSeconds(_delayToRelease);
         _canRelease = true;
     }
@@ -92,7 +100,11 @@ public class MissileController : MonoBehaviour
                 }
             }
 
-            GameObject explosion = Instantiate(_missileLauncher._explosionPrefab, transform.position, Quaternion.identity);
+            // Free space
+            _missileLauncher.FreeOccupiedPosition(_targetGridPos);
+
+            // Explosion
+            Instantiate(_missileLauncher._explosionPrefab, transform.position, Quaternion.identity);
 
             // Play sfx
             AudioManager.Instance.PlaySfx(AudioManager.Instance._missileExplodeSfx);

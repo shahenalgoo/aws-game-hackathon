@@ -23,7 +23,6 @@ public class BossController : MonoBehaviour
     public void ActivatePhaseTwo()
     {
         _phaseTwoActivated = true;
-        Debug.Log("Phase 2 activated");
 
         _missileLauncher.gameObject.SetActive(true);
         _missileLauncher.MissileAmountPerAttack = 2;
@@ -32,15 +31,12 @@ public class BossController : MonoBehaviour
     public void ActivatePhaseThree()
     {
         _phaseThreeActivated = true;
-        Debug.Log("Phase 3 activated");
 
         _turret.StopAttack();
         _turret.BurstAttackAmount = 2;
         _turret.StartRepeatingBurstAttack();
 
-
         StartCoroutine(FireLaserBeams());
-
 
         _missileLauncher.StopAttack();
         StartCoroutine(ActivateMissileLauncher());
@@ -84,7 +80,6 @@ public class BossController : MonoBehaviour
     {
         // turret
         _turret.StopAttack();
-        // _turret.enabled = false;
 
         // ricochet blade
         _sawBlade.transform.parent.parent = transform;
@@ -109,7 +104,6 @@ public class BossController : MonoBehaviour
         // Shatter everything
         GetComponent<BossFracture>().Shatter();
 
-
         // Destroy all children
         foreach (Transform child in transform)
         {
@@ -126,4 +120,4 @@ public class BossController : MonoBehaviour
 // Turret, Ricochet Blade, 1 Missile 
 
 // Phase 3
-// Ricochet Blade, 4 missiles, laser beam, turret 1 bullet
+// Ricochet Blade, 4 missiles, laser beam, turret 2 bullet

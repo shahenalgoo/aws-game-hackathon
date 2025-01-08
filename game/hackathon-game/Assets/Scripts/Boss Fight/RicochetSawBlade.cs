@@ -16,14 +16,14 @@ public class RicochetSawBlade : MonoBehaviour
     private Transform _player;
 
     [SerializeField] private int _ricochetMax = 5;
-    [SerializeField] private int _ricochetCount = 0;
+    private int _ricochetCount = 0;
 
     [SerializeField] private Transform _homePosition;
     private bool _isHome = false;
     private bool _canGoHome = false;
-    [SerializeField] private float _homeReachedThreshold = 0.1f;
+    private float _homeReachedThreshold = 0.1f;
 
-    [SerializeField] private float _height;
+    private float _height;
     [SerializeField] private ParticleSystem _sparks;
 
     void Start()
