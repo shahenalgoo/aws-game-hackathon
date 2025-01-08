@@ -8,6 +8,9 @@ public class Minimap : MonoBehaviour
     [SerializeField] private GameObject cellPrefab; // Create a prefab with a RawImage component
     [SerializeField] private Color backgroundColor = Color.black;
     [SerializeField] private Color pathColor = Color.white;
+    [SerializeField] private Color extractionColor = Color.blue;
+    [SerializeField] private Color playerColor = Color.blue;
+    [SerializeField] private Color enemyColor = Color.blue;
     [SerializeField] private float mapSize = 216f;
     [SerializeField] private float padding = 20f;
     [SerializeField] private Transform player;  // Assign the player's transform in inspector
@@ -35,8 +38,8 @@ public class Minimap : MonoBehaviour
         Vector2Int currentPlayerGridPos = WorldToGridPosition(player.position);
         if (prevPlayerGridPos != currentPlayerGridPos)
         {
-            UpdateCell(prevPlayerGridPos.x, prevPlayerGridPos.y, true);
-            gridCells[currentPlayerGridPos.x, currentPlayerGridPos.y].color = Color.red;
+            UpdateCell(prevPlayerGridPos.x, prevPlayerGridPos.y);
+            gridCells[currentPlayerGridPos.x, currentPlayerGridPos.y].color = playerColor;
             prevPlayerGridPos = currentPlayerGridPos;
         }
     }
@@ -111,21 +114,50 @@ public class Minimap : MonoBehaviour
 
                 // Set initial color based on grid data
                 cellImage.texture = cellTexture;
-                cellImage.color = gridInstructions[row, col] == 0 ? backgroundColor : pathColor;
+                cellImage.color = GetColorForCell(row, col);
             }
         }
 
         Vector2Int currentPlayerGridPos = WorldToGridPosition(player.position);
-        gridCells[currentPlayerGridPos.x, currentPlayerGridPos.y].color = Color.red;
+        gridCells[currentPlayerGridPos.x, currentPlayerGridPos.y].color = playerColor;
 
 
     }
 
-    public void UpdateCell(int row, int col, bool isPath)
+    public void UpdateCell(int row, int col)
     {
         if (gridCells != null && row >= 0 && row < gridDimensions.x && col >= 0 && col < gridDimensions.y)
         {
-            gridCells[row, col].color = isPath ? pathColor : backgroundColor;
+            gridCells[row, col].color = GetColorForCell(row, col);
+        }
+    }
+
+    public Color GetColorForCell(int row, int col)
+    {
+        int objectId = gridInstructions[row, col];
+        switch (objectId)
+        {
+            case 0:
+                return backgroundColor;
+            case 2:
+                return enemyColor;
+            case 8:
+                return extractionColor;
+            default:
+                return pathColor;
+        }
+
+    }
+
+    public void AmendGrid(Vector2Int gridPos, int newId)
+    {
+        gridInstructions[gridPos.x, gridPos.y] = newId;
+
+        Vector2Int currentPlayerGridPos = WorldToGridPosition(player.position);
+        // if player not on here, update
+        if (gridPos != currentPlayerGridPos)
+        {
+            UpdateCell(gridPos.x, gridPos.y);
         }
     }
 }

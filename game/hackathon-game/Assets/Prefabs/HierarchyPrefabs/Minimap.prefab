@@ -52,7 +52,10 @@ MonoBehaviour:
   cellPrefab: {fileID: 8310385347590076143, guid: e3b320f9aa19941d895bc4ad054ae42b,
     type: 3}
   backgroundColor: {r: 1, g: 1, b: 1, a: 0}
-  pathColor: {r: 0, g: 0, b: 0, a: 0.9137255}
+  pathColor: {r: 1, g: 1, b: 1, a: 0.19607843}
+  extractionColor: {r: 0, g: 0.72156864, b: 1, a: 1}
+  playerColor: {r: 0, g: 0.9647059, b: 1, a: 1}
+  enemyColor: {r: 1, g: 0.8791459, b: 0.1745283, a: 0.78431374}
   mapSize: 1500
   padding: 20
   player: {fileID: 0}

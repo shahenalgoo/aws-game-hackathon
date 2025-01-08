@@ -18,12 +18,14 @@ public class PlayerEntrance : MonoBehaviour
         if (_gameplayActions == null) Debug.Log("action map not found");
         // Disable player controls
         _gameplayActions.Disable();
+        GameManager.Instance?.StopTimeCount();
     }
     void Start()
     {
         if (GameManager.Instance != null && !GameManager.Instance.UsePlayerEntranceAnimation)
         {
             _gameplayActions.Enable();
+            GameManager.Instance.CanCountTime = true;
             Destroy(gameObject);
             return;
         }
@@ -65,6 +67,9 @@ public class PlayerEntrance : MonoBehaviour
 
         // Give objective
         HUDManager._noticeUpdater?.Invoke(_playerObjective, 3f);
+
+        // Count time
+        if (TutorialManager.Instance == null) GameManager.Instance.CanCountTime = true;
 
         Destroy(gameObject);
     }

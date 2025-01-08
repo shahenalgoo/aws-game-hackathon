@@ -5,7 +5,8 @@ public class TargetLootController : MonoBehaviour
     [SerializeField] private float magneticRange = 5f; // Range at which magnetic effect starts
     [SerializeField] private float moveSpeed = 10f; // Speed at which item moves to player
     private Transform player;
-    private bool isBeingPulled = false;
+    private bool _isBeingPulled = false;
+    private Vector2Int _gridPos;
 
     [SerializeField] private ParticleSystem _lootCollectVFX;
     [SerializeField] private GameObject _trails;
@@ -14,6 +15,10 @@ public class TargetLootController : MonoBehaviour
     {
         // Get reference to the player - assuming there's only one player with "Player" tag
         player = GameObject.FindGameObjectWithTag("Player").transform;
+
+        // Get grid pos from world pos
+        _gridPos = Helpers.GetGridPosition(transform, LevelBuilder.Instance.TileSize);
+
     }
 
     private void Update()
@@ -23,9 +28,9 @@ public class TargetLootController : MonoBehaviour
             float distanceToPlayer = Vector3.Distance(transform.position, player.position);
 
             // Once pulled, keep pulling regardless of distance
-            if (!isBeingPulled && distanceToPlayer <= magneticRange)
+            if (!_isBeingPulled && distanceToPlayer <= magneticRange)
             {
-                isBeingPulled = true;
+                _isBeingPulled = true;
 
                 // activate trails
                 _trails.SetActive(true);
@@ -35,7 +40,7 @@ public class TargetLootController : MonoBehaviour
             }
 
             // If being pulled, continue pulling regardless of distance
-            if (isBeingPulled)
+            if (_isBeingPulled)
             {
                 Vector3 targetPosition = player.position + new Vector3(0, 1, 0); // Slightly above player
                 transform.parent.LookAt(targetPosition);
@@ -59,6 +64,12 @@ public class TargetLootController : MonoBehaviour
 
             // Play SFX
             AudioManager.Instance.PlaySfx(AudioManager.Instance._starCollectedSfx);
+
+            // Update Minimap
+
+            Minimap minimap = FindObjectOfType<Minimap>();
+            minimap.AmendGrid(_gridPos, 1);
+
 
             Destroy(gameObject);
         }
