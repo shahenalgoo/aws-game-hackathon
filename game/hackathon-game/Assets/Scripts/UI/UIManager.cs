@@ -104,7 +104,17 @@ public class UIManager : Singleton<UIManager>
 
     public void RestartLevel()
     {
-        Helpers.ResetTrackingVariables();
+        bool resetTrackers = PlayerPrefs.GetInt(PlayerConstants.RESET_TRACKERS_ON_RESTART, 0) == 1;
+
+        if (resetTrackers)
+        {
+            Helpers.ResetTrackingVariables();
+        }
+        else
+        {
+            Helpers.RecordTime(GameManager.Instance.GameTimer);
+        }
+
         if (Time.timeScale == 0) Time.timeScale = 1;
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }

@@ -67,4 +67,17 @@ public static class Helpers
         PlayerPrefs.Save();
     }
 
+    public static void ResetTrackersOnRestart(bool value)
+    {
+        PlayerPrefs.SetInt(PlayerConstants.RESET_TRACKERS_ON_RESTART, value ? 1 : 0);
+        PlayerPrefs.Save();
+    }
+
+    public static void RecordTime(float _time)
+    {
+        // Save time
+        PlayerPrefs.SetFloat(PlayerConstants.TIMER_PREF_KEY, _time);
+        PlayerPrefs.Save();
+    }
+
 }

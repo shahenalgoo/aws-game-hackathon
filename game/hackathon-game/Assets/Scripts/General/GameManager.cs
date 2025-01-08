@@ -91,9 +91,7 @@ public class GameManager : MonoBehaviour
 
     public void GoToNextLevel()
     {
-        // Save time
-        PlayerPrefs.SetFloat(PlayerConstants.TIMER_PREF_KEY, _gameTimer);
-        PlayerPrefs.Save();
+        Helpers.RecordTime(_gameTimer);
 
         // If we are in a boss fight, trigger submission directly
         if (SceneManager.GetActiveScene().buildIndex == SceneIndexes.BossFightSceneIndex)
