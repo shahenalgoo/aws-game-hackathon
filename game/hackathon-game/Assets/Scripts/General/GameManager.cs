@@ -2,6 +2,7 @@ using System;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using System.Runtime.InteropServices;
+using System.Collections;
 
 public class GameManager : MonoBehaviour
 {
@@ -29,6 +30,8 @@ public class GameManager : MonoBehaviour
     /** EXTERNAL COMM **/
     [DllImport("__Internal")]
     private static extern void SubmitTime(float time);
+    [DllImport("__Internal")]
+    private static extern void PlayVoiceline(string type);
     private void Awake()
     {
         SingletonCheck();
@@ -41,6 +44,18 @@ public class GameManager : MonoBehaviour
     public void Start()
     {
         _gameTimer = PlayerPrefs.GetFloat(PlayerConstants.TIMER_PREF_KEY, 0f);
+
+        // Play voiceline
+#if UNITY_WEBGL == true && UNITY_EDITOR == false
+        if (SceneManager.GetActiveScene().buildIndex == SceneIndexes.GameSceneIndex)
+        {
+            PlayVoiceline("spawn");
+        }
+        else if (SceneManager.GetActiveScene().buildIndex == SceneIndexes.BossFightSceneIndex)
+        {
+            PlayVoiceline("beforeBossFight");
+        }
+#endif
     }
 
     void SingletonCheck()

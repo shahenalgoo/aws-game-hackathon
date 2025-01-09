@@ -140,6 +140,7 @@ public class UIManager : Singleton<UIManager>
         EnableDeathPanel();
 #endif
 
+        Time.timeScale = 0f;
     }
 
     private void EnableDeathPanel()

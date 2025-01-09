@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Runtime.InteropServices;
 using UnityEngine;
 using UnityEngine.Rendering;
 using UnityEngine.Rendering.Universal; // For URP
@@ -20,6 +21,9 @@ public class PlayerHealth : MonoBehaviour
 
     private bool isDead;
     public bool IsDead { get { return isDead; } set { isDead = value; } }
+
+    [DllImport("__Internal")]
+    private static extern void PlayVoiceline(string type);
     public void Start()
     {
         SetMaxHealth();
@@ -151,9 +155,21 @@ public class PlayerHealth : MonoBehaviour
             AudioManager.Instance.PlaySfx(AudioManager.Instance._playerDeath2Sfx);
         }
 
+        // Request voiceline
+        StartCoroutine(RequestDeathVoiceline());
+
 
         // Trigger Death Panel
         if (TutorialManager.Instance == null) StartCoroutine(UIManager.Instance.DeathPanelSetup());
 
+    }
+
+    private IEnumerator RequestDeathVoiceline()
+    {
+        yield return new WaitForSeconds(1f);
+#if UNITY_WEBGL == true && UNITY_EDITOR == false
+        PlayVoiceline("death");
+#endif
+        Debug.Log("Player died, voiceline requested");
     }
 }

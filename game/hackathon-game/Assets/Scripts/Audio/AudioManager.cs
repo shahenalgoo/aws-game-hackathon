@@ -229,6 +229,23 @@ public class AudioManager : MonoBehaviour
         _sfxBus.setPaused(value);
     }
 
+    public void SetVolume(float volume)
+    {
+        // Clamp the volume between 0 and 1
+        volume = Mathf.Clamp01(volume);
+
+        // Set volume for both SFX and Music buses
+        if (_sfxBus.isValid())
+        {
+            _sfxBus.setVolume(volume);
+        }
+
+        if (_musicBus.isValid())
+        {
+            _musicBus.setVolume(volume);
+        }
+    }
+
     /*** SFX CONTROLS ***/
 
     public void PlaySfx(EventInstance sfx)

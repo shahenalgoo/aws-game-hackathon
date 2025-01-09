@@ -17,4 +17,7 @@ mergeInto(LibraryManager.library, {
   TakeScreenshot: function () {
     window.dispatchReactUnityEvent("TakeScreenshot");
   },
+  PlayVoiceline: function (type) {
+    window.dispatchReactUnityEvent("PlayVoiceline", type);
+  },
 });
