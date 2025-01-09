@@ -44,13 +44,7 @@ public class GameManager : MonoBehaviour
     public void Start()
     {
         _gameTimer = PlayerPrefs.GetFloat(PlayerConstants.TIMER_PREF_KEY, 0f);
-        StartCoroutine(RequestVoiceline());
-    }
 
-    private IEnumerator RequestVoiceline()
-    {
-        yield return new WaitForSeconds(2f);
-        // Play voiceline
 #if UNITY_WEBGL == true && UNITY_EDITOR == false
         if (SceneManager.GetActiveScene().buildIndex == SceneIndexes.GameSceneIndex)
         {
@@ -62,6 +56,7 @@ public class GameManager : MonoBehaviour
         }
 #endif
     }
+
 
     void SingletonCheck()
     {
