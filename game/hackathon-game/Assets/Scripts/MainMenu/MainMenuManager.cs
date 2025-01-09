@@ -122,6 +122,12 @@ public class MainMenuManager : MonoBehaviour
         SceneManager.LoadScene(SceneIndexes.BossFightSceneIndex);
     }
 
+    public void StartFootageScene()
+    {
+        SceneManager.LoadScene(4);
+
+    }
+
     private void SetPlaylist(string[] playlist)
     {
         string savedPlaylistString = string.Join("###", playlist);

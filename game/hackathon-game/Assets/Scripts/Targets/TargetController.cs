@@ -32,8 +32,15 @@ public class TargetController : MonoBehaviour
     }
     void FindPlayer()
     {
-        _player = GameObject.FindGameObjectWithTag("Player").transform;
-        _playerHealth = _player.gameObject.GetComponent<PlayerHealth>();
+        try
+        {
+            _player = GameObject.FindGameObjectWithTag("Player").transform;
+            _playerHealth = _player.gameObject.GetComponent<PlayerHealth>();
+        }
+        catch
+        {
+            Debug.Log("Player not found");
+        }
 
     }
 

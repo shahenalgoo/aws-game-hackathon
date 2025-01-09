@@ -18,6 +18,6 @@ mergeInto(LibraryManager.library, {
     window.dispatchReactUnityEvent("TakeScreenshot");
   },
   PlayVoiceline: function (type) {
-    window.dispatchReactUnityEvent("PlayVoiceline", type);
+    window.dispatchReactUnityEvent("PlayVoiceline", UTF8ToString(type));
   },
 });
