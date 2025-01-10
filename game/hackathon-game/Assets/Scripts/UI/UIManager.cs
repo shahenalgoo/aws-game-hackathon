@@ -135,24 +135,28 @@ public class UIManager : Singleton<UIManager>
         _gameplayActions.Disable();
 
         yield return new WaitForSeconds(_enableDeathPanelDelay);
+        if (Helpers.IsSurvivalMode())
+        {
+            GameManager.Instance?.StartSubmissionSurvival();
+        }
 
 #if UNITY_WEBGL == true && UNITY_EDITOR == false
-    ActivateDeathMenu();
-    Debug.Log("Death menu requested");
+        if (Helpers.IsSurvivalMode())
+        {
+            GameManager.Instance?.StartSubmissionSurvival();
+        }
+        else
+        {
+            ActivateDeathMenu();
+        }    
 #endif
 
 #if UNITY_WEBGL == false || UNITY_EDITOR == true
-        EnableDeathPanel();
+        _deathPanel.SetActive(true);
 #endif
 
         Time.timeScale = 0f;
-    }
-
-    private void EnableDeathPanel()
-    {
-        Time.timeScale = 0;
         AudioManager.Instance.PauseAudio(true);
-        _deathPanel.SetActive(true);
     }
 
     public void LoadToggleStates()

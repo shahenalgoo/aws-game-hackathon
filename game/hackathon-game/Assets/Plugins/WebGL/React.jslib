@@ -14,6 +14,12 @@ mergeInto(LibraryManager.library, {
   SubmitTime: function (time) {
     window.dispatchReactUnityEvent("SubmitTime", time);
   },
+  SubmitSurvivalData: function (time, round) {
+    window.dispatchReactUnityEvent("SubmitSurvivalData", time, round);
+  },
+  RequestSurvivalLevel: function () {
+    window.dispatchReactUnityEvent("RequestSurvivalLevel");
+  },
   TakeScreenshot: function () {
     window.dispatchReactUnityEvent("TakeScreenshot");
   },

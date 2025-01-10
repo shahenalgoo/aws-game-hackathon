@@ -37,16 +37,41 @@ public class MainMenuManager : MonoBehaviour
         // playlist[1] = "{\"grid\":[[0,0,0,2,1,4,1,2,0,0,0,2,1,7,0,0,0,0,0,0],[0,2,3,1,0,0,0,1,4,1,0,0,0,1,2,1,4,2,0,0],[0,1,0,5,1,2,0,3,0,5,1,2,0,0,0,0,0,1,0,0],[2,4,0,1,0,1,0,8,0,0,0,1,4,1,2,3,0,5,2,0],[1,1,6,2,0,3,1,2,1,6,1,0,0,0,1,1,0,1,3,1],[0,0,0,1,0,1,0,0,0,0,2,1,3,0,5,2,0,0,0,0],[0,2,3,2,0,4,1,2,0,0,0,0,1,0,1,4,1,2,0,0],[0,1,0,5,1,0,0,1,4,1,2,0,5,0,0,0,0,1,7,0],[0,2,0,1,2,0,0,0,0,0,1,3,2,1,4,2,0,2,1,0]]}";
 
         // Set playlist
-        SetPlaylist(playlist);
+        Helpers.SetPlaylist(playlist);
 
         // Reset trackers
         Helpers.ResetTrackingVariables();
         Helpers.ModeHasBossFight(true);
         Helpers.ResetTrackersOnRestart(false);
-
+        Helpers.SetSurvivalMode(false);
 
         // Start game
         StartGame();
+    }
+
+    public void StartSurvivalMode(string gridData)
+    {
+        // Set up array
+        string[] playlist = new string[1];
+        playlist[0] = gridData;
+
+        // Set playlist
+        Helpers.SetPlaylist(playlist);
+
+        // Reset trackers
+        Helpers.ResetTrackingVariables();
+        Helpers.ModeHasBossFight(false);
+        Helpers.ResetTrackersOnRestart(false);
+        Helpers.SetSurvivalMode(true);
+
+        // Start game
+        StartGame();
+    }
+
+    public void StartSurvivalModeTest()
+    {
+        StartSurvivalMode("{\"grid\":[[0,0,0,2,1,8,1,2,0,0,2,4,0,0,0,0,3,2,0,0],[0,2,7,5,0,7,0,6,0,0,1,3,0,2,1,4,1,0,0,0],[1,1,2,1,0,2,0,1,2,0,5,1,2,7,5,0,6,0,0,0],[4,2,0,3,0,1,0,0,1,0,0,0,0,2,1,0,2,0,0,0],[1,6,0,1,2,5,2,0,4,0,0,0,0,7,3,0,1,2,0,0],[0,1,0,0,0,1,6,0,1,2,0,0,2,1,4,0,5,0,0,0],[0,3,2,0,0,0,1,0,0,7,0,2,6,0,1,0,2,0,0,0],[0,1,5,4,2,0,3,1,0,2,0,1,2,0,5,0,1,2,0,0],[0,0,0,0,1,2,0,2,0,1,2,0,0,0,2,0,0,1,2,0]]}");
+
     }
 
     public void StartAILevelTest()
@@ -76,13 +101,13 @@ public class MainMenuManager : MonoBehaviour
         playlist[0] = gridData;
 
         // Set playlist
-        SetPlaylist(playlist);
+        Helpers.SetPlaylist(playlist);
 
         // Reset trackers
         Helpers.ResetTrackingVariables();
         Helpers.ModeHasBossFight(false);
         Helpers.ResetTrackersOnRestart(true);
-
+        Helpers.SetSurvivalMode(false);
 
         // Start game
         StartGame();
@@ -106,12 +131,14 @@ public class MainMenuManager : MonoBehaviour
         playlist[0] = "{\"grid\":[[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,2,0,0,0,0,0,0,0,0,0,0,0],[1,1,0,1,1,0,1,1,1,0,0,0,0,1,7,1,0,0,0,0],[1,1,1,1,1,1,1,1,1,1,3,1,4,1,0,5,0,0,1,8],[1,1,0,1,1,0,1,1,1,0,0,0,0,0,0,1,0,0,1,0],[0,0,0,0,0,0,0,0,2,0,0,0,0,0,0,1,6,1,1,0],[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]]}";
 
         // Set playlist
-        SetPlaylist(playlist);
+        Helpers.SetPlaylist(playlist);
         // Reset trackers
         Helpers.ResetTrackingVariables();
         Helpers.ModeHasBossFight(false);
         Helpers.ResetTrackersOnRestart(true);
+        Helpers.SetSurvivalMode(false);
         SceneManager.LoadScene(SceneIndexes.TutorialSceneIndex);
+
     }
 
     public void StartBossFight()
@@ -119,6 +146,7 @@ public class MainMenuManager : MonoBehaviour
         // Reset trackers
         Helpers.ResetTrackingVariables();
         Helpers.ResetTrackersOnRestart(true);
+        Helpers.SetSurvivalMode(false);
         SceneManager.LoadScene(SceneIndexes.BossFightSceneIndex);
     }
 
@@ -128,12 +156,7 @@ public class MainMenuManager : MonoBehaviour
 
     }
 
-    private void SetPlaylist(string[] playlist)
-    {
-        string savedPlaylistString = string.Join("###", playlist);
-        PlayerPrefs.SetString(PlayerConstants.PLAYLIST_PREF_KEY, savedPlaylistString);
-        PlayerPrefs.Save();
-    }
+
     public void StartGame()
     {
         SceneManager.LoadScene(SceneIndexes.GameSceneIndex);

@@ -885,7 +885,7 @@ MonoBehaviour:
   - m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: UIManager, Assembly-CSharp
+        m_TargetAssemblyTypeName: HUDManager, Assembly-CSharp
         m_MethodName: ToggleHUD
         m_Mode: 0
         m_Arguments:

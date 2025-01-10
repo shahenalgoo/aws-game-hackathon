@@ -2,7 +2,6 @@ using System;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using System.Runtime.InteropServices;
-using System.Collections;
 
 public class GameManager : MonoBehaviour
 {
@@ -27,9 +26,20 @@ public class GameManager : MonoBehaviour
     public bool UsePlayerEntranceAnimation { get => _usePlayerEntranceAnimation; }
 
 
+    // For survival mode
+    private bool _isSurvivalMode = false;
+    public bool IsSurvivalMode { get => _isSurvivalMode; }
+    private int _roundReached;
+    public int RoundReached { get => _roundReached; }
+
+
     /** EXTERNAL COMM **/
     [DllImport("__Internal")]
     private static extern void SubmitTime(float time);
+    [DllImport("__Internal")]
+    private static extern void SubmitSurvivalData(float time, int round);
+    [DllImport("__Internal")]
+    private static extern void RequestSurvivalLevel();
     [DllImport("__Internal")]
     private static extern void PlayVoiceline(string type);
     private void Awake()
@@ -44,6 +54,16 @@ public class GameManager : MonoBehaviour
     public void Start()
     {
         _gameTimer = PlayerPrefs.GetFloat(PlayerConstants.TIMER_PREF_KEY, 0f);
+
+        _isSurvivalMode = Helpers.IsSurvivalMode();
+        if (_isSurvivalMode)
+        {
+            // Increment round and save, update on hud
+            _roundReached = PlayerPrefs.GetInt(PlayerConstants.ROUNDS_SURVIVED_PREF_KEY, 0) + 1;
+            Helpers.RecordRoundReached(_roundReached);
+            HUDManager.Instance?.ShowRounds(_roundReached);
+
+        }
 
 #if UNITY_WEBGL == true && UNITY_EDITOR == false
         if (SceneManager.GetActiveScene().buildIndex == SceneIndexes.GameSceneIndex)
@@ -104,6 +124,20 @@ public class GameManager : MonoBehaviour
     {
         Helpers.RecordTime(_gameTimer);
 
+        if (_isSurvivalMode)
+        {
+            // request new level
+#if UNITY_WEBGL == true && UNITY_EDITOR == false
+            RequestSurvivalLevel();
+#endif
+
+#if UNITY_WEBGL == false || UNITY_EDITOR == true
+            StartNewRoundTest();
+#endif
+            return;
+        }
+
+
         // If we are in a boss fight, trigger submission directly
         if (SceneManager.GetActiveScene().buildIndex == SceneIndexes.BossFightSceneIndex)
         {
@@ -143,6 +177,25 @@ public class GameManager : MonoBehaviour
 
     }
 
+    public void StartNewRoundTest()
+    {
+        StartNewRound("{\"grid\":[[0,0,0,2,1,8,1,2,0,0,2,4,0,0,0,0,3,2,0,0],[0,2,7,5,0,7,0,6,0,0,1,3,0,2,1,4,1,0,0,0],[1,1,2,1,0,2,0,1,2,0,5,1,2,7,5,0,6,0,0,0],[4,2,0,3,0,1,0,0,1,0,0,0,0,2,1,0,2,0,0,0],[1,6,0,1,2,5,2,0,4,0,0,0,0,7,3,0,1,2,0,0],[0,1,0,0,0,1,6,0,1,2,0,0,2,1,4,0,5,0,0,0],[0,3,2,0,0,0,1,0,0,7,0,2,6,0,1,0,2,0,0,0],[0,1,5,4,2,0,3,1,0,2,0,1,2,0,5,0,1,2,0,0],[0,0,0,0,1,2,0,2,0,1,2,0,0,0,2,0,0,1,2,0]]}");
+    }
+
+    public void StartNewRound(string gridData)
+    {
+        // Set up array
+        string[] playlist = new string[1];
+        playlist[0] = gridData;
+
+        // Set playlist
+        Helpers.SetPlaylist(playlist);
+
+        // Reload scene
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+
+    }
+
     public void StartSubmission()
     {
         Time.timeScale = 0;
@@ -154,6 +207,16 @@ public class GameManager : MonoBehaviour
 #endif
 
         Debug.Log("Submitted time: " + _gameTimer);
+    }
+
+    public void StartSubmissionSurvival()
+    {
+        // already being paused in death menu request
+#if UNITY_WEBGL == true && UNITY_EDITOR == false
+            SubmitSurvivalData(_gameTimer, _roundReached);
+#endif
+
+        Debug.Log("Submitted time and round: " + _gameTimer + ", " + _roundReached);
     }
 
 

@@ -16,6 +16,7 @@ public class HUDManager : MonoBehaviour
     public static Action<int> _ammoUpdater;
     public TextMeshProUGUI _ammoText;
     public TextMeshProUGUI _timerText;
+    public TextMeshProUGUI _roundText; // For survival mode
 
     [Header("Notice Box")]
     [SerializeField] private TextMeshProUGUI _noticeText;
@@ -39,6 +40,9 @@ public class HUDManager : MonoBehaviour
         _targetHealthUpdater += SetTargetHealth;
         _maxHealthUpdater += SetMaxHealthBar;
         _noticeUpdater += NotifyOnHUD;
+
+        // Disable rounds, if active
+        if (_roundText != null) _roundText.gameObject.SetActive(false);
     }
 
     void Start()
@@ -95,7 +99,7 @@ public class HUDManager : MonoBehaviour
     }
     public void UpdateLootText(int amount)
     {
-        _lootText.text = "Stars Collected: " + amount.ToString("N0") + "/" + GameManager.Instance?.TotalTargets;
+        _lootText.text = "Stars: " + amount.ToString("N0") + "/" + GameManager.Instance?.TotalTargets;
     }
 
     public void UpdateAmmoText(int amount)
@@ -105,7 +109,7 @@ public class HUDManager : MonoBehaviour
 
     public void UpdateTimerText(float amount)
     {
-        _timerText.text = "Timer: " + FormatTime(amount);
+        _timerText.text = FormatTime(amount);
     }
 
     public string FormatTime(float time)
@@ -170,6 +174,14 @@ public class HUDManager : MonoBehaviour
     {
         yield return new WaitForSeconds(noticeTime);
         _noticeBox.GetComponent<Animator>().Play("Roll Out");
+    }
+
+    public void ShowRounds(int round)
+    {
+        // For Survival Mode
+        if (_roundText == null) return;
+        _roundText.text = "Round: " + round;
+        _roundText.gameObject.SetActive(true);
     }
 
     private void OnDestroy()

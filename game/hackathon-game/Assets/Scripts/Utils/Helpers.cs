@@ -54,11 +54,31 @@ public static class Helpers
         return gridPos;
     }
 
+    public static void SetPlaylist(string[] playlist)
+    {
+        string savedPlaylistString = string.Join("###", playlist);
+        PlayerPrefs.SetString(PlayerConstants.PLAYLIST_PREF_KEY, savedPlaylistString);
+        PlayerPrefs.Save();
+    }
+
     public static void ResetTrackingVariables()
     {
         PlayerPrefs.SetInt(PlayerConstants.PLAYLIST_TRACKER_PREF_KEY, 0);
         PlayerPrefs.SetFloat(PlayerConstants.TIMER_PREF_KEY, 0f);
+        PlayerPrefs.SetInt(PlayerConstants.IS_SURVIVAL_MODE_PREF_KEY, 0);
+        PlayerPrefs.SetInt(PlayerConstants.ROUNDS_SURVIVED_PREF_KEY, 0);
         PlayerPrefs.Save();
+    }
+
+    public static void SetSurvivalMode(bool value)
+    {
+        PlayerPrefs.SetInt(PlayerConstants.IS_SURVIVAL_MODE_PREF_KEY, value ? 1 : 0);
+        PlayerPrefs.Save();
+    }
+
+    public static bool IsSurvivalMode()
+    {
+        return PlayerPrefs.GetInt(PlayerConstants.IS_SURVIVAL_MODE_PREF_KEY, 0) == 1;
     }
 
     public static void ModeHasBossFight(bool value)
@@ -79,11 +99,20 @@ public static class Helpers
         PlayerPrefs.Save();
     }
 
-    public static void RecordTime(float _time)
+    public static void RecordTime(float time)
     {
         // Save time
-        PlayerPrefs.SetFloat(PlayerConstants.TIMER_PREF_KEY, _time);
+        PlayerPrefs.SetFloat(PlayerConstants.TIMER_PREF_KEY, time);
         PlayerPrefs.Save();
     }
+
+    public static void RecordRoundReached(int round)
+    {
+        // Save round
+        PlayerPrefs.SetInt(PlayerConstants.ROUNDS_SURVIVED_PREF_KEY, round);
+        PlayerPrefs.Save();
+    }
+
+
 
 }
