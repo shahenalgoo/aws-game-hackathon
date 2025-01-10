@@ -2958,7 +2958,7 @@ PrefabInstance:
     - target: {fileID: 5315199282729196132, guid: ed6351fa37ed1a54bac66c908dc976f8,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 16.05
+      value: 32
       objectReference: {fileID: 0}
     - target: {fileID: 5315199282729196132, guid: ed6351fa37ed1a54bac66c908dc976f8,
         type: 3}
@@ -2968,7 +2968,7 @@ PrefabInstance:
     - target: {fileID: 5315199282729196132, guid: ed6351fa37ed1a54bac66c908dc976f8,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 19.43
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5315199282729196132, guid: ed6351fa37ed1a54bac66c908dc976f8,
         type: 3}
@@ -3388,8 +3388,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.25}
   m_AnchorMax: {x: 1, y: 0.75}
-  m_AnchoredPosition: {x: 0, y: -0.00027942657}
-  m_SizeDelta: {x: 0, y: 27.381}
+  m_AnchoredPosition: {x: -1.1170044, y: -1.5209999}
+  m_SizeDelta: {x: -2.233, y: 30.423}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1001 &1886732589
 PrefabInstance:
@@ -3808,6 +3808,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: HUDCanvas
       objectReference: {fileID: 0}
+    - target: {fileID: 255313461283852495, guid: 2b1b09cda95ce4ee8a0b88193eb18397,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 572061678595578605, guid: 2b1b09cda95ce4ee8a0b88193eb18397,
         type: 3}
       propertyPath: m_IsActive
@@ -3861,7 +3866,7 @@ PrefabInstance:
     - target: {fileID: 8019465284477853025, guid: 2b1b09cda95ce4ee8a0b88193eb18397,
         type: 3}
       propertyPath: m_RenderMode
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8069974892428237347, guid: 2b1b09cda95ce4ee8a0b88193eb18397,
         type: 3}
@@ -4228,7 +4233,7 @@ Transform:
   m_GameObject: {fileID: 3705325874965250192}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0, y: 1.1382709, z: 0}
+  m_LocalPosition: {x: 0, y: 1.138271, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -4514,6 +4519,7 @@ GameObject:
   - component: {fileID: 5430694484293341506}
   - component: {fileID: 5257580278775241524}
   - component: {fileID: 5430694484293341507}
+  - component: {fileID: 5430694484293341508}
   m_Layer: 0
   m_Name: boss-head
   m_TagString: Untagged
@@ -5016,6 +5022,21 @@ MonoBehaviour:
   _burstAttackInterval: 0.5
   _burstAttackAmount: 5
   _spawnPoint: {fileID: 1362291344}
+--- !u!114 &5430694484293341508
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3705325874965250192}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e6015a459c69a46379eef45c29ca09b6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _recoilDistance: 0.15
+  _recoilDuration: 0.15
+  _returnDuration: 0.15
 --- !u!33 &5445970335125449928
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -5443,7 +5464,7 @@ PrefabInstance:
     - target: {fileID: 5090252357612646392, guid: 06e2a1484dc1a4aaa90ed2ddd550a0c7,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7161240516011965372, guid: 06e2a1484dc1a4aaa90ed2ddd550a0c7,
         type: 3}

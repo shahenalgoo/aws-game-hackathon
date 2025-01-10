@@ -70,7 +70,23 @@ public class HUDManager : MonoBehaviour
 
     public void UpdateTimerText(float amount)
     {
-        _timerText.text = "Timer : " + amount.ToString();
+        _timerText.text = "Timer: " + FormatTime(amount);
+    }
+
+    public string FormatTime(float time)
+    {
+        int hours = Mathf.FloorToInt(time / 3600);
+        int minutes = Mathf.FloorToInt((time % 3600) / 60);
+        int seconds = Mathf.FloorToInt(time % 60);
+
+        if (hours > 0)
+        {
+            return string.Format("{0:00}:{1:00}:{2:00}", hours, minutes, seconds);
+        }
+        else
+        {
+            return string.Format("{0:00}:{1:00}", minutes, seconds);
+        }
     }
 
     public void UpdateHealthBar()

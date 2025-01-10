@@ -43,6 +43,11 @@ public class UIManager : Singleton<UIManager>
     [DllImport("__Internal")]
     private static extern void ActivateDeathMenu();
 
+    protected override void Awake()
+    {
+        base.Awake();
+        if (!_screenFader.activeSelf) _screenFader.SetActive(true);
+    }
 
     public void Start()
     {

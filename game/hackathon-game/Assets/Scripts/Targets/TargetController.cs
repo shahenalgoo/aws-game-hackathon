@@ -24,11 +24,16 @@ public class TargetController : MonoBehaviour
     [SerializeField] private GameObject _meleeObject;
     public GameObject TargetBarrel => _targetBarrel;
 
+    private Recoil _recoil;
+
+
     void Start()
     {
         Invoke("FindPlayer", _shootingDelayOnStart / 2);
         Invoke("ActivateShooting", _shootingDelayOnStart);
         _meleeObject.SetActive(false);
+        _recoil = GetComponentInChildren<Recoil>();
+
     }
     void FindPlayer()
     {
@@ -107,6 +112,9 @@ public class TargetController : MonoBehaviour
 
         // Play sfx
         AudioManager.Instance.PlaySfx(AudioManager.Instance._targetShotSfx);
+
+        // Trigger the recoil effect
+        _recoil.TriggerRecoil();
 
         _canShoot = false;
     }

@@ -10,10 +10,13 @@ public class BossTurret : MonoBehaviour
     [SerializeField] private int _burstAttackAmount = 5;
     public int BurstAttackAmount { get { return _burstAttackAmount; } set { _burstAttackAmount = value; } }
 
+    private Recoil _recoil;
+
     [SerializeField] private Transform _spawnPoint;
 
     void Start()
     {
+        _recoil = GetComponent<Recoil>();
         FindPlayer();
         StartRepeatingBurstAttack();
     }
@@ -73,6 +76,9 @@ public class BossTurret : MonoBehaviour
 
         // Play sfx
         AudioManager.Instance.PlaySfx(AudioManager.Instance._targetShotSfx);
+
+        // Trigger the recoil effect
+        _recoil.TriggerRecoil();
     }
 
     public void StopAttack()
