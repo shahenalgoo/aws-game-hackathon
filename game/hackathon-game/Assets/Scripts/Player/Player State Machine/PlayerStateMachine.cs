@@ -2,6 +2,7 @@ using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Animations.Rigging;
+using System.Collections;
 public class PlayerStateMachine : MonoBehaviour
 {
     [Header("User Input variables")]
@@ -344,11 +345,24 @@ public class PlayerStateMachine : MonoBehaviour
     {
         _rig.weight = value ? 1 : 0;
 
-        // Toggle Laser
-        _weapon.GetComponentInChildren<GunLaser>().EnableLaser(value);
-
         _weapon.GetComponent<MeshRenderer>().enabled = value;
 
+        // Toggle Laser
+        if (value)
+        {
+            StartCoroutine(EnableLaserAfterDelay());
+        }
+        else
+        {
+            _weapon.GetComponentInChildren<GunLaser>().EnableLaser(value);
+        }
+
+    }
+
+    private IEnumerator EnableLaserAfterDelay()
+    {
+        yield return new WaitForSeconds(0.1f);
+        _weapon.GetComponentInChildren<GunLaser>().EnableLaser(true);
     }
 
     public void AllowShootDelayed() => Invoke("AllowShoot", 0.1f);

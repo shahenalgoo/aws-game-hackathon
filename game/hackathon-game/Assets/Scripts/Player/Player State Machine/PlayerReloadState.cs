@@ -42,7 +42,7 @@ public class PlayerReloadState : PlayerBaseState
     {
 
         // Check fight mode
-        Ctx.CheckFightMode(false);
+        Ctx.CheckFightMode(Ctx.IsShooting);
 
         Ctx.CharacterAnimator.SetBool("isReloading", false);
         Ctx.IsReloading = false;

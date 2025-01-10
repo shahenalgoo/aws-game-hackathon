@@ -20,7 +20,7 @@ public class GunLaser : MonoBehaviour
         laserLine.positionCount = 2;
     }
 
-    void Update()
+    void LateUpdate()
     {
         if (!isLaserEnabled)
         {
