@@ -42,10 +42,7 @@ public class TargetController : MonoBehaviour
             _player = GameObject.FindGameObjectWithTag("Player").transform;
             _playerHealth = _player.gameObject.GetComponent<PlayerHealth>();
         }
-        catch
-        {
-            Debug.Log("Player not found");
-        }
+        catch { }
 
     }
 

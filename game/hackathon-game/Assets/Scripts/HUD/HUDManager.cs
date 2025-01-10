@@ -3,6 +3,7 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
 using System.Collections;
+using UnityEngine.InputSystem;
 
 public class HUDManager : MonoBehaviour
 {
@@ -16,17 +17,18 @@ public class HUDManager : MonoBehaviour
     public TextMeshProUGUI _ammoText;
     public TextMeshProUGUI _timerText;
 
-
     [Header("Notice Box")]
     [SerializeField] private TextMeshProUGUI _noticeText;
     [SerializeField] private GameObject _noticeBox;
     public static Action<string, float> _noticeUpdater;
 
-
     // Health bar lerp settings
     private float _targetHealth;
     [SerializeField] private float _lerpSpeed = 10f;
     private bool _isHealthLerping = false;
+
+    private Animator _animator;
+    private CanvasGroup _canvasGroup;
 
     public void Awake()
     {
@@ -37,6 +39,39 @@ public class HUDManager : MonoBehaviour
         _targetHealthUpdater += SetTargetHealth;
         _maxHealthUpdater += SetMaxHealthBar;
         _noticeUpdater += NotifyOnHUD;
+    }
+
+    void Start()
+    {
+        _animator = GetComponent<Animator>();
+        _canvasGroup = GetComponent<CanvasGroup>();
+        _animator.enabled = false;
+        bool hudOn = PlayerPrefs.GetInt(PlayerConstants.HUD_PREF_KEY, 1) == 1;
+        ToggleAlpha(hudOn);
+    }
+
+    public void TriggerFadeOut()
+    {
+        if (_canvasGroup.alpha == 1)
+        {
+            _animator.enabled = true;
+            _animator.Play("Fade Out");
+        }
+    }
+
+    public void ToggleAlpha(bool value)
+    {
+        _canvasGroup.alpha = value ? 1 : 0;
+    }
+
+    public void ToggleHUD(InputAction.CallbackContext ctx)
+    {
+        if (ctx.performed)
+        {
+            bool hudOn = PlayerPrefs.GetInt(PlayerConstants.HUD_PREF_KEY, 1) == 1;
+            ToggleAlpha(!hudOn);
+            Helpers.SaveHUDState(!hudOn);
+        }
     }
 
     void Update()

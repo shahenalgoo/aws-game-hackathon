@@ -73,6 +73,12 @@ public static class Helpers
         PlayerPrefs.Save();
     }
 
+    public static void SaveHUDState(bool value)
+    {
+        PlayerPrefs.SetInt(PlayerConstants.HUD_PREF_KEY, value ? 1 : 0);
+        PlayerPrefs.Save();
+    }
+
     public static void RecordTime(float _time)
     {
         // Save time

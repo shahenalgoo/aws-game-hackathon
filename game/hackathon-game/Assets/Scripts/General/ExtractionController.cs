@@ -103,7 +103,7 @@ public class ExtractionController : MonoBehaviour
 
         // Make screen fade 
         UIManager.Instance._screenFader.GetComponent<Animator>().Play("Fade In");
-        HUDManager.Instance.gameObject.GetComponent<Animator>().Play("Fade Out");
+        HUDManager.Instance?.TriggerFadeOut();
 
         // Allo time to fade in
         yield return new WaitForSeconds(2f);

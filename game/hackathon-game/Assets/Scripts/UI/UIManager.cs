@@ -73,7 +73,7 @@ public class UIManager : Singleton<UIManager>
         }
 #endif
 
-#if UNITY_EDITOR == true
+#if UNITY_WEBGL == false || UNITY_EDITOR == true
         _pausePanel.SetActive(_isPaused);
 #endif
 
@@ -141,7 +141,7 @@ public class UIManager : Singleton<UIManager>
     Debug.Log("Death menu requested");
 #endif
 
-#if UNITY_EDITOR == true
+#if UNITY_WEBGL == false || UNITY_EDITOR == true
         EnableDeathPanel();
 #endif
 

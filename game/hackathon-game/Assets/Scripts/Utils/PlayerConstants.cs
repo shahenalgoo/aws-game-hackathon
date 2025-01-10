@@ -7,4 +7,5 @@ public static class PlayerConstants
     public const string TIMER_PREF_KEY = "Timer";
     public const string HAS_BOSS_PREF_KEY = "HasBossFight";
     public const string RESET_TRACKERS_ON_RESTART = "CanRestartTracker";
+    public const string HUD_PREF_KEY = "HudOn";
 }

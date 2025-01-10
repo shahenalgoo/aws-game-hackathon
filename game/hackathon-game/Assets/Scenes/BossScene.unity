@@ -2950,6 +2950,21 @@ PrefabInstance:
       propertyPath: m_ActionEvents.Array.data[12].m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 1492246460}
+    - target: {fileID: 2777191392175198548, guid: ed6351fa37ed1a54bac66c908dc976f8,
+        type: 3}
+      propertyPath: m_ActionEvents.Array.data[13].m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1746615083419218592}
+    - target: {fileID: 2777191392175198548, guid: ed6351fa37ed1a54bac66c908dc976f8,
+        type: 3}
+      propertyPath: m_ActionEvents.Array.data[13].m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: ToggleHUD
+      objectReference: {fileID: 0}
+    - target: {fileID: 2777191392175198548, guid: ed6351fa37ed1a54bac66c908dc976f8,
+        type: 3}
+      propertyPath: m_ActionEvents.Array.data[13].m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: HUDManager, Assembly-CSharp
+      objectReference: {fileID: 0}
     - target: {fileID: 3928576000499327119, guid: ed6351fa37ed1a54bac66c908dc976f8,
         type: 3}
       propertyPath: m_Name
@@ -3987,6 +4002,18 @@ PrefabInstance:
       addedObject: {fileID: 1194397041}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2b1b09cda95ce4ee8a0b88193eb18397, type: 3}
+--- !u!114 &1746615083419218592 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 859216418548466181, guid: 2b1b09cda95ce4ee8a0b88193eb18397,
+    type: 3}
+  m_PrefabInstance: {fileID: 1746615083419218591}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ac269ae40d7b54a378af6a69e91b2708, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!23 &1883012253653798949
 MeshRenderer:
   m_ObjectHideFlags: 0

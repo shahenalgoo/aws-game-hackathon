@@ -427,6 +427,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Floor - Player Sitting
       objectReference: {fileID: 0}
+    - target: {fileID: 4337133127639320260, guid: 495468f46fa534560bb43cb39d4b7634,
+        type: 3}
+      propertyPath: m_CastShadows
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8233422843895376904, guid: 495468f46fa534560bb43cb39d4b7634,
         type: 3}
       propertyPath: m_LocalPosition.x
