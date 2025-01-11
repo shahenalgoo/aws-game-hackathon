@@ -1,5 +1,7 @@
 using System.Collections;
+using System.Runtime.InteropServices;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class ExtractionController : MonoBehaviour
 {
@@ -12,6 +14,9 @@ public class ExtractionController : MonoBehaviour
     [SerializeField] private GameObject _vfx;
 
     [SerializeField] private string _interactionText;
+
+    [DllImport("__Internal")]
+    private static extern void PlayVoiceline(string type);
 
     void OnTriggerEnter(Collider other)
     {
@@ -67,6 +72,18 @@ public class ExtractionController : MonoBehaviour
 
         // let player know on hud
         if (TutorialManager.Instance == null) HUDManager._noticeUpdater?.Invoke("The extraction platform is ready", 3f);
+
+        // If boss fight, request voiceline with a delay
+        if (SceneManager.GetActiveScene().buildIndex == SceneIndexes.BossFightSceneIndex) StartCoroutine(RequestDeathVoiceline());
+    }
+
+    private IEnumerator RequestDeathVoiceline()
+    {
+        yield return new WaitForSeconds(2f);
+#if UNITY_WEBGL == true && UNITY_EDITOR == false
+        PlayVoiceline("afterBossFight");
+#endif
+        Debug.Log("Boss died, voiceline requested");
     }
 
     void CompleteLevel()

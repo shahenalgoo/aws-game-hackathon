@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Runtime.InteropServices;
 using UnityEngine;
 
 public class BossController : MonoBehaviour
@@ -18,8 +17,7 @@ public class BossController : MonoBehaviour
     [SerializeField] private Animator[] _shieldPieces;
     [SerializeField] private GameObject[] _laserBeams;
 
-    [DllImport("__Internal")]
-    private static extern void PlayVoiceline(string type);
+
 
     public void ActivatePhaseTwo()
     {
@@ -103,9 +101,6 @@ public class BossController : MonoBehaviour
         // Shatter everything
         GetComponent<BossFracture>().Shatter();
 
-        // Play voiceline
-        StartCoroutine(RequestDeathVoiceline());
-
         // Destroy all children
         foreach (Transform child in transform)
         {
@@ -113,14 +108,7 @@ public class BossController : MonoBehaviour
         }
     }
 
-    private IEnumerator RequestDeathVoiceline()
-    {
-        yield return new WaitForSeconds(2f);
-#if UNITY_WEBGL == true && UNITY_EDITOR == false
-        PlayVoiceline("afterBossFight");
-#endif
-        Debug.Log("Boss died, voiceline requested");
-    }
+
 }
 
 // Phase 1
