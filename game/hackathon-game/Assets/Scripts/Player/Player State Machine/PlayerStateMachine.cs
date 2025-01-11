@@ -393,4 +393,10 @@ public class PlayerStateMachine : MonoBehaviour
     private void OnControllerColliderHit(ControllerColliderHit hit) => _currentState.CollisionHandler?.Invoke(hit);
     private void OnTriggerEnter(Collider other) => _currentState.TriggerHandler?.Invoke(other);
 
+
+    public void OnDisable()
+    {
+        StopAllCoroutines();
+    }
+
 }
