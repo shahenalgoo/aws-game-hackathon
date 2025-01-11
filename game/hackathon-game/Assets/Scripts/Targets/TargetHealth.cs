@@ -93,6 +93,8 @@ public class TargetHealth : MonoBehaviour
         // Collect all materials from all mesh renderers
         foreach (MeshRenderer renderer in meshRenderers)
         {
+            renderer.receiveShadows = false;
+            renderer.shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.Off;
             foreach (Material material in renderer.materials)
             {
                 allMaterials.Add(material);
