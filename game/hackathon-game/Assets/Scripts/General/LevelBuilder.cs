@@ -86,14 +86,13 @@ public class LevelBuilder : MonoBehaviour
         CreateObject(_levelObjects[1], startingFloorPos, Quaternion.identity);
         AddWallInExtremity(_startingGrid.x, _startingGrid.y);
 
-        // create 2d array for loop
+        // Loop through grid instructions
         for (int i = 0; i < _grid.GetLength(0); i++)
         {
             for (int j = 0; j < _grid.GetLength(1); j++)
             {
                 // skip starting floor
                 if (i == _startingGrid.x && j == _startingGrid.y) continue;
-                // if (i == _endGrid.x && j == _endGrid.y) continue;
 
                 int objectId = _grid[i, j];
 
@@ -109,7 +108,6 @@ public class LevelBuilder : MonoBehaviour
                     continue;
                 }
 
-
                 Vector3 pos = new Vector3(i * _tileSize, _yAdjustObject, j * _tileSize);
                 GameObject obj = CreateObject(_levelObjects[objectId], pos, Quaternion.identity);
 
@@ -119,13 +117,12 @@ public class LevelBuilder : MonoBehaviour
                 // If extraction floor, get a reference to the controller
                 if (objectId == 8) _extractionController = obj.GetComponentInChildren<ExtractionController>();
 
-                // If object is in extremity, Add wall in extreme row and column
+                // If object is in extremity, Add invisible wall in extreme row and column
                 if (i == 0 || i == _grid.GetLength(0) - 1 || j == 0 || j == _grid.GetLength(1) - 1) AddWallInExtremity(i, j);
-
-
             }
         }
 
+        // Replace invisible walls with modified ones with their corners cut where needed - Allows the player to go to diagonally connected floors.
         FixDiagonallyConnectedWalls();
     }
 

@@ -225,6 +225,54 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 1746615083419218591}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &660638957 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8372874844413263862, guid: e00e4b0c950694eefa0b534624889d47,
+    type: 3}
+  m_PrefabInstance: {fileID: 4817982330810883922}
+  m_PrefabAsset: {fileID: 0}
+--- !u!23 &660638961
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 660638957}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: 5e6fde33d0e7743d0a002f2281da4352, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
 --- !u!1 &727766252
 GameObject:
   m_ObjectHideFlags: 0
@@ -1151,6 +1199,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2450375143656045998, guid: e00e4b0c950694eefa0b534624889d47,
         type: 3}
+      propertyPath: _targetMaterial
+      value: 
+      objectReference: {fileID: 2100000, guid: 5e6fde33d0e7743d0a002f2281da4352, type: 2}
+    - target: {fileID: 2450375143656045998, guid: e00e4b0c950694eefa0b534624889d47,
+        type: 3}
       propertyPath: _screenshotCameraSize
       value: 34
       objectReference: {fileID: 0}
@@ -1169,6 +1222,16 @@ PrefabInstance:
       propertyPath: _screenshotCameraPos.z
       value: 74
       objectReference: {fileID: 0}
+    - target: {fileID: 2450375143656045998, guid: e00e4b0c950694eefa0b534624889d47,
+        type: 3}
+      propertyPath: _targetMaterialOutlineOn
+      value: 
+      objectReference: {fileID: 2100000, guid: 5e6fde33d0e7743d0a002f2281da4352, type: 2}
+    - target: {fileID: 2450375143656045998, guid: e00e4b0c950694eefa0b534624889d47,
+        type: 3}
+      propertyPath: _targetMaterialOutlineOff
+      value: 
+      objectReference: {fileID: 2100000, guid: a837980276d6a414a86b72869dcad15b, type: 2}
     - target: {fileID: 2464345215269904859, guid: e00e4b0c950694eefa0b534624889d47,
         type: 3}
       propertyPath: orthographic size
@@ -1247,7 +1310,11 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 8372874844413263862, guid: e00e4b0c950694eefa0b534624889d47,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 660638961}
   m_SourcePrefab: {fileID: 100100000, guid: e00e4b0c950694eefa0b534624889d47, type: 3}
 --- !u!1001 &4897642682032924726
 PrefabInstance:

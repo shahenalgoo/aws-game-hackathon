@@ -172,4 +172,9 @@ public class PlayerHealth : MonoBehaviour
 #endif
         Debug.Log("Player died, voiceline requested");
     }
+
+    public void OnDisable()
+    {
+        StopAllCoroutines();
+    }
 }

@@ -4646,6 +4646,21 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 2450375143656045998, guid: e00e4b0c950694eefa0b534624889d47,
+        type: 3}
+      propertyPath: _affectOutlines
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2450375143656045998, guid: e00e4b0c950694eefa0b534624889d47,
+        type: 3}
+      propertyPath: _targetMaterialOutlineOn
+      value: 
+      objectReference: {fileID: 2100000, guid: 5e6fde33d0e7743d0a002f2281da4352, type: 2}
+    - target: {fileID: 2450375143656045998, guid: e00e4b0c950694eefa0b534624889d47,
+        type: 3}
+      propertyPath: _targetMaterialOutlineOff
+      value: 
+      objectReference: {fileID: 2100000, guid: a837980276d6a414a86b72869dcad15b, type: 2}
     - target: {fileID: 2464345215269904859, guid: e00e4b0c950694eefa0b534624889d47,
         type: 3}
       propertyPath: m_ClearFlags

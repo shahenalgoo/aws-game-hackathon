@@ -350,6 +350,7 @@ public class PlayerStateMachine : MonoBehaviour
         // Toggle Laser
         if (value)
         {
+            if (!gameObject.activeSelf) return; // safety as can cause error when switching/reloading scene
             StartCoroutine(EnableLaserAfterDelay());
         }
         else
@@ -362,6 +363,7 @@ public class PlayerStateMachine : MonoBehaviour
     private IEnumerator EnableLaserAfterDelay()
     {
         yield return new WaitForSeconds(0.1f);
+        if (!gameObject.activeSelf) yield break;
         _weapon.GetComponentInChildren<GunLaser>().EnableLaser(true);
     }
 
