@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Runtime.InteropServices;
 using UnityEngine.SceneManagement;
+using Newtonsoft.Json;
 
 public class MainMenuManager : MonoBehaviour
 {
@@ -47,6 +48,53 @@ public class MainMenuManager : MonoBehaviour
 
         // Start game
         StartGame();
+    }
+
+    public void StartCampaignModeTest()
+    {
+        string[] playlist = new string[] {
+            "{\"grid\":[[0,0,2,0,2,0,0,0,2,7,0,0,0,2,1,0,0,2,0,0],[0,1,1,5,1,2,0,2,1,3,0,2,1,6,4,2,0,1,0,0],[2,4,0,0,7,1,3,1,0,1,4,1,0,5,0,4,0,7,1,0],[0,6,0,0,2,0,0,5,0,2,1,0,0,1,3,1,2,1,8,0],[1,3,0,0,6,1,2,1,0,0,5,0,0,7,0,0,6,0,1,2],[0,1,2,4,1,4,0,2,0,0,1,2,0,2,1,0,4,0,0,0],[0,0,0,0,0,1,0,7,1,6,0,1,5,0,5,3,1,0,0,0],[0,0,0,2,1,5,2,1,3,2,0,0,1,0,0,1,2,0,0,0],[0,0,0,0,0,0,0,0,0,2,6,2,3,2,0,2,0,0,0,0]]}",
+            "{\"grid\":[[0,0,0,0,2,4,2,0,0,1,0,0,0,1,7,2,0,0,0,0],[0,2,4,1,7,0,1,2,1,3,0,0,2,1,5,0,0,2,0,0],[0,5,0,0,6,0,0,7,0,1,2,1,6,0,1,3,1,4,0,0],[2,1,0,0,1,0,0,2,0,5,0,0,3,0,0,0,0,1,2,0],[1,1,3,2,7,2,0,1,1,6,0,0,2,1,2,0,0,5,0,0],[0,0,0,0,6,0,0,0,0,1,2,1,7,0,4,1,2,1,0,0],[0,0,2,1,4,1,2,0,0,5,0,0,2,0,0,0,0,3,0,0],[0,0,5,0,2,0,1,4,2,1,0,0,1,2,1,3,2,6,2,0],[0,0,1,2,0,0,0,0,0,8,0,0,0,0,0,0,0,1,0,0]]}",
+            "{\"grid\":[[0,0,0,2,1,8,1,2,0,0,2,4,0,0,0,0,3,2,0,0],[0,2,7,5,0,7,0,6,0,0,1,3,0,2,1,4,1,0,0,0],[1,1,2,1,0,2,0,1,2,0,5,1,2,7,5,0,6,0,0,0],[4,2,0,3,0,1,0,0,1,0,0,0,0,2,1,0,2,0,0,0],[1,6,0,1,2,5,2,0,4,0,0,0,0,7,3,0,1,2,0,0],[0,1,0,0,0,1,6,0,1,2,0,0,2,1,4,0,5,0,0,0],[0,3,2,0,0,0,1,0,0,7,0,2,6,0,1,0,2,0,0,0],[0,1,5,4,2,0,3,1,0,2,0,1,2,0,5,0,1,2,0,0],[0,0,0,0,1,2,0,2,0,1,2,0,0,0,2,0,0,1,2,0]]}"
+        };
+
+        PlaylistWrapper _wrapper = new PlaylistWrapper();
+        _wrapper.playlist = playlist;
+
+        string jsonPlaylist = JsonConvert.SerializeObject(_wrapper);
+        Debug.Log(jsonPlaylist);
+        StartCampaignMode(jsonPlaylist);
+    }
+    public void StartCampaignMode(string jsonPlaylist)
+    {
+        try
+        {
+            // Parse the JSON string
+            // PlaylistWrapper playlistData = JsonUtility.FromJson<PlaylistWrapper>(jsonPlaylist);
+            PlaylistWrapper playlistData = JsonConvert.DeserializeObject<PlaylistWrapper>(jsonPlaylist);
+
+            // Set up playlist with the parsed data
+            string[] playlist = playlistData.playlist;
+            Debug.Log(playlist[0]);
+            Debug.Log(playlist[1]);
+            Debug.Log(playlist[2]);
+
+            // Set playlist
+            Helpers.SetPlaylist(playlist);
+
+            // Reset trackers
+            Helpers.ResetTrackingVariables();
+            Helpers.ModeHasBossFight(true);
+            Helpers.ResetTrackersOnRestart(false);
+            Helpers.SetSurvivalMode(false);
+
+            // Start game
+            StartGame();
+        }
+        catch (System.Exception e)
+        {
+            Debug.LogError($"Error parsing playlist JSON: {e.Message}");
+        }
     }
 
     public void StartSurvivalMode(string gridData)
@@ -161,4 +209,10 @@ public class MainMenuManager : MonoBehaviour
     {
         SceneManager.LoadScene(SceneIndexes.GameSceneIndex);
     }
+}
+
+[System.Serializable]
+public class PlaylistWrapper
+{
+    public string[] playlist;
 }

@@ -1214,7 +1214,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 492088065}
         m_TargetAssemblyTypeName: MainMenuManager, Assembly-CSharp
-        m_MethodName: StartNormalMode
+        m_MethodName: StartCampaignModeTest
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
