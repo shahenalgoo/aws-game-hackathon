@@ -62,7 +62,7 @@ public class MainMenuManager : MonoBehaviour
         _wrapper.playlist = playlist;
 
         string jsonPlaylist = JsonConvert.SerializeObject(_wrapper);
-        Debug.Log(jsonPlaylist);
+        // Debug.Log(jsonPlaylist);
         StartCampaignMode(jsonPlaylist);
     }
     public void StartCampaignMode(string jsonPlaylist)
@@ -75,9 +75,16 @@ public class MainMenuManager : MonoBehaviour
 
             // Set up playlist with the parsed data
             string[] playlist = playlistData.playlist;
-            Debug.Log(playlist[0]);
-            Debug.Log(playlist[1]);
-            Debug.Log(playlist[2]);
+            // Debug.Log(playlist[0]);
+            // Debug.Log(playlist[1]);
+            // Debug.Log(playlist[2]);
+
+            if (playlist.Length != 3)
+            {
+                Debug.Log("Playlist length is not 3, starting with fallback levels");
+                StartNormalMode();
+                return;
+            }
 
             // Set playlist
             Helpers.SetPlaylist(playlist);

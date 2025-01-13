@@ -73,11 +73,13 @@ public class LevelBuilder : MonoBehaviour
 
     void BuildLevel()
     {
+        // Make sure starting floor is a safe floor
         if (_grid[_startingGrid.x, _startingGrid.y] != 1)
         {
             _grid[_startingGrid.x, _startingGrid.y] = 1;
         }
 
+        // Resolve any gaps/inconsistencies using Q's resolver script.
         GridResolver resolver = new GridResolver(_grid);
         _grid = resolver.FixIsolatedRegions(4, 0);
 
@@ -91,15 +93,15 @@ public class LevelBuilder : MonoBehaviour
         {
             for (int j = 0; j < _grid.GetLength(1); j++)
             {
-                // skip starting floor
+                // Skip starting floor
                 if (i == _startingGrid.x && j == _startingGrid.y) continue;
 
                 int objectId = _grid[i, j];
 
+                // Handle voids
                 if (objectId == 0)
                 {
-
-                    // check if at least 1 neighbor is not zero, place invisible wall so player cannot fall.
+                    // Check if at least 1 neighbor is not zero, place invisible wall so player cannot fall.
                     if (Helpers.HasNonZeroNeighbor(_grid, i, j))
                     {
                         Vector3 wallPos = new Vector3(i * _tileSize, 0, j * _tileSize);
@@ -173,40 +175,38 @@ public class LevelBuilder : MonoBehaviour
 
     private void FixDiagonallyConnectedWalls()
     {
-        // We could technically put the modified walls directly everywhere but this way minimizes the use of mesh colliders
-
         modifiedWallsGridPos = new List<Vector2Int>();
 
-        // we skip rows and columns at extremities
+        // Skip rows and columns at extremities
         for (int i = 1; i < _grid.GetLength(0) - 1; i++)
         {
             for (int j = 1; j < _grid.GetLength(1) - 1; j++)
             {
-                //ignore void spaces
+                // Ignore void spaces
                 if (_grid[i, j] == 0) continue;
 
-                // check left, top 
+                // Check left, top 
                 if (_grid[i, j - 1] == 0 && _grid[i - 1, j] == 0 && _grid[i - 1, j - 1] != 0)
                 {
                     ReplaceInvisibleWall(i, j - 1);
                     ReplaceInvisibleWall(i - 1, j);
                 }
 
-                // check left, bottom
+                // Check left, bottom
                 if (_grid[i, j - 1] == 0 && _grid[i + 1, j] == 0 && _grid[i + 1, j - 1] != 0)
                 {
                     ReplaceInvisibleWall(i, j - 1);
                     ReplaceInvisibleWall(i + 1, j);
                 }
 
-                // check right, top
+                // Check right, top
                 if (_grid[i, j + 1] == 0 && _grid[i - 1, j] == 0 && _grid[i - 1, j + 1] != 0)
                 {
                     ReplaceInvisibleWall(i, j + 1);
                     ReplaceInvisibleWall(i - 1, j);
                 }
 
-                // check right, bottom
+                // Check right, bottom
                 if (_grid[i, j + 1] == 0 && _grid[i + 1, j] == 0 && _grid[i + 1, j + 1] != 0)
                 {
                     ReplaceInvisibleWall(i, j + 1);
@@ -218,28 +218,24 @@ public class LevelBuilder : MonoBehaviour
 
     private void ReplaceInvisibleWall(int row, int col)
     {
-        // replace if not already replaced
-        if (modifiedWallsGridPos.Contains(new Vector2Int(row, col)))
-        {
-            // Debug.Log("Already replaced at _grid pos: [" + row + ", " + col + "]");
-            return;
-        }
+        // Replace if not already replaced
+        if (modifiedWallsGridPos.Contains(new Vector2Int(row, col))) return;
 
-        // Debug.Log("Need to replace at _grid pos: [" + row + ", " + col + "]");
         Vector3 worldPos = new Vector3(row * _tileSize, 0, col * _tileSize);
         GameObject invisibleWall = FindObjectAtPosition(worldPos);
-        // replace if found
+
+        // Replace if found
         if (invisibleWall != null)
         {
             Destroy(invisibleWall);
             Quaternion rot = Quaternion.identity;
-            GameObject modifiedWall = CreateObject(_modifiedInvisibleWall, worldPos, rot);
+            CreateObject(_modifiedInvisibleWall, worldPos, rot);
 
-            // keep record
+            // Keep record
             modifiedWallsGridPos.Add(new Vector2Int(row, col));
         }
-
     }
+
     public GameObject FindObjectAtPosition(Vector3 position, float radius = 0.1f)
     {
         Collider[] hitColliders = Physics.OverlapSphere(position, radius);
