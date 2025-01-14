@@ -1234,8 +1234,18 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: a837980276d6a414a86b72869dcad15b, type: 2}
     - target: {fileID: 2464345215269904859, guid: e00e4b0c950694eefa0b534624889d47,
         type: 3}
+      propertyPath: m_ClearFlags
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2464345215269904859, guid: e00e4b0c950694eefa0b534624889d47,
+        type: 3}
       propertyPath: orthographic size
       value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 2464345215269904859, guid: e00e4b0c950694eefa0b534624889d47,
+        type: 3}
+      propertyPath: m_CullingMask.m_Bits
+      value: 36287
       objectReference: {fileID: 0}
     - target: {fileID: 3096403595217000957, guid: e00e4b0c950694eefa0b534624889d47,
         type: 3}

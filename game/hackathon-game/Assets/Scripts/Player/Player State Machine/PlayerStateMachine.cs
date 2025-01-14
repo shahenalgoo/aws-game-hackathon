@@ -363,7 +363,7 @@ public class PlayerStateMachine : MonoBehaviour
     private IEnumerator EnableLaserAfterDelay()
     {
         yield return new WaitForSeconds(0.1f);
-        if (!gameObject.activeSelf) yield break;
+        if (!gameObject.activeSelf || !_fightMode) yield break;
         _weapon.GetComponentInChildren<GunLaser>().EnableLaser(true);
     }
 

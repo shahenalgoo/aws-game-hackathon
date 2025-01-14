@@ -24,21 +24,18 @@ public class ExtractionController : MonoBehaviour
         {
             if (_player == null) _player = other.gameObject;
 
-            PlayerStateMachine._interact += CompleteLevel;
-            InteractTextController._setInteractionText(true, _interactionText);
+            bool isTutorial = TutorialManager.Instance != null;
+            bool hasCollectedAll = GameManager.Instance != null && GameManager.Instance.HasCollectedAll();
 
-            // bool isTutorial = TutorialManager.Instance != null;
-            // bool hasCollectedAll = GameManager.Instance != null && GameManager.Instance.HasCollectedAll();
-
-            // if (isTutorial || hasCollectedAll)
-            // {
-            //     PlayerStateMachine._interact += CompleteLevel;
-            //     InteractTextController._setInteractionText(true, _interactionText);
-            // }
-            // else
-            // {
-            //     InteractTextController._setInteractionText(true, "Collect All Stars To Extract");
-            // }
+            if (isTutorial || hasCollectedAll)
+            {
+                PlayerStateMachine._interact += CompleteLevel;
+                InteractTextController._setInteractionText(true, _interactionText);
+            }
+            else
+            {
+                InteractTextController._setInteractionText(true, "Collect All Stars To Extract");
+            }
         }
 
     }
@@ -50,8 +47,11 @@ public class ExtractionController : MonoBehaviour
 
     void OnTriggerExit(Collider other)
     {
-        PlayerStateMachine._interact -= CompleteLevel;
-        InteractTextController._setInteractionText(false, "");
+        if (other.gameObject.CompareTag("Player"))
+        {
+            PlayerStateMachine._interact -= CompleteLevel;
+            InteractTextController._setInteractionText(false, "");
+        }
     }
 
     void Update()
@@ -96,7 +96,6 @@ public class ExtractionController : MonoBehaviour
         psm.enabled = false;
         _player.GetComponentInChildren<GunManager>().gameObject.SetActive(false);
         _player.GetComponentInChildren<Canvas>().gameObject.SetActive(false);
-
 
         _player.GetComponent<Animator>().Play("Hovering");
         _playerCC = _player.GetComponent<CharacterController>();

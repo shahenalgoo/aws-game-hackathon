@@ -318,7 +318,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   laserLength: 50
-  laserWidth: 0.03
+  laserWidth: 0.045
   laserColor: {r: 0, g: 1, b: 1, a: 0.2509804}
   layersToHit:
     serializedVersion: 2

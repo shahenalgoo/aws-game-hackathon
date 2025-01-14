@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1607940989480778721}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: Trails
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -47,7 +47,7 @@ GameObject:
   - component: {fileID: 7774704957857088808}
   - component: {fileID: 8400456802357438009}
   - component: {fileID: 487541917047565887}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: RewardLoot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -153,8 +153,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2214e86a0cfa2452794ee80e6fdb1ca2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  magneticRange: 5
-  moveSpeed: 10
+  _magneticRange: 5
+  _moveSpeed: 10
   _lootCollectVFX: {fileID: 2499121994272647193}
   _trails: {fileID: 465787297625343249}
 --- !u!95 &487541917047565887
@@ -188,7 +188,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6323601273908913995}
   - component: {fileID: 2355853269041144695}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: trail
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -333,7 +333,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4201278049139196997}
   - component: {fileID: 6427474142972568494}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: trail (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -477,7 +477,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4040294236617409738}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: RewardLootParent
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -513,6 +513,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: RewardCollectVFX
+      objectReference: {fileID: 0}
+    - target: {fileID: 3588510740932538482, guid: 5f6ae1b1d80f44f9ca7204d7aaa82afc,
+        type: 3}
+      propertyPath: m_Layer
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 4502340557270732219, guid: 5f6ae1b1d80f44f9ca7204d7aaa82afc,
         type: 3}

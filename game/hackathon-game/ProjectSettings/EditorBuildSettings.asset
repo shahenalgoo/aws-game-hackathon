@@ -20,7 +20,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/TutorialScene.unity
     guid: cc2029082c19c42b581811143b4d0142
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/FootageScene.unity
     guid: 7421d7f63d8ed4bbf88d1304c978733a
   m_configObjects: {}
